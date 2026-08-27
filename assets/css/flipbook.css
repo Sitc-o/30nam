@@ -1,0 +1,366 @@
+/* Reset và layout tổng thể */
+.flipbook-layout {
+    background-color: #f9f7f4;
+    background-image: radial-gradient(circle at center, #ffffff 0%, #f6f3ee 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Đưa cánh hoa rơi lên lớp trên cùng để không bị sách đè */
+.petals {
+    z-index: 50 !important;
+}
+
+/* Trang trí cành cây nền */
+.bg-branches {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+    /* Nằm dưới sách */
+    overflow: hidden;
+}
+
+.bg-branches .branch {
+    position: absolute;
+    opacity: 0.15;
+    /* Làm mờ tinh tế không gây rối mắt */
+    max-width: 450px;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    /* Cắt bỏ phần logo "Kỷ niệm 30 năm" ở nửa trên của ảnh */
+    clip-path: inset(40% 0 0 0);
+}
+
+.bg-branches .branch-top-left {
+    top: -150px;
+    left: -80px;
+    transform: rotate(15deg);
+}
+
+.bg-branches .branch-bottom-right {
+    bottom: -150px;
+    right: -80px;
+    transform: rotate(-165deg);
+    /* Lật ngược lại cho góc dưới phải */
+}
+
+/* Con số kỷ niệm chìm (Typographic Watermark) */
+.bg-watermark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-watermark span {
+    font-family: "Georgia", serif;
+    font-size: 28vw;
+    font-weight: bold;
+    color: #a9121a;
+    opacity: 0.03; /* Cực mờ ảo */
+    user-select: none;
+    line-height: 1;
+}
+
+.bg-watermark .year-left {
+    margin-left: -4vw;
+}
+
+.bg-watermark .year-right {
+    margin-right: -4vw;
+}
+
+/* Navbar */
+.top-nav {
+    position: absolute;
+    /* Khóa cứng ở giữa */
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 30px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: max-content;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Layout 3 cột (Giờ chỉ còn cột giữa) */
+.scene-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    margin-top: 130px;
+    /* Cách xa an toàn khỏi navbar */
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.center-book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+/* Bố cục Typography giống hệt thiết kế */
+.kicker {
+    font-size: 1.1rem;
+    color: #555;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.main-title {
+    font-size: 3.5rem;
+    color: #a9121a;
+    font-family: "Georgia", serif;
+    margin: 0;
+    font-weight: normal;
+}
+
+.divider {
+    color: #a9121a;
+    margin: 15px 0;
+    font-size: 1.2rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.play-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.play-btn-group span {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    color: #555;
+    font-weight: 600;
+}
+
+.icon-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #a9121a;
+    background: transparent;
+    color: #a9121a;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.icon-btn:hover {
+    background: #fff0f0;
+}
+
+.right-side .kicker-small {
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.arrow-icon {
+    background: #d00018;
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(208, 0, 24, 0.3);
+    margin-top: 15px;
+}
+
+.arrow-icon:hover {
+    background: #b00014;
+}
+
+.vertical-line {
+    width: 1px;
+    height: 100px;
+    background-color: #a9121a;
+    margin-bottom: 20px;
+}
+
+/* Flipbook Core */
+.container-flipbook {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1600px;
+    height: 75vh;
+    max-height: 800px;
+    /* Khóa chiều cao trần tự nhiên không đè navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Đồng bộ tuyệt đối thời gian trượt (0.7s) với tốc độ lật trang */
+    transition: transform 0.7s ease-in-out;
+    will-change: transform;
+    /* Đổ bóng tổng thể giả lập sách đặt trên mặt bàn */
+    filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15)) drop-shadow(0 5px 10px rgba(0,0,0,0.08));
+}
+
+
+/* Định dạng trang sách */
+.page {
+    background-color: #fdfcf9;
+    /* Dùng box-shadow chìm thay cho border để không làm thay đổi kích thước thực tế của DOM (nguyên nhân gây tách bìa) */
+    box-shadow: inset 0 0 0 1px #e8e3dc, inset 0 0 20px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Lớp phủ shadow 3D cho gáy sách (Nằm đè lên cả ảnh bìa) */
+.page::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; /* Xuyên qua không chặn click */
+    z-index: 5;
+}
+
+/* Trang lẻ (Bìa trước, Mặt phải) -> Gáy sách nằm ở bên TRÁI */
+.page:nth-child(odd)::after {
+    background: linear-gradient(to right, 
+        rgba(255,255,255,0.5) 0%, 
+        rgba(0,0,0,0.12) 2%, 
+        rgba(255,255,255,0.2) 4%, 
+        rgba(0,0,0,0.03) 8%, 
+        rgba(0,0,0,0) 15%);
+}
+
+/* Trang chẵn (Mặt trái) -> Gáy sách nằm ở bên PHẢI */
+.page:nth-child(even)::after {
+    background: linear-gradient(to left, 
+        rgba(255,255,255,0.5) 0%, 
+        rgba(0,0,0,0.12) 2%, 
+        rgba(255,255,255,0.2) 4%, 
+        rgba(0,0,0,0.03) 8%, 
+        rgba(0,0,0,0) 15%);
+}
+
+.page.--right {
+    background-image: linear-gradient(to right, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
+}
+.page.--left {
+    background-image: linear-gradient(to left, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
+}
+
+/* Bìa cứng sử dụng chính ảnh bạn gửi */
+.page-cover {
+    background-color: #e3ddd3;
+    border-radius: 2px 6px 6px 2px;
+    /* Tạo vát cạnh giả lập độ dày của bìa cứng 3D */
+    box-shadow: inset -4px -4px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+/* Đánh sáng chéo (Studio light) để tạo độ phồng mặt cong cho bìa sách */
+.page-cover::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%);
+    pointer-events: none;
+    z-index: 4;
+}
+
+.full-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.page-cover-inner {
+    background-color: #eae5dc;
+}
+
+.page-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.year-title {
+    font-size: 4rem;
+    color: #a71d2a;
+    margin-bottom: 20px;
+    font-family: "Georgia", serif;
+}
+
+.year-desc {
+    font-size: 1.3rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.page-number {
+    position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    color: #999;
+}
+
+.page.--left .page-number {
+    left: 30px;
+}
+
+.page.--right .page-number {
+    right: 30px;
+}
+
+/* Ẩn các class cũ không dùng tới */
+.arrow-pulse,
+.video-ring,
+.corner-fold,
+.hotspot {
+    display: none;
+}
