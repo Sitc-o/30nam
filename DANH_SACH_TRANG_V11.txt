@@ -1,0 +1,32 @@
+WEBSITE VCM 30 NĂM – GIỮ NGUYÊN GIAO DIỆN ĐÃ CHỐT
+
+Tổng số trang HTML chính: 17
+
+DANH SÁCH TRANG:
+01. CONTENT_COVERAGE.html — Báo cáo bao phủ nội dung | Viettel Commerce 30 năm
+02. bien-nien-30-nam.html — Biên niên sự kiện 30 năm | Viettel Commerce 30 năm
+03. cong-nghe-in.html — Công nghệ in | Viettel Commerce 30 năm
+04. cong-tac-dang.html — Công tác Đảng và xây dựng đơn vị | Viettel Commerce 30 năm
+05. dich-vu-thuong-mai.html — Dịch vụ Thương mại | Viettel Commerce 30 năm
+06. gioi-thieu.html — Giới thiệu – Lời nói đầu | Viettel Commerce 30 năm
+07. hanh-trinh.html — Hành trình phát triển | Viettel Commerce 30 năm
+08. index.html — 30 năm Viettel Commerce | Mở trang ký ức
+09. ket-luan.html — Kết luận – Bài học 30 năm | Viettel Commerce 30 năm
+10. khoi-nguon-1997-2005.html — Khởi nguồn 1997–2005 | Viettel Commerce 30 năm
+11. kinh-doanh-thiet-bi-so.html — Kinh doanh thiết bị số | Viettel Commerce 30 năm
+12. nhan-vat-ky-uc.html — Nhân vật – Ký ức lịch sử | Viettel Commerce 30 năm
+13. phan-phoi.html — Phân phối | Viettel Commerce 30 năm
+14. phu-luc.html — Phụ lục tra cứu | Viettel Commerce 30 năm
+15. tang-toc-2015-2027.html — Tăng tốc 2015–2027 | Viettel Commerce 30 năm
+16. thanh-tuu-khen-thuong.html — Thành tựu – Khen thưởng | Viettel Commerce 30 năm
+17. troi-day-2006-2014.html — Trỗi dậy 2006–2014 | Viettel Commerce 30 năm
+
+CÁCH MỞ:
+1. Giải nén toàn bộ file ZIP.
+2. Mở index.html để xem website.
+3. Không di chuyển riêng lẻ file HTML ra khỏi thư mục vì các trang dùng chung thư mục assets.
+
+KIỂM TRA:
+- Trang chủ giữ nguyên giao diện sách 30 năm đã chốt.
+- Toàn bộ trang con V11 được đóng gói.
+- Tất cả liên kết nội bộ và tài nguyên đã được kiểm tra không thiếu file.

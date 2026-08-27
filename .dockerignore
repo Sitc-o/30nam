@@ -1,0 +1,6 @@
+_backup_v11_original
+.claude
+.git
+*.bat
+*.txt
+!requirements-voice.txt

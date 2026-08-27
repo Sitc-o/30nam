@@ -1,0 +1,49 @@
+{
+  "source_file": "Biên niên sử kiện.doc",
+  "source_pages": 320,
+  "source_paragraphs_total": 2799,
+  "canonical_ranges": [
+    {
+      "page": "gioi-thieu.html",
+      "source_paragraphs": "4-51",
+      "description": "Thông tin ấn phẩm, chỉ đạo nội dung và Lời nói đầu"
+    },
+    {
+      "page": "bien-nien-30-nam.html",
+      "source_paragraphs": "73-261",
+      "description": "Phần thứ nhất - 27 sự kiện lịch sử"
+    },
+    {
+      "page": "hanh-trinh.html",
+      "source_paragraphs": "262-270",
+      "description": "Mở đầu Phần thứ hai"
+    },
+    {
+      "page": "khoi-nguon-1997-2005.html",
+      "source_paragraphs": "271-475",
+      "description": "Chương một"
+    },
+    {
+      "page": "troi-day-2006-2014.html",
+      "source_paragraphs": "476-1110",
+      "description": "Chương hai"
+    },
+    {
+      "page": "tang-toc-2015-2027.html",
+      "source_paragraphs": "1111-1886",
+      "description": "Chương ba"
+    },
+    {
+      "page": "ket-luan.html",
+      "source_paragraphs": "1887-1964",
+      "description": "Kết luận"
+    },
+    {
+      "page": "phu-luc.html",
+      "source_paragraphs": "1965-2796",
+      "description": "Phụ lục, tài liệu tham khảo, mục lục và ghi chú cuối sách"
+    }
+  ],
+  "event_count": 27,
+  "coverage_result": "No missing meaningful source paragraph in checked scope."
+}

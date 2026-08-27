@@ -1,0 +1,9 @@
+CẤU TRÚC WEBSITE TỐI GIẢN
+
+1. Trang chủ: chỉ hiển thị 30 NĂM – VỮNG BƯỚC TIÊN PHONG – KIẾN TẠO TƯƠNG LAI.
+2. Giới thiệu: Lời nói đầu; Quá trình hình thành và phát triển; Các lĩnh vực; Thành tựu tiêu biểu.
+3. Hành trình: 4 hành trình; nội dung text và voice mở khi bấm.
+4. Mô hình tổ chức: Giám đốc các thời kỳ; Ban Tổng Giám đốc hiện nay; Khối cơ quan; Các Trung tâm; Đảng bộ và tổ chức quần chúng.
+5. Thành tựu: danh hiệu, giải thưởng và hình ảnh.
+
+Các trang chi tiết và nội dung V11 vẫn được giữ trong gói website.

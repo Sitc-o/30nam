@@ -1,0 +1,16 @@
+BÁO CÁO BAO PHỦ NỘI DUNG
+============================================================
+Tổng đoạn có nội dung trong phạm vi kiểm tra: 2507
+Đã ánh xạ: 2507
+Chưa ánh xạ: 0
+
+- Trang Giới thiệu – Lời nói đầu: gioi-thieu.html, đoạn 4-51, 28 đoạn.
+- Biên niên sự kiện: bien-nien-30-nam.html, đoạn 73-261, 163 đoạn.
+- Tổng quan Phần thứ hai: hanh-trinh.html, đoạn 262-270, 6 đoạn.
+- Chương một: khoi-nguon-1997-2005.html, đoạn 271-475, 190 đoạn.
+- Chương hai: troi-day-2006-2014.html, đoạn 476-1110, 624 đoạn.
+- Chương ba: tang-toc-2015-2027.html, đoạn 1111-1886, 760 đoạn.
+- Kết luận: ket-luan.html, đoạn 1887-1964, 72 đoạn.
+- Phụ lục, tài liệu tham khảo, mục lục gốc và ghi chú: phu-luc.html, đoạn 1965-2796, 664 đoạn.
+
+Kết quả: Không có đoạn nội dung nào bị bỏ sót trong phạm vi kiểm tra.

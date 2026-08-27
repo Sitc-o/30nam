@@ -1,0 +1,8 @@
+Bản thiết kế mới theo ảnh giao diện người dùng cung cấp:
+1. Dùng ảnh tham chiếu làm hero toàn màn hình, giữ đúng bố cục hình ảnh, thông điệp 30 năm, 4 lĩnh vực và thanh số liệu.
+2. Xóa toàn bộ lớp 3D/text/ảnh chồng trước đó để tránh trùng lặp và rối bố cục.
+3. Thêm 4 hotspot trong suốt đúng vị trí các thẻ Viettel Store, Công nghệ in, Dịch vụ Thương mại và Phân phối; nhấn để mở trang tương ứng.
+4. Bổ sung menu hamburger hoạt động trực tiếp tại vị trí biểu tượng trên ảnh.
+5. Menu mở dạng drawer bên phải, có đầy đủ các nhóm nội dung và trang con.
+6. Header thật chỉ xuất hiện sau khi cuộn, tránh che ảnh hero.
+7. Responsive cho desktop, tablet và mobile; giữ nguyên toàn bộ nội dung các phần phía dưới.

@@ -1,0 +1,9 @@
+services:
+  viettel-commerce:
+    build: .
+    container_name: viettel-commerce-30nam
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./assets/audio/neural:/app/assets/audio/neural
+    restart: unless-stopped

@@ -1,0 +1,23 @@
+/* Hiệu ứng chuyển trang dùng View Transitions API gốc của trình duyệt.
+   Trang vẫn tải lại bình thường (mọi script hiện có chạy y nguyên, không rủi
+   ro gãy tính năng) — trình duyệt tự chụp lại 2 trang và crossfade mượt giữa
+   chúng. Chrome/Edge hỗ trợ sẵn; trình duyệt khác tự bỏ qua, chuyển trang
+   bình thường như trước, không lỗi. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: .45s;
+  animation-timing-function: cubic-bezier(.4,0,.2,1);
+}
+::view-transition-old(root){animation-name:pt-fade-out}
+::view-transition-new(root){animation-name:pt-fade-in}
+
+@keyframes pt-fade-out{from{opacity:1}to{opacity:0}}
+@keyframes pt-fade-in{from{opacity:0}to{opacity:1}}
+
+@media (prefers-reduced-motion: reduce){
+  @view-transition{navigation:none}
+}
