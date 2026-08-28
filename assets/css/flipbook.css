@@ -34,9 +34,9 @@
     /* Làm mờ tinh tế không gây rối mắt */
     max-width: 450px;
     mix-blend-mode: multiply; /* Khử phần nền viền mờ trắng của ảnh */
-    /* Dùng mask-image để xóa bỏ logo phía trên với viền mờ mềm mại (không để lại nét cắt thẳng) */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 40%, black 50%);
-    mask-image: linear-gradient(to bottom, transparent 40%, black 50%);
+    /* Bo mờ hoàn toàn 4 cạnh của ảnh bằng elip, chỉ lấy phần lõi giữa chứa cành cây */
+    -webkit-mask-image: radial-gradient(ellipse at 50% 60%, black 30%, transparent 70%);
+    mask-image: radial-gradient(ellipse at 50% 60%, black 30%, transparent 70%);
 }
 
 .bg-branches .branch-top-left {
