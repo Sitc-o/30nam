@@ -17,7 +17,7 @@
             </div>
         `;
 
-        for (let year = 1997; year <= 1999; year++) {
+        for (let year = 1997; year <= 1998; year++) {
             let pageNum = year - 1996;
             // Trang TRÁI (Mô tả)
             pagesHTML += ` 

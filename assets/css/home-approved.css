@@ -35,3 +35,11 @@ h1,h2,h3,h4,h5,h6{font-family:'FS Magistral',sans-serif}
 @media(max-width:1100px){.top-nav{gap:22px;padding:9px 18px}.top-nav a{font-size:13px}}
 @media(max-width:760px){.top-nav{top:1.5%;left:50%;width:calc(100% - 120px);justify-content:center;gap:12px;padding:8px 10px;background:rgba(247,247,247,.72)}.top-nav a{font-size:11px}.hotspot-menu{z-index:12}}
 @media(max-width:560px){.top-nav{display:none}}
+
+/* CSS for header nav dropdown */
+.nav-dropdown { position: relative; display: flex; align-items: center; }
+.nav-submenu { position: absolute; top: 100%; left: 0; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; min-width: 220px; opacity: 0; visibility: hidden; transition: all 0.2s ease; margin-top: 10px; z-index: 100; border: 1px solid #eee; }
+.nav-submenu::before { content: ""; position: absolute; top: -7px; left: 20px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 7px solid #fff; }
+.nav-dropdown:hover .nav-submenu { opacity: 1; visibility: visible; margin-top: 0px; }
+.nav-submenu a { display: block; font-family: 'Roboto', Arial, sans-serif !important; font-size: 15px !important; color: #444 !important; padding: 12px 20px; transition: background 0.2s, color 0.2s; white-space: nowrap; text-transform: none; font-weight: normal; }
+.nav-submenu a:hover { background: #f8f9fa; color: #ee0033 !important; }

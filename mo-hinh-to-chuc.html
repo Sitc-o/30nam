@@ -13,8 +13,7 @@
 <body class="simple-v12">
   <header class="simple-header"><a class="simple-logo" href="index.html"><img class="brand-logo"
         src="assets/images/logo/viettel-commerce-light.svg" alt="Viettel Commerce" width="160" height="92"></a>
-    <nav class="simple-nav"><a href="gioi-thieu.html">GIỚI THIỆU</a><a href="hanh-trinh.html">HÀNH TRÌNH</a><a
-        class="active" href="mo-hinh-to-chuc.html">MÔ HÌNH TỔ CHỨC</a><a href="thanh-tuu-khen-thuong.html">THÀNH TỰU</a>
+    <nav class="simple-nav"><a href="gioi-thieu.html">GIỚI THIỆU</a><a href="hanh-trinh.html">HÀNH TRÌNH</a><div class="nav-dropdown"><a class="active" href="mo-hinh-to-chuc.html">MÔ HÌNH TỔ CHỨC</a><div class="nav-submenu"><a href="mo-hinh-to-chuc.html#tab-chinh-quyen">Tổ chức chính quyền</a><a href="mo-hinh-to-chuc.html#tab-dang">Tổ chức Đảng và Đoàn thể</a></div></div><a href="thanh-tuu-khen-thuong.html">THÀNH TỰU</a>
     </nav>
     <div class="simple-actions"><button class="search-open" type="button" aria-label="Tìm kiếm">⌕</button><button
         class="simple-menu" type="button" aria-label="Mở menu">☰</button></div>
@@ -70,8 +69,9 @@
     </section>
     <section class="simple-section">
       <div class="simple-container">
-        <div class="org-list">
-          <article class="org-item reveal open"><button data-org>GIÁM ĐỐC CÁC THỜI KỲ <span>＋</span></button>
+        <div id="tab-chinh-quyen">
+          <div class="org-list">
+            <article class="org-item reveal open"><button data-org>GIÁM ĐỐC CÁC THỜI KỲ <span>＋</span></button>
             <div class="org-content">
               <p>Các thế hệ Giám đốc đã lãnh đạo đơn vị qua các giai đoạn hình thành, xây dựng, phát triển và vươn tầm.
               </p>
@@ -99,6 +99,10 @@
                   Thương mại</a><a href="cong-nghe-in.html">Trung tâm Công nghệ In</a></div>
             </div>
           </article>
+          </div>
+        </div>
+        <div id="tab-dang" style="display: none;">
+          <div class="org-list">
           <article class="org-item reveal open"><button data-org>ĐẢNG BỘ TỔNG CÔNG TY VÀ CÁC TỔ CHỨC QUẦN
               CHÚNG<span>＋</span></button>
             <div class="org-content">
@@ -113,6 +117,7 @@
                   TY</button></div>
             </div>
           </article>
+          </div>
         </div>
       </div>
     </section>

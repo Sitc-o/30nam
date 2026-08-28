@@ -3,10 +3,10 @@
  document.querySelectorAll('.reveal').forEach(x=>revealObserver.observe(x));
  document.querySelectorAll('[data-org]').forEach(btn=>btn.addEventListener('click',()=>btn.closest('.org-item').classList.toggle('open')));
  const modal=document.querySelector('.journey-modal');
- const title=modal?.querySelector('[data-j-title]'), text=modal?.querySelector('[data-j-text]'), full=modal?.querySelector('[data-j-full]');
+ const title=modal?.querySelector('[data-j-title]'), text=modal?.querySelector('[data-j-text]'), full=modal?.querySelector('[data-j-full]'), imgLink=modal?.querySelector('[data-j-img]');
  let utterance=null;
  document.querySelectorAll('.journey-card').forEach(card=>card.addEventListener('click',()=>{
-   if(!modal)return; title.textContent=card.dataset.title; text.textContent=card.dataset.text; full.href=card.dataset.href; modal.classList.add('open');
+   if(!modal)return; title.textContent=card.dataset.title; text.textContent=card.dataset.text; full.href=card.dataset.href; if(imgLink) imgLink.href=card.dataset.img||'#'; modal.classList.add('open');
  }));
  modal?.querySelectorAll('[data-j-close]').forEach(x=>x.addEventListener('click',()=>{modal.classList.remove('open');speechSynthesis.cancel()}));
  modal?.querySelector('[data-j-voice]')?.addEventListener('click',()=>{speechSynthesis.cancel();utterance=new SpeechSynthesisUtterance(title.textContent+'. '+text.textContent);utterance.lang='vi-VN';utterance.rate=.92;speechSynthesis.speak(utterance)});
@@ -65,3 +65,36 @@
    searchResults.innerHTML=found.length?found.map(x=>`<a class="search-result" href="${x.url}"><small>${x.page}</small><b>${x.title}</b><p>${x.excerpt||''}</p></a>`).join(''):'<p>Không tìm thấy nội dung phù hợp.</p>';
  });
 })();
+
+/* JS for org tabs in mo-hinh-to-chuc.html */
+document.addEventListener("DOMContentLoaded", () => {
+  const select = document.querySelector(".org-tab-select");
+  const contents = document.querySelectorAll(".org-tab-content");
+  if (!select) return;
+  select.addEventListener("change", (e) => {
+    contents.forEach(c => c.classList.remove("active"));
+    const targetContent = document.getElementById(e.target.value);
+    if (targetContent) {
+        targetContent.classList.add("active");
+    }
+  });
+});
+/* JS for org tabs via URL hash */
+document.addEventListener('DOMContentLoaded', () => {
+  const tabChinhQuyen = document.getElementById('tab-chinh-quyen');
+  const tabDang = document.getElementById('tab-dang');
+  if (!tabChinhQuyen || !tabDang) return;
+  
+  function updateTabs() {
+    if (window.location.hash === '#tab-dang') {
+      tabChinhQuyen.style.display = 'none';
+      tabDang.style.display = 'block';
+    } else {
+      tabChinhQuyen.style.display = 'block';
+      tabDang.style.display = 'none';
+    }
+  }
+  
+  window.addEventListener('hashchange', updateTabs);
+  updateTabs();
+});

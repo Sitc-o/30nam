@@ -209,3 +209,11 @@ body.subpage-book .backtop{background:#ee0033;box-shadow:0 12px 26px rgba(238,0,
 .simple-actions{display:flex;align-items:center;gap:10px;justify-self:end}
 .simple-menu{display:none;border:0;background:none;font-size:22px;cursor:pointer;color:var(--ink)}
 @media(max-width:950px){.simple-nav{display:none;position:absolute;top:120px;left:16px;right:16px;background:var(--pearl);padding:15px;border:1px solid var(--line);border-radius:14px;flex-direction:column;gap:8px;z-index:60}.simple-nav.open{display:flex}.simple-menu{display:block}}
+
+/* CSS for header nav dropdown */
+.nav-dropdown { position: relative; display: flex; align-items: center; }
+.nav-submenu { position: absolute; top: 100%; left: 0; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; padding: 10px 0; min-width: 220px; opacity: 0; visibility: hidden; transition: all 0.2s ease; margin-top: 10px; z-index: 100; border: 1px solid #eee; }
+.nav-submenu::before { content: ""; position: absolute; top: -7px; left: 20px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 7px solid #fff; }
+.nav-dropdown:hover .nav-submenu { opacity: 1; visibility: visible; margin-top: 0px; }
+.nav-submenu a { display: block; font-family: 'Roboto', Arial, sans-serif !important; font-size: 15px !important; color: #444 !important; padding: 12px 20px; transition: background 0.2s, color 0.2s; white-space: nowrap; text-transform: none; font-weight: normal; }
+.nav-submenu a:hover { background: #f8f9fa; color: #ee0033 !important; }
