@@ -1,4 +1,4 @@
-﻿/* Reset vÃ  layout tá»•ng thá»ƒ */
+/* Reset vÃ  layout tá»•ng thá»ƒ */
 .flipbook-layout {
     background-color: #e0dcd7;
     background-image: radial-gradient(circle at center, #f2efe9 0%, #d8d3cd 100%);
@@ -335,14 +335,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Äá»“ng bá»™ tuyá»‡t Ä‘á»‘i thá»i gian trÆ°á»£t (0.7s) vá»›i tá»‘c Ä‘á»™ láº­t trang */
+    /* KhÃ³a chiá» u cao tráº§n tá»± nhiÃªn khÃ´ng Ä‘Ã¨ navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ä á»“ng bá»™ tuyá»‡t Ä‘á»‘i thá» i gian trÆ°á»£t (0.7s) vá»›i tá»‘c Ä‘á»™ láº­t trang */
     transition: transform 0.7s ease-in-out;
     will-change: transform, filter;
     /* Đổ bóng tĩnh chéo trái (khớp với God Rays) */
     filter: drop-shadow(-30px 30px 40px rgba(0,0,0,0.2)) drop-shadow(-10px 15px 15px rgba(0,0,0,0.1));
+}
 
-
-/* Äá»‹nh dáº¡ng trang sÃ¡ch */
+/* Ä á»‹nh dáº¡ng trang sÃ¡ch */
 .page {
     background-color: #fdfcf9;
     /* DÃ¹ng box-shadow chÃ¬m thay cho border Ä‘á»ƒ khÃ´ng lÃ m thay Ä‘á»•i kÃ­ch thÆ°á»›c thá»±c táº¿ cá»§a DOM (nguyÃªn nhÃ¢n gÃ¢y tÃ¡ch bÃ¬a) */
