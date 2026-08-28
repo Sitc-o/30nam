@@ -1,7 +1,7 @@
 /* Reset và layout tổng thể */
 .flipbook-layout {
-    background-color: #2a2826;
-    background-image: radial-gradient(circle at center, #6b635c 0%, #2a2826 80%);
+    background-color: #f9f7f4;
+    background-image: radial-gradient(circle at center, #ffffff 0%, #f6f3ee 100%);
     min-height: 100vh;
     position: relative;
     overflow: hidden;
@@ -81,6 +81,26 @@
 
 .bg-watermark .year-right {
     margin-right: -4vw;
+}
+
+/* Tia sáng hắt từ góc phải (God Rays / Directional Spotlight) */
+.god-rays {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    pointer-events: none;
+    z-index: 15; /* Nằm trên bề mặt sách để ánh sáng trùm lên một chút */
+    mix-blend-mode: screen;
+    background: 
+        /* Tia sáng chính rọi chéo 215 độ */
+        linear-gradient(215deg, rgba(255, 250, 220, 0.15) 0%, rgba(255, 250, 220, 0.04) 35%, transparent 60%),
+        /* Tia phụ mở rộng góc */
+        linear-gradient(235deg, rgba(255, 250, 220, 0.08) 0%, rgba(255, 250, 220, 0) 50%);
+    animation: god-rays-pulse 6s infinite alternate ease-in-out;
+}
+
+@keyframes god-rays-pulse {
+    0% { opacity: 0.6; filter: brightness(1); }
+    100% { opacity: 1; filter: brightness(1.2); }
 }
 
 /* Navbar */
