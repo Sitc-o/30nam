@@ -89,18 +89,18 @@
     top: 0; right: 0; bottom: 0; left: 0;
     pointer-events: none;
     z-index: 15; /* Nằm trên bề mặt sách để ánh sáng trùm lên một chút */
-    mix-blend-mode: screen;
+    mix-blend-mode: normal; /* Đổi sang normal để không bị triệt tiêu trên nền sáng */
     background: 
         /* Tia sáng chính rọi chéo 215 độ */
-        linear-gradient(215deg, rgba(255, 255, 240, 0.45) 0%, rgba(255, 255, 240, 0.1) 35%, transparent 60%),
+        linear-gradient(215deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.25) 30%, transparent 55%),
         /* Tia phụ mở rộng góc */
-        linear-gradient(235deg, rgba(255, 255, 240, 0.2) 0%, rgba(255, 255, 240, 0) 50%);
+        linear-gradient(235deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 45%);
     animation: god-rays-pulse 6s infinite alternate ease-in-out;
 }
 
 @keyframes god-rays-pulse {
-    0% { opacity: 0.6; filter: brightness(1); }
-    100% { opacity: 1; filter: brightness(1.2); }
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 /* Navbar */
