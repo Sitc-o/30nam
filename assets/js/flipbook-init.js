@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+﻿document.addEventListener('DOMContentLoaded', function () {
     const flipbookEl = document.getElementById('flipbook');
     // Thư viện có thể export dưới tên StPageFlip hoặc St
     const PageFlipClass = (typeof StPageFlip !== 'undefined') ? StPageFlip.PageFlip : (typeof St !== 'undefined' ? St.PageFlip : null);
@@ -7,12 +7,39 @@ document.addEventListener('DOMContentLoaded', function () {
         const innerCover = flipbookEl.querySelectorAll('.page-cover-inner')[0];
 
         let pagesHTML = '';
-        for (let year = 1997; year <= 1998; year++) {
+                // Trang đệm để đẩy mốc thời gian sang trang lẻ (bên trái)
+        pagesHTML += ` 
+            <div class="page">
+                <div class="page-content">
+                    <h2 class="year-title" style="font-size: 2.5rem; margin-top: 50%">HÀNH TRÌNH<br>30 NĂM</h2>
+                    <p class="year-desc">Vững bước tiên phong<br>Kiến tạo tương lai</p>
+                </div>
+            </div>
+        `;
+
+        for (let year = 1997; year <= 2005; year++) {
             let pageNum = year - 1996;
-            pagesHTML += `
-                <div class="page">
+            // Trang TRÁI (Mô tả)
+            pagesHTML += ` 
+                <div class="page --left">
                     <div class="page-content">
                         <h2 class="year-title">${year}</h2>
+                        <p class="year-desc">Dấu ấn nổi bật và sự kiện quan trọng trong năm ${year}.</p>
+                    </div>
+                    <div class="page-number">${pageNum * 2 - 1}</div>
+                </div>
+            `;
+            // Trang PHẢI (Ảnh)
+            let imgSrc = year === 1997 ? 'assets/images/viettel-1997.jpg' : 'assets/images/people-story-' + ((year % 4) + 1) + '.webp';
+            pagesHTML += ` 
+                <div class="page --right">
+                    <div class="page-content" style="padding: 0;">
+                        <img src="${imgSrc}" style="width:100%; height:100%; object-fit:cover;" alt="Image ${year}">
+                    </div>
+                    <div class="page-number">${pageNum * 2}</div>
+                </div>
+            `;
+        }</h2>
                         <p class="year-desc">Dấu ấn nổi bật và sự kiện quan trọng trong năm ${year}.</p>
                     </div>
                     <div class="page-number">${pageNum}</div>
