@@ -7,7 +7,7 @@
         const innerCover = flipbookEl.querySelectorAll('.page-cover-inner')[0];
 
         let pagesHTML = '';
-                // Trang đệm để đẩy mốc thời gian sang trang lẻ (bên trái)
+        // Trang đệm để đẩy mốc thời gian sang trang lẻ (bên trái)
         pagesHTML += ` 
             <div class="page">
                 <div class="page-content">
@@ -17,7 +17,7 @@
             </div>
         `;
 
-        for (let year = 1997; year <= 2005; year++) {
+        for (let year = 1997; year <= 1999; year++) {
             let pageNum = year - 1996;
             // Trang TRÁI (Mô tả)
             pagesHTML += ` 
@@ -36,10 +36,19 @@
                     <div class="page-content" style="padding: 20px; display: flex; align-items: center; justify-content: center;">
                         <img src="${imgSrc}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Image ${year}">
                     </div>
-                    <div class="page-number">${pageNum * 2}</div>
+                    <                    <div class="page-number">${pageNum * 2}</div>
                 </div>
             `;
         }
+
+        // Trang đệm cuối để tổng số trang là SỐ CHẴN (đảm bảo bìa sau nằm bên trái khi đóng sách)
+        pagesHTML += ` 
+            <div class="page">
+                <div class="page-content">
+                    <h2 class="year-title" style="font-size: 2rem; margin-top: 50%">VIETTEL<br>Theo cách của bạn</h2>
+                </div>
+            </div>
+        `;
         innerCover.insertAdjacentHTML('afterend', pagesHTML);
 
         const pageFlip = new PageFlipClass(flipbookEl, {
