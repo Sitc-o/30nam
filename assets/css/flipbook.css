@@ -1,7 +1,7 @@
 /* Reset và layout tổng thể */
 .flipbook-layout {
-    background-color: #f9f7f4;
-    background-image: radial-gradient(circle at center, #ffffff 0%, #f6f3ee 100%);
+    background-color: #2a2826;
+    background-image: radial-gradient(circle at center, #6b635c 0%, #2a2826 80%);
     min-height: 100vh;
     position: relative;
     overflow: hidden;
@@ -237,10 +237,14 @@
     justify-content: center;
     align-items: center;
     /* Đồng bộ tuyệt đối thời gian trượt (0.7s) với tốc độ lật trang */
-    transition: transform 0.7s ease-in-out;
-    will-change: transform;
-    /* Đổ bóng tổng thể giả lập sách đặt trên mặt bàn */
-    filter: drop-shadow(0 25px 35px rgba(0,0,0,0.15)) drop-shadow(0 5px 10px rgba(0,0,0,0.08));
+    transition: transform 0.7s ease-in-out, filter 0.1s ease-out;
+    will-change: transform, filter;
+    /* Đổ bóng tổng thể tương tác theo hướng chuột (2.5D) */
+    /* --mouse-x/y mặc định là 0.5 (ở giữa) nếu chưa có JS */
+    filter: 
+        drop-shadow(calc((var(--mouse-x, 0.5) - 0.5) * -50px) calc((var(--mouse-y, 0.5) - 0.5) * -50px) 25px rgba(0,0,0,0.3))
+        drop-shadow(0 25px 35px rgba(0,0,0,0.2)) 
+        drop-shadow(0 5px 10px rgba(0,0,0,0.1));
 }
 
 
@@ -297,14 +301,18 @@
     box-shadow: inset -4px -4px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(0,0,0,0.05);
 }
 
-/* Đánh sáng chéo (Studio light) để tạo độ phồng mặt cong cho bìa sách */
+/* Đánh sáng chéo (Studio light) và Ánh sáng tương tác (Interactive Glare) */
 .page-cover::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%);
+    /* Lớp 1: Vệt sáng di chuyển theo chuột, Lớp 2: Ánh sáng tĩnh vát chéo */
+    background: 
+        radial-gradient(circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%), rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%),
+        linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%);
     pointer-events: none;
     z-index: 4;
+    transition: background 0.1s ease-out;
 }
 
 .full-cover {

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         innerCover.insertAdjacentHTML('afterend', pagesHTML);
 
         const pageFlip = new PageFlipClass(flipbookEl, {
-            width: 550, 
+            width: 550,
             height: 733,
             size: "stretch", // Đổi thành stretch để lấp đầy container
             minWidth: 300,
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             maxShadowOpacity: 0.15, // Làm bóng dịu và chân thực hơn, xóa bỏ dải màu xám đen giả tạo
             showCover: true,
             usePortrait: true,
-            mobileScrollSupport: false, 
+            mobileScrollSupport: false,
             flippingTime: 700 // Tăng tốc độ lật trang (0.7s) đồng bộ với Camera
         });
 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const pageIndex = pageFlip.getCurrentPageIndex();
             const rect = flipContainer.getBoundingClientRect();
             const isClickLeft = (e.clientX - rect.left) < (rect.width / 2);
-            
+
             if (pageIndex === 0) {
                 predictedTarget = 'center'; // Đang ở bìa trước, chắc chắn là mở ra giữa
             } else if (pageIndex >= pageFlip.getPageCount() - 1) {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     container.style.transform = `translateX(${shiftAmount}px)`;
                 }
             }
-            
+
             // Bước kiểm tra an toàn: Đề phòng người dùng giữ giấy nhưng lại đổi ý không lật nữa
             if (state === 'read') {
                 const actualPage = pageFlip.getCurrentPageIndex();
@@ -117,6 +117,19 @@ document.addEventListener('DOMContentLoaded', function () {
             const shiftAmount = getShiftAmount();
             document.querySelector('.container-flipbook').style.transform = `translateX(-${shiftAmount}px)`;
         }, 50);
+
+        // ==========================================
+        // ÁNH SÁNG & BÓNG ĐỔ TƯƠNG TÁC THEO CHUỘT (2.5D LIGHTING)
+        // ==========================================
+        document.addEventListener('mousemove', (e) => {
+            // Tính toán phần trăm tọa độ chuột trên màn hình (0.0 đến 1.0)
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            // Cập nhật CSS Variables
+            document.documentElement.style.setProperty('--mouse-x', mouseX);
+            document.documentElement.style.setProperty('--mouse-y', mouseY);
+        });
 
     } else {
         console.error("Lỗi: Không tìm thấy thư viện StPageFlip hoặc thẻ #flipbook.");
