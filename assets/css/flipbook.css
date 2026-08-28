@@ -1,7 +1,7 @@
 /* Reset và layout tổng thể */
 .flipbook-layout {
-    background-color: #f9f7f4;
-    background-image: radial-gradient(circle at center, #ffffff 0%, #f6f3ee 100%);
+    background-color: #e0dcd7;
+    background-image: radial-gradient(circle at center, #f2efe9 0%, #d8d3cd 100%);
     min-height: 100vh;
     position: relative;
     overflow: hidden;
@@ -92,9 +92,9 @@
     mix-blend-mode: screen;
     background: 
         /* Tia sáng chính rọi chéo 215 độ */
-        linear-gradient(215deg, rgba(255, 250, 220, 0.15) 0%, rgba(255, 250, 220, 0.04) 35%, transparent 60%),
+        linear-gradient(215deg, rgba(255, 255, 240, 0.45) 0%, rgba(255, 255, 240, 0.1) 35%, transparent 60%),
         /* Tia phụ mở rộng góc */
-        linear-gradient(235deg, rgba(255, 250, 220, 0.08) 0%, rgba(255, 250, 220, 0) 50%);
+        linear-gradient(235deg, rgba(255, 255, 240, 0.2) 0%, rgba(255, 255, 240, 0) 50%);
     animation: god-rays-pulse 6s infinite alternate ease-in-out;
 }
 
@@ -257,7 +257,7 @@
     justify-content: center;
     align-items: center;
     /* Đồng bộ tuyệt đối thời gian trượt (0.7s) với tốc độ lật trang */
-    transition: transform 0.7s ease-in-out, filter 0.1s ease-out;
+    transition: transform 0.7s ease-in-out;
     will-change: transform, filter;
     /* Đổ bóng tổng thể tương tác theo hướng chuột (2.5D) */
     /* --mouse-x/y mặc định là 0.5 (ở giữa) nếu chưa có JS */
@@ -332,7 +332,6 @@
         linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%);
     pointer-events: none;
     z-index: 4;
-    transition: background 0.1s ease-out;
 }
 
 .full-cover {
