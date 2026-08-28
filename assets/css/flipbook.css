@@ -34,6 +34,7 @@
     /* Làm mờ tinh tế không gây rối mắt */
     max-width: 450px;
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    mix-blend-mode: multiply; /* Khử phần nền viền mờ trắng của ảnh */
     /* Cắt bỏ phần logo "Kỷ niệm 30 năm" ở nửa trên của ảnh */
     clip-path: inset(40% 0 0 0);
 }
