@@ -1,4 +1,4 @@
-/* Reset và layout tổng thể */
+﻿/* Reset vÃ  layout tá»•ng thá»ƒ */
 .flipbook-layout {
     background-color: #e0dcd7;
     background-image: radial-gradient(circle at center, #f2efe9 0%, #d8d3cd 100%);
@@ -10,12 +10,12 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Đưa cánh hoa rơi lên lớp trên cùng để không bị sách đè */
+/* ÄÆ°a cÃ¡nh hoa rÆ¡i lÃªn lá»›p trÃªn cÃ¹ng Ä‘á»ƒ khÃ´ng bá»‹ sÃ¡ch Ä‘Ã¨ */
 .petals {
     z-index: 50 !important;
 }
 
-/* Trang trí cành cây nền */
+/* Trang trÃ­ cÃ nh cÃ¢y ná»n */
 .bg-branches {
     position: absolute;
     top: 0;
@@ -24,17 +24,17 @@
     bottom: 0;
     pointer-events: none;
     z-index: 1;
-    /* Nằm dưới sách */
+    /* Náº±m dÆ°á»›i sÃ¡ch */
     overflow: hidden;
 }
 
 .bg-branches .branch {
     position: absolute;
     opacity: 0.15;
-    /* Làm mờ tinh tế không gây rối mắt */
+    /* LÃ m má» tinh táº¿ khÃ´ng gÃ¢y rá»‘i máº¯t */
     max-width: 450px;
-    mix-blend-mode: multiply; /* Khử phần nền viền mờ trắng của ảnh */
-    /* Bo mờ hoàn toàn 4 cạnh của ảnh bằng elip, chỉ lấy phần lõi giữa chứa cành cây */
+    mix-blend-mode: multiply; /* Khá»­ pháº§n ná»n viá»n má» tráº¯ng cá»§a áº£nh */
+    /* Bo má» hoÃ n toÃ n 4 cáº¡nh cá»§a áº£nh báº±ng elip, chá»‰ láº¥y pháº§n lÃµi giá»¯a chá»©a cÃ nh cÃ¢y */
     -webkit-mask-image: radial-gradient(ellipse at 50% 60%, black 30%, transparent 70%);
     mask-image: radial-gradient(ellipse at 50% 60%, black 30%, transparent 70%);
 }
@@ -49,10 +49,10 @@
     bottom: -150px;
     right: -80px;
     transform: rotate(-165deg);
-    /* Lật ngược lại cho góc dưới phải */
+    /* Láº­t ngÆ°á»£c láº¡i cho gÃ³c dÆ°á»›i pháº£i */
 }
 
-/* Con số kỷ niệm chìm (Typographic Watermark) */
+/* Con sá»‘ ká»· niá»‡m chÃ¬m (Typographic Watermark) */
 .bg-watermark {
     position: absolute;
     top: 50%;
@@ -71,7 +71,7 @@
     font-size: 28vw;
     font-weight: bold;
     color: #a9121a;
-    opacity: 0.03; /* Cực mờ ảo */
+    opacity: 0.03; /* Cá»±c má» áº£o */
     user-select: none;
     line-height: 1;
 }
@@ -84,16 +84,16 @@
     margin-right: -4vw;
 }
 
-/* Tia sáng hắt từ góc phải (God Rays / Directional Spotlight) */
+/* Tia sÃ¡ng háº¯t tá»« gÃ³c pháº£i (God Rays / Directional Spotlight) */
 .god-rays {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     pointer-events: none;
-    z-index: 50; /* Nằm hẳn lên trên cùng */
+    z-index: 50; /* Náº±m háº³n lÃªn trÃªn cÃ¹ng */
     background: 
-        /* Tia sáng chính màu vàng cam (sunlight) */
+        /* Tia sÃ¡ng chÃ­nh mÃ u vÃ ng cam (sunlight) */
         linear-gradient(215deg, rgba(255, 180, 50, 0.4) 0%, rgba(255, 180, 50, 0.1) 30%, transparent 55%),
-        /* Tia phụ mở rộng góc */
+        /* Tia phá»¥ má»Ÿ rá»™ng gÃ³c */
         linear-gradient(235deg, rgba(255, 200, 100, 0.25) 0%, transparent 45%);
     animation: god-rays-pulse 4s infinite alternate ease-in-out;
 }
@@ -106,7 +106,7 @@
 /* Navbar */
 .top-nav {
     position: absolute;
-    /* Khóa cứng ở giữa */
+    /* KhÃ³a cá»©ng á»Ÿ giá»¯a */
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
@@ -129,7 +129,7 @@
     text-transform: uppercase;
 }
 
-/* Layout 3 cột (Giờ chỉ còn cột giữa) */
+/* Layout 3 cá»™t (Giá» chá»‰ cÃ²n cá»™t giá»¯a) */
 .scene-layout {
     display: flex;
     justify-content: center;
@@ -138,7 +138,7 @@
     max-width: 1800px;
     margin: 0 auto;
     margin-top: 130px;
-    /* Cách xa an toàn khỏi navbar */
+    /* CÃ¡ch xa an toÃ n khá»i navbar */
     padding: 0 40px;
     box-sizing: border-box;
 }
@@ -152,13 +152,13 @@
     width: 100%;
 }
 
-/* Bố cục Typography giống hệt thiết kế */
+/* Bá»‘ cá»¥c Typography giá»‘ng há»‡t thiáº¿t káº¿ */
 .side-typography {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 20;
-    pointer-events: none; /* Xuyên click để không chặn trang */
+    pointer-events: none; /* XuyÃªn click Ä‘á»ƒ khÃ´ng cháº·n trang */
     display: flex;
     flex-direction: column;
 }
@@ -171,7 +171,7 @@
     align-items: center;
 }
 .side-typography * {
-    pointer-events: auto; /* Kích hoạt lại click cho chữ và nút */
+    pointer-events: auto; /* KÃ­ch hoáº¡t láº¡i click cho chá»¯ vÃ  nÃºt */
 }
 
 .kicker {
@@ -233,7 +233,7 @@
     font-weight: 600;
 }
 
-/* Nút video bên trái */
+/* NÃºt video bÃªn trÃ¡i */
 .ripple-ring {
     position: relative;
     width: 50px;
@@ -276,7 +276,7 @@
     text-transform: uppercase;
 }
 
-/* Dấu gạch dọc bên phải */
+/* Dáº¥u gáº¡ch dá»c bÃªn pháº£i */
 .vertical-line-container {
     display: flex;
     flex-direction: column;
@@ -290,7 +290,7 @@
     background-color: #a9121a;
 }
 
-/* Nút chuyển trang bên phải */
+/* NÃºt chuyá»ƒn trang bÃªn pháº£i */
 .ripple-solid {
     position: relative;
     background: #d00018;
@@ -331,41 +331,36 @@
     max-width: 1600px;
     height: 75vh;
     max-height: 800px;
-    /* Khóa chiều cao trần tự nhiên không đè navbar */
+    /* KhÃ³a chiá»u cao tráº§n tá»± nhiÃªn khÃ´ng Ä‘Ã¨ navbar */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Đồng bộ tuyệt đối thời gian trượt (0.7s) với tốc độ lật trang */
+    /* Äá»“ng bá»™ tuyá»‡t Ä‘á»‘i thá»i gian trÆ°á»£t (0.7s) vá»›i tá»‘c Ä‘á»™ láº­t trang */
     transition: transform 0.7s ease-in-out;
     will-change: transform, filter;
-    /* Đổ bóng tổng thể tương tác theo hướng chuột (2.5D) */
-    /* --mouse-x/y mặc định là 0.5 (ở giữa) nếu chưa có JS */
-    filter: 
-        drop-shadow(calc((var(--mouse-x, 0.5) - 0.5) * -50px) calc((var(--mouse-y, 0.5) - 0.5) * -50px) 25px rgba(0,0,0,0.3))
-        drop-shadow(0 25px 35px rgba(0,0,0,0.2)) 
-        drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-}
+    /* Đổ bóng tĩnh chéo trái (khớp với God Rays) */
+    filter: drop-shadow(-30px 30px 40px rgba(0,0,0,0.2)) drop-shadow(-10px 15px 15px rgba(0,0,0,0.1));
 
 
-/* Định dạng trang sách */
+/* Äá»‹nh dáº¡ng trang sÃ¡ch */
 .page {
     background-color: #fdfcf9;
-    /* Dùng box-shadow chìm thay cho border để không làm thay đổi kích thước thực tế của DOM (nguyên nhân gây tách bìa) */
+    /* DÃ¹ng box-shadow chÃ¬m thay cho border Ä‘á»ƒ khÃ´ng lÃ m thay Ä‘á»•i kÃ­ch thÆ°á»›c thá»±c táº¿ cá»§a DOM (nguyÃªn nhÃ¢n gÃ¢y tÃ¡ch bÃ¬a) */
     box-shadow: inset 0 0 0 1px #e8e3dc, inset 0 0 20px rgba(0, 0, 0, 0.03);
     overflow: hidden;
     position: relative;
 }
 
-/* Lớp phủ shadow 3D cho gáy sách (Nằm đè lên cả ảnh bìa) */
+/* Lá»›p phá»§ shadow 3D cho gÃ¡y sÃ¡ch (Náº±m Ä‘Ã¨ lÃªn cáº£ áº£nh bÃ¬a) */
 .page::after {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none; /* Xuyên qua không chặn click */
+    pointer-events: none; /* XuyÃªn qua khÃ´ng cháº·n click */
     z-index: 5;
 }
 
-/* Trang lẻ (Bìa trước, Mặt phải) -> Gáy sách nằm ở bên TRÁI */
+/* Trang láº» (BÃ¬a trÆ°á»›c, Máº·t pháº£i) -> GÃ¡y sÃ¡ch náº±m á»Ÿ bÃªn TRÃI */
 .page:nth-child(odd)::after {
     background: linear-gradient(to right, 
         rgba(255,255,255,0.5) 0%, 
@@ -375,7 +370,7 @@
         rgba(0,0,0,0) 15%);
 }
 
-/* Trang chẵn (Mặt trái) -> Gáy sách nằm ở bên PHẢI */
+/* Trang cháºµn (Máº·t trÃ¡i) -> GÃ¡y sÃ¡ch náº±m á»Ÿ bÃªn PHáº¢I */
 .page:nth-child(even)::after {
     background: linear-gradient(to left, 
         rgba(255,255,255,0.5) 0%, 
@@ -392,20 +387,20 @@
     background-image: linear-gradient(to left, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
 }
 
-/* Bìa cứng sử dụng chính ảnh bạn gửi */
+/* BÃ¬a cá»©ng sá»­ dá»¥ng chÃ­nh áº£nh báº¡n gá»­i */
 .page-cover {
     background-color: #e3ddd3;
     border-radius: 2px 6px 6px 2px;
-    /* Tạo vát cạnh giả lập độ dày của bìa cứng 3D */
+    /* Táº¡o vÃ¡t cáº¡nh giáº£ láº­p Ä‘á»™ dÃ y cá»§a bÃ¬a cá»©ng 3D */
     box-shadow: inset -4px -4px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(0,0,0,0.05);
 }
 
-/* Đánh sáng chéo (Studio light) và Ánh sáng tương tác (Interactive Glare) */
+/* ÄÃ¡nh sÃ¡ng chÃ©o (Studio light) vÃ  Ãnh sÃ¡ng tÆ°Æ¡ng tÃ¡c (Interactive Glare) */
 .page-cover::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    /* Lớp 1: Vệt sáng di chuyển theo chuột, Lớp 2: Ánh sáng tĩnh vát chéo */
+    /* Lá»›p 1: Vá»‡t sÃ¡ng di chuyá»ƒn theo chuá»™t, Lá»›p 2: Ãnh sÃ¡ng tÄ©nh vÃ¡t chÃ©o */
     background: 
         radial-gradient(circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%), rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%),
         linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%);
@@ -463,12 +458,14 @@
     right: 30px;
 }
 
-/* Ẩn các class cũ không dùng tới */
+/* áº¨n cÃ¡c class cÅ© khÃ´ng dÃ¹ng tá»›i */
 .arrow-pulse,
 .video-ring,
 .corner-fold,
 .hotspot {
     display: none;
-} 
- @ m e d i a   ( m a x - w i d t h :   1 2 0 0 p x )   {   . s i d e - t y p o g r a p h y   {   d i s p l a y :   n o n e   ! i m p o r t a n t ;   }   }  
+}
+ 
+ @ m e d i a   ( m a x - w i d t h :   1 2 0 0 p x )   {   . s i d e - t y p o g r a p h y   {   d i s p l a y :   n o n e   ! i m p o r t a n t ;   }   } 
+ 
  @keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } } .action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; } .action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }

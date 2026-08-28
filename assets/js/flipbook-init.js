@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             maxWidth: 550,   // Khóa cứng chiều rộng 1 trang tối đa (2 trang = 1100px)
             minHeight: 400,
             maxHeight: 700,  // Khóa cứng chiều cao tuyệt đối của sách để không đè navbar
-            maxShadowOpacity: 0.15, // Làm bóng dịu và chân thực hơn, xóa bỏ dải màu xám đen giả tạo
+            maxShadowOpacity: 0.02, // Gần như tắt bóng đổ nội bộ vì nó sai logic với ánh sáng God Rays chiếu từ phải sang
             showCover: true,
             usePortrait: true,
             mobileScrollSupport: false,
