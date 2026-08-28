@@ -33,8 +33,8 @@
             let imgSrc = year === 1997 ? 'assets/images/viettel-1997.jpg' : 'assets/images/people-story-' + ((year % 4) + 1) + '.webp';
             pagesHTML += ` 
                 <div class="page --right">
-                    <div class="page-content" style="padding: 0;">
-                        <img src="${imgSrc}" style="width:100%; height:100%; object-fit:cover;" alt="Image ${year}">
+                    <div class="page-content" style="padding: 20px; display: flex; align-items: center; justify-content: center;">
+                        <img src="${imgSrc}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="Image ${year}">
                     </div>
                     <div class="page-number">${pageNum * 2}</div>
                 </div>
