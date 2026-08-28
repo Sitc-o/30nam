@@ -39,12 +39,6 @@
                     <div class="page-number">${pageNum * 2}</div>
                 </div>
             `;
-        }</h2>
-                        <p class="year-desc">Dấu ấn nổi bật và sự kiện quan trọng trong năm ${year}.</p>
-                    </div>
-                    <div class="page-number">${pageNum}</div>
-                </div>
-            `;
         }
         innerCover.insertAdjacentHTML('afterend', pagesHTML);
 
