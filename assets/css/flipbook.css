@@ -1,4 +1,4 @@
-/* Reset vÃ  layout tá»•ng thá»ƒ */
+﻿/* Reset và layout tổng thể */
 .flipbook-layout {
     background-color: #e0dcd7;
     background-image: radial-gradient(circle at center, #f2efe9 0%, #d8d3cd 100%);
@@ -10,12 +10,12 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* ÄÆ°a cÃ¡nh hoa rÆ¡i lÃªn lá»›p trÃªn cÃ¹ng Ä‘á»ƒ khÃ´ng bá»‹ sÃ¡ch Ä‘Ã¨ */
+/* Đưa cánh hoa rơi lên lớp trên cùng để không bị sách đè */
 .petals {
     z-index: 50 !important;
 }
 
-/* Trang trÃ­ cÃ nh cÃ¢y ná»n */
+/* Trang trí cành cây nền */
 .bg-branches {
     position: absolute;
     top: 0;
@@ -24,17 +24,17 @@
     bottom: 0;
     pointer-events: none;
     z-index: 1;
-    /* Náº±m dÆ°á»›i sÃ¡ch */
+    /* Nằm dưới sách */
     overflow: hidden;
 }
 
 .bg-branches .branch {
     position: absolute;
     opacity: 0.15;
-    /* LÃ m má» tinh táº¿ khÃ´ng gÃ¢y rá»‘i máº¯t */
+    /* Làm mờ tinh tế không gây rối mắt */
     max-width: 450px;
-    mix-blend-mode: multiply; /* Khá»­ pháº§n ná»n viá»n má» tráº¯ng cá»§a áº£nh */
-    /* Bo má» hoÃ n toÃ n 4 cáº¡nh cá»§a áº£nh báº±ng elip, chá»‰ láº¥y pháº§n lÃµi giá»¯a chá»©a cÃ nh cÃ¢y */
+    mix-blend-mode: multiply; /* Khử phần nền viền mờ trắng của ảnh */
+    /* Bo mờ hoàn toàn 4 cạnh của ảnh bằng elip, chỉ lấy phần lõi giữa chứa cành cây */
     -webkit-mask-image: radial-gradient(ellipse at 50% 60%, black 30%, transparent 70%);
     mask-image: radial-gradient(ellipse at 50% 60%, black 30%, transparent 70%);
 }
@@ -49,10 +49,10 @@
     bottom: -150px;
     right: -80px;
     transform: rotate(-165deg);
-    /* Láº­t ngÆ°á»£c láº¡i cho gÃ³c dÆ°á»›i pháº£i */
+    /* Lật ngược lại cho góc dưới phải */
 }
 
-/* Con sá»‘ ká»· niá»‡m chÃ¬m (Typographic Watermark) */
+/* Con số kỷ niệm chìm (Typographic Watermark) */
 .bg-watermark {
     position: absolute;
     top: 50%;
@@ -71,7 +71,7 @@
     font-size: 28vw;
     font-weight: bold;
     color: #a9121a;
-    opacity: 0.03; /* Cá»±c má» áº£o */
+    opacity: 0.03; /* Cực mờ ảo */
     user-select: none;
     line-height: 1;
 }
@@ -84,16 +84,16 @@
     margin-right: -4vw;
 }
 
-/* Tia sÃ¡ng háº¯t tá»« gÃ³c pháº£i (God Rays / Directional Spotlight) */
+/* Tia sáng hắt từ góc phải (God Rays / Directional Spotlight) */
 .god-rays {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     pointer-events: none;
-    z-index: 50; /* Náº±m háº³n lÃªn trÃªn cÃ¹ng */
+    z-index: 50; /* Nằm hẳn lên trên cùng */
     background: 
-        /* Tia sÃ¡ng chÃ­nh mÃ u vÃ ng cam (sunlight) */
+        /* Tia sáng chính màu vàng cam (sunlight) */
         linear-gradient(215deg, rgba(255, 180, 50, 0.4) 0%, rgba(255, 180, 50, 0.1) 30%, transparent 55%),
-        /* Tia phá»¥ má»Ÿ rá»™ng gÃ³c */
+        /* Tia phụ mở rộng góc */
         linear-gradient(235deg, rgba(255, 200, 100, 0.25) 0%, transparent 45%);
     animation: god-rays-pulse 4s infinite alternate ease-in-out;
 }
@@ -106,7 +106,7 @@
 /* Navbar */
 .top-nav {
     position: absolute;
-    /* KhÃ³a cá»©ng á»Ÿ giá»¯a */
+    /* Khóa cứng ở giữa */
     top: 30px;
     left: 50%;
     transform: translateX(-50%);
@@ -129,7 +129,7 @@
     text-transform: uppercase;
 }
 
-/* Layout 3 cá»™t (Giá» chá»‰ cÃ²n cá»™t giá»¯a) */
+/* Layout 3 cột (Giờ chỉ còn cột giữa) */
 .scene-layout {
     display: flex;
     justify-content: center;
@@ -138,7 +138,7 @@
     max-width: 1800px;
     margin: 0 auto;
     margin-top: 130px;
-    /* CÃ¡ch xa an toÃ n khá»i navbar */
+    /* Cách xa an toàn khỏi navbar */
     padding: 0 40px;
     box-sizing: border-box;
 }
@@ -152,13 +152,13 @@
     width: 100%;
 }
 
-/* Bá»‘ cá»¥c Typography giá»‘ng há»‡t thiáº¿t káº¿ */
+/* Bố cục Typography giống hệt thiết kế */
 .side-typography {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 20;
-    pointer-events: none; /* XuyÃªn click Ä‘á»ƒ khÃ´ng cháº·n trang */
+    pointer-events: none; /* Xuyên click để không chặn trang */
     display: flex;
     flex-direction: column;
 }
@@ -171,7 +171,7 @@
     align-items: center;
 }
 .side-typography * {
-    pointer-events: auto; /* KÃ­ch hoáº¡t láº¡i click cho chá»¯ vÃ  nÃºt */
+    pointer-events: auto; /* Kích hoạt lại click cho chữ và nút */
 }
 
 .kicker {
@@ -233,7 +233,7 @@
     font-weight: 600;
 }
 
-/* NÃºt video bÃªn trÃ¡i */
+/* Nút video bên trái */
 .ripple-ring {
     position: relative;
     width: 50px;
@@ -276,7 +276,7 @@
     text-transform: uppercase;
 }
 
-/* Dáº¥u gáº¡ch dá»c bÃªn pháº£i */
+/* Dấu gạch dọc bên phải */
 .vertical-line-container {
     display: flex;
     flex-direction: column;
@@ -290,7 +290,7 @@
     background-color: #a9121a;
 }
 
-/* NÃºt chuyá»ƒn trang bÃªn pháº£i */
+/* Nút chuyển trang bên phải */
 .ripple-solid {
     position: relative;
     background: #d00018;
@@ -331,40 +331,37 @@
     max-width: 1600px;
     height: 75vh;
     max-height: 800px;
-    /* KhÃ³a chiá»u cao tráº§n tá»± nhiÃªn khÃ´ng Ä‘Ã¨ navbar */
+    /* Khóa chiều cao trần tự nhiên không đè navbar */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* KhÃ³a chiá» u cao tráº§n tá»± nhiÃªn khÃ´ng Ä‘Ã¨ navbar */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Ä á»“ng bá»™ tuyá»‡t Ä‘á»‘i thá» i gian trÆ°á»£t (0.7s) vá»›i tá»‘c Ä‘á»™ láº­t trang */
+    /* Đồng bộ tuyệt đối thời gian trượt (0.7s) với tốc độ lật trang */
     transition: transform 0.7s ease-in-out;
     will-change: transform, filter;
     /* Đổ bóng tĩnh chéo trái (khớp với God Rays) */
     filter: drop-shadow(-30px 30px 40px rgba(0,0,0,0.2)) drop-shadow(-10px 15px 15px rgba(0,0,0,0.1));
 }
 
-/* Ä á»‹nh dáº¡ng trang sÃ¡ch */
+
+/* Định dạng trang sách */
 .page {
     background-color: #fdfcf9;
-    /* DÃ¹ng box-shadow chÃ¬m thay cho border Ä‘á»ƒ khÃ´ng lÃ m thay Ä‘á»•i kÃ­ch thÆ°á»›c thá»±c táº¿ cá»§a DOM (nguyÃªn nhÃ¢n gÃ¢y tÃ¡ch bÃ¬a) */
+    /* Dùng box-shadow chìm thay cho border để không làm thay đổi kích thước thực tế của DOM (nguyên nhân gây tách bìa) */
     box-shadow: inset 0 0 0 1px #e8e3dc, inset 0 0 20px rgba(0, 0, 0, 0.03);
     overflow: hidden;
     position: relative;
 }
 
-/* Lá»›p phá»§ shadow 3D cho gÃ¡y sÃ¡ch (Náº±m Ä‘Ã¨ lÃªn cáº£ áº£nh bÃ¬a) */
+/* Lớp phủ shadow 3D cho gáy sách (Nằm đè lên cả ảnh bìa) */
 .page::after {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none; /* XuyÃªn qua khÃ´ng cháº·n click */
+    pointer-events: none; /* Xuyên qua không chặn click */
     z-index: 5;
 }
 
-/* Trang láº» (BÃ¬a trÆ°á»›c, Máº·t pháº£i) -> GÃ¡y sÃ¡ch náº±m á»Ÿ bÃªn TRÃI */
+/* Trang lẻ (Bìa trước, Mặt phải) -> Gáy sách nằm ở bên TRÁI */
 .page:nth-child(odd)::after {
     background: linear-gradient(to right, 
         rgba(255,255,255,0.5) 0%, 
@@ -374,7 +371,7 @@
         rgba(0,0,0,0) 15%);
 }
 
-/* Trang cháºµn (Máº·t trÃ¡i) -> GÃ¡y sÃ¡ch náº±m á»Ÿ bÃªn PHáº¢I */
+/* Trang chẵn (Mặt trái) -> Gáy sách nằm ở bên PHẢI */
 .page:nth-child(even)::after {
     background: linear-gradient(to left, 
         rgba(255,255,255,0.5) 0%, 
@@ -391,20 +388,20 @@
     background-image: linear-gradient(to left, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
 }
 
-/* BÃ¬a cá»©ng sá»­ dá»¥ng chÃ­nh áº£nh báº¡n gá»­i */
+/* Bìa cứng sử dụng chính ảnh bạn gửi */
 .page-cover {
     background-color: #e3ddd3;
     border-radius: 2px 6px 6px 2px;
-    /* Táº¡o vÃ¡t cáº¡nh giáº£ láº­p Ä‘á»™ dÃ y cá»§a bÃ¬a cá»©ng 3D */
+    /* Tạo vát cạnh giả lập độ dày của bìa cứng 3D */
     box-shadow: inset -4px -4px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(0,0,0,0.05);
 }
 
-/* ÄÃ¡nh sÃ¡ng chÃ©o (Studio light) vÃ  Ãnh sÃ¡ng tÆ°Æ¡ng tÃ¡c (Interactive Glare) */
+/* Đánh sáng chéo (Studio light) và Ánh sáng tương tác (Interactive Glare) */
 .page-cover::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    /* Lá»›p 1: Vá»‡t sÃ¡ng di chuyá»ƒn theo chuá»™t, Lá»›p 2: Ãnh sÃ¡ng tÄ©nh vÃ¡t chÃ©o */
+    /* Lớp 1: Vệt sáng di chuyển theo chuột, Lớp 2: Ánh sáng tĩnh vát chéo */
     background: 
         radial-gradient(circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%), rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%),
         linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%);
@@ -462,14 +459,20 @@
     right: 30px;
 }
 
-/* áº¨n cÃ¡c class cÅ© khÃ´ng dÃ¹ng tá»›i */
+/* Ẩn các class cũ không dùng tới */
 .arrow-pulse,
 .video-ring,
 .corner-fold,
 .hotspot {
     display: none;
-}
- 
- @ m e d i a   ( m a x - w i d t h :   1 2 0 0 p x )   {   . s i d e - t y p o g r a p h y   {   d i s p l a y :   n o n e   ! i m p o r t a n t ;   }   } 
- 
+} 
+ @ m e d i a   ( m a x - w i d t h :   1 2 0 0 p x )   {   . s i d e - t y p o g r a p h y   {   d i s p l a y :   n o n e   ! i m p o r t a n t ;   }   }  
  @keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } } .action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; } .action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }
+@media (max-width: 1200px) { .side-typography { display: none !important; } }
+@keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+.action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; }
+.action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }
+@media (max-width: 1200px) { .side-typography { display: none !important; } }
+@keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+.action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; }
+.action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }
