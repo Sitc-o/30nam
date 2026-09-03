@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+﻿document.addEventListener('DOMContentLoaded', function () {
     const flipbookEl = document.getElementById('flipbook');
     // Thư viện có thể export dưới tên StPageFlip hoặc St
     const PageFlipClass = (typeof StPageFlip !== 'undefined') ? StPageFlip.PageFlip : (typeof St !== 'undefined' ? St.PageFlip : null);
@@ -115,13 +115,13 @@ document.addEventListener('DOMContentLoaded', function () {
         innerCover.insertAdjacentHTML('afterend', pagesHTML);
 
         const pageFlip = new PageFlipClass(flipbookEl, {
-            width: 700,
-            height: 490,
+            width: 550,
+            height: 733,
             size: "stretch",
-            minWidth: 250,
-            maxWidth: 700,   // Trang ngang - mỗi trang rộng hơn cao
-            minHeight: 200,
-            maxHeight: 490,
+            minWidth: 300,
+            maxWidth: 550,
+            minHeight: 400,
+            maxHeight: 700,
             maxShadowOpacity: 0.02,
             showCover: true,
             usePortrait: true,
