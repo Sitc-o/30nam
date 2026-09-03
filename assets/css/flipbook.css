@@ -335,8 +335,8 @@
     width: 100%;
     max-width: 1600px;
     /* Chiều cao cho album NGANG: thấp hơn album dọc */
-    height: 60vh;
-    max-height: 560px;
+    height: 75vh;
+    max-height: 800px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -528,3 +528,128 @@
 }
 
 
+
+
+.page::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; /* Xuyên qua không chặn click */
+    z-index: 5;
+}
+
+/* Trang lẻ (Bìa trước, Mặt phải) -> Gáy sách nằm ở bên TRÁI */
+.page:nth-child(odd)::after {
+    background: linear-gradient(to right, 
+        rgba(255,255,255,0.5) 0%, 
+        rgba(0,0,0,0.12) 2%, 
+        rgba(255,255,255,0.2) 4%, 
+        rgba(0,0,0,0.03) 8%, 
+        rgba(0,0,0,0) 15%);
+}
+
+/* Trang chẵn (Mặt trái) -> Gáy sách nằm ở bên PHẢI */
+.page:nth-child(even)::after {
+    background: linear-gradient(to left, 
+        rgba(255,255,255,0.5) 0%, 
+        rgba(0,0,0,0.12) 2%, 
+        rgba(255,255,255,0.2) 4%, 
+        rgba(0,0,0,0.03) 8%, 
+        rgba(0,0,0,0) 15%);
+}
+
+.page.--right {
+    background-image: linear-gradient(to right, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
+}
+.page.--left {
+    background-image: linear-gradient(to left, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
+}
+
+/* Bìa cứng sử dụng chính ảnh bạn gửi */
+.page-cover {
+    background-color: #e3ddd3;
+    border-radius: 2px 6px 6px 2px;
+    /* Tạo vát cạnh giả lập độ dày của bìa cứng 3D */
+    box-shadow: inset -4px -4px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+/* Đánh sáng chéo (Studio light) và Ánh sáng tương tác (Interactive Glare) */
+.page-cover::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Lớp 1: Vệt sáng di chuyển theo chuột, Lớp 2: Ánh sáng tĩnh vát chéo */
+    background: 
+        radial-gradient(circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%), rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%),
+        linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%);
+    pointer-events: none;
+    z-index: 4;
+}
+
+.full-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.page-cover-inner {
+    background-color: #eae5dc;
+}
+
+.page-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.year-title {
+    font-size: 4rem;
+    color: #a71d2a;
+    margin-bottom: 20px;
+    font-family: "FSMagistral", sans-serif;
+}
+
+.year-desc {
+    font-size: 1.3rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.page-number {
+    position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    color: #999;
+}
+
+.page.--left .page-number {
+    left: 30px;
+}
+
+.page.--right .page-number {
+    right: 30px;
+}
+
+/* Ẩn các class cũ không dùng tới */
+.arrow-pulse,
+.video-ring,
+.corner-fold,
+.hotspot {
+    display: none;
+} 
+ @ m e d i a   ( m a x - w i d t h :   1 2 0 0 p x )   {   . s i d e - t y p o g r a p h y   {   d i s p l a y :   n o n e   ! i m p o r t a n t ;   }   }  
+ @keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } } .action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; } .action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }
+@media (max-width: 1200px) { .side-typography { display: none !important; } }
+@keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+.action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; }
+.action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }
+@media (max-width: 1200px) { .side-typography { display: none !important; } }
+@keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+.action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; }
+.action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }

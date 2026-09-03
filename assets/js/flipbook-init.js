@@ -78,23 +78,16 @@
                 </div>
             `;
 
-            // Trang PHẢI - 2 ảnh dán so le kiểu scrapbook album
-            const rot2 = rotations[(i + 5) % rotations.length]; // góc xoay khác cho ảnh thứ 2
+            // Trang PHẢI - 1 ảnh dán kiểu scrapbook
             pagesHTML += `
                 <div class="page scrapbook-right">
-                    <div class="page-content scrapbook-two-photos">
-                        <!-- Ảnh 1: góc trên trái -->
-                        <div class="scrapbook-photo-wrapper photo-slot-top" style="transform: rotate(${rot}deg);">
+                    <div class="page-content">
+                        <div class="scrapbook-photo-wrapper" style="transform: rotate(${rot}deg); max-width: 85%; max-height: 75%;">
                             <span class="corner-tr"></span>
                             <span class="corner-bl"></span>
-                            <img src="${m.img}" alt="${m.year} - ảnh 1">
+                            <img src="${m.img}" alt="${m.year}">
                         </div>
-                        <!-- Ảnh 2: góc dưới phải (so le) -->
-                        <div class="scrapbook-photo-wrapper photo-slot-bottom" style="transform: rotate(${rot2}deg);">
-                            <span class="corner-tr"></span>
-                            <span class="corner-bl"></span>
-                            <img src="${m.img}" alt="${m.year} - ảnh 2">
-                        </div>
+                        <p class="scrapbook-caption">${m.caption}</p>
                     </div>
                     <div class="page-number">${i * 2 + 2}</div>
                 </div>
