@@ -1,0 +1,30 @@
+﻿.gallery-placeholder-main {
+    min-height: calc(100vh - 120px);
+    padding: 80px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 15%, #fff, #f3eee8);
+}
+.gallery-placeholder-content {
+    text-align: center;
+}
+.gallery-placeholder-title {
+    font-family: 'FS Magistral', sans-serif;
+    color: var(--red, #e12729);
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+.gallery-placeholder-text {
+    color: #666;
+    font-size: 18px;
+}
+.gallery-placeholder-link {
+    display: inline-block;
+    margin-top: 24px;
+    color: var(--red, #e12729);
+    text-decoration: none;
+    border: 1px solid var(--red, #e12729);
+    padding: 8px 16px;
+    border-radius: 99px;
+}

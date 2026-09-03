@@ -1,0 +1,312 @@
+﻿    /* Viettel brand color */
+    .bg-viettel { background-color: #EE0033; }
+    .text-viettel { color: #EE0033; }
+
+    /* Font vars fallback */
+    :root {
+      --font-beausans: 'Arial', sans-serif;
+      --font-roboto: 'Roboto', 'Arial', sans-serif;
+    }
+
+    /* Section 1: THÃ€NH Tá»°U background */
+    .thanhtuu-outer {
+      background-color: #f3f4f6;
+      padding: 80px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative concentric circles */
+    .deco-circles {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Font utility classes */
+    .font-beausans { font-family: var(--font-beausans); }
+    .font-roboto { font-family: var(--font-roboto); }
+
+    /* Remove top padding from simple-main since we have our own sections */
+    .simple-main { padding-top: 0 !important; }
+
+    .honors-section {
+      position: relative;
+      width: 100%;
+      min-height: 850px;
+      padding: 40px 0 40px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .honors-pattern {
+      position: absolute;
+      top: 0;
+      left: -25%;
+      width: 150%;
+      height: 100%;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .honors-container {
+      position: relative;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+      z-index: 10;
+      width: 100%;
+    }
+    .honors-title {
+      font-size: 48px;
+      font-weight: 900;
+      color: #FFF !important;
+      opacity: 0.9;
+      position: absolute;
+      top: 80px !important;
+      left: 60px;
+      z-index: 5;
+      pointer-events: none;
+      line-height: 1;
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .honors-carousel {
+      position: relative;
+      height: 600px;
+      margin-top: 100px;
+      perspective: 2000px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .honor-card-main {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 562px;
+      height: 349px;
+      background: #F5F5F5 !important;
+      border-radius: 28px;
+      padding: 40px 60px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      z-index: 100;
+      text-align: center;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      will-change: transform, opacity;
+    }
+    .honor-card-side {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 562px;
+      height: 349px;
+      background: #F5F5F5 !important;
+      border-radius: 28px;
+      padding: 40px 60px;
+      opacity: 1 !important;
+      z-index: 10;
+      text-align: center;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      will-change: transform, opacity;
+    }
+    .left-near { transform: translate(-75%, -50%) scale(0.94); z-index: 80; opacity: 1 !important; }
+    .left-mid { transform: translate(-95%, -50%) scale(0.88); z-index: 60; opacity: 1 !important; }
+    .left-far { transform: translate(-110%, -50%) scale(0.82); z-index: 40; opacity: 1 !important; }
+    .left-extra { transform: translate(-125%, -50%) scale(0.75); z-index: 20; opacity: 1 !important; }
+
+    .right-near { transform: translate(-25%, -50%) scale(0.94); z-index: 80; opacity: 1 !important; }
+    .right-mid { transform: translate(-5%, -50%) scale(0.88); z-index: 60; opacity: 1 !important; }
+    .right-far { transform: translate(10%, -50%) scale(0.82); z-index: 40; opacity: 1 !important; }
+    .right-extra { transform: translate(25%, -50%) scale(0.75); z-index: 20; opacity: 1 !important; }
+
+    .honor-year {
+      color: #000 !important;
+      font-family: var(--font-beausans) !important;
+      font-size: 24px !important;
+      font-style: normal !important;
+      font-weight: 700 !important;
+      line-height: normal !important;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .honor-card-title {
+      color: #000 !important;
+      font-family: var(--font-beausans) !important;
+      font-size: 32px !important;
+      font-style: normal !important;
+      font-weight: 700 !important;
+      line-height: normal !important;
+      text-transform: uppercase !important;
+      margin-bottom: 32px;
+    }
+    .honor-divider {
+      width: 220px;
+      height: 3px;
+      background: #E60023;
+      margin: 0 auto 40px;
+      border-radius: 2px;
+    }
+    .honor-desc {
+      color: #000 !important;
+      text-align: center !important;
+      font-family: var(--font-beausans) !important;
+      font-size: 16px !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      line-height: normal !important;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .achievement-carousel {
+      position: relative;
+      height: 600px;
+      width: 100%;
+      perspective: 2000px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 40px;
+      overflow: visible !important;
+    }
+    .achievement-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 420px;
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @media (max-width: 767px) {
+      .honor-card-main {
+        width: 320px !important;
+        height: 380px !important;
+        padding: 24px 20px !important;
+        border-radius: 20px !important;
+      }
+      .honor-card-side {
+        display: none !important;
+      }
+      .honor-card-title {
+        font-size: 20px !important;
+        margin-bottom: 16px !important;
+      }
+      .honor-divider {
+        width: 120px !important;
+        margin: 0 auto 16px !important;
+      }
+      .honor-desc {
+        font-size: 14px !important;
+      }
+      .honors-title {
+        font-size: 28px !important;
+        top: 20px !important;
+        left: 20px !important;
+      }
+    }
+  </style>
+
+/* Extracted inline styles for Tailwind HTML */
+.pointer-auto { pointer-events: auto !important; }
+.pointer-none { pointer-events: none !important; }
+
+.honor-badges-container {
+    transform: translateY(-40px);
+}
+
+.honor-cups-section {
+    padding-top: 40px;
+    padding-bottom: 200px;
+    min-height: 900px;
+}
+
+.honor-bg-image-wrapper {
+    top: 75%;
+    left: 40%;
+    width: 2600px;
+    height: 1453.25px;
+    aspect-ratio: 399/223;
+    opacity: 0.6;
+    z-index: 1;
+    transform: translate(-50%, -50%) rotate(152.914deg);
+}
+
+.honor-bg-image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: transparent;
+}
+
+.honor-cups-grid-container {
+    touch-action: auto;
+}
+
+.honor-cups-grid {
+    max-width: 1480px;
+    transform: none;
+    transition: none;
+}
+
+.honor-cup-card {
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(100% 100% at 50% 50%, #F5F5F5 0%, #D9D9D9 100%);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.honor-cup-image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: transparent;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: scale(1.4);
+}
+
+.honor-cup-image-shifted {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: transparent;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: scale(1.4) translateX(-15px);
+}
+.inline-style-1 { top:60px;right:220px;width:180px;height:180px;opacity:0.6 }
+.inline-style-2 { top:300px;left:60px;width:140px;height:140px;opacity:0.5 }
+.inline-style-3 { bottom:40px;left:300px;width:220px;height:220px;opacity:0.4 }
+.inline-style-4 { color:#44494D;font-family:var(--font-beausans);font-style:normal;font-weight:700;line-height:normal }
+.inline-style-5 { color:#000;font-family:var(--font-beausans);font-size:20px;font-weight:400;font-style:normal;line-height:normal }
+.inline-style-6 { color:#ED1C24;font-weight:700;font-style:normal;line-height:normal }
+.inline-style-7 { color:#ED1C24;font-family:var(--font-beausans);font-style:normal;font-weight:700;line-height:normal }
+.inline-style-8 { color:#000;font-family:var(--font-beausans);font-size:15px sm:16px;font-style:normal;font-weight:400;line-height:normal }
+

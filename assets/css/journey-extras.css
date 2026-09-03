@@ -1,0 +1,8 @@
+﻿.voice-text-content {
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    line-height: 1.9;
+}
+.grid-2-cols {
+    grid-template-columns: repeat(2, 1fr) !important;
+}
