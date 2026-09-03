@@ -75,16 +75,23 @@
                 </div>
             `;
 
-            // Trang PHẢI - Ảnh dán kiểu scrapbook
+            // Trang PHẢI - 2 ảnh dán so le kiểu scrapbook album
+            const rot2 = rotations[(i + 5) % rotations.length]; // góc xoay khác cho ảnh thứ 2
             pagesHTML += `
                 <div class="page scrapbook-right">
-                    <div class="page-content">
-                        <div class="scrapbook-photo-wrapper" style="transform: rotate(${rot}deg); max-width: 85%; max-height: 75%;">
+                    <div class="page-content scrapbook-two-photos">
+                        <!-- Ảnh 1: góc trên trái -->
+                        <div class="scrapbook-photo-wrapper photo-slot-top" style="transform: rotate(${rot}deg);">
                             <span class="corner-tr"></span>
                             <span class="corner-bl"></span>
-                            <img src="${m.img}" alt="${m.year}">
+                            <img src="${m.img}" alt="${m.year} - ảnh 1">
                         </div>
-                        <p class="scrapbook-caption">${m.caption}</p>
+                        <!-- Ảnh 2: góc dưới phải (so le) -->
+                        <div class="scrapbook-photo-wrapper photo-slot-bottom" style="transform: rotate(${rot2}deg);">
+                            <span class="corner-tr"></span>
+                            <span class="corner-bl"></span>
+                            <img src="${m.img}" alt="${m.year} - ảnh 2">
+                        </div>
                     </div>
                     <div class="page-number">${i * 2 + 2}</div>
                 </div>
@@ -105,18 +112,18 @@
         innerCover.insertAdjacentHTML('afterend', pagesHTML);
 
         const pageFlip = new PageFlipClass(flipbookEl, {
-            width: 550,
-            height: 733,
-            size: "stretch", // Đổi thành stretch để lấp đầy container
-            minWidth: 300,
-            maxWidth: 550,   // Khóa cứng chiều rộng 1 trang tối đa (2 trang = 1100px)
-            minHeight: 400,
-            maxHeight: 700,  // Khóa cứng chiều cao tuyệt đối của sách để không đè navbar
-            maxShadowOpacity: 0.02, // Gần như tắt bóng đổ nội bộ vì nó sai logic với ánh sáng God Rays chiếu từ phải sang
+            width: 700,
+            height: 490,
+            size: "stretch",
+            minWidth: 250,
+            maxWidth: 700,   // Trang ngang - mỗi trang rộng hơn cao
+            minHeight: 200,
+            maxHeight: 490,
+            maxShadowOpacity: 0.02,
             showCover: true,
             usePortrait: true,
             mobileScrollSupport: false,
-            flippingTime: 700 // Tăng tốc độ lật trang (0.7s) đồng bộ với Camera
+            flippingTime: 700
         });
 
         // Nạp các trang HTML vào thư viện

@@ -334,16 +334,14 @@
     z-index: 10;
     width: 100%;
     max-width: 1600px;
-    height: 75vh;
-    max-height: 800px;
-    /* Khóa chiều cao trần tự nhiên không đè navbar */
+    /* Chiều cao cho album NGANG: thấp hơn album dọc */
+    height: 60vh;
+    max-height: 560px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Đồng bộ tuyệt đối thời gian trượt (0.7s) với tốc độ lật trang */
     transition: transform 0.7s ease-in-out;
     will-change: transform, filter;
-    /* Đổ bóng tĩnh chéo trái (khớp với God Rays) */
     filter: drop-shadow(-30px 30px 40px rgba(0,0,0,0.2)) drop-shadow(-10px 15px 15px rgba(0,0,0,0.1));
 }
 
@@ -508,7 +506,69 @@
     letter-spacing: 0.5px;
 }
 
-/* Lớp phủ shadow 3D cho gáy sách (Nằm đè lên cả ảnh bìa) */
+/* ============================================================
+   ALBUM NGANG: Layout 2 ảnh so le (staggered) trên trang phải
+   ============================================================ */
+.scrapbook-two-photos {
+    position: relative;
+    padding: 0 !important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    overflow: visible;
+}
+
+/* Ảnh 1: Góc trên-trái, nghiêng sang trái */
+.photo-slot-top {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 52%;
+    max-height: 52%;
+    z-index: 2;
+}
+
+/* Ảnh 2: Góc dưới-phải, nghiêng sang phải (so le) */
+.photo-slot-bottom {
+    position: absolute;
+    bottom: 8%;
+    right: 4%;
+    width: 52%;
+    max-height: 52%;
+    z-index: 3;
+}
+
+/* Kích thước ảnh trong album ngang - nhỏ gọn hơn */
+.photo-slot-top img,
+.photo-slot-bottom img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border: 6px solid #fff;
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.3),
+        0 2px 5px rgba(0,0,0,0.15),
+        inset 0 0 0 1px rgba(0,0,0,0.05);
+    filter: sepia(15%) contrast(0.95) brightness(0.97);
+}
+
+/* Điều chỉnh trang TRÁI cho album ngang - text nhỏ hơn */
+.page.scrapbook-left .page-content {
+    padding: 28px 28px 28px 35px;
+}
+
+.scrapbook-year {
+    font-size: 4rem; /* Nhỏ hơn một chút vì trang thấp hơn */
+}
+
+.scrapbook-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+}
+
+
 .page::after {
     content: "";
     position: absolute;
