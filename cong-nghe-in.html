@@ -39,11 +39,148 @@
         </div>
     </div> <!-- end tab-hanh-trinh -->
     <div id="tab-mo-hinh" class="tab-content-pane">
-        <div class="section-head reveal"><span>MÃ” HÃŒNH Tá»” CHá»¨C</span>
-            <h2>CÆ¡ cáº¥u tá»• chá»©c CÃ´ng nghá»‡ in</h2>
-            <p>Ná»™i dung chi tiáº¿t Ä‘ang Ä‘Æ°á»£c cáº­p nháº­t...</p>
+<style>
+.org-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 0;
+}
+.org-card {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    overflow: hidden;
+}
+.org-card-head {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+}
+.org-card-head:hover {
+    background: #fafafa;
+}
+.org-card-head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+.org-card-toggle {
+    color: var(--red, #e30019);
+    font-size: 1.8rem;
+    line-height: 1;
+    font-weight: 300;
+    transition: transform 0.3s ease;
+}
+.org-card.open .org-card-toggle {
+    transform: rotate(45deg);
+}
+.org-card-body {
+    padding: 0 24px 24px;
+    display: none;
+    border-top: 1px solid #eaeaea;
+}
+.org-card.open .org-card-body {
+    display: block;
+    animation: fadeInOrg 0.4s ease;
+    padding-top: 24px;
+}
+@keyframes fadeInOrg {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.org-card-body p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 0.95rem;
+}
+.org-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.org-chip {
+    display: inline-block;
+    background: #f2f2f2;
+    color: #555;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+a.org-chip:hover {
+    background: #e6e6e6;
+    color: #111;
+}
+</style>
+
+<div class="section-head reveal">
+    <span>MÔ HÌNH TỔ CHỨC</span>
+    <h2>Cơ cấu tổ chức</h2>
+    <p>Cơ cấu lãnh đạo, khối cơ quan và các đơn vị trực thuộc.</p>
+</div>
+
+<div class="org-accordion reveal">
+    <div class="org-card open">
+        <div class="org-card-head" onclick="this.parentElement.classList.toggle('open')">
+            <h3>Giám đốc các thời kỳ</h3>
+            <div class="org-card-toggle">+</div>
+        </div>
+        <div class="org-card-body">
+            <p>Các thế hệ Giám đốc đã lãnh đạo đơn vị qua các giai đoạn hình thành, xây dựng, phát triển và vươn tầm.</p>
+            <div class="org-chips">
+                <a href="#" class="org-chip">Xem chân dung &rarr;</a>
+                <a href="#" class="org-chip">Ký ức các lãnh đạo &rarr;</a>
+            </div>
         </div>
     </div>
+
+    <div class="org-card open">
+        <div class="org-card-head" onclick="this.parentElement.classList.toggle('open')">
+            <h3>Khối cơ quan</h3>
+            <div class="org-card-toggle">+</div>
+        </div>
+        <div class="org-card-body">
+            <div class="org-chips">
+                <span class="org-chip">PHÒNG CHIẾN LƯỢC</span>
+                <span class="org-chip">PHÒNG HÀNH CHÍNH</span>
+                <span class="org-chip">PHÒNG PHÁP CHẾ & ĐẦU TƯ</span>
+                <span class="org-chip">PHÒNG NHÂN SỰ</span>
+                <span class="org-chip">PHÒNG TÀI CHÍNH - KẾ TOÁN</span>
+                <span class="org-chip">PHÒNG CHÍNH TRỊ</span>
+                <span class="org-chip">PHÒNG CÔNG NGHỆ THÔNG TIN</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="org-card open">
+        <div class="org-card-head" onclick="this.parentElement.classList.toggle('open')">
+            <h3>Các đơn vị trực thuộc</h3>
+            <div class="org-card-toggle">+</div>
+        </div>
+        <div class="org-card-body">
+            <div class="org-chips">
+                <span class="org-chip">Khối Kinh doanh</span>
+                <span class="org-chip">Khối Dịch vụ Khách hàng</span>
+                <span class="org-chip">Khối Vận hành</span>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div id="tab-thanh-tuu" class="tab-content-pane">
         <div class="section-head reveal"><span>THÃ€NH Tá»°U</span>
             <h2>Káº¿t quáº£ ná»•i báº­t</h2>
