@@ -1,3 +1,8 @@
+﻿@font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Light.ttf') format('truetype'); font-weight: 300; font-style: normal; }
+@font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Book.ttf') format('truetype'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; }
+@font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; }
+@font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-ExtraBold.ttf') format('truetype'); font-weight: 800; font-style: normal; }
 /* Reset và layout tổng thể */
 .flipbook-layout {
     background-color: #e0dcd7;
@@ -67,7 +72,7 @@
 }
 
 .bg-watermark span {
-    font-family: "Georgia", serif;
+    font-family: "FSMagistral", sans-serif;
     font-size: 28vw;
     font-weight: bold;
     color: #a9121a;
@@ -184,7 +189,7 @@
 .main-title {
     font-size: 3.5rem;
     color: #a9121a;
-    font-family: "Georgia", serif;
+    font-family: "FSMagistral", sans-serif;
     margin: 0;
     font-weight: normal;
 }
@@ -379,7 +384,7 @@
 }
 
 .scrapbook-year {
-    font-family: "Georgia", serif;
+    font-family: "FSMagistral", sans-serif;
     font-size: 2.8rem; /* Giảm từ 5rem xuống để vừa với ngày tháng dài */
     font-weight: bold;
     color: #8b1a1a;
@@ -391,7 +396,7 @@
 }
 
 .scrapbook-milestone {
-    font-family: "Georgia", serif;
+    font-family: "FSMagistral", sans-serif;
     font-size: 1rem;
     color: #a0522d;
     letter-spacing: 1px;
@@ -412,7 +417,7 @@
     font-size: 0.95rem;
     color: #4a3728;
     line-height: 1.8;
-    font-family: "Georgia", serif;
+    font-family: "FSMagistral", sans-serif;
 }
 
 /* ============================================================
@@ -497,7 +502,7 @@
     font-size: 0.75rem;
     color: #6b4c35;
     font-style: italic;
-    font-family: "Georgia", serif;
+    font-family: "FSMagistral", sans-serif;
     text-align: center;
     margin-top: 10px;
     letter-spacing: 0.5px;
@@ -586,7 +591,7 @@
     font-size: 4rem;
     color: #a71d2a;
     margin-bottom: 20px;
-    font-family: "Georgia", serif;
+    font-family: "FSMagistral", sans-serif;
 }
 
 .year-desc {
