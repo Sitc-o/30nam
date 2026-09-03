@@ -1,23 +1,165 @@
-﻿
-/* Extracted global inline styles */
-.global-inline-1 { padding-top: 30px; }
-.global-inline-2 { text-align: center; color: var(--muted); padding: 40px 0; }
-.global-inline-3 { font-family:Roboto,sans-serif;font-size:18px;line-height:1.9;max-width:920px }
-.global-inline-4 { color:var(--red);font-size:12px;letter-spacing:.1em }
-.global-inline-5 { display:inline-block;margin-top:24px;color:var(--red);font-size:12px;letter-spacing:.1em }
-.global-inline-6 { text-align:center }
-.global-inline-7 { margin:auto }
-.global-inline-8 { letter-spacing:.18em;color:var(--muted) }
-.global-inline-9 { width: 14px; height: 14px; }
-.global-inline-10 { width: 24px; height: 24px; }
-.global-inline-11 { left:15%;width:14px;height:12px;animation-duration:8s;animation-delay:0s;--drift:30px }
-.global-inline-12 { left:28%;width:10px;height:10px;animation-duration:6s;animation-delay:2s;--drift:-15px;opacity:0.3 }
-.global-inline-13 { left:48%;width:16px;height:14px;animation-duration:9s;animation-delay:1s;--drift:20px }
-.global-inline-14 { left:68%;width:11px;height:10px;animation-duration:7s;animation-delay:3s;--drift:-25px }
-.global-inline-15 { left:85%;width:15px;height:13px;animation-duration:8.5s;animation-delay:0.5s;--drift:15px;opacity:0.4 }
-.global-inline-16 { justify-content: center; }
-.global-inline-17 { flex: none; width: 100%; }
-.global-inline-18 { font-family: Georgia, serif; color: #a9121a; }
-.global-inline-19 { margin-top:20px; font-style: italic; }
-.global-inline-20 { color:#a9121a; font-family: Georgia, serif; }
-.global-inline-21 { display: none; }
+﻿/* Extracted global inline styles */
+@font-face {
+    font-family: 'FSMagistral';
+    src: url('../fonts/FSMagistral-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FSMagistral';
+    src: url('../fonts/FSMagistral-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FSMagistral';
+    src: url('../fonts/FSMagistral-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FSMagistral';
+    src: url('../fonts/FSMagistral-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FSMagistral';
+    src: url('../fonts/FSMagistral-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+.global-inline-1 {
+    padding-top: 30px;
+}
+
+.global-inline-2 {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 0;
+}
+
+.global-inline-3 {
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    line-height: 1.9;
+    max-width: 920px
+}
+
+.global-inline-4 {
+    color: var(--red);
+    font-size: 12px;
+    letter-spacing: .1em
+}
+
+.global-inline-5 {
+    display: inline-block;
+    margin-top: 24px;
+    color: var(--red);
+    font-size: 12px;
+    letter-spacing: .1em
+}
+
+.global-inline-6 {
+    text-align: center
+}
+
+.global-inline-7 {
+    margin: auto
+}
+
+.global-inline-8 {
+    letter-spacing: .18em;
+    color: var(--muted)
+}
+
+.global-inline-9 {
+    width: 14px;
+    height: 14px;
+}
+
+.global-inline-10 {
+    width: 24px;
+    height: 24px;
+}
+
+.global-inline-11 {
+    left: 15%;
+    width: 14px;
+    height: 12px;
+    animation-duration: 8s;
+    animation-delay: 0s;
+    --drift: 30px
+}
+
+.global-inline-12 {
+    left: 28%;
+    width: 10px;
+    height: 10px;
+    animation-duration: 6s;
+    animation-delay: 2s;
+    --drift: -15px;
+    opacity: 0.3
+}
+
+.global-inline-13 {
+    left: 48%;
+    width: 16px;
+    height: 14px;
+    animation-duration: 9s;
+    animation-delay: 1s;
+    --drift: 20px
+}
+
+.global-inline-14 {
+    left: 68%;
+    width: 11px;
+    height: 10px;
+    animation-duration: 7s;
+    animation-delay: 3s;
+    --drift: -25px
+}
+
+.global-inline-15 {
+    left: 85%;
+    width: 15px;
+    height: 13px;
+    animation-duration: 8.5s;
+    animation-delay: 0.5s;
+    --drift: 15px;
+    opacity: 0.4
+}
+
+.global-inline-16 {
+    justify-content: center;
+}
+
+.global-inline-17 {
+    flex: none;
+    width: 100%;
+}
+
+.global-inline-18 {
+    /* font-family: Georgia, serif; */
+    font-family: "FSMagistral", sans-serif;
+    color: #a9121a;
+}
+
+.global-inline-19 {
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.global-inline-20 {
+    color: #a9121a;
+    font-family: Georgia, serif;
+}
+
+.global-inline-21 {
+    display: none;
+}
