@@ -396,7 +396,7 @@
 </div>
 </section>
 </div><!-- end .thanhtuu-outer -->
-<section class="honors-section mt-0">
+<section class="honors-section mt-0 bg-viettel">
 <div class="honors-pattern">
 <img alt="" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="100vw" srcSet="https://20nam.viettelstore.vn/_next/image?url=%2Fimages%2Fbackgrounds%2Fdiahinh1.1.webp&amp;w=640&amp;q=75 640w, https://20nam.viettelstore.vn/_next/image?url=%2Fimages%2Fbackgrounds%2Fdiahinh1.1.webp&amp;w=768&amp;q=75 768w, https://20nam.viettelstore.vn/_next/image?url=%2Fimages%2Fbackgrounds%2Fdiahinh1.1.webp&amp;w=1024&amp;q=75 1024w, https://20nam.viettelstore.vn/_next/image?url=%2Fimages%2Fbackgrounds%2Fdiahinh1.1.webp&amp;w=1280&amp;q=75 1280w, https://20nam.viettelstore.vn/_next/image?url=%2Fimages%2Fbackgrounds%2Fdiahinh1.1.webp&amp;w=1920&amp;q=75 1920w" src="https://20nam.viettelstore.vn/_next/image?url=%2Fimages%2Fbackgrounds%2Fdiahinh1.1.webp&amp;w=1920&amp;q=75"/>
 </div>
@@ -477,13 +477,13 @@
 </div>
 </div>
 <div class="flex justify-center gap-6 relative z-30" style="transform:translateY(-40px)">
-<button class="w-14 h-14 rounded-full bg-white flex items-center justify-center border border-gray-200 text-black hover:text-[#EE0033] shadow-lg hover:shadow-xl transition-all group">
+<button id="btn-prev" class="w-14 h-14 rounded-full bg-white flex items-center justify-center border border-gray-200 text-black hover:text-[#EE0033] shadow-lg hover:shadow-xl transition-all group">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left w-6 h-6" aria-hidden="true">
 <path d="m15 18-6-6 6-6">
 </path>
 </svg>
 </button>
-<button class="w-14 h-14 rounded-full bg-white flex items-center justify-center border border-gray-200 text-black hover:text-[#EE0033] shadow-lg hover:shadow-xl transition-all group">
+<button id="btn-next" class="w-14 h-14 rounded-full bg-white flex items-center justify-center border border-gray-200 text-black hover:text-[#EE0033] shadow-lg hover:shadow-xl transition-all group">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-6 h-6" aria-hidden="true">
 <path d="m9 18 6-6-6-6">
 </path>
@@ -541,6 +541,74 @@
 </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const carouselCards = Array.from(document.querySelectorAll('.honors-carousel > div'));
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      
+      if(!carouselCards.length || !btnPrev || !btnNext) return;
+
+      const positions = [
+          'honor-card-main',
+          'honor-card-side right-near',
+          'honor-card-side right-mid',
+          'honor-card-side right-far',
+          'honor-card-side right-extra',
+          'honor-card-side right-extra',
+          'honor-card-side left-extra',
+          'honor-card-side left-far',
+          'honor-card-side left-mid',
+          'honor-card-side left-near'
+      ];
+
+      let currentIndex = 0;
+
+      function updateCards() {
+          carouselCards.forEach((card, i) => {
+              let posIndex = (i - currentIndex) % carouselCards.length;
+              if (posIndex < 0) posIndex += carouselCards.length;
+              
+              const posClass = positions[posIndex];
+              card.className = posClass + ' transition-all duration-700';
+              
+              if (posClass === 'honor-card-main' || posClass.includes('near') || posClass.includes('mid') || posClass.includes('far')) {
+                  card.style.pointerEvents = 'auto';
+              } else {
+                  card.style.pointerEvents = 'none';
+              }
+          });
+      }
+
+      btnNext.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % carouselCards.length;
+          updateCards();
+      });
+
+      btnPrev.addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + carouselCards.length) % carouselCards.length;
+          updateCards();
+      });
+
+      carouselCards.forEach((card, i) => {
+          card.addEventListener('click', () => {
+              let posIndex = (i - currentIndex) % carouselCards.length;
+              if (posIndex < 0) posIndex += carouselCards.length;
+
+              if (posIndex === 0) return;
+              
+              if (posIndex > 0 && posIndex <= 4) {
+                  currentIndex = (currentIndex + posIndex) % carouselCards.length;
+              } else if (posIndex > 5) {
+                  let leftOffset = carouselCards.length - posIndex;
+                  currentIndex = (currentIndex - leftOffset + carouselCards.length) % carouselCards.length;
+              }
+              updateCards();
+          });
+      });
+  });
+</script>
 </main><footer class="simple-footer"><span>© Viettel Commerce</span><span>Danh hiệu và giải thưởng</span></footer><dialog class="search-dialog"><form method="dialog"><button class="search-close">×</button></form><div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Tìm mốc thời gian, nhân vật, lĩnh vực…" autocomplete="off"></div><div id="searchResults" class="search-results"><p>Nhập từ khóa để tìm trong toàn bộ website.</p></div></dialog><script src="assets/js/search-index.js"></script><script src="assets/js/simple-v12.js"></script><script src="assets/js/book-menu.js"></script></body></html>
+
 
 
