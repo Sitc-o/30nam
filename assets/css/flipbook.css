@@ -380,23 +380,25 @@
 
 .scrapbook-year {
     font-family: "Georgia", serif;
-    font-size: 5rem;
+    font-size: 2.8rem; /* Giảm từ 5rem xuống để vừa với ngày tháng dài */
     font-weight: bold;
     color: #8b1a1a;
-    line-height: 1;
-    margin-bottom: 8px;
+    line-height: 1.1;
+    margin-bottom: 12px;
     /* Hiệu ứng chữ cũ nhẹ */
     text-shadow: 1px 1px 0px rgba(139, 26, 26, 0.2), 2px 2px 4px rgba(0,0,0,0.1);
+    word-wrap: break-word;
 }
 
 .scrapbook-milestone {
     font-family: "Georgia", serif;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #a0522d;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-style: italic;
+    line-height: 1.4;
 }
 
 .scrapbook-divider {
