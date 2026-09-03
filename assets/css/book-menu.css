@@ -1,23 +1,174 @@
 /* Menu mục lục đầy đủ (20 trang) — dùng chung cho mọi trang trong site,
    không chỉ riêng trang chủ. Trích từ home-approved.css để tái sử dụng. */
-.menu-backdrop{position:fixed;inset:0;background:rgba(31,31,31,.34);backdrop-filter:blur(9px);z-index:80;opacity:0;visibility:hidden;transition:.28s}
-.menu-backdrop.open{opacity:1;visibility:visible}
-.book-menu{position:fixed;right:0;top:0;bottom:0;width:min(760px,92vw);z-index:81;padding:34px 38px 26px;background:linear-gradient(100deg,#eee5da 0,#fffdf8 5%,#f9f4ed 96%,#ddd1c4 100%);border-left:1px solid #cecece;box-shadow:-24px 0 60px rgba(35,35,35,.16);transform:translateX(105%);transition:transform .42s cubic-bezier(.65,.05,.2,1);overflow:auto}
-.book-menu.open{transform:none}
-.book-menu::before{content:"";position:absolute;inset:14px;border:1px solid rgba(157,157,157,.35);pointer-events:none}
-.book-menu__head{position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:24px;border-bottom:1px solid #d5d5d5}
-.book-menu__head small{font-size:10px;letter-spacing:.25em;color:#7f7f7f}
-.book-menu__head h1{font-family:'FS Magistral',sans-serif;font-size:36px;font-weight:500;color:#ee0033;margin:8px 0 0}
-.book-menu__head button{width:44px;height:44px;border-radius:50%;border:1px solid #d2d2d2;background:#ffffff;color:#636363;font-size:27px;cursor:pointer}
-.book-menu__grid{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 34px;padding:30px 0}
-.book-menu__grid section{position:relative;padding-left:40px}
-.book-menu__grid section>span{position:absolute;left:0;top:2px;font-family:'FS Magistral',sans-serif;color:#ee0033;font-size:20px}
-.book-menu__grid h2{font-family:'FS Magistral',sans-serif;font-weight:500;font-size:22px;color:#373737;margin:0 0 12px}
-.book-menu__grid a{display:block;padding:6px 0;color:#5f5f5f;text-decoration:none;font-size:13px;line-height:1.45;transition:.2s}
-.book-menu__grid a:hover{color:#ee0033;transform:translateX(3px)}
-.book-menu__grid a.active{color:#ee0033;font-weight:700}
-.book-menu__footer{position:relative;display:flex;align-items:center;gap:14px;border-top:1px solid #d5d5d5;padding-top:20px}
-.book-menu__footer strong{font-size:28px;color:#ee0033}
-.book-menu__footer span{font-size:11px;letter-spacing:.08em;color:#6b6b6b}
-@media(max-width:1000px){.book-menu{width:min(700px,96vw)}}
-@media(max-width:680px){.book-menu{padding:24px 20px}.book-menu__grid{grid-template-columns:1fr;gap:22px}.book-menu__head h1{font-size:29px}}
+.font8888 {
+    font-family: "1FTV Autography", sans-serif;
+}
+
+.menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 31, 31, .34);
+    backdrop-filter: blur(9px);
+    z-index: 80;
+    opacity: 0;
+    visibility: hidden;
+    transition: .28s
+}
+
+.menu-backdrop.open {
+    opacity: 1;
+    visibility: visible
+}
+
+.book-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: min(760px, 92vw);
+    z-index: 81;
+    padding: 34px 38px 26px;
+    background: linear-gradient(100deg, #eee5da 0, #fffdf8 5%, #f9f4ed 96%, #ddd1c4 100%);
+    border-left: 1px solid #cecece;
+    box-shadow: -24px 0 60px rgba(35, 35, 35, .16);
+    transform: translateX(105%);
+    transition: transform .42s cubic-bezier(.65, .05, .2, 1);
+    overflow: auto
+}
+
+.book-menu.open {
+    transform: none
+}
+
+.book-menu::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(157, 157, 157, .35);
+    pointer-events: none
+}
+
+.book-menu__head {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #d5d5d5
+}
+
+.book-menu__head small {
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: #7f7f7f
+}
+
+.book-menu__head h1 {
+    font-family: 'FS Magistral', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: #ee0033;
+    margin: 8px 0 0
+}
+
+.book-menu__head button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid #d2d2d2;
+    background: #ffffff;
+    color: #636363;
+    font-size: 27px;
+    cursor: pointer
+}
+
+.book-menu__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 34px;
+    padding: 30px 0
+}
+
+.book-menu__grid section {
+    position: relative;
+    padding-left: 40px
+}
+
+.book-menu__grid section>span {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-family: 'FS Magistral', sans-serif;
+    color: #ee0033;
+    font-size: 20px
+}
+
+.book-menu__grid h2 {
+    font-family: 'FS Magistral', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #373737;
+    margin: 0 0 12px
+}
+
+.book-menu__grid a {
+    display: block;
+    padding: 6px 0;
+    color: #5f5f5f;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.45;
+    transition: .2s
+}
+
+.book-menu__grid a:hover {
+    color: #ee0033;
+    transform: translateX(3px)
+}
+
+.book-menu__grid a.active {
+    color: #ee0033;
+    font-weight: 700
+}
+
+.book-menu__footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid #d5d5d5;
+    padding-top: 20px
+}
+
+.book-menu__footer strong {
+    font-size: 28px;
+    color: #ee0033
+}
+
+.book-menu__footer span {
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: #6b6b6b
+}
+
+@media(max-width:1000px) {
+    .book-menu {
+        width: min(700px, 96vw)
+    }
+}
+
+@media(max-width:680px) {
+    .book-menu {
+        padding: 24px 20px
+    }
+
+    .book-menu__grid {
+        grid-template-columns: 1fr;
+        gap: 22px
+    }
+
+    .book-menu__head h1 {
+        font-size: 29px
+    }
+}

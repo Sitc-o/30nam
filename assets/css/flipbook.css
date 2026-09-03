@@ -1,4 +1,4 @@
-﻿@font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Light.ttf') format('truetype'); font-weight: 300; font-style: normal; }
+@font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Light.ttf') format('truetype'); font-weight: 300; font-style: normal; }
 @font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Book.ttf') format('truetype'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; }
 @font-face { font-family: 'FSMagistral'; src: url('../fonts/FSMagistral-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; }
@@ -416,6 +416,27 @@
     color: #4a3728;
     line-height: 1.8;
     font-family: "FSMagistral", sans-serif;
+    /* Bật tính năng cuộn cho phần mô tả */
+    flex-grow: 1;
+    overflow-y: auto;
+    width: 100%;
+    padding-right: 10px;
+}
+
+/* Làm đẹp thanh cuộn cho hợp với sách cổ */
+.scrapbook-desc::-webkit-scrollbar {
+    width: 6px;
+}
+.scrapbook-desc::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+.scrapbook-desc::-webkit-scrollbar-thumb {
+    background: rgba(107, 76, 53, 0.4);
+    border-radius: 4px;
+}
+.scrapbook-desc::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 76, 53, 0.7);
 }
 
 /* ============================================================
