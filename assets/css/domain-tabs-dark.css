@@ -1,0 +1,9 @@
+﻿.domain-stat-tab { cursor:pointer;padding:16px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:10px;text-align:center;transition:all .25s;color:#ccc;display:flex;flex-direction:column;align-items:center;gap:6px }
+.domain-stat-tab:hover { background:rgba(255,255,255,0.1);color:#fff }
+.domain-stat-tab.active { background:rgba(230,0,18,0.25);border-color:rgba(230,0,18,0.6);color:#fff }
+.domain-stat-tab i { font-size:1.6rem;font-style:normal }
+.domain-stat-tab b { font-size:1rem;font-weight:700 }
+.domain-stat-tab span { font-size:.78rem;opacity:.75 }
+.tab-content-pane { display:none }
+.tab-content-pane.active { display:block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
