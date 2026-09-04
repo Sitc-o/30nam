@@ -1,9 +1,9 @@
-﻿const footerCSS = `
+const footerCSS = `
 <style>
 .site-footer {
-    background: #ee0033;
-    border-top: 1px solid var(--line, #ececec);
-    padding: 55px 0 24px;
+    background: #f7f9fc;
+    border-top: 1px solid #eaeaea;
+    padding: 60px 0 30px;
     font-family: 'Roboto', Arial, sans-serif;
 }
 .site-footer .container {
@@ -13,67 +13,52 @@
 .footer-top {
     display: grid;
     grid-template-columns: 1.4fr repeat(3, 1fr);
-    gap: 35px;
+    gap: 40px;
 }
-.footer-logo {
-    display: inline-grid;
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-.footer-brand .brand {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto auto;
-    align-items: center;
-    white-space: nowrap;
-}
-.footer-brand .brand-main {
-    grid-column: 1;
-    grid-row: 1;
-    font-size: 26px;
-    color: #ffffff;
-    font-weight: 850;
-    letter-spacing: -1.5px;
-    line-height: .9;
-}
-.footer-brand .brand-sub {
-    grid-column: 1;
-    grid-row: 2;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1;
-    margin-top: 3px;
-    text-transform: uppercase;
+.footer-brand img {
+    margin-bottom: 12px;
 }
 .footer-brand p, .footer-brand > span, .site-footer a, .site-footer p {
-    font-size: 12px;
-    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    color: #555555;
     display: block;
-    margin: 6px 0;
+    margin: 8px 0;
     text-decoration: none;
+    line-height: 1.6;
+}
+.site-footer a {
+    transition: color 0.2s;
 }
 .site-footer a:hover {
-    color: #ffffff;
+    color: #ee0033;
 }
 .site-footer h4 {
-    margin: 0 0 12px;
+    margin: 0 0 16px;
     font-family: 'FS Magistral', sans-serif;
-    font-size: 16px;
-    color: #ffffff;
+    font-size: 17px;
+    color: #1a1a1a;
+    font-weight: 700;
 }
 .footer-bottom {
-    border-top: 1px solid var(--line, #ececec);
-    margin-top: 32px;
-    padding-top: 18px;
+    border-top: 1px solid #eaeaea;
+    margin-top: 40px;
+    padding-top: 24px;
     display: flex;
     justify-content: space-between;
-    font-size: 10px;
-    color: rgba(255,255,255,0.8);
+    font-size: 11px;
+    color: #777777;
 }
 @media(max-width: 1050px) {
     .footer-top { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width: 650px) {
-    .footer-top { grid-template-columns: 1fr; }
-    .footer-bottom { display: flex; flex-direction: column; gap: 8px; }
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 10px; }
     .site-footer .container { width: min(1240px, calc(100% - 24px)); }
 }
 </style>
@@ -83,8 +68,10 @@ const footerHTML = `
 <footer class="site-footer">
     <div class="container footer-top">
         <div class="footer-brand">
-            <div class="brand footer-logo"><span class="brand-main">viettel</span><span class="brand-sub">commerce</span></div>
-            <p>Tổng Công ty Thương mại và Xuất nhập khẩu Viettel.</p>
+            <a href="index.html">
+                <img src="assets/images/logo/viettel-commerce-dark.svg" alt="Viettel Commerce" width="160" height="92">
+            </a>
+            <p><strong>Tổng Công ty Thương mại và Xuất nhập khẩu Viettel.</strong></p>
             <span>Vững bước tiên phong – Kiến tạo tương lai.</span>
         </div>
         <div>
@@ -93,6 +80,7 @@ const footerHTML = `
             <a href="hanh-trinh.html#modal-khoi-nguon">Khởi Nguồn</a>
             <a href="hanh-trinh.html#modal-troi-day">Trỗi Dậy</a>
             <a href="hanh-trinh.html#modal-tang-toc">Tăng Tốc</a>
+            <a href="hanh-trinh.html#modal-vuon-tam">Vươn Tầm</a>
         </div>
         <div>
             <h4>Nội dung</h4>

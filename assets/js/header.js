@@ -1,7 +1,98 @@
+const headerCSS = `
+<style>
+.simple-header {
+    height: 120px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 4vw;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.simple-logo {
+    display: flex;
+    align-items: center;
+}
+.simple-nav {
+    display: flex;
+    gap: 50px;
+    justify-self: center;
+}
+.simple-nav a {
+    font-family: 'FS Magistral', sans-serif;
+    font-size: 22px;
+    color: #333333;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+.simple-nav a:hover,
+.simple-nav a.active {
+    color: #ee0033;
+}
+.nav-dropdown {
+    position: relative;
+}
+.nav-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 12px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    min-width: 220px;
+    z-index: 60;
+}
+.nav-dropdown:hover .nav-submenu {
+    display: flex;
+    flex-direction: column;
+}
+.nav-submenu a {
+    font-size: 16px;
+    padding: 10px 24px;
+    display: block;
+    color: #555555;
+    white-space: nowrap;
+}
+.nav-submenu a:hover {
+    background: #fcfcfc;
+    color: #ee0033;
+}
+.simple-actions {
+    display: flex;
+    gap: 16px;
+    justify-self: end;
+    align-items: center;
+}
+.simple-actions button {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #333333;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.simple-actions button:hover {
+    color: #ee0033;
+}
+@media(max-width: 1050px) {
+    .simple-nav { display: none; }
+}
+</style>
+`;
+
 const headerHTML = `
     <header class="simple-header">
         <a class="simple-logo" href="index.html">
-            <img class="brand-logo" src="assets/images/logo/viettel-commerce-light.svg" alt="Viettel Commerce" width="160" height="92">
+            <img class="brand-logo" src="assets/images/logo/viettel-commerce-dark.svg" alt="Viettel Commerce" width="160" height="92">
         </a>
         <nav class="simple-nav">
             <a href="gioi-thieu.html">GIỚI THIỆU</a>
@@ -30,7 +121,7 @@ const headerHTML = `
     </header>
 `;
 
-document.write(headerHTML);
+document.write(headerCSS + headerHTML);
 
 // Thêm class active cho menu dựa vào URL hiện tại
 document.addEventListener("DOMContentLoaded", () => {
