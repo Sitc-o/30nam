@@ -1,7 +1,33 @@
+﻿/* =========================================
+   TÙY CHỈNH TABS CHO 4 TRANG LĨNH VỰC
+   ========================================= */
+
+/* 1. Tùy chỉnh Tiêu đề Tab (Giới thiệu, Hành trình,...) */
+.domain-stat-tab b {
+    /* Đổi kiểu chữ (uppercase: in hoa, lowercase: in thường, capitalize: in hoa chữ cái đầu) */
+    text-transform: none; 
+    font-size: 17px;
+    color: var(--red);
+    font-weight: bold;
+}
+
+/* 2. Tùy chỉnh Nội dung mô tả nhỏ bên dưới Tiêu đề */
+.domain-stat-tab span {
+    text-transform: none;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* 3. Tùy chỉnh Icon */
+.domain-stat-tab i {
+    font-size: 20px;
+}
+
+/* Các thuộc tính cấu trúc cơ bản */
 .domain-stat-tab { cursor: pointer; transition: all 0.3s; }
 .domain-stat-tab:hover { background: #fdfdfd; }
 .domain-stat-tab.active { background: #fff5f6; position: relative; }
-.domain-stat-tab.active::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--red); }
+.domain-stat-tab.active::after { content: "; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--red); }
 .tab-content-pane { display: none; }
 .tab-content-pane.active { display: block; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
