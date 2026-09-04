@@ -421,6 +421,15 @@
     overflow-y: auto;
     width: 100%;
     padding-right: 10px;
+    text-align: justify; /* Căn lề đều 2 bên như Word */
+}
+
+/* Định dạng từng đoạn văn bản trong mô tả */
+.scrapbook-desc p {
+    margin-bottom: 12px; /* Khoảng cách giữa các đoạn */
+    text-indent: 1.5rem; /* Thụt lề dòng đầu giống Word */
+    text-align: justify;
+    line-height: 1.8;
 }
 
 /* Làm đẹp thanh cuộn cho hợp với sách cổ */

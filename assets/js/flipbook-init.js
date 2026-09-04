@@ -11,7 +11,7 @@
         // Dữ liệu 30 mốc thời gian - mỗi entry: [year, tên mốc, mô tả, ảnh]
         const milestones = [
             {
-                year: "Ngày 10 tháng 4 năm 1997", milestone: "Ngày đầu thành lập", desc: "Ngày 10 tháng 4 năm 1997, thành lập Phòng Xuất nhập khẩu thuộc Công ty Điện tử Viễn thông Quân đội, với ngành nghề ban đầu là làm dịch vụ Xuất nhập khẩu ủy thác cho Công ty. Ngày 10 tháng 4 hàng năm trở thành ngày Truyền thống của Công ty Thương mại và Xuất nhập khẩu Viettel.", images: [
+                year: "Ngày 10 tháng 4 năm 1997", milestone: "Lịch sử Viettel Commerce bắt đầu", desc: `Đó là ngày thành lập Phòng Xuất nhập khẩu thuộc Công ty Điện tử Viễn thông Quân đội, Với ngành nghề ban đầu là làm dịch vụ Xuất nhập khẩu ủy thác cho Công ty Điện tử Viễn thông Quân đội. Ngày 10 tháng 4 hàng năm trở thành ngày Truyền thống của Tổng Công ty Thương mại và Xuất nhập khẩu Viettel sau này. Lịch sử Viettel ghi lại, nhiều năm sau ngày thành lập (01/6/1989), Công ty Điện tử Viễn thông Quân đội vẫn trong tình trạng "đi làm thuê", tìm kiếm các hợp đồng để ký kết, xây dựng các công trình, hạ tầng viễn thông cho các đối tác. Sáu năm sau thời gian đi "làm thuê" tích lũy kinh nghiệm và ấp ủ "ước mơ"; ngày 13/6/1995 đã trở thành một dấu mốc mang tính bước ngoặt trong lịch sử Viettel. Thực hiện Quyết nghị của Thường trực Bộ Chính trị, đồng chí Trần Đức Lương, Phó Thủ tướng Chính phủ đã ký quyết định thành lập Công ty Điện tử Viễn thông Quân đội (trên cơ sở Công ty Điện tử Thiết bị Thông tin-Sigelco). Với ngành nghề mới được bổ sung là kinh doanh dịch vụ bưu chính viễn thông trong nước và quốc tế. Sigeleco đã vượt qua hàng rào cản trở độc quyền, tiến hành lập đề án về kinh doanh viễn thông. Đại tá Phạm Ngọc Điệp, nguyên Giám đốc Công ty Sigelco (1993-1995) cho biết: Trong đề xuất cấp giấy phép kinh doanh bưu chính viễn thông, Ban Lãnh đạo Công ty đã giải quyết được 02 vấn đề rất mấu chốt, rất căn bản, có tính chiến lược lâu dài: "Thứ nhất, xin được giấy phép cho Công ty được kinh doanh dịch vụ bưu chính viễn thông cả trong nước và quốc tế.Thứ hai, đặt tên mới cho công ty có thêm chữ "viễn thông", gọi tắt  là "VIETEL"(lúc này trong chữ Vietel chỉ có 01 chữ T, đến năm 2003 mới bổ sung thành Viettel).Lúc này, Công ty đã có tầm nhìn chiến lược lâu dài, cả trong nước và đối ngoại, hội nhập quốc tế.Ngày 20 tháng 10 năm 1995, Ủy ban Kế hoạch Hà Nội cấp giấy kinh doanh số 109822 cho Công ty Điện tử Viễn thông Quân đội với ngành nghề kinh doanh "xuất nhập khẩu các sản phẩm thiết bị thông tin, xây lắp các công trình thiết bị thông tin, đường dây tải điện, trạm biến thế, lắp ráp các thiết bị điện tử, hoạt động kinh doanh các loại dịch vụ bưu chính viễn thông trong nước và nước ngoài".Nội dung giấy phép kinh doanh, có thể thấy lúc này Công ty chú trọng nhiệm vụ Xuất nhập khẩu.Để kiện toàn Ban lãnh đạo Công ty Điện tử Viễn thông Quân đội, ĐUQSTW(nay là Quân ủy Trung ương) - Bộ Quốc phòng quyết định điều động, bổ nhiệm kiện toàn Ban Giám đốc Công ty và các đơn vị trực thuộc.Các đồng chí: Đàm Rơi - Phó Tư lệnh Binh chủng Thông tin làm Giám đốc Công ty, đồng chí Phạm Ngọc Điệp làm Phó Giám đốc Công ty; các đồng chí: Nguyễn Tiến Mỹ và Bùi Mạnh Hồng làm Quyền Phó Giám đốc Công ty.Quyết định thành lập Xí nghiệp Khảo sát thiết kế và Xí nghiệp Xây lắp công trình trực thuộc Công ty; các phòng, ban và các trưởng phòng, ban của Công ty; Trong đó có Phòng Kinh doanh.Từ đó dịch vụ xuất nhập khẩu liên tục phát triên, trở thành một ngành kinh doanh chính và có triển vọng lâu dài của Công ty, trước hết là nhập khẩu các máy móc, thiết bị phục vụ các hợp đồng xây dựng các công trình thông tin cho Bộ Tư lệnh Thông tin liên lạc.Năm 1997 đứng trước nhu cầu phát triển, Phòng Kinh doanh Công ty Điện tử Viễn thông Quân đội được tách thành 02 bộ phận riêng biệt là Phòng Xuất nhập khẩu và Trung tâm kinh doanh thương mại và Dịch vụ kỹ thuật.Tiến sỹ, Trung tá Hồ Công Việt, Nguyên giáo viên Trường Sỹ quan Chỉ huy kỹ thuật thông tin, về Viettel năm 1995, Trưởng Phòng Xuất nhập khẩu đầu khi thành lập đã bồi hồi nhớ lại: "Là người sỹ quan, cán bộ đảng viên cấp trên giao thì chấp hành thôi, nhưng cũng trăn trở lắm vì lực lượng mỏng, kinh nghiệm ít", Còn Đại tá Đỗ Ngọc Cường khi còn sống từng hồi tưởng: "lúc mới thành lập, Phòng  chỉ có 7 người, 4 người bộ phận xuất nhập khẩu gồm anh Hồ Công Việt, tôi, Nguyễn Thị Minh Nguyệt và Lê Phú Lâm; bộ phận Radio Trunking có 3 người là đồng chí Tống Viết Trung, đồng chí Đỗ Minh Phương và anh Bùi Ánh Quang. Đến tháng 11 năm 1997 thì bộ phận Radio Trunking cũng sáp nhập về Trung tâm Thương mại và Dịch vụ kỹ thuật. Do nhu cầu nhập khẩu máy móc thiết bị cho binh chủng tăng lên, cần thiết phải có một bộ phận chuyên về xuất nhập khẩu; là một bộ phận độc lập tách rời; đó là một trọng trách mà Binh chủng và Công ty giao cho. Lúc ấy thì tôi nghĩ Phòng sẽ phát triển; song cũng không nghĩ Phòng Xuất nhập khẩu năm ấy lại lớn mạnh như bây giờ".`, images: [
                     { src: "assets/images/viettel-1997.jpg", caption: "Lễ thành lập Viettel, 1997" },
                     { src: "assets/images/8 - Sk 8Nguyên Tổng Giám đốc Nguyễn Mạnh Hùng; Lê Đăng Dũng (Khí đó là Phó Tổng Giám đốc Tập đoàn đến thăm, kiểm tra Công trường TTHGQG.jpg", caption: "Lễ thành lập Viettel, 1997" },
                 ]
@@ -59,7 +59,7 @@
                     <div class="scrapbook-year" style="font-size:6rem; margin-top:-10px;">30</div>
                     <div class="scrapbook-milestone">Năm vững bước tiên phong</div>
                     <div class="scrapbook-divider"></div>
-                    <p class="scrapbook-desc">Từ những ngày đầu gian khó cho đến hôm nay, mỗi trang sách là một dấu ấn, một câu chuyện, một chặng đường đáng nhớ trong hành trình 30 năm của chúng tôi.</p>
+                    <div class="scrapbook-desc">Từ những ngày đầu gian khó cho đến hôm nay, mỗi trang sách là một dấu ấn, một câu chuyện, một chặng đường đáng nhớ trong hành trình 30 năm của chúng tôi.</div>
                 </div>
             </div>
         `;
@@ -79,7 +79,7 @@
                         <div class="scrapbook-year">${m.year}</div>
                         <div class="scrapbook-milestone">${m.milestone}</div>
                         <div class="scrapbook-divider"></div>
-                        <p class="scrapbook-desc">${m.desc}</p>
+                        <div class="scrapbook-desc">${m.desc.split("\n").map(p => p.trim() ? `<p>${p.trim()}</p>` : "").join("")}</div>
                     </div>
                     <div class="page-number">${i * 2 + 1}</div>
                 </div>
@@ -125,7 +125,7 @@
                     <div class="scrapbook-year" style="font-size:3rem;">VIETTEL</div>
                     <div class="scrapbook-milestone">Theo cách của bạn</div>
                     <div class="scrapbook-divider"></div>
-                    <p class="scrapbook-desc">Cảm ơn bạn đã đồng hành cùng chúng tôi suốt hành trình 30 năm ý nghĩa này.</p>
+                    <div class="scrapbook-desc">Cảm ơn bạn đã đồng hành cùng chúng tôi suốt hành trình 30 năm ý nghĩa này.</div>
                 </div>
             </div>
         `;
@@ -166,12 +166,12 @@
         const lightboxCaption = document.getElementById("lightbox-caption");
         const closeBtn = document.querySelector(".lightbox-close");
 
-        const closeLightbox = () => { 
-            lightbox.classList.remove("active"); 
-            setTimeout(() => { lightbox.style.display = "none"; }, 300); 
+        const closeLightbox = () => {
+            lightbox.classList.remove("active");
+            setTimeout(() => { lightbox.style.display = "none"; }, 300);
         };
         closeBtn.addEventListener("click", closeLightbox);
-        lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
+        lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
 
         // Ngăn lật trang và giảm độ nhạy hover khi tương tác với nội dung
         const contentElements = document.querySelectorAll(".scrapbook-desc, .scrapbook-year, .scrapbook-milestone, .scrapbook-photo-wrapper");
@@ -193,7 +193,7 @@
                 const wrapper = img.closest(".scrapbook-photo-item") || img.closest(".page-content");
                 const captionEl = wrapper.querySelector(".scrapbook-caption");
                 lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
-                
+
                 lightbox.style.display = "flex";
                 setTimeout(() => lightbox.classList.add("active"), 10);
             });
