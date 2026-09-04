@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
     font-family: 'FSMagistral';
     src: url('../fonts/FSMagistral-Light.ttf') format('truetype');
     font-weight: 300;
@@ -464,7 +464,8 @@
 .scrapbook-milestone {
     font-family: var(--font-heading);
     font-size: 1rem;
-    color: #a0522d;
+    font-weight: bold;
+    color: #000000;
     letter-spacing: 1px;
     text-transform: uppercase;
     margin-bottom: 15px;
@@ -481,7 +482,7 @@
 
 .scrapbook-desc {
     font-size: 0.95rem;
-    color: #4a3728;
+    color: #000000;
     line-height: 1.8;
     font-family: var(--font-body);
     /* Bật tính năng cuộn cho phần mô tả */
@@ -551,7 +552,7 @@
     width: 100%;
 }
 
-/* Khung ảnh dán kiểu scrapbook */
+/* Khung ảnh kiểu Premium Gallery (thay thế scrapbook cũ) */
 .scrapbook-photo-wrapper {
     position: relative;
     display: inline-block;
@@ -559,77 +560,60 @@
     max-height: 100%;
     min-height: 0;
     flex-shrink: 1;
-    /* Cho phép co lại khi thiếu không gian */
+    box-sizing: border-box;
+    
+    /* Lớp giấy viền ảnh (Off-white silk paper) */
+    background-color: #fcfbfa;
+    padding: 12px;
+    padding-bottom: 28px; /* Lề dưới rộng hơn tạo cảm giác ảnh in rửa cổ điển / film */
+    
+    /* Viền ngoài cùng cực mỏng và bóng đổ đa tầng (nhấc bổng ảnh khỏi mặt giấy) */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 
+        0 12px 30px -8px rgba(0, 0, 0, 0.3),
+        0 4px 10px -4px rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+}
+
+/* Khung viền chỉ mảnh (Fine inner line) bao quanh sát mép ảnh để tăng vẻ sang trọng */
+.scrapbook-photo-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    right: 9px;
+    bottom: 25px;
+    border: 1px solid rgba(139, 115, 85, 0.4); /* Màu vàng đồng/nâu nhạt */
+    pointer-events: none;
+    z-index: 5;
 }
 
 .scrapbook-photo-wrapper img {
     display: block;
     max-width: 100%;
     max-height: 100%;
-    /* Bỏ object-fit: contain để wrapper có thể bám sát khung ảnh */
-    /* Viền ảnh cũ phim */
-    border: 8px solid #fff;
-    box-shadow:
-        0 4px 12px rgba(136, 172, 39, 0.25),
-        0 1px 3px rgba(0, 0, 0, 0.15),
-        inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-    /* Lọc màu cũ vintage nhẹ */
-    filter: sepia(15%) contrast(0.95) brightness(0.97);
+    position: relative;
+    z-index: 1;
+    
+    /* Bỏ viền trắng cũ vì đã dùng padding ở wrapper */
+    border: none;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05); /* Viền mờ ngăn cách ảnh và nền giấy */
+    
+    /* Lọc màu phim/vintage nhẹ nhàng */
+    filter: sepia(10%) contrast(1.02) brightness(0.98);
 }
 
-/* Góc cài ảnh (Photo corners) - 4 góc đen tam giác */
-.scrapbook-photo-wrapper::before,
-.scrapbook-photo-wrapper::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    z-index: 10;
-    pointer-events: none;
-}
-
-/* Góc trên trái */
-.scrapbook-photo-wrapper::before {
-    top: -4px;
-    left: -4px;
-    background:
-        linear-gradient(135deg, #a0522d 50%, transparent 50%);
-}
-
-/* Góc dưới phải */
-.scrapbook-photo-wrapper::after {
-    bottom: -4px;
-    right: -4px;
-    background:
-        linear-gradient(315deg, #a0522d 50%, transparent 50%);
-}
-
-/* Góc trên phải và dưới trái - dùng span bên trong */
+/* Xoá sạch các góc tam giác cũ */
+.scrapbook-photo-wrapper::after,
 .corner-tr,
 .corner-bl {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    z-index: 10;
-    pointer-events: none;
-}
-
-.corner-tr {
-    top: -4px;
-    right: -4px;
-    background: linear-gradient(225deg, #a0522d 50%, transparent 50%);
-}
-
-.corner-bl {
-    bottom: -4px;
-    left: -4px;
-    background: linear-gradient(45deg, #a0522d 50%, transparent 50%);
+    display: none !important;
 }
 
 /* Caption ảnh dán */
 .scrapbook-caption {
     font-size: 0.75rem;
-    color: #6b4c35;
+    color: #000000;
     font-style: italic;
     font-family: var(--font-body);
     text-align: center;
