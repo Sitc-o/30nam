@@ -341,9 +341,54 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
         closeBtn.addEventListener("click", closeLightbox);
         lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
 
-        // Ngăn lật trang và giảm độ nhạy hover khi tương tác với nội dung
-        const contentElements = document.querySelectorAll(".scrapbook-desc, .scrapbook-year, .scrapbook-milestone, .scrapbook-photo-wrapper");
-        contentElements.forEach(el => {
+        // Xử lý sự kiện riêng cho Text: Bôi đen thì không lật, nhưng click nhanh thì lật trang
+        const textElements = document.querySelectorAll(".scrapbook-desc, .scrapbook-year, .scrapbook-milestone");
+        let pressTime = 0;
+        let pressX = 0;
+        let pressY = 0;
+
+        textElements.forEach(el => {
+            const stopProp = (e) => e.stopPropagation();
+            el.addEventListener("mousemove", stopProp);
+            el.addEventListener("pointermove", stopProp);
+
+            const handleDown = (e) => {
+                e.stopPropagation();
+                pressTime = Date.now();
+                pressX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+                pressY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+            };
+
+            el.addEventListener("mousedown", handleDown);
+            el.addEventListener("touchstart", handleDown);
+            el.addEventListener("pointerdown", handleDown);
+
+            const handleUp = (e) => {
+                e.stopPropagation();
+                const timeDiff = Date.now() - pressTime;
+                const upX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX) || 0;
+                const upY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY) || 0;
+                const dist = Math.abs(upX - pressX) + Math.abs(upY - pressY);
+
+                // Click nhanh (dưới 250ms) và không rê chuột (dưới 10px) => Lật trang
+                if (timeDiff < 250 && dist < 10) {
+                    const isRightPage = el.closest(".scrapbook-right");
+                    if (isRightPage) {
+                        pageFlip.flipNext();
+                    } else {
+                        pageFlip.flipPrev();
+                    }
+                }
+            };
+
+            el.addEventListener("mouseup", handleUp);
+            el.addEventListener("touchend", handleUp);
+            el.addEventListener("pointerup", handleUp);
+        });
+
+        // Riêng phần khung ảnh: Chặn lật trang để ưu tiên tính năng Lightbox Zoom
+        const mediaElements = document.querySelectorAll(".scrapbook-photo-wrapper");
+        mediaElements.forEach(el => {
             const stopProp = (e) => e.stopPropagation();
             el.addEventListener("mousedown", stopProp);
             el.addEventListener("touchstart", stopProp);
@@ -351,7 +396,6 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
             el.addEventListener("pointerdown", stopProp);
             el.addEventListener("pointermove", stopProp);
         });
-
         // Click ảnh để mở zoom
         document.querySelectorAll(".scrapbook-photo-wrapper img").forEach(img => {
             img.style.cursor = "zoom-in";

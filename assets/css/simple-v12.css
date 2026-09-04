@@ -1,11 +1,10 @@
-﻿
 /* ============================================================
    TYPOGRAPHY UTILITIES
    ============================================================ */
 @font-face {
     font-family: '1FTV Autography';
     src: url('../fonts/1FTVAutography.ttf') format('truetype'),
-         url('../fonts/1FTV-Autography.ttf') format('truetype');
+        url('../fonts/1FTV-Autography.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -17,9 +16,21 @@
     --font-deco: '1FTV Autography', 'Dancing Script', cursive;
 }
 
-.font-heading { font-family: var(--font-heading) !important; }
-.font-body    { font-family: var(--font-body) !important; }
-.font-deco, .text-uon-luon, .signature { font-family: var(--font-deco) !important; font-size: 1.2em; }
+.font-heading {
+    font-family: var(--font-heading) !important;
+}
+
+.font-body {
+    font-family: var(--font-body) !important;
+}
+
+.font-deco,
+.text-uon-luon,
+.signature {
+    font-family: var(--font-deco) !important;
+    font-size: 1.2em;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 @font-face {
@@ -146,12 +157,31 @@ a {
 
 .simple-nav a {
     font-family: 'FS Magistral', sans-serif;
-    font-size: 25px
+    font-size: 25px;
+    position: relative;
+    text-decoration: none;
+}
+
+.simple-nav a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: -5px;
+    height: 1px;
+    background: var(--red);
+    transition: .25s;
 }
 
 .simple-nav a:hover,
 .simple-nav a.active {
     color: var(--red)
+}
+
+.simple-nav a:hover::after,
+.simple-nav a.active::after {
+    left: 0;
+    right: 0;
 }
 
 .simple-actions {
@@ -1472,7 +1502,7 @@ body.event-modal-open {
     padding: 12px 20px;
     transition: background 0.2s, color 0.2s;
     white-space: nowrap;
-    text-transform: none;
+    text-transform: uppercase;
     font-weight: normal;
 }
 

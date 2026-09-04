@@ -119,17 +119,17 @@ const headerHTML = `
             <div class="nav-dropdown">
                 <a href="hanh-trinh.html">HÀNH TRÌNH</a>
                 <div class="nav-submenu">
-                    <a href="hanh-trinh.html#modal-khoi-nguon">Khởi Nguồn</a>
-                    <a href="hanh-trinh.html#modal-troi-day">Trỗi Dậy</a>
-                    <a href="hanh-trinh.html#modal-tang-toc">Tăng Tốc</a>
-                    <a href="hanh-trinh.html#modal-vuon-tam">Vươn Tầm</a>
+                    <a href="hanh-trinh.html#modal-khoi-nguon"><b>Khởi Nguồn</b></a>
+                    <a href="hanh-trinh.html#modal-troi-day"><b>Trỗi Dậy</b></a>
+                    <a href="hanh-trinh.html#modal-tang-toc"><b>Tăng Tốc</b></a>
+                    <a href="hanh-trinh.html#modal-vuon-tam"><b>Vươn Tầm</b></a>
                 </div>
             </div>
             <div class="nav-dropdown">
                 <a href="mo-hinh-to-chuc.html">MÔ HÌNH TỔ CHỨC</a>
                 <div class="nav-submenu">
-                    <a href="mo-hinh-to-chuc.html#tab-chinh-quyen">Tổ chức chính quyền</a>
-                    <a href="mo-hinh-to-chuc.html#tab-dang">Tổ chức Đảng và Đoàn thể</a>
+                    <a href="mo-hinh-to-chuc.html#tab-chinh-quyen"><b>Tổ chức chính quyền</b></a>
+                    <a href="mo-hinh-to-chuc.html#tab-dang"><b>Tổ chức Đảng và Đoàn thể</b></a>
                 </div>
             </div>
             <a href="thanh-tuu-khen-thuong.html">THÀNH TỰU</a>
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks.forEach(link => {
         // Xóa class active cũ
         link.classList.remove('active');
-        
+
         const linkPath = link.getAttribute('href').split('/').pop().split('#')[0];
         if (linkPath === currentPath) {
             link.classList.add('active');

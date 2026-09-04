@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lời chúc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep-top:#050912;
+    --deep-bottom:#0c1730;
+    --gold:#d9b45c;
+    --gold-soft:#f0d68a;
+    --cream:#f7ecd0;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    height:100%;
+    background:
+      radial-gradient(ellipse at 50% 45%, #10203f 0%, transparent 65%),
+      linear-gradient(180deg, var(--deep-top) 0%, var(--deep-bottom) 100%);
+    overflow:hidden;
+    font-family:'Be Vietnam Pro', sans-serif;
+    perspective:900px;
+  }
+
+  .scene{
+    position:relative;
+    width:100%;
+    height:100vh;
+    transform-style:preserve-3d;
+  }
+
+  .mote{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:rgba(127,184,255,.5);
+    border-radius:50%;
+    animation:drift 6s ease-in-out infinite;
+  }
+  @keyframes drift{
+    0%,100%{ transform:translateY(0); opacity:.15; }
+    50%{ transform:translateY(-14px); opacity:.6; }
+  }
+
+  .title{
+    position:absolute;
+    top:5%;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    z-index:20;
+    pointer-events:none;
+  }
+  .title h1{
+    margin:0;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:clamp(24px,4.6vw,42px);
+    color:var(--gold-soft);
+    text-shadow:0 0 22px rgba(217,180,92,.4);
+  }
+  .title p{
+    margin:.4em 0 0;
+    color:rgba(247,236,208,.5);
+    font-size:13px;
+    letter-spacing:.03em;
+  }
+
+  /* Mỗi ô là một "cửa sổ" cố định, không giao nhau — lời chúc nổi lên trong đúng ô của nó */
+  .slot{
+    position:absolute;
+    top:var(--y);
+    left:var(--x);
+    width:var(--slotW);
+    height:var(--slotH);
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+
+  .wish{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:6px 10px;
+    transform:translateZ(var(--zStart)) scale(var(--sStart));
+    opacity:0;
+    filter:blur(10px);
+    color:var(--cream);
+    font-size:14px;
+    line-height:1.4;
+    font-weight:500;
+    text-shadow:0 0 10px rgba(0,0,0,.5), 0 0 20px rgba(127,184,255,.22);
+    animation-name:surface;
+    animation-timing-function:cubic-bezier(.22,.61,.36,1);
+    animation-iteration-count:infinite;
+    will-change:transform,opacity,filter;
+  }
+
+  /* Chìm sâu (nhỏ, mờ) -> nổi lên áp sát, đạt kích thước lớn nhất giữa vòng -> rồi bé & mờ dần lại khi lùi ra xa */
+  @keyframes surface{
+    0%{
+      transform:translateZ(-380px) scale(.4);
+      opacity:0;
+      filter:blur(9px);
+    }
+    16%{
+      opacity:.85;
+      filter:blur(2px);
+    }
+    50%{
+      transform:translateZ(30px) scale(1.12);
+      opacity:1;
+      filter:blur(0px);
+    }
+    84%{
+      opacity:.8;
+      filter:blur(2px);
+    }
+    100%{
+      transform:translateZ(-380px) scale(.4);
+      opacity:0;
+      filter:blur(9px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .wish{ animation-duration:.01ms !important; animation-iteration-count:1 !important; }
+    .mote{ animation:none; }
+  }
+
+  @media (max-width:520px){
+    .wish{ font-size:12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="title">
+    <h1>Lời chúc gửi đến bạn</h1>
+    <p>Mỗi lời chúc nổi lên từ một ô riêng, không chồng lấn</p>
+  </div>
+</div>
+
+<script>
+  const scene = document.getElementById('scene');
+
+  // ------- Danh sách lời chúc: chỉnh sửa / thêm bớt tuỳ ý -------
+  const wishes = [
+    "Chúc bạn một năm mới an khang, vạn sự như ý",
+    "Sức khoẻ dồi dào, gia đình hạnh phúc",
+    "Công việc hanh thông, tài lộc đầy nhà",
+    "Mọi ước mơ đều thành hiện thực",
+    "Bình an đi qua từng ngày, hạnh phúc ở lại thật lâu",
+    "Chúc bạn luôn giữ được nụ cười như hôm nay",
+    "Vạn sự khởi đầu nan, gian nan rồi cũng qua",
+    "Chúc mừng năm mới, an vui bên người thương",
+    "Mong bạn luôn đủ can đảm để theo đuổi điều mình muốn",
+    "Sum vầy bên gia đình, ấm áp suốt bốn mùa",
+    "Chúc bạn một năm rực rỡ như ánh đèn lồng",
+    "Sống chậm lại, yêu thương nhiều hơn"
+  ];
+
+  function shuffled(arr){
+    return [...arr].sort(()=>Math.random()-.5);
+  }
+
+  // ------- Hạt sáng nền -------
+  const moteCount = 40;
+  for(let i=0;i<moteCount;i++){
+    const m = document.createElement('div');
+    m.className = 'mote';
+    m.style.left = Math.random()*100 + '%';
+    m.style.top = Math.random()*100 + '%';
+    m.style.animationDelay = (Math.random()*6) + 's';
+    scene.appendChild(m);
+  }
+
+  // ------- Vị trí ngẫu nhiên rải khắp màn hình, không chèn nhau, và tự đổi chỗ mỗi vòng -------
+  const narrowScreen = window.innerWidth < 640;
+  const SLOT_COUNT = narrowScreen ? 8 : 12;
+  const SLOT_W = narrowScreen ? 46 : 20;   // % chiều rộng viewport mỗi ô chiếm
+  const SLOT_H = narrowScreen ? 10 : 13;   // % chiều cao viewport mỗi ô chiếm
+  const GROWTH = 1.18;                      // chừa thêm chỗ vì lời chúc phồng to giữa vòng
+  const MARGIN = 1.5;                       // khoảng đệm % giữa hai ô
+  const MAX_ATTEMPTS = 400;
+
+  const slotsData = []; // {x, y, w, h}
+
+  function collidesWith(x, y, excludeIndex){
+    return slotsData.some((s, idx)=>{
+      if(idx === excludeIndex || !s) return false;
+      const w = (SLOT_W * GROWTH);
+      const h = (SLOT_H * GROWTH);
+      const dx = Math.abs(s.x - x);
+      const dy = Math.abs(s.y - y);
+      return dx < (SLOT_W*GROWTH)/2 + (w)/2 + MARGIN && dy < (SLOT_H*GROWTH)/2 + (h)/2 + MARGIN;
+    });
+  }
+
+  function randomPosition(excludeIndex){
+    for(let a=0;a<MAX_ATTEMPTS;a++){
+      const x = 6 + Math.random()*88;   // gần sát hai mép trái/phải
+      const y = 14 + Math.random()*80;  // từ ngay dưới tiêu đề tới gần đáy
+      if(!collidesWith(x, y, excludeIndex)) return { x, y };
+    }
+    return null; // màn hình quá chật, giữ nguyên vị trí cũ ở nơi gọi hàm
+  }
+
+  slotsData.length = SLOT_COUNT;
+  const slotEls = [];
+
+  // Hàng đợi lời chúc dùng chung, xáo trộn lại khi hết vòng
+  const pool = shuffled(wishes);
+  let cursor = 0;
+  function nextWish(){
+    if(cursor >= pool.length){
+      pool.splice(0, pool.length, ...shuffled(wishes));
+      cursor = 0;
+    }
+    return pool[cursor++];
+  }
+
+  for(let i=0;i<SLOT_COUNT;i++){
+    const pos = randomPosition(i) || { x: 50, y: 50 };
+    slotsData[i] = pos;
+
+    const slotEl = document.createElement('div');
+    slotEl.className = 'slot';
+    slotEl.style.setProperty('--x', pos.x + '%');
+    slotEl.style.setProperty('--y', pos.y + '%');
+    slotEl.style.setProperty('--slotW', SLOT_W + 'vw');
+    slotEl.style.setProperty('--slotH', SLOT_H + 'vh');
+    scene.appendChild(slotEl);
+    slotEls.push(slotEl);
+
+    const wishEl = document.createElement('div');
+    wishEl.className = 'wish';
+
+    const duration = 10 + Math.random()*6;      // 10s - 16s, mỗi ô một nhịp riêng
+    const delay = -(Math.random()*duration);    // lệch pha để không đồng loạt
+    const zStart = -(360 + Math.random()*120);
+    const sStart = .38 + Math.random()*.12;
+
+    wishEl.style.setProperty('--zStart', zStart + 'px');
+    wishEl.style.setProperty('--sStart', sStart);
+    wishEl.style.animationDuration = duration + 's';
+    wishEl.style.animationDelay = delay + 's';
+    wishEl.textContent = nextWish();
+
+    // Mỗi khi kết thúc một vòng nổi - chìm: đổi lời chúc mới VÀ dời sang một vị trí khác
+    // (thực hiện đúng lúc nó vô hình ở đáy chu kỳ nên không bị giật hình)
+    wishEl.addEventListener('animationiteration', ()=>{
+      wishEl.textContent = nextWish();
+
+      const newPos = randomPosition(i);
+      if(newPos){
+        slotsData[i] = newPos;
+        slotEl.style.setProperty('--x', newPos.x + '%');
+        slotEl.style.setProperty('--y', newPos.y + '%');
+      }
+    });
+
+    slotEl.appendChild(wishEl);
+  }
+</script>
+
+</body>
+</html>
