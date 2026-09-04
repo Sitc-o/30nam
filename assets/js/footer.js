@@ -1,7 +1,7 @@
-const footerCSS = `
+﻿const footerCSS = `
 <style>
 .site-footer {
-    background: linear-gradient(180deg, #f7f9fc, #fff);
+    background: #ee0033;
     border-top: 1px solid var(--line, #ececec);
     padding: 55px 0 24px;
     font-family: 'Roboto', Arial, sans-serif;
@@ -29,7 +29,7 @@ const footerCSS = `
     grid-column: 1;
     grid-row: 1;
     font-size: 26px;
-    color: var(--red, #ee0033);
+    color: #ffffff;
     font-weight: 850;
     letter-spacing: -1.5px;
     line-height: .9;
@@ -45,19 +45,19 @@ const footerCSS = `
 }
 .footer-brand p, .footer-brand > span, .site-footer a, .site-footer p {
     font-size: 12px;
-    color: var(--muted, #717171);
+    color: rgba(255,255,255,0.8);
     display: block;
     margin: 6px 0;
     text-decoration: none;
 }
 .site-footer a:hover {
-    color: var(--red, #ee0033);
+    color: #ffffff;
 }
 .site-footer h4 {
     margin: 0 0 12px;
     font-family: 'FS Magistral', sans-serif;
     font-size: 16px;
-    color: var(--ink, #202020);
+    color: #ffffff;
 }
 .footer-bottom {
     border-top: 1px solid var(--line, #ececec);
@@ -66,7 +66,7 @@ const footerCSS = `
     display: flex;
     justify-content: space-between;
     font-size: 10px;
-    color: var(--muted, #717171);
+    color: rgba(255,255,255,0.8);
 }
 @media(max-width: 1050px) {
     .footer-top { grid-template-columns: 1fr 1fr; }
