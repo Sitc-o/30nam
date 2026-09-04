@@ -1,3 +1,84 @@
+const footerCSS = `
+<style>
+.site-footer {
+    background: linear-gradient(180deg, #f7f9fc, #fff);
+    border-top: 1px solid var(--line, #ececec);
+    padding: 55px 0 24px;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+.site-footer .container {
+    width: min(1240px, calc(100% - 42px));
+    margin: auto;
+}
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 35px;
+}
+.footer-logo {
+    display: inline-grid;
+}
+.footer-brand .brand {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    white-space: nowrap;
+}
+.footer-brand .brand-main {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 26px;
+    color: var(--red, #ee0033);
+    font-weight: 850;
+    letter-spacing: -1.5px;
+    line-height: .9;
+}
+.footer-brand .brand-sub {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 3px;
+    text-transform: uppercase;
+}
+.footer-brand p, .footer-brand > span, .site-footer a, .site-footer p {
+    font-size: 12px;
+    color: var(--muted, #717171);
+    display: block;
+    margin: 6px 0;
+    text-decoration: none;
+}
+.site-footer a:hover {
+    color: var(--red, #ee0033);
+}
+.site-footer h4 {
+    margin: 0 0 12px;
+    font-family: 'FS Magistral', sans-serif;
+    font-size: 16px;
+    color: var(--ink, #202020);
+}
+.footer-bottom {
+    border-top: 1px solid var(--line, #ececec);
+    margin-top: 32px;
+    padding-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--muted, #717171);
+}
+@media(max-width: 1050px) {
+    .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 650px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 8px; }
+    .site-footer .container { width: min(1240px, calc(100% - 24px)); }
+}
+</style>
+`;
+
 const footerHTML = `
 <footer class="site-footer">
     <div class="container footer-top">
@@ -34,4 +115,4 @@ const footerHTML = `
 </footer>
 `;
 
-document.write(footerHTML);
+document.write(footerCSS + footerHTML);
