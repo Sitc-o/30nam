@@ -446,13 +446,37 @@
     padding: 30px 25px;
     justify-content: center;
     align-items: center;
-    gap: 0;
+}
+
+.scrapbook-gallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+    width: 100%;
+}
+
+.scrapbook-photo-item {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 /* Khung ảnh dán kiểu scrapbook */
 .scrapbook-photo-wrapper {
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+    max-width: 95%;
 }
 
 .scrapbook-photo-wrapper img {

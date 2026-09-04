@@ -10,7 +10,10 @@
 
         // Dữ liệu 30 mốc thời gian - mỗi entry: [year, tên mốc, mô tả, ảnh]
         const milestones = [
-            { year: "Ngày 10 tháng 4 năm 1997", milestone: "Ngày đầu thành lập", desc: "Ngày 10 tháng 4 năm 1997, thành lập Phòng Xuất nhập khẩu thuộc Công ty Điện tử Viễn thông Quân đội, với ngành nghề ban đầu là làm dịch vụ Xuất nhập khẩu ủy thác cho Công ty. Ngày 10 tháng 4 hàng năm trở thành ngày Truyền thống của Công ty Thương mại và Xuất nhập khẩu Viettel.", img: "assets/images/viettel-1997.jpg", caption: "Lễ thành lập Viettel, 1997" },
+            { year: "Ngày 10 tháng 4 năm 1997", milestone: "Ngày đầu thành lập", desc: "Ngày 10 tháng 4 năm 1997, thành lập Phòng Xuất nhập khẩu thuộc Công ty Điện tử Viễn thông Quân đội, với ngành nghề ban đầu là làm dịch vụ Xuất nhập khẩu ủy thác cho Công ty. Ngày 10 tháng 4 hàng năm trở thành ngày Truyền thống của Công ty Thương mại và Xuất nhập khẩu Viettel.", images: [
+                { src: "assets/images/viettel-1997.jpg", caption: "Lễ thành lập Viettel, 1997" },
+                { src: "assets/images/11. Đc Lê Đăng Dũng chụp hình với một số Đại biểu tại Đại hội ĐB CTy lần thứ nhất.jpg", caption: "Ảnh minh họa bổ sung (tự co giãn)" }
+            ] },
             { year: "Tháng 8 năm 1998", milestone: "Chi bộ Xuất nhập khẩu đầu tiên được thành lập", desc: "Thực hiện Chỉ thị số 8G3/A ngày 29 tháng 5 năm 1998 của Đảng ủy Binh chủng Thông tin liên lạc, ngày 14 tháng 8 năm 1998, Đảng ủy Công ty Điện tử Viễn thông Quân đội ra Nghị quyết số 21/NQ-ĐU về việc lãnh đạo chỉ đạo các đơn vị tiến hành đại hội tiến tới đại hội Đảng bộ Công ty lần thứ IV; trong Nghị quyết có nội dung kiện toàn, thành lập mới một số chi bộ cơ sở. Theo đó, Chi bộ Xuất nhập khẩu được thành lập (cùng Quyết định thành lập với Chi bộ Trung tâm Bưu chính); đồng thời chỉ định đồng chí Đỗ Ngọc Cường làm Bí thư chi bộ. Đồng chí Đỗ Ngọc Cường từng cho biết: “Trước đó, một số đảng viên thuộc phòng Xuất nhập khẩu vẫn sinh hoạt ghép với Chi bộ Trung tâm Thương mại và dịch vụ kỹ thuật; và tôi là Phó Bí thư. Chi bộ đầu tiên được thành lập là thể hiện sự quan tâm của Đảng ủy Công ty. Chi bộ lúc đó chỉ có 4 đảng viên. Nghị quyết chi bộ chưa được đánh máy như bây giờ, chỉ ghi chép trong sổ tay, vậy mà vẫn  đoàn kết thống nhất cao, triển khai lãnh đạo, chỉ đạo kịp thời và hoàn thành tốt mọi nhiệm vụ. Từ đó cho đến lúc tôi (Đại tá Đỗ Ngọc Cường) nghỉ hưu, chi bộ và sau này là Đảng bộ năm nào cũng đạt trong sạch vững mạnh”. Đó là dấu ấn đầu tiên về tổ chức Đảng đầu tiên của đơn vị, là tấm gương để Đảng ủy Tổng Công ty và đội ngũ đảng viên của Đảng bộ hôm nay cần phát huy và phát huy truyển thống truyền thống cha anh; luôn giữ gìn sự đoàn kết thống nhất trong Đảng; lãnh đạo đơn vị hoàn thành tốt mọi nhiệm vụ được giao.", img: "assets/images/2 - Sự kiện thứ 2 - Đại hội Chi bộ Trung tâm XNK lần thứ nhất.jpg", caption: "Đồng chí Hoàng Anh Xuân - Nguyên Tổng Giám đốc, đồng chí Dương Văn Tính - Nguyên Bí thư Đảng ủy, đồng chí Trần Văn Đại - Nguyên Chủ nhiệm Chính trị Tập đoàn chụp ảnh cùng đại biểu Đại hội chi bộ Trung tâm Xuất nhập khẩu lần thứ nhất năm 2002" },
             { year: "Ngày 30 tháng 6 năm 1999", milestone: "Mở rộng dịch vụ", desc: "Ngày 30 tháng 6 năm 1999, Phòng Xuất nhập khẩu phát triển thành Trung tâm Xuất nhập khẩu.", img: "assets/images/viettel-1997.jpg", caption: "Khai trương dịch vụ, 1999" },
             { year: "Tháng 3/2000", milestone: "Vươn tầm thế kỷ", desc: "4.	Tháng 3/2000 nhập khẩu lô hàng thiết bị đầu tin cho Viettel mở mạng.", img: "assets/images/viettel-1997.jpg", caption: "Kỷ nguyên mới, 2000" },
@@ -78,16 +81,33 @@
                 </div>
             `;
 
-            // Trang PHẢI - 1 ảnh dán kiểu scrapbook
-            pagesHTML += `
-                <div class="page scrapbook-right">
-                    <div class="page-content">
-                        <div class="scrapbook-photo-wrapper" style="transform: rotate(${rot}deg); max-width: 85%; max-height: 75%;">
+            // Trang PHẢI - Ảnh dán (Hỗ trợ 1 hoặc nhiều ảnh tự co giãn)
+            let photos = [];
+            if (m.images && Array.isArray(m.images)) {
+                photos = m.images;
+            } else if (m.img) {
+                photos = [{ src: m.img, caption: m.caption }];
+            }
+
+            let photosHTML = "";
+            photos.forEach((photo, idx) => {
+                const photoRot = rotations[(i + idx * 3) % rotations.length];
+                photosHTML += `
+                    <div class="scrapbook-photo-item" style="transform: rotate(${photoRot}deg);">
+                        <div class="scrapbook-photo-wrapper">
                             <span class="corner-tr"></span>
                             <span class="corner-bl"></span>
-                            <img src="${m.img}" alt="${m.year}">
+                            <img src="${photo.src}" alt="${m.year}">
                         </div>
-                        <p class="scrapbook-caption">${m.caption}</p>
+                        <p class="scrapbook-caption">${photo.caption || ""}</p>
+                    </div>
+                `;
+            });
+
+            pagesHTML += `
+                <div class="page scrapbook-right">
+                    <div class="page-content scrapbook-gallery" data-count="${photos.length}">
+                        ${photosHTML}
                     </div>
                     <div class="page-number">${i * 2 + 2}</div>
                 </div>
