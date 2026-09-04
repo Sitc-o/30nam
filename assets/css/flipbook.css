@@ -471,19 +471,18 @@
 /* Khung ảnh dán kiểu scrapbook */
 .scrapbook-photo-wrapper {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    min-height: 0;
+    display: inline-block;
     max-width: 95%;
+    max-height: 100%;
+    min-height: 0;
+    flex-shrink: 1; /* Cho phép co lại khi thiếu không gian */
 }
 
 .scrapbook-photo-wrapper img {
     display: block;
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
+    /* Bỏ object-fit: contain để wrapper có thể bám sát khung ảnh */
     /* Viền ảnh cũ phim */
     border: 8px solid #fff;
     box-shadow:
