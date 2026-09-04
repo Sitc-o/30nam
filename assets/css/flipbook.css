@@ -562,28 +562,29 @@
     flex-shrink: 1;
     box-sizing: border-box;
     
-    /* Lớp giấy viền ảnh (Off-white silk paper) */
-    background-color: #fcfbfa;
-    padding: 12px;
-    padding-bottom: 28px; /* Lề dưới rộng hơn tạo cảm giác ảnh in rửa cổ điển / film */
+    /* Lớp giấy viền ảnh (Off-white silk paper) - đều 4 cạnh */
+    background-color: #fff;
+    padding: 14px;
     
-    /* Viền ngoài cùng cực mỏng và bóng đổ đa tầng (nhấc bổng ảnh khỏi mặt giấy) */
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    /* Viền ngoài cùng và bóng đổ nhấc bổng ảnh */
+    border: 1px solid #dcdcdc;
     box-shadow: 
-        0 12px 30px -8px rgba(0, 0, 0, 0.3),
+        0 10px 25px -5px rgba(0, 0, 0, 0.25),
         0 4px 10px -4px rgba(0, 0, 0, 0.15);
     border-radius: 2px;
 }
 
-/* Khung viền chỉ mảnh (Fine inner line) bao quanh sát mép ảnh để tăng vẻ sang trọng */
+/* Khung viền chỉ kép (Double line frame) rõ nét và sang trọng */
 .scrapbook-photo-wrapper::before {
     content: "";
     position: absolute;
-    top: 9px;
-    left: 9px;
-    right: 9px;
-    bottom: 25px;
-    border: 1px solid rgba(139, 115, 85, 0.4); /* Màu vàng đồng/nâu nhạt */
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    /* Tạo viền kép: 1 lớp viền ngoài, 1 lớp trắng ở giữa, 1 lớp viền trong */
+    border: 1px solid #c4a77d; /* Vàng đồng */
+    box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px #c4a77d;
     pointer-events: none;
     z-index: 5;
 }
