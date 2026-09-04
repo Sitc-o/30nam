@@ -475,9 +475,10 @@
 
 .scrapbook-divider {
     width: 60px;
-    height: 2px;
-    background: linear-gradient(to right, #8b1a1a, transparent);
+    height: 3px;
+    background: linear-gradient(to right, #8b1a1a, rgba(139, 26, 26, 0.1));
     margin-bottom: 20px;
+    border-radius: 2px;
 }
 
 .scrapbook-desc {
