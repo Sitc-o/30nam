@@ -106,15 +106,19 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
   const tabChinhQuyen = document.getElementById('tab-chinh-quyen');
   const tabDang = document.getElementById('tab-dang');
+  const heroTitle = document.querySelector('.simple-hero h1');
+  
   if (!tabChinhQuyen || !tabDang) return;
   
   function updateTabs() {
     if (window.location.hash === '#tab-dang') {
       tabChinhQuyen.style.display = 'none';
       tabDang.style.display = 'block';
+      if (heroTitle) heroTitle.textContent = 'TỔ CHỨC ĐẢNG VÀ ĐOÀN THỂ';
     } else {
       tabChinhQuyen.style.display = 'block';
       tabDang.style.display = 'none';
+      if (heroTitle) heroTitle.textContent = 'TỔ CHỨC CHÍNH QUYỀN';
     }
   }
   
