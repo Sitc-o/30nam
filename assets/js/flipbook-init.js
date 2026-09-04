@@ -378,8 +378,13 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
                 // Click nhanh (dưới 250ms) và không rê chuột (dưới 10px) => Lật trang
                 if (timeDiff < 250 && dist < 10) {
                     window.lastFlipTime = now; // Ghi nhận thời gian lật
-                    const isRightPage = el.closest(".scrapbook-right");
-                    if (isRightPage) {
+                    
+                    // Xác định trang trái/phải dựa vào toạ độ click so với giữa cuốn sách
+                    const bookEl = document.getElementById("flipbook");
+                    const bookRect = bookEl.getBoundingClientRect();
+                    const bookCenter = bookRect.left + (bookRect.width / 2);
+                    
+                    if (upX > bookCenter) {
                         pageFlip.flipNext();
                     } else {
                         pageFlip.flipPrev();
