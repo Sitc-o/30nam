@@ -16,19 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const wishes = [
-        "Chúc bạn một năm mới an khang, vạn sự như ý",
-        "Sức khoẻ dồi dào, gia đình hạnh phúc",
-        "Công việc hanh thông, tài lộc đầy nhà",
-        "Mọi ước mơ đều thành hiện thực",
-        "Bình an đi qua từng ngày, hạnh phúc ở lại thật lâu",
-        "Chúc bạn luôn giữ được nụ cười như hôm nay",
-        "Vạn sự khởi đầu nan, gian nan rồi cũng qua",
-        "Chúc mừng năm mới, an vui bên người thương",
-        "Mong bạn luôn đủ can đảm để theo đuổi điều mình muốn",
-        "Sum vầy bên gia đình, ấm áp suốt bốn mùa",
-        "Chúc bạn một năm rực rỡ như ánh đèn lồng",
-        "Sống chậm lại, yêu thương nhiều hơn",
-        `Thực hiện Chỉ thị số 8G3/A ngày 29 tháng 5 năm 1998 của Đảng ủy Binh chủng Thông tin liên lạc, ngày 14 tháng 8 năm 1998, Đảng ủy Công ty Điện tử Viễn thông Quân đội ra Nghị quyết số 21/NQ-ĐU về việc lãnh đạo chỉ đạo các đơn vị tiến hành đại hội tiến tới đại hội Đảng bộ Công ty lần thứ IV; trong Nghị quyết có nội dung kiện toàn, thành lập mới một số chi bộ cơ sở. Theo đó, Chi bộ Xuất nhập khẩu được thành lập (cùng Quyết định thành lập với Chi bộ Trung tâm Bưu chính); đồng thời chỉ định đồng chí Đỗ Ngọc Cường làm Bí thư chi bộ. Đồng chí Đỗ Ngọc Cường từng cho biết: “Trước đó, một số đảng viên thuộc phòng Xuất nhập khẩu vẫn sinh hoạt ghép với Chi bộ Trung tâm Thương mại và dịch vụ kỹ thuật; và tôi là Phó Bí thư. Chi bộ đầu tiên được thành lập là thể hiện sự quan tâm của Đảng ủy Công ty. Chi bộ lúc đó chỉ có 4 đảng viên. Nghị quyết chi bộ chưa được đánh máy như bây giờ, chỉ ghi chép trong sổ tay, vậy mà vẫn  đoàn kết thống nhất cao, triển khai lãnh đạo, chỉ đạo kịp thời và hoàn thành tốt mọi nhiệm vụ. Từ đó cho đến lúc tôi (Đại tá Đỗ Ngọc Cường) nghỉ hưu, chi bộ và sau này là Đảng bộ năm nào cũng đạt trong sạch vững mạnh”. Đó là dấu ấn đầu tiên về tổ chức Đảng đầu tiên của đơn vị, là tấm gương để Đảng ủy Tổng Công ty và đội ngũ đảng viên của Đảng bộ hôm nay cần phát huy và phát huy truyển thống truyền thống cha anh; luôn giữ gìn sự đoàn kết thống nhất trong Đảng; lãnh đạo đơn vị hoàn thành tốt mọi nhiệm vụ được giao.`
+        "Chúc mừng VCM tròn 30 năm kiến tạo giá trị và khẳng định vị thế dẫn đầu",
+        "30 năm một chặng đường tự hào, chúc VCM tiếp tục vươn xa và bứt phá mọi giới hạn",
+        "Kỷ niệm 30 năm thành lập, chúc công ty luôn vững bước tiên phong, phát triển bền vững",
+        "Tri ân hành trình 3 thập kỷ bản lĩnh, chúc VCM đón tuổi mới với ngàn thành công mới",
+        "Chúc đại gia đình VCM luôn đoàn kết, giữ vững nhiệt huyết để chinh phục những đỉnh cao mới",
+        "30 năm vững nền tảng, sáng tương lai – chúc VCM ngày càng thịnh vượng và vươn tầm quốc tế",
+        "Kính chúc VCM tuổi 30 vững tay chèo, vượt mọi sóng lớn và gặt hái thêm nhiều thắng lợi",
+        "Chúc mừng cột mốc 30 năm rực rỡ, mở ra một chương mới đầy bứt phá cho VCM",
+        "Cảm ơn hành trình 30 năm cống hiến, chúc VCM luôn là điểm tựa vững chắc cho toàn thể CBNV",
+        "Chúc VCM tuổi 30 tràn đầy sinh lực, giữ trọn niềm tin từ khách hàng và đối tác",
+        "Hành trình 30 năm dựng xây uy tín – chúc VCM tiếp tục thắp sáng những hoài bão lớn",
+        "Chúc mừng kỷ niệm 30 năm ngày thành lập, chúc VCM vạn sự hanh thông, trường tồn và phát triển"
     ];
 
     function shuffled(arr) {
@@ -46,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const narrowScreen = window.innerWidth < 640;
-    
+
     // Define fixed safe positions (percentages for x and y)
     // Using fixed slots guarantees no overlap with the book or UI
     const fixedPositionsDesktop = [
@@ -85,11 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const slotEl = document.createElement('div');
         slotEl.className = 'slot';
-        
+
         // Add a slight random jitter (-2% to 2%) so it feels organic, but stays in its zone
         const jitterX = (Math.random() - 0.5) * 4;
         const jitterY = (Math.random() - 0.5) * 4;
-        
+
         slotEl.style.setProperty('--x', (pos.x + jitterX) + '%');
         slotEl.style.setProperty('--y', (pos.y + jitterY) + '%');
         slotEl.style.setProperty('--slotW', SLOT_W + 'vw');

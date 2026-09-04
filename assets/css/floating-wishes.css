@@ -58,7 +58,7 @@
   transform: translateZ(var(--zStart)) scale(var(--sStart));
   opacity: 0;
   filter: blur(10px);
-  color: #ee0033;
+  color: #000000;
   font-size: 14px;
   line-height: 1.4;
   font-weight: 600;
