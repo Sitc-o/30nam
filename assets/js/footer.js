@@ -20,8 +20,26 @@ const footerCSS = `
     flex-direction: column;
     align-items: flex-start;
 }
-.footer-brand img {
-    margin-bottom: 12px;
+.footer-brand .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 0.9;
+    margin-bottom: 16px;
+    text-decoration: none;
+}
+.footer-brand .brand-main {
+    font-size: 32px;
+    font-weight: 850;
+    color: #ee0033;
+    letter-spacing: -1.5px;
+}
+.footer-brand .brand-sub {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333333;
+    text-transform: uppercase;
+    margin-top: 4px;
 }
 .footer-brand p, .footer-brand > span, .site-footer a, .site-footer p {
     font-size: 13px;
@@ -68,8 +86,9 @@ const footerHTML = `
 <footer class="site-footer">
     <div class="container footer-top">
         <div class="footer-brand">
-            <a href="index.html">
-                <img src="assets/images/logo/viettel-commerce-dark.svg" alt="Viettel Commerce" width="160" height="92">
+            <a href="index.html" class="brand">
+                <span class="brand-main">viettel</span>
+                <span class="brand-sub">commerce</span>
             </a>
             <p><strong>Tổng Công ty Thương mại và Xuất nhập khẩu Viettel.</strong></p>
             <span>Vững bước tiên phong – Kiến tạo tương lai.</span>

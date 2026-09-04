@@ -16,6 +16,26 @@ const headerCSS = `
 .simple-logo {
     display: flex;
     align-items: center;
+    text-decoration: none;
+}
+.simple-logo .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 0.9;
+}
+.simple-logo .brand-main {
+    font-size: 28px;
+    font-weight: 850;
+    color: #ee0033;
+    letter-spacing: -1.5px;
+}
+.simple-logo .brand-sub {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333333;
+    text-transform: uppercase;
+    margin-top: 3px;
 }
 .simple-nav {
     display: flex;
@@ -92,7 +112,10 @@ const headerCSS = `
 const headerHTML = `
     <header class="simple-header">
         <a class="simple-logo" href="index.html">
-            <img class="brand-logo" src="assets/images/logo/viettel-commerce-dark.svg" alt="Viettel Commerce" width="160" height="92">
+            <div class="brand">
+                <span class="brand-main">viettel</span>
+                <span class="brand-sub">commerce</span>
+            </div>
         </a>
         <nav class="simple-nav">
             <a href="gioi-thieu.html">GIỚI THIỆU</a>
