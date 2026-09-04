@@ -365,13 +365,19 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
 
             const handleUp = (e) => {
                 e.stopPropagation();
-                const timeDiff = Date.now() - pressTime;
+                const now = Date.now();
+                const timeDiff = now - pressTime;
+                
+                // Tránh việc 1 cú click kích hoạt cả pointerup và mouseup gây lật 2 trang
+                if (window.lastFlipTime && (now - window.lastFlipTime < 500)) return;
+
                 const upX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX) || 0;
                 const upY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY) || 0;
                 const dist = Math.abs(upX - pressX) + Math.abs(upY - pressY);
 
                 // Click nhanh (dưới 250ms) và không rê chuột (dưới 10px) => Lật trang
                 if (timeDiff < 250 && dist < 10) {
+                    window.lastFlipTime = now; // Ghi nhận thời gian lật
                     const isRightPage = el.closest(".scrapbook-right");
                     if (isRightPage) {
                         pageFlip.flipNext();
