@@ -5,7 +5,7 @@
 /* 1. Tùy chỉnh Tiêu đề Tab (Giới thiệu, Hành trình,...) */
 .domain-stat-tab b {
     /* Đổi kiểu chữ (uppercase: in hoa, lowercase: in thường, capitalize: in hoa chữ cái đầu) */
-    text-transform: none; 
+    text-transform: none;
     font-size: 17px;
     color: var(--red);
     font-weight: bold;
@@ -24,10 +24,100 @@
 }
 
 /* Các thuộc tính cấu trúc cơ bản */
-.domain-stat-tab { cursor: pointer; transition: all 0.3s; }
-.domain-stat-tab:hover { background: #fdfdfd; }
-.domain-stat-tab.active { background: #fff5f6; position: relative; }
-.domain-stat-tab.active::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--red); }
-.tab-content-pane { display: none; }
-.tab-content-pane.active { display: block; animation: fadeIn 0.4s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.domain-stat-tab {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.domain-stat-tab:hover {
+    background: #fdfdfd;
+}
+
+.domain-stat-tab.active {
+    background: #fff5f6;
+    position: relative;
+}
+
+.domain-stat-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--red);
+}
+
+.tab-content-pane {
+    display: none;
+}
+
+.tab-content-pane.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+/* =========================================
+   THANH ĐIỀU HƯỚNG PHỤ (DOMAIN SWITCHER BAR)
+   ========================================= */
+.domain-switcher-bar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 120px;
+    z-index: 40;
+    padding: 12px 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+.domain-switcher-bar::-webkit-scrollbar {
+    display: none; /* Ẩn thanh cuộn trên mobile để đẹp hơn */
+}
+.domain-switcher-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.domain-switch-item {
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'FS Magistral', sans-serif;
+    color: var(--muted);
+    background: #f7f9fc;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+.domain-switch-item:hover {
+    background: #ffffff;
+    color: var(--ink);
+    border-color: var(--line);
+}
+.domain-switch-item.active {
+    background: linear-gradient(135deg, var(--red), var(--coral));
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(238, 0, 51, 0.25);
+    border-color: transparent;
+}
+@media (max-width: 768px) {
+    .domain-switcher-container {
+        justify-content: flex-start;
+    }
+}
