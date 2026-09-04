@@ -8,10 +8,33 @@
  document.querySelectorAll('.journey-card').forEach(card=>card.addEventListener('click',()=>{
    if(!modal)return; title.textContent=card.dataset.title; text.textContent=card.dataset.text; full.href=card.dataset.href; if(imgLink) imgLink.href=card.dataset.img||'#'; modal.classList.add('open');
  }));
- modal?.querySelectorAll('[data-j-close]').forEach(x=>x.addEventListener('click',()=>{modal.classList.remove('open');speechSynthesis.cancel()}));
+ modal?.querySelectorAll('[data-j-close]').forEach(x=>x.addEventListener('click',()=>{modal.classList.remove('open');speechSynthesis.cancel();if(window.location.hash.startsWith('#modal-')) history.replaceState(null, null, window.location.pathname + window.location.search);}));
  modal?.querySelector('[data-j-voice]')?.addEventListener('click',()=>{speechSynthesis.cancel();utterance=new SpeechSynthesisUtterance(title.textContent+'. '+text.textContent);utterance.lang='vi-VN';utterance.rate=.92;speechSynthesis.speak(utterance)});
  modal?.querySelector('[data-j-stop]')?.addEventListener('click',()=>speechSynthesis.cancel());
- const homeBtn=document.querySelector('.home-menu-button'), homeMenu=document.querySelector('.home-overlay-menu');
+
+  function handleModalHash() {
+      const hash = window.location.hash;
+      if (hash.startsWith('#modal-')) {
+          const type = hash.replace('#modal-', '');
+          const urlMap = {
+              'khoi-nguon': 'khoi-nguon-1997-2005.html',
+              'troi-day': 'troi-day-2006-2014.html',
+              'tang-toc': 'tang-toc-2015-2027.html',
+              'vuon-tam': 'vuon-tam-2023-2027.html'
+          };
+          const targetHref = urlMap[type];
+          if (targetHref && modal) {
+              const card = document.querySelector(`.journey-card[data-href="${targetHref}"]`);
+              if (card) {
+                  title.textContent=card.dataset.title; text.textContent=card.dataset.text; full.href=card.dataset.href; if(imgLink) imgLink.href=card.dataset.img||'#'; modal.classList.add('open');
+              }
+          }
+      }
+  }
+  handleModalHash();
+  window.addEventListener('hashchange', handleModalHash);
+
+  const homeBtn=document.querySelector('.home-menu-button'), homeMenu=document.querySelector('.home-overlay-menu');
  homeBtn?.addEventListener('click',()=>homeMenu?.classList.toggle('open'));
 
  const portraitDialog=document.getElementById('portraitDialog');
