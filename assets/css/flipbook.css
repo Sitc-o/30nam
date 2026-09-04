@@ -676,3 +676,57 @@
 @keyframes ripple-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
 .action-btn:hover .ripple-solid::before, .action-btn:hover .ripple-ring::before { animation: ripple-anim 1.5s infinite; opacity: 1; }
 .action-btn:hover .ripple-solid::after, .action-btn:hover .ripple-ring::after { animation: ripple-anim 1.5s infinite 0.5s; opacity: 1; }
+
+/* ============================================================
+   LIGHTBOX & TEXT SELECTION OVERRIDES
+   ============================================================ */
+.scrapbook-desc, .scrapbook-year, .scrapbook-milestone {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    cursor: text;
+}
+
+.photo-lightbox {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.photo-lightbox.active {
+    opacity: 1;
+}
+.photo-lightbox img {
+    max-width: 90%;
+    max-height: 80vh;
+    border: 8px solid #fff;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    border-radius: 2px;
+    object-fit: contain;
+}
+.lightbox-caption {
+    color: #fff;
+    font-family: "FSMagistral", sans-serif;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-style: italic;
+    text-align: center;
+    max-width: 80%;
+}
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.lightbox-close:hover { color: #ccc; }

@@ -13,7 +13,7 @@
             {
                 year: "Ngày 10 tháng 4 năm 1997", milestone: "Ngày đầu thành lập", desc: "Ngày 10 tháng 4 năm 1997, thành lập Phòng Xuất nhập khẩu thuộc Công ty Điện tử Viễn thông Quân đội, với ngành nghề ban đầu là làm dịch vụ Xuất nhập khẩu ủy thác cho Công ty. Ngày 10 tháng 4 hàng năm trở thành ngày Truyền thống của Công ty Thương mại và Xuất nhập khẩu Viettel.", images: [
                     { src: "assets/images/viettel-1997.jpg", caption: "Lễ thành lập Viettel, 1997" },
-
+                    { src: "assets/images/8 - Sk 8Nguyên Tổng Giám đốc Nguyễn Mạnh Hùng; Lê Đăng Dũng (Khí đó là Phó Tổng Giám đốc Tập đoàn đến thăm, kiểm tra Công trường TTHGQG.jpg", caption: "Lễ thành lập Viettel, 1997" },
                 ]
             },
             { year: "Tháng 8 năm 1998", milestone: "Chi bộ Xuất nhập khẩu đầu tiên được thành lập", desc: "Thực hiện Chỉ thị số 8G3/A ngày 29 tháng 5 năm 1998 của Đảng ủy Binh chủng Thông tin liên lạc, ngày 14 tháng 8 năm 1998, Đảng ủy Công ty Điện tử Viễn thông Quân đội ra Nghị quyết số 21/NQ-ĐU về việc lãnh đạo chỉ đạo các đơn vị tiến hành đại hội tiến tới đại hội Đảng bộ Công ty lần thứ IV; trong Nghị quyết có nội dung kiện toàn, thành lập mới một số chi bộ cơ sở. Theo đó, Chi bộ Xuất nhập khẩu được thành lập (cùng Quyết định thành lập với Chi bộ Trung tâm Bưu chính); đồng thời chỉ định đồng chí Đỗ Ngọc Cường làm Bí thư chi bộ. Đồng chí Đỗ Ngọc Cường từng cho biết: “Trước đó, một số đảng viên thuộc phòng Xuất nhập khẩu vẫn sinh hoạt ghép với Chi bộ Trung tâm Thương mại và dịch vụ kỹ thuật; và tôi là Phó Bí thư. Chi bộ đầu tiên được thành lập là thể hiện sự quan tâm của Đảng ủy Công ty. Chi bộ lúc đó chỉ có 4 đảng viên. Nghị quyết chi bộ chưa được đánh máy như bây giờ, chỉ ghi chép trong sổ tay, vậy mà vẫn  đoàn kết thống nhất cao, triển khai lãnh đạo, chỉ đạo kịp thời và hoàn thành tốt mọi nhiệm vụ. Từ đó cho đến lúc tôi (Đại tá Đỗ Ngọc Cường) nghỉ hưu, chi bộ và sau này là Đảng bộ năm nào cũng đạt trong sạch vững mạnh”. Đó là dấu ấn đầu tiên về tổ chức Đảng đầu tiên của đơn vị, là tấm gương để Đảng ủy Tổng Công ty và đội ngũ đảng viên của Đảng bộ hôm nay cần phát huy và phát huy truyển thống truyền thống cha anh; luôn giữ gìn sự đoàn kết thống nhất trong Đảng; lãnh đạo đơn vị hoàn thành tốt mọi nhiệm vụ được giao.", img: "assets/images/2 - Sự kiện thứ 2 - Đại hội Chi bộ Trung tâm XNK lần thứ nhất.jpg", caption: "Đồng chí Hoàng Anh Xuân - Nguyên Tổng Giám đốc, đồng chí Dương Văn Tính - Nguyên Bí thư Đảng ủy, đồng chí Trần Văn Đại - Nguyên Chủ nhiệm Chính trị Tập đoàn chụp ảnh cùng đại biểu Đại hội chi bộ Trung tâm Xuất nhập khẩu lần thứ nhất năm 2002" },
@@ -68,6 +68,8 @@
         milestones.forEach((m, i) => {
             // Xoay ảnh ngẫu nhiên nhẹ để tạo cảm giác dán tự nhiên
             const rotations = [0]; // Chuyển thành [0] để ảnh luôn thẳng. Bạn có thể sửa lại thành [-2.5, 1.8, -1.2...] nếu muốn ảnh nghiêng ngẫu nhiên.
+            // const rotations = [-2.5, 1.8, -1.2, 2.1, -3.0, 1.5, -0.8, 2.8, -1.7, 1.1];
+
             const rot = rotations[i % rotations.length];
 
             // Trang TRÁI - Mô tả dạng nhật ký
@@ -146,6 +148,56 @@
 
         // Nạp các trang HTML vào thư viện
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+        // ==========================================
+        // LIGHTBOX & EVENT INTERCEPTION
+        // ==========================================
+        const lightboxHTML = `
+            <div id="photo-lightbox" class="photo-lightbox">
+                <span class="lightbox-close">&times;</span>
+                <img id="lightbox-img" src="" alt="">
+                <div id="lightbox-caption" class="lightbox-caption"></div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML("beforeend", lightboxHTML);
+
+        const lightbox = document.getElementById("photo-lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const lightboxCaption = document.getElementById("lightbox-caption");
+        const closeBtn = document.querySelector(".lightbox-close");
+
+        const closeLightbox = () => { 
+            lightbox.classList.remove("active"); 
+            setTimeout(() => { lightbox.style.display = "none"; }, 300); 
+        };
+        closeBtn.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
+
+        // Ngăn lật trang và giảm độ nhạy hover khi tương tác với nội dung
+        const contentElements = document.querySelectorAll(".scrapbook-desc, .scrapbook-year, .scrapbook-milestone, .scrapbook-photo-wrapper");
+        contentElements.forEach(el => {
+            const stopProp = (e) => e.stopPropagation();
+            el.addEventListener("mousedown", stopProp);
+            el.addEventListener("touchstart", stopProp);
+            el.addEventListener("mousemove", stopProp);
+            el.addEventListener("pointerdown", stopProp);
+            el.addEventListener("pointermove", stopProp);
+        });
+
+        // Click ảnh để mở zoom
+        document.querySelectorAll(".scrapbook-photo-wrapper img").forEach(img => {
+            img.style.cursor = "zoom-in";
+            img.addEventListener("click", (e) => {
+                e.stopPropagation();
+                lightboxImg.src = img.src;
+                const wrapper = img.closest(".scrapbook-photo-item") || img.closest(".page-content");
+                const captionEl = wrapper.querySelector(".scrapbook-caption");
+                lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
+                
+                lightbox.style.display = "flex";
+                setTimeout(() => lightbox.classList.add("active"), 10);
+            });
+        });
 
         // ==========================================
         // TÍNH NĂNG CINEMATIC CAMERA (TRƯỢT KHUNG ĐỒNG THỜI)
