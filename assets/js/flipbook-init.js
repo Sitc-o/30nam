@@ -215,8 +215,8 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
 Để tương xứng với quy mô tổng công ty mới, các đơn vị trực thuộc cũng đồng loạt chuyển mình thay đổi tên gọi mới đầy ý nghĩa và tầm vóc chiến lược: Trung tâm Kinh doanh Thiết bị số đổi tên thành Trung tâm Kinh doanh Thiết bị số; Trung tâm Phân phối giữ nguyên tên gọi; Nhà máy In Viettel tự hào chuyển đổi mô hình thành Trung tâm Công nghệ In; Trung tâm Xuất nhập khẩu đổi tên thành Trung tâm Dịch vụ Thương mại. Sự thay đổi vĩ đại đồng bộ về cả danh xưng lẫn mô hình tổ chức đã thổi một luồng sinh khí mới, kích hoạt một niềm vinh dự, tự hào vô bờ bến và làn sóng hân hoan, phấn khởi sục sôi chưa từng có trong huyết quản của toàn thể hơn bốn ngàn cán bộ, chiến sĩ và công nhân viên trên toàn quốc. Khí thế hân hoan từ mô hình Tổng công ty mới đã kết tinh thành một thắng lợi rực rỡ trong 6 tháng đầu năm 2026 với doanh thu sản xuất kinh doanh đạt 14.586,7 tỷ đồng (hoàn thành xuất sắc 118,4% kế hoạch 6 tháng), lợi nhuận trước thuế bứt phá đạt 112,5 tỷ đồng (tăng trưởng phi mã tới 44,8% so với cùng kỳ). Năng suất lao động bứt phá lên mức kỷ lục đạt 41,1 triệu đồng trên một người mỗi tháng, giúp thu nhập bình quân của người lao động tăng lên mức 20,59 triệu đồng trên một người mỗi tháng, người lao động vô cùng phấn khởi, an tâm cống hiến và tin tưởng tuyệt đối vào hướng đi chiến lược của tập thể Đảng ủy, Ban Tổng Giám đốc Tổng công ty, sẵn sàng chung sức đồng lòng viết tiếp những trang sử vàng chói lọi trong hành trình vững bước tiên phong, xứng đáng với tầm vóc của một công trình lịch sử ba mươi năm vững bền cùng đất nước.
 `, img: "assets/images/viettel-1997.jpg", caption: "Thập kỷ tăng trưởng, 2025"
             },
-            { year: 2026, milestone: "Đổi mới không ngừng", desc: "30.	Đón nhận Huân chương Bảo vệ Tổ quốc hạng Nhất.", img: "assets/images/viettel-1997.jpg", caption: "Đổi mới không ngừng, 2026" },
-            { year: 2027, milestone: "30 năm tự hào", desc: "Kỷ niệm 30 năm thành lập – 30 năm vững bước tiên phong, kiến tạo tương lai số cho Việt Nam và thế giới.", img: "assets/images/viettel-1997.jpg", caption: "30 năm vững bước tiên phong" },
+            // { year: 2026, milestone: "Đổi mới không ngừng", desc: "30.	Đón nhận Huân chương Bảo vệ Tổ quốc hạng Nhất.", img: "assets/images/viettel-1997.jpg", caption: "Đổi mới không ngừng, 2026" },
+            // { year: 2027, milestone: "30 năm tự hào", desc: "Kỷ niệm 30 năm thành lập – 30 năm vững bước tiên phong, kiến tạo tương lai số cho Việt Nam và thế giới.", img: "assets/images/viettel-1997.jpg", caption: "30 năm vững bước tiên phong" },
         ];
 
         // Trang mở đầu - Lời giới thiệu
@@ -370,7 +370,7 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
                 e.stopPropagation();
                 const now = Date.now();
                 const timeDiff = now - pressTime;
-                
+
                 // Tránh việc 1 cú click kích hoạt cả pointerup và mouseup gây lật 2 trang
                 if (window.lastFlipTime && (now - window.lastFlipTime < 500)) return;
 
@@ -381,12 +381,12 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
                 // Click nhanh (dưới 250ms) và không rê chuột (dưới 10px) => Lật trang
                 if (timeDiff < 250 && dist < 10) {
                     window.lastFlipTime = now; // Ghi nhận thời gian lật
-                    
+
                     // Xác định trang trái/phải dựa vào toạ độ click so với giữa cuốn sách
                     const bookEl = document.getElementById("flipbook");
                     const bookRect = bookEl.getBoundingClientRect();
                     const bookCenter = bookRect.left + (bookRect.width / 2);
-                    
+
                     if (upX > bookCenter) {
                         pageFlip.flipNext();
                     } else {
