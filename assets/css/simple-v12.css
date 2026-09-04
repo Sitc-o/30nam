@@ -1,3 +1,25 @@
+﻿
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+@font-face {
+    font-family: '1FTV Autography';
+    src: url('../fonts/1FTVAutography.ttf') format('truetype'),
+         url('../fonts/1FTV-Autography.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --font-heading: 'FS Magistral', sans-serif;
+    --font-body: 'Roboto', Arial, sans-serif;
+    --font-deco: '1FTV Autography', 'Dancing Script', cursive;
+}
+
+.font-heading { font-family: var(--font-heading) !important; }
+.font-body    { font-family: var(--font-body) !important; }
+.font-deco, .text-uon-luon, .signature { font-family: var(--font-deco) !important; font-size: 1.2em; }
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 @font-face {

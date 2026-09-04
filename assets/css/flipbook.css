@@ -382,7 +382,7 @@
 }
 
 .scrapbook-year {
-    font-family: "FSMagistral", sans-serif;
+    font-family: var(--font-heading);
     font-size: 2.8rem; /* Giảm từ 5rem xuống để vừa với ngày tháng dài */
     font-weight: bold;
     color: #8b1a1a;
@@ -394,7 +394,7 @@
 }
 
 .scrapbook-milestone {
-    font-family: "FSMagistral", sans-serif;
+    font-family: var(--font-heading);
     font-size: 1rem;
     color: #a0522d;
     letter-spacing: 1px;
@@ -415,7 +415,7 @@
     font-size: 0.95rem;
     color: #4a3728;
     line-height: 1.8;
-    font-family: "FSMagistral", sans-serif;
+    font-family: var(--font-body);
     /* Bật tính năng cuộn cho phần mô tả */
     flex-grow: 1;
     overflow-y: auto;
@@ -544,7 +544,7 @@
     font-size: 0.75rem;
     color: #6b4c35;
     font-style: italic;
-    font-family: "FSMagistral", sans-serif;
+    font-family: var(--font-body);
     text-align: center;
     margin-top: 10px;
     letter-spacing: 0.5px;
@@ -712,7 +712,7 @@
 }
 .lightbox-caption {
     color: #fff;
-    font-family: "FSMagistral", sans-serif;
+    font-family: var(--font-heading);
     font-size: 1.2rem;
     margin-top: 20px;
     font-style: italic;

@@ -103,7 +103,7 @@
                             <span class="corner-bl"></span>
                             <img src="${photo.src}" alt="${m.year}">
                         </div>
-                        <p class="scrapbook-caption">${photo.caption || ""}</p>
+                        <p class="scrapbook-caption font-deco">${photo.caption || ""}</p>
                     </div>
                 `;
             });
