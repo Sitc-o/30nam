@@ -147,8 +147,8 @@ Chủ đề của Đại hội là: “Nâng cao năng lực lãnh đạo, sức
 Đại tá Đặng Hồng Thái (nguyên Bí thư Đảng ủy Công ty) chia sẻ: Là một công ty hạch toán độc lập, Công ty thường xuyên phải đối mặt với nhiều khó khăn thách thức trong thương trường. Truyền thống Công ty chúng ta là một công ty luôn coi trọng nghĩa tình, đoàn kết trên dưới một lòng, sống có trách nhiệm với nhau vì nhiệm vụ chung. Việc xây dựng môi trường làm việc “thân thiện, văn minh, nghĩa tình, như một gia đình” là một việc rất quan trọng; là động lực thúc đẩy sản xuất kinh doanh. Vì thế nên khi chuẩn bị văn kiện, tôi đã đề nghị Đảng ủy đưa ý này vào Nghị quyết Đại hội và được đông đảo cán bộ Đảng viên đồng tình, ủng hộ.
 Đó là những nét đẹp truyền thống mà lớp lớp cán bộ, đảng viên, công nhân viên trong toàn Đảng bộ, toàn Công ty cần trân trọng gìn giữ và phát huy. 
 `, images: [
-                    { src: "assets/images/22- Đc Lương Thế Qâng  tham luận tại Hội nghị Đảng bộ Cty lần thứ IV năm 2020.jpg", caption: "Đồng chí Lương Thế Quang - Nguyên Bí thư Đảng ủy, Phó Tổng Giám đốc Tổng Công ty tham luận tại Hội nghị Đảng bộ Công ty lần thứ IV năm 2020" },
-                    { src: "assets/images/22- DDc Nguyễn Anh Tuấn Nguyên Phó GĐ Cty tham luận tại Hội nghị.jpg", caption: "Đồng chí Nguyễn Anh Tuấn - Nguyên Phó Giám đốc Công ty tham luận tại Hội nghị" },
+                    { src: "assets/images/22- Đc Lương Thế Qâng  tham luận tại Hội nghị Đảng bộ Cty lần thứ VI năm 2020.jpg", caption: "Đồng chí Lương Thế Quang - Nguyên Bí thư Đảng ủy, Phó Tổng Giám đốc Tổng Công ty tham luận tại Hội nghị Đảng bộ Công ty lần thứ IV năm 2020" },
+                    // { src: "assets/images/22- DDc Nguyễn Anh Tuấn Nguyên Phó GĐ Cty tham luận tại Hội nghị.jpg", caption: "Đồng chí Nguyễn Anh Tuấn - Nguyên Phó Giám đốc Công ty tham luận tại Hội nghị" },
                     { src: "assets/images/22- Sự kiên 22 BCH Đảng bộ được bầu tại Đại hội Đảng bộ lần thứ IV năm 2020.jpg", caption: "Sự kiện 22 Ban chấp hành Đảng bộ được bầu tại Đại hội Đảng bộ lần thứ IV năm 2020" },
 
                 ]
@@ -449,12 +449,12 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
         // ==========================================
         // ÁNH SÁNG & BÓNG ĐỔ TƯƠNG TÁC THEO CHUỘT (2.5D LIGHTING)
         // ==========================================
-                // ==========================================
+        // ==========================================
         // SỰ KIỆN BÀN PHÍM (KEYBOARD NAVIGATION)
         // ==========================================
         document.addEventListener('keydown', (e) => {
             if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
-            
+
             if (e.key === 'ArrowRight') {
                 pageFlip.flipNext();
             } else if (e.key === 'ArrowLeft') {
