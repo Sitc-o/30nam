@@ -1,0 +1,225 @@
+/* ============================================================
+   BOOK TIMELINE NAV - Thanh điều hướng dạng timeline nằm dưới sách
+   ============================================================ */
+
+.book-timeline-wrap {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    width: calc(100% - 40px);
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+/* ---- Thanh trượt ngang (scroll container) ---- */
+.book-timeline {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    pointer-events: all;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE */
+    padding: 10px 20px 14px;
+    position: relative;
+}
+
+.book-timeline::-webkit-scrollbar { display: none; }
+
+/* ---- Inner track ---- */
+.book-timeline__track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+    width: max-content;
+    min-width: 100%;
+}
+
+/* Đường kẻ ngang xuyên suốt */
+.book-timeline__track::before {
+    content: '';
+    position: absolute;
+    top: 10px; /* nằm ngang tâm nốt tròn */
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(169,18,26,0.25) 8%, rgba(169,18,26,0.25) 92%, transparent);
+    pointer-events: none;
+}
+
+/* ---- Mỗi mốc ---- */
+.book-timeline__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 0 14px;
+    cursor: pointer;
+    position: relative;
+    min-width: 80px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.book-timeline__item:hover {
+    transform: translateY(-2px);
+}
+
+/* Nốt tròn */
+.book-timeline__dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid rgba(169,18,26,0.35);
+    transition: all 0.25s ease;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.book-timeline__item:hover .book-timeline__dot,
+.book-timeline__item.active .book-timeline__dot {
+    background: #a9121a;
+    border-color: #a9121a;
+    box-shadow: 0 0 0 4px rgba(169,18,26,0.15);
+}
+
+/* Nhãn năm */
+.book-timeline__year {
+    font-family: 'FSMagistral', 'Roboto', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.book-timeline__item:hover .book-timeline__year,
+.book-timeline__item.active .book-timeline__year {
+    color: #a9121a;
+}
+
+/* ---- Tooltip (hiện khi hover) ---- */
+.book-timeline__item::before {
+    content: attr(data-milestone);
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(40,20,10,0.92);
+    color: #f7ead8;
+    font-size: 11px;
+    line-height: 1.4;
+    padding: 7px 11px;
+    border-radius: 6px;
+    white-space: normal;
+    width: 180px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translateX(-50%) translateY(4px);
+    z-index: 100;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
+/* Mũi tên tooltip */
+.book-timeline__item::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(40,20,10,0.92);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 100;
+}
+
+.book-timeline__item:hover::before,
+.book-timeline__item:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ---- Arrows cuộn ---- */
+.book-timeline-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(169,18,26,0.2);
+    color: #a9121a;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all 0.2s ease;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.book-timeline-arrow:hover {
+    background: #a9121a;
+    color: #fff;
+}
+.book-timeline-arrow--left { left: -14px; }
+.book-timeline-arrow--right { right: -14px; }
+.book-timeline-arrow.hidden { opacity: 0; pointer-events: none; }
+
+/* ---- Wrapper để định vị arrows ---- */
+.book-timeline-slider {
+    position: relative;
+    width: 100%;
+    pointer-events: all;
+}
+
+/* Fade gradient hai đầu */
+.book-timeline-slider::before,
+.book-timeline-slider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    z-index: 4;
+    pointer-events: none;
+}
+.book-timeline-slider::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(235,230,222,0.9), transparent);
+}
+.book-timeline-slider::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(235,230,222,0.9), transparent);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .book-timeline-wrap {
+        bottom: 10px;
+        max-width: calc(100% - 20px);
+    }
+    .book-timeline__item {
+        min-width: 60px;
+        padding: 0 8px;
+    }
+    .book-timeline__item::before {
+        width: 140px;
+        font-size: 10px;
+    }
+}
