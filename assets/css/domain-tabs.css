@@ -68,6 +68,7 @@
         transform: none;
     }
 }
+
 /* =========================================
    THANH ĐIỀU HƯỚNG PHỤ (DOMAIN SWITCHER BAR)
    ========================================= */
@@ -81,11 +82,14 @@
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
+
 .domain-switcher-bar::-webkit-scrollbar {
-    display: none; /* Ẩn thanh cuộn trên mobile để đẹp hơn */
+    display: none;
+    /* Ẩn thanh cuộn trên mobile để đẹp hơn */
 }
+
 .domain-switcher-container {
     display: flex;
     gap: 12px;
@@ -93,6 +97,7 @@
     max-width: 1200px;
     margin: 0 auto;
 }
+
 .domain-switch-item {
     padding: 8px 24px;
     border-radius: 30px;
@@ -105,17 +110,15 @@
     transition: all 0.3s ease;
     border: 1px solid transparent;
 }
+
 .domain-switch-item:hover {
     background: #ffffff;
     color: var(--ink);
     border-color: var(--line);
 }
-.domain-switch-item.active {
-    background: linear-gradient(135deg, var(--red), var(--coral));
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(238, 0, 51, 0.25);
-    border-color: transparent;
-}
+
+.domain-switch-item.active { background: #ee0033; color: #ffffff; box-shadow: 0 4px 12px rgba(238, 0, 51, 0.25); border-color: transparent; }
+
 @media (max-width: 768px) {
     .domain-switcher-container {
         justify-content: flex-start;
