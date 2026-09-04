@@ -86,9 +86,8 @@ const footerHTML = `
 <footer class="site-footer">
     <div class="container footer-top">
         <div class="footer-brand">
-            <a href="index.html" class="brand">
-                <span class="brand-main">viettel</span>
-                <span class="brand-sub">commerce</span>
+            <a href="index.html" class="simple-logo">
+                <img src="assets/images/logo/viettel-commerce-light.svg" alt="Viettel Commerce" width="160" height="92">
             </a>
             <p><strong>Tổng Công ty Thương mại và Xuất nhập khẩu Viettel.</strong></p>
             <span>Vững bước tiên phong – Kiến tạo tương lai.</span>

@@ -112,10 +112,7 @@ const headerCSS = `
 const headerHTML = `
     <header class="simple-header">
         <a class="simple-logo" href="index.html">
-            <div class="brand">
-                <span class="brand-main">viettel</span>
-                <span class="brand-sub">commerce</span>
-            </div>
+            <img class="brand-logo" src="assets/images/logo/viettel-commerce-light.svg" alt="Viettel Commerce" width="160" height="92">
         </a>
         <nav class="simple-nav">
             <a href="gioi-thieu.html">GIỚI THIỆU</a>
