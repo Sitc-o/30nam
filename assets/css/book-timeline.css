@@ -19,7 +19,7 @@
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 1px;
-    color: #a9121a;
+    color: #ee0033;
     text-transform: uppercase;
     box-shadow: 0 3px 14px rgba(0,0,0,0.12);
     display: flex;
@@ -30,9 +30,9 @@
 }
 
 .timeline-toggle-btn:hover {
-    background: #a9121a;
+    background: #ee0033;
     color: #fff;
-    border-color: #a9121a;
+    border-color: #ee0033;
 }
 
 .timeline-toggle-btn .tl-icon {
@@ -131,9 +131,9 @@
 
 .book-timeline__item:hover .book-timeline__dot,
 .book-timeline__item.active .book-timeline__dot {
-    background: #a9121a;
-    border-color: #a9121a;
-    box-shadow: 0 0 0 4px rgba(169,18,26,0.15);
+    background: #ee0033;
+    border-color: #ee0033;
+    box-shadow: 0 0 0 4px rgba(238,0,51,0.15);
 }
 
 /* Nhãn năm */
@@ -150,7 +150,7 @@
 
 .book-timeline__item:hover .book-timeline__year,
 .book-timeline__item.active .book-timeline__year {
-    color: #a9121a;
+    color: #ee0033;
 }
 
 /* ---- Tooltip ---- */
@@ -206,7 +206,7 @@
     border-radius: 50%;
     background: rgba(255,255,255,0.95);
     border: 1px solid rgba(169,18,26,0.2);
-    color: #a9121a;
+    color: #ee0033;
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -217,7 +217,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     line-height: 1;
 }
-.book-timeline-arrow:hover { background: #a9121a; color: #fff; }
+.book-timeline-arrow:hover { background: #ee0033; color: #fff; }
 .book-timeline-arrow--left  { left: 4px; }
 .book-timeline-arrow--right { right: 4px; }
 .book-timeline-arrow.hidden { opacity: 0; pointer-events: none; }
