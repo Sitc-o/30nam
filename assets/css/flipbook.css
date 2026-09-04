@@ -403,9 +403,9 @@
     z-index: 10;
     width: 100%;
     max-width: 1600px;
-    /* Chiều cao cho album NGANG: thấp hơn album dọc */
-    height: 75vh;
-    max-height: 800px;
+    /* Thu nhỏ một chút để dành khoảng cho timeline phía dưới */
+    height: 68vh;
+    max-height: 720px;
     display: flex;
     justify-content: center;
     align-items: center;

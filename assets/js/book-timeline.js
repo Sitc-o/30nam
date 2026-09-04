@@ -49,10 +49,10 @@
     });
 
     function buildTimeline() {
-        const sceneLayout = document.querySelector('.scene-layout');
-        if (!sceneLayout) return;
+        // Chèn timeline vào bên trong .center-book, ngay sau .container-flipbook
+        const centerBook = document.querySelector('.center-book');
+        if (!centerBook) return;
 
-        // Chèn timeline ngay sau .scene-layout
         const wrapEl = document.createElement('div');
         wrapEl.className = 'book-timeline-wrap';
         wrapEl.innerHTML = `
@@ -64,7 +64,8 @@
                 <button class="book-timeline-arrow book-timeline-arrow--right" aria-label="Cuộn phải">&#8250;</button>
             </div>
         `;
-        sceneLayout.insertAdjacentElement('afterend', wrapEl);
+        // Thêm vào cuối .center-book (bên dưới sách)
+        centerBook.appendChild(wrapEl);
 
         const track = document.getElementById('bookTimelineTrack');
         const scroll = document.getElementById('bookTimelineScroll');
