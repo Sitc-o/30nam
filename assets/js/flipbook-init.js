@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const flipbookEl = document.getElementById('flipbook');
     // Thư viện có thể export dưới tên StPageFlip hoặc St
     const PageFlipClass = (typeof StPageFlip !== 'undefined') ? StPageFlip.PageFlip : (typeof St !== 'undefined' ? St.PageFlip : null);
@@ -316,6 +316,9 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
 
         // Nạp các trang HTML vào thư viện
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+        // Expose để book-timeline.js có thể hook vào
+        window.bookPageFlip = pageFlip;
 
         // ==========================================
         // LIGHTBOX & EVENT INTERCEPTION
