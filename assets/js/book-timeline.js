@@ -58,6 +58,7 @@
             isOpen = !isOpen;
             panel.classList.toggle('open', isOpen);
             btn.classList.toggle('open', isOpen);
+            document.body.classList.toggle('timeline-open', isOpen);
             btn.innerHTML = isOpen
                 ? '<span class="tl-icon">✕</span> Đóng'
                 : '<span class="tl-icon">☰</span> Mục lục';
@@ -80,6 +81,7 @@
                 isOpen = false;
                 panel.classList.remove('open');
                 btn.classList.remove('open');
+                document.body.classList.remove('timeline-open');
                 btn.innerHTML = '<span class="tl-icon">☰</span> Mục lục';
             });
             track.appendChild(item);
