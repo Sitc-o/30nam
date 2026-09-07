@@ -58,15 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
             fullWish += ` - ${name}`;
         }
 
-        // Lưu vào localStorage
-        const savedWishes = JSON.parse(localStorage.getItem('userWishes') || '[]');
-        savedWishes.push(fullWish);
-        localStorage.setItem('userWishes', JSON.stringify(savedWishes));
-
-        // Ném lên màn hình bằng hàm của floating-wishes.js
+        // Ném lên màn hình ngay lập tức (phía client)
         if (typeof window.addFloatingWish === 'function') {
             window.addFloatingWish(fullWish);
         }
+
+        // Gửi lên server để lưu vào file json
+        fetch('/api/wishes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: fullWish })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Đã lưu lời chúc vào wishes.json");
+        })
+        .catch(err => console.error("Lỗi khi lưu lời chúc:", err));
 
         // Feedback
         submitBtn.style.display = 'none';
