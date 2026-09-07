@@ -104,7 +104,8 @@ class VoiceHandler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self) -> None:  # noqa: N802
-        if self.path.split("?", 1)[0] == "/api/health":
+        path = self.path.split("?", 1)[0]
+        if path == "/api/health":
             self.send_json(
                 {
                     "ok": edge_tts is not None,
@@ -116,10 +117,46 @@ class VoiceHandler(SimpleHTTPRequestHandler):
                 HTTPStatus.OK if edge_tts is not None else HTTPStatus.SERVICE_UNAVAILABLE,
             )
             return
+        elif path == "/api/wishes":
+            wishes_file = ROOT / "wishes.json"
+            wishes = []
+            if wishes_file.exists():
+                try:
+                    wishes = json.loads(wishes_file.read_text(encoding="utf-8"))
+                except json.JSONDecodeError:
+                    pass
+            self.send_json(wishes)
+            return
         super().do_GET()
 
     def do_POST(self) -> None:  # noqa: N802
-        if self.path.split("?", 1)[0] != "/api/tts":
+        path = self.path.split("?", 1)[0]
+        if path == "/api/wishes":
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                payload = json.loads(self.rfile.read(length).decode("utf-8"))
+                wish_text = payload.get("text", "")
+                if not wish_text:
+                    self.send_json({"success": False, "message": "No text provided"}, HTTPStatus.BAD_REQUEST)
+                    return
+                
+                wishes_file = ROOT / "wishes.json"
+                with GENERATE_LOCK:
+                    wishes = []
+                    if wishes_file.exists():
+                        try:
+                            wishes = json.loads(wishes_file.read_text(encoding="utf-8"))
+                        except json.JSONDecodeError:
+                            pass
+                    wishes.append(wish_text)
+                    wishes_file.write_text(json.dumps(wishes, ensure_ascii=False, indent=4), encoding="utf-8")
+                
+                self.send_json({"success": True})
+            except Exception as exc:
+                self.send_json({"success": False, "message": str(exc)}, HTTPStatus.BAD_REQUEST)
+            return
+
+        if path != "/api/tts":
             self.send_json({"error": "Không tìm thấy API."}, HTTPStatus.NOT_FOUND)
             return
         try:
