@@ -119,10 +119,10 @@ const headerHTML = `
             <div class="nav-dropdown">
                 <a href="hanh-trinh.html">HÀNH TRÌNH</a>
                 <div class="nav-submenu">
-                    <a href="hanh-trinh.html#modal-khoi-nguon"><b>Khởi Nguồn</b></a>
-                    <a href="hanh-trinh.html#modal-troi-day"><b>Trỗi Dậy</b></a>
-                    <a href="hanh-trinh.html#modal-tang-toc"><b>Tăng Tốc</b></a>
-                    <a href="hanh-trinh.html#modal-vuon-tam"><b>Vươn Tầm</b></a>
+                    <a href="hanh-trinh.html#khoi-nguon"><b>Khởi Nguồn</b></a>
+                    <a href="hanh-trinh.html#troi-day"><b>Trỗi Dậy</b></a>
+                    <a href="hanh-trinh.html#tang-toc"><b>Tăng Tốc</b></a>
+                    <a href="hanh-trinh.html#vuon-tam"><b>Vươn Tầm</b></a>
                 </div>
             </div>
             <div class="nav-dropdown">
