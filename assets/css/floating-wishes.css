@@ -49,7 +49,7 @@
 
 .wish {
   position: absolute;
-  inset: 0;
+  inset: -50px; /* Cho phép tràn ra ngoài slot một chút để text dài không bị cắt */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,10 +60,11 @@
   filter: blur(10px);
   color: #000000;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
   font-weight: 600;
   font-family: 'Be Vietnam Pro', sans-serif;
   text-shadow: 0 0 10px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .9);
+  word-break: break-word; /* Đảm bảo từ dài tự động xuống dòng */
   animation-name: surface;
   animation-timing-function: cubic-bezier(.22, .61, .36, 1);
   animation-iteration-count: infinite;
