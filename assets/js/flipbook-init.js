@@ -218,6 +218,8 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
             // { year: 2026, milestone: "Đổi mới không ngừng", desc: "30.	Đón nhận Huân chương Bảo vệ Tổ quốc hạng Nhất.", img: "assets/images/viettel-1997.jpg", caption: "Đổi mới không ngừng, 2026" },
             // { year: 2027, milestone: "30 năm tự hào", desc: "Kỷ niệm 30 năm thành lập – 30 năm vững bước tiên phong, kiến tạo tương lai số cho Việt Nam và thế giới.", img: "assets/images/viettel-1997.jpg", caption: "30 năm vững bước tiên phong" },
         ];
+        
+        window.bookMilestones = milestones;
 
         // Trang mở đầu - Lời giới thiệu
         pagesHTML += `
