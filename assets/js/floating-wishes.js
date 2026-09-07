@@ -15,32 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const wishes = [
-        "Chúc mừng VCM tròn 30 năm kiến tạo giá trị và khẳng định vị thế dẫn đầu",
-        "30 năm một chặng đường tự hào, chúc VCM tiếp tục vươn xa và bứt phá mọi giới hạn",
-        "Kỷ niệm 30 năm thành lập, chúc công ty luôn vững bước tiên phong, phát triển bền vững",
-        "Tri ân hành trình 3 thập kỷ bản lĩnh, chúc VCM đón tuổi mới với ngàn thành công mới",
-        "Chúc đại gia đình VCM luôn đoàn kết, giữ vững nhiệt huyết để chinh phục những đỉnh cao mới",
-        "30 năm vững nền tảng, sáng tương lai – chúc VCM ngày càng thịnh vượng và vươn tầm quốc tế",
-        "Kính chúc VCM tuổi 30 vững tay chèo, vượt mọi sóng lớn và gặt hái thêm nhiều thắng lợi",
-        "Chúc mừng cột mốc 30 năm rực rỡ, mở ra một chương mới đầy bứt phá cho VCM",
-        "Cảm ơn hành trình 30 năm cống hiến, chúc VCM luôn là điểm tựa vững chắc cho toàn thể CBNV",
-        "Chúc VCM tuổi 30 tràn đầy sinh lực, giữ trọn niềm tin từ khách hàng và đối tác",
-        "Hành trình 30 năm dựng xây uy tín – chúc VCM tiếp tục thắp sáng những hoài bão lớn",
-        "Chúc mừng kỷ niệm 30 năm ngày thành lập, chúc VCM vạn sự hanh thông, trường tồn và phát triển"
-    ];
-
-    // Nạp các lời chúc đã lưu từ FastAPI backend
-    fetch('/api/wishes')
-        .then(res => res.json())
-        .then(data => {
-            if (Array.isArray(data) && data.length > 0) {
-                wishes.push(...data);
-                // Cập nhật lại pool nếu cần
-                pool.splice(0, pool.length, ...shuffled(wishes));
-            }
-        })
-        .catch(err => console.log("Không tải được API Backend (có thể chưa chạy server)"));
+    const wishes = [];
 
     function shuffled(arr) {
         return [...arr].sort(() => Math.random() - .5);
@@ -57,33 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const narrowScreen = window.innerWidth < 640;
-
-    // Define fixed safe positions (percentages for x and y)
-    // Using fixed slots guarantees no overlap with the book or UI
     const fixedPositionsDesktop = [
-        { x: 12, y: 22 }, // Left Top
-        { x: 10, y: 50 }, // Left Middle
-        { x: 12, y: 78 }, // Left Bottom
-        { x: 88, y: 15 }, // Right Top
-        { x: 88, y: 85 }  // Right Bottom
+        { x: 12, y: 22 }, { x: 10, y: 50 }, { x: 12, y: 78 },
+        { x: 88, y: 15 }, { x: 88, y: 85 }
     ];
-
     const fixedPositionsMobile = [
-        { x: 50, y: 12 }, // Top Center
-        { x: 25, y: 88 }, // Bottom Left
-        { x: 75, y: 88 }  // Bottom Right
+        { x: 50, y: 12 }, { x: 25, y: 88 }, { x: 75, y: 88 }
     ];
 
     const slotsData = narrowScreen ? fixedPositionsMobile : fixedPositionsDesktop;
     const SLOT_COUNT = slotsData.length;
-    const SLOT_W = narrowScreen ? 46 : 24; // slightly wider for long text
+    const SLOT_W = narrowScreen ? 46 : 24;
     const SLOT_H = narrowScreen ? 15 : 20;
-
     const slotEls = [];
-
-    const pool = shuffled(wishes);
+    
+    let pool = [];
     let cursor = 0;
+
     function nextWish() {
+        if (wishes.length === 0) return "";
         if (cursor >= pool.length) {
             pool.splice(0, pool.length, ...shuffled(wishes));
             cursor = 0;
@@ -91,56 +58,68 @@ document.addEventListener('DOMContentLoaded', () => {
         return pool[cursor++];
     }
 
-    // Cho phép thêm lời chúc từ bên ngoài (chat form)
     window.addFloatingWish = function(text) {
         wishes.push(text);
-        pool.splice(cursor, 0, text); // Chèn ngay vị trí tiếp theo để xuất hiện sớm
-        
-        // Thử tìm một slot nào sắp lặp lại để nhét vào ngay lập tức nếu muốn
-        // (Để đơn giản, nó sẽ hiện ra khi slot tiếp theo reset animation)
+        if (pool.length === 0) {
+            pool.push(text);
+        } else {
+            pool.splice(cursor, 0, text);
+        }
     };
 
-    for (let i = 0; i < SLOT_COUNT; i++) {
-        const pos = slotsData[i];
+    function initSlots() {
+        for (let i = 0; i < SLOT_COUNT; i++) {
+            const pos = slotsData[i];
+            const slotEl = document.createElement('div');
+            slotEl.className = 'slot';
 
-        const slotEl = document.createElement('div');
-        slotEl.className = 'slot';
+            const jitterX = (Math.random() - 0.5) * 4;
+            const jitterY = (Math.random() - 0.5) * 4;
+            slotEl.style.setProperty('--x', (pos.x + jitterX) + '%');
+            slotEl.style.setProperty('--y', (pos.y + jitterY) + '%');
+            slotEl.style.setProperty('--slotW', SLOT_W + 'vw');
+            slotEl.style.setProperty('--slotH', SLOT_H + 'vh');
+            scene.appendChild(slotEl);
+            slotEls.push(slotEl);
 
-        // Add a slight random jitter (-2% to 2%) so it feels organic, but stays in its zone
-        const jitterX = (Math.random() - 0.5) * 4;
-        const jitterY = (Math.random() - 0.5) * 4;
+            const wishEl = document.createElement('div');
+            wishEl.className = 'wish';
 
-        slotEl.style.setProperty('--x', (pos.x + jitterX) + '%');
-        slotEl.style.setProperty('--y', (pos.y + jitterY) + '%');
-        slotEl.style.setProperty('--slotW', SLOT_W + 'vw');
-        slotEl.style.setProperty('--slotH', SLOT_H + 'vh');
-        scene.appendChild(slotEl);
-        slotEls.push(slotEl);
+            const duration = 12 + Math.random() * 8;
+            const delay = -(Math.random() * duration);
+            const zStart = -(360 + Math.random() * 120);
+            const sStart = .38 + Math.random() * .12;
 
-        const wishEl = document.createElement('div');
-        wishEl.className = 'wish';
+            wishEl.style.setProperty('--zStart', zStart + 'px');
+            wishEl.style.setProperty('--sStart', sStart);
+            wishEl.style.animationDuration = duration + 's';
+            wishEl.style.animationDelay = delay + 's';
 
-        const duration = 12 + Math.random() * 8; // Slower animation 12s - 20s
-        const delay = -(Math.random() * duration);
-        const zStart = -(360 + Math.random() * 120);
-        const sStart = .38 + Math.random() * .12;
-
-        wishEl.style.setProperty('--zStart', zStart + 'px');
-        wishEl.style.setProperty('--sStart', sStart);
-        wishEl.style.animationDuration = duration + 's';
-        wishEl.style.animationDelay = delay + 's';
-        wishEl.textContent = nextWish();
-
-        wishEl.addEventListener('animationiteration', () => {
             wishEl.textContent = nextWish();
+            slotEl.appendChild(wishEl);
 
-            // Slightly adjust position within the fixed zone every loop
-            const jX = (Math.random() - 0.5) * 4;
-            const jY = (Math.random() - 0.5) * 4;
-            slotEl.style.setProperty('--x', (pos.x + jX) + '%');
-            slotEl.style.setProperty('--y', (pos.y + jY) + '%');
-        });
-
-        slotEl.appendChild(wishEl);
+            wishEl.addEventListener('animationiteration', () => {
+                wishEl.textContent = nextWish();
+            });
+        }
     }
+
+    // Nạp các lời chúc đã lưu từ FastAPI backend
+    fetch('/api/wishes')
+        .then(res => res.json())
+        .then(data => {
+            if (Array.isArray(data) && data.length > 0) {
+                wishes.push(...data);
+            } else {
+                wishes.push("Chào mừng đến với kỷ yếu 30 năm!");
+            }
+            pool = shuffled(wishes);
+            initSlots();
+        })
+        .catch(err => {
+            console.log("Không tải được API Backend (có thể chưa chạy server)");
+            wishes.push("Chào mừng đến với kỷ yếu 30 năm!");
+            pool = shuffled(wishes);
+            initSlots();
+        });
 });
