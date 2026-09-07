@@ -91,6 +91,66 @@
         });
     });
 
+    // ── HASH CHANGE (Sync with section) ──
+    window.addEventListener('hashchange', function() {
+        var hash = window.location.hash;
+        var type = hash.replace('#', '');
+        var indexMap = {
+            'khoi-nguon': 0,
+            'troi-day': 1,
+            'tang-toc': 2,
+            'vuon-tam': 3
+        };
+        if (indexMap[type] !== undefined) {
+            goTo(indexMap[type]);
+        }
+    });
+
+    // ── OPEN MODAL FROM CTA ──
+    var modal = document.querySelector('.journey-modal');
+    var modalTitle = modal ? modal.querySelector('[data-j-title]') : null;
+    var modalText = modal ? modal.querySelector('[data-j-text]') : null;
+    var modalFull = modal ? modal.querySelector('[data-j-full]') : null;
+    var modalImg = modal ? modal.querySelector('[data-j-img]') : null;
+
+    var ctas = document.querySelectorAll('.fp-cta');
+    ctas.forEach(function(cta) {
+        cta.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (!modal) return;
+            if (modalTitle) modalTitle.textContent = cta.dataset.title || '';
+            if (modalText) modalText.textContent = cta.dataset.text || '';
+            if (modalFull) modalFull.href = cta.dataset.href || '#';
+            if (modalImg) modalImg.href = cta.dataset.img || '#';
+            modal.classList.add('open');
+        });
+    });
+
     // Init
-    goTo(0);
+    var initialHash = window.location.hash;
+    var initialIndex = 0;
+    var type = initialHash.replace('#', '');
+    var indexMap = {
+        'khoi-nguon': 0,
+        'troi-day': 1,
+        'tang-toc': 2,
+        'vuon-tam': 3
+    };
+    if (indexMap[type] !== undefined) {
+        initialIndex = indexMap[type];
+    }
+    
+    if (fpSections) {
+        fpSections.style.transition = 'none';
+    }
+    goTo(initialIndex);
+    
+    // Restore transition after first paint
+    requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+            if (fpSections) {
+                fpSections.style.transition = '';
+            }
+        });
+    });
 })();
