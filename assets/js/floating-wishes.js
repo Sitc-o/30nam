@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "Chúc mừng kỷ niệm 30 năm ngày thành lập, chúc VCM vạn sự hanh thông, trường tồn và phát triển"
     ];
 
+    // Nạp các lời chúc đã lưu từ người dùng
+    const savedWishes = JSON.parse(localStorage.getItem('userWishes') || '[]');
+    wishes.push(...savedWishes);
+
     function shuffled(arr) {
         return [...arr].sort(() => Math.random() - .5);
     }
@@ -78,6 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return pool[cursor++];
     }
+
+    // Cho phép thêm lời chúc từ bên ngoài (chat form)
+    window.addFloatingWish = function(text) {
+        wishes.push(text);
+        pool.splice(cursor, 0, text); // Chèn ngay vị trí tiếp theo để xuất hiện sớm
+        
+        // Thử tìm một slot nào sắp lặp lại để nhét vào ngay lập tức nếu muốn
+        // (Để đơn giản, nó sẽ hiện ra khi slot tiếp theo reset animation)
+    };
 
     for (let i = 0; i < SLOT_COUNT; i++) {
         const pos = slotsData[i];

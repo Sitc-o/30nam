@@ -1,0 +1,132 @@
+.chat-wish-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+}
+
+.chat-wish-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ee0033;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 16px rgba(238, 0, 51, 0.4);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chat-wish-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(238, 0, 51, 0.6);
+}
+
+.chat-wish-popup {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 320px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: bottom right;
+    font-family: 'Roboto', sans-serif;
+}
+
+.chat-wish-popup.open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.chat-wish-header {
+    background: #ee0033;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-wish-header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.chat-wish-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.chat-wish-close:hover { opacity: 1; }
+
+.chat-wish-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.chat-wish-desc {
+    margin: 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.chat-wish-body textarea,
+.chat-wish-body input {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    resize: none;
+}
+
+.chat-wish-body textarea:focus,
+.chat-wish-body input:focus {
+    outline: none;
+    border-color: #ee0033;
+}
+
+.chat-wish-submit {
+    background: #ee0033;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.chat-wish-submit:hover {
+    background: #c20029;
+}
+
+.chat-wish-feedback {
+    margin: 0;
+    font-size: 13px;
+    color: #2e7d32;
+    text-align: center;
+    display: none;
+}
