@@ -6,4 +6,5 @@ services:
       - "8765:8765"
     volumes:
       - ./assets/audio/neural:/app/assets/audio/neural
+      - ./wishes.json:/app/wishes.json
     restart: unless-stopped
