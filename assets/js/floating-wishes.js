@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Chúc mừng kỷ niệm 30 năm ngày thành lập, chúc VCM vạn sự hanh thông, trường tồn và phát triển"
     ];
 
-    // Nạp các lời chúc đã lưu từ file json
-    fetch('/wishes.json')
+    // Nạp các lời chúc đã lưu từ FastAPI backend
+    fetch('/api/wishes')
         .then(res => res.json())
         .then(data => {
             if (Array.isArray(data) && data.length > 0) {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pool.splice(0, pool.length, ...shuffled(wishes));
             }
         })
-        .catch(err => console.log("Không tải được wishes.json (có thể file trống hoặc chưa chạy server)"));
+        .catch(err => console.log("Không tải được API Backend (có thể chưa chạy server)"));
 
     function shuffled(arr) {
         return [...arr].sort(() => Math.random() - .5);
