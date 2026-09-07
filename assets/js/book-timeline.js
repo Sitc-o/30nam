@@ -134,6 +134,32 @@
             arrowRight.classList.toggle('hidden',
                 scroll.scrollLeft + scroll.clientWidth >= scroll.scrollWidth - 4);
         }
+        
+        // ---- Mouse Wheel Scroll ----
+        scroll.addEventListener('wheel', function (e) {
+            e.preventDefault(); // Ngăn cuộn trang dọc
+            // Lăn lên (deltaY < 0) -> cuộn sang phải
+            // Lăn xuống (deltaY > 0) -> cuộn sang trái
+            if (e.deltaY < 0) {
+                scroll.scrollBy({ left: 180, behavior: 'smooth' });
+            } else if (e.deltaY > 0) {
+                scroll.scrollBy({ left: -180, behavior: 'smooth' });
+            }
+            setTimeout(updateArrows, 350);
+        });
+
+        // ---- Keyboard Arrows Scroll ----
+        document.addEventListener('keydown', function (e) {
+            if (!isOpen) return; // Chỉ tác dụng khi timeline đang mở
+            if (e.key === 'ArrowRight') {
+                scroll.scrollBy({ left: 180, behavior: 'smooth' });
+                setTimeout(updateArrows, 350);
+            } else if (e.key === 'ArrowLeft') {
+                scroll.scrollBy({ left: -180, behavior: 'smooth' });
+                setTimeout(updateArrows, 350);
+            }
+        });
+
         updateArrows();
     }
 })();

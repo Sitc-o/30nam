@@ -202,7 +202,7 @@ Công tác xây dựng Đảng và đơn vị vững mạnh toàn diện đạt 
                 year: "Năm 2024", milestone: "Cuộc đại cải tổ số toàn diện và kỳ tích lợi nhuận bùng nổ mạnh mẽ", desc: `Năm 2024 chứng kiến sức ép khốc liệt từ các nền tảng thương mại điện tử xuyên biên giới và tổn thất nặng nề từ siêu bão Yagi, Đảng ủy và Ban Giám đốc Công ty đã biến áp lực thành bàn đạp tiến công bằng chiến lược lấy công nghệ số làm vũ khí cạnh tranh trọng tâm, đón đầu chiến dịch dừng dịch vụ sóng 2G để mở rộng không gian tăng trưởng. Sức mạnh tổng lực từ tư duy tiến công đã mang lại kết quả kinh doanh kỷ lục vĩ đại nhất kể từ ngày thành lập: Doanh thu sản xuất kinh doanh đạt con số khổng lồ 18.965 tỷ đồng (tăng trưởng 14%), vượt xa tốc độ chung của thị trường. Chỉ tiêu lợi nhuận trước thuế bùng nổ bứt phá mạnh mẽ nhất khi đạt 225 tỷ đồng, hoàn thành xuất sắc 119% kế hoạch Tập đoàn giao và tăng trưởng ngoạn mục tới 40% so với năm trước. Năng suất lao động bình quân thiết lập kỷ lục mới đạt 357 triệu đồng trên một người mỗi năm, mang lại thu nhập bình quân cao nhất lịch sử đạt 20,1 triệu đồng trên một người mỗi tháng. Viettel Commerce kiêu hãnh vươn lên đứng thứ 3 trong toàn ngành bán lẻ, bán sỉ khối doanh nghiệp lớn và đứng vị trí thứ 27 trong Top 100 nơi làm việc tốt nhất Việt Nam do tổ chức Anphabe công bố.
 Sự cất cánh đồng đều của các đơn vị trực thuộc đã dệt nên bản trường ca chiến công đầy tự hào. Trung tâm Bán lẻ Viettel Store bùng nổ lợi nhuận gấp 2,7 lần so với năm ngoái khi cán mốc 55 tỷ đồng, doanh thu đạt 7.800 tỷ đồng, trong đó mũi nhọn thương mại điện tử đa kênh bứt phá đạt doanh thu Online 2.200 tỷ đồng (tăng 53%), đưa hệ thống kiêu hãnh đứng vị trí số 1 tuyệt đối về doanh thu điện thoại di động trên các sàn thương mại điện tử quốc gia. Trung tâm Phân phối ghi nhận số lượng license phát triển mới tốt nhất lịch sử với 9 bản quyền lớn, đưa tổng doanh thu bứt phá lên con số kỷ lục 8.553 tỷ đồng và lợi nhuận đạt 55 tỷ đồng (tăng trưởng 113,8%). Nhà máy In Viettel khẳng định uy tín thương hiệu vĩ đại khi doanh thu đạt 543,3 tỷ đồng, lợi nhuận trước thuế tại đơn vị đạt 50,39 tỷ đồng, đồng thời bảo vệ thành công chủ trương đầu tư sắm hệ thống máy in Offset hiện đại mới tại khu vực Thành phố Hồ Chí Minh trong tháng 11 năm 2024. Trung tâm Xuất nhập khẩu ghi dấu mốc son chói lọi khi đạt doanh thu 2.000 tỷ đồng, tổ chức giao nhận tuyệt đối an toàn khối lượng khổng lồ vật tư phục vụ mạng 4G và 5G, đặc biệt tập thể cán bộ xuất nhập khẩu đã thông minh bảo vệ thành công trước Tổng cục Hải quan về việc áp mã thuế thiết bị RRU từ 5% về 0%, làm lợi cho Tập đoàn số tiền cực kỳ lớn gần 200 tỷ đồng.
 Ghi nhận những chiến công hiển hách đó, Đảng bộ Công ty đạt tiêu chuẩn trong sạch vững mạnh xuất sắc tiêu biểu năm thứ tư liên tiếp, chính quyền Công ty tự hào nhận Cờ thi đua của Bộ Quốc phòng, tập thể Nhà máy In Viettel vinh dự đón nhận Bằng khen của Thủ tướng Chính phủ, đồng thời cá nhân Thiếu tá Đinh Thị Dung được tôn vinh Điển hình tiên tiến xuất sắc toàn Tập đoàn. Hành trình Nghĩa tình Quân đội được thắp sáng rực rỡ khi Công ty trích kinh phí kịp thời hỗ trợ 371 triệu đồng cho 182 gia đình cán bộ bị ảnh hưởng thiên tai, và tổ chức khánh thành, khởi công xây dựng công trình Điểm trường Tà Moòng tại xã Nậm Bàn, huyện Văn Bàn, tỉnh Lào Cai với tổng trị giá gần 500 triệu đồng.
-`, img: "assets / images / viettel - 1997.jpg", caption: "Xuất khẩu công nghệ, 2023"
+`, img: "assets/images/viettel-1997.jpg", caption: "Xuất khẩu công nghệ, 2023"
             },
             {
                 year: "Năm 2025", milestone: "Dấu ấn rực rỡ từ Đại hội Đảng bộ lần thứ V mở đường cho sự bứt phá toàn diện, thiết lập đỉnh cao lịch sử và kiêu hãnh bước vào hàng ngũ các doanh nghiệp tỷ đô", desc: `Năm 2025 đi vào lịch sử của đơn vị, ghi dấu thắng lợi toàn diện và rực rỡ nhất ngay trong năm khởi đầu của nhiệm kỳ Đại hội đại biểu Đảng bộ Công ty lần thứ V, giai đoạn 2025 – 2030. Toàn thể ban điều hành và lực lượng lao động đã chuyển hóa tinh thần Nghị quyết Đại hội thành những hành động thương trường quả cảm, mở ra không gian tăng trưởng mới và bẻ gãy mọi rào cản thị trường. Kết quả thực hiện nhiệm vụ kinh doanh đã tạo nên một kỳ tích kinh ngạc khi Công ty xuất sắc hoàn thành toàn diện kế hoạch doanh thu của cả năm trước hẳn 02 tháng, đưa tổng doanh thu sản xuất kinh doanh toàn đơn vị cán đích với con số vĩ đại chưa từng có là 27.132 tỷ đồng, đạt 134% kế hoạch và tăng trưởng bùng nổ 37,8% so với năm 2024. Chiến chiến thắng vang dội này đã chính thức đưa Viettel Commerce kiêu hãnh vươn mình, bước vào hàng ngũ các doanh nghiệp tỷ đô vĩ đại của quốc gia, thăng 5 bậc lên vị trí thứ 78 trong bảng xếp hạng VNR500 và lần đầu tiên lọt vào Top 50 Doanh nghiệp xuất sắc nhất Việt Nam với thứ hạng 25.
@@ -218,7 +218,7 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
             // { year: 2026, milestone: "Đổi mới không ngừng", desc: "30.	Đón nhận Huân chương Bảo vệ Tổ quốc hạng Nhất.", img: "assets/images/viettel-1997.jpg", caption: "Đổi mới không ngừng, 2026" },
             // { year: 2027, milestone: "30 năm tự hào", desc: "Kỷ niệm 30 năm thành lập – 30 năm vững bước tiên phong, kiến tạo tương lai số cho Việt Nam và thế giới.", img: "assets/images/viettel-1997.jpg", caption: "30 năm vững bước tiên phong" },
         ];
-        
+
         window.bookMilestones = milestones;
 
         // Trang mở đầu - Lời giới thiệu
@@ -345,6 +345,13 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
         };
         closeBtn.addEventListener("click", closeLightbox);
         lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+        
+        // Thêm tính năng ấn phím ESC để đóng ảnh
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && lightbox.classList.contains("active")) {
+                closeLightbox();
+            }
+        });
 
         // Xử lý sự kiện riêng cho Text: Bôi đen thì không lật, nhưng click nhanh thì lật trang
         const textElements = document.querySelectorAll(".scrapbook-desc, .scrapbook-year, .scrapbook-milestone");
