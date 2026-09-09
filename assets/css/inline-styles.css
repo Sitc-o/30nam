@@ -1,4 +1,4 @@
-/* Extracted global inline styles */
+﻿/* Extracted global inline styles */
 @font-face {
     font-family: 'FSMagistral';
     src: url('../fonts/FSMagistral-Light.ttf') format('truetype');
@@ -181,11 +181,11 @@
 .ldr-section {
     position: relative;
     border-radius: 20px;
-    background: #111111;
+    background: #f2f2f2;
     /* Dark tech theme */
     padding: 80px 40px;
     overflow: hidden;
-    color: #fff;
+    color: #111111;
     margin-bottom: 40px;
 }
 
@@ -264,9 +264,11 @@
 .ldr-card {
     width: 340px;
     flex: 0 0 auto;
+    /* background: rgba(255, 255, 255, 0.03); */
+    background: #fbf5f5;
+    /* border: 1px solid rgba(255, 255, 255, 0.08); */
+    border: 1px solid rgba(189, 9, 9, 0.952);
 
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 35px 25px;
     text-align: center;
@@ -290,6 +292,7 @@
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid transparent;
+    border: 2px solid red;
     transition: all 0.4s ease;
 }
 
@@ -341,7 +344,8 @@
 
 .ldr-card__role-title {
     display: block;
-    color: #ccc;
+    color: #111111;
+    font-weight: 100;
 }
 
 .ldr-card__role-time {
@@ -391,7 +395,8 @@
     position: relative;
     background: #fff;
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
+    min-height: 600px;
     border-radius: 20px;
     overflow: hidden;
     transform: translateY(30px) scale(0.95);
@@ -406,12 +411,12 @@
 }
 
 .ldr-modal__top {
-    background: #111;
+    background: #ee0033;
     padding: 40px;
     display: flex;
     gap: 24px;
     align-items: center;
-    color: #fff;
+    color: #111111;
     position: relative;
 }
 
@@ -421,7 +426,7 @@
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    border: 3px solid #ee0033;
+    border: 3px solid #111111;
 }
 
 .ldr-modal__photo img {
@@ -534,32 +539,41 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 4px;
-}/* Custom styles for mo-hinh-to-chuc.html */
+}
+
+/* Custom styles for mo-hinh-to-chuc.html */
 .hero-org {
     background: #ee0033 !important;
     border-bottom: none !important;
 }
+
 .hero-org small {
-    color: rgba(255,255,255,0.8) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
 }
+
 .hero-org h1 {
     color: #ffffff !important;
 }
+
 .hero-org p {
-    color: rgba(255,255,255,0.9) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .section-org {
     padding-top: 0 !important;
 }
+
 .section-org .ldr-section {
     border-radius: 0 !important;
 }
+
 .section-org .org-list {
     gap: 0 !important;
 }
+
 .section-org .org-item {
     border-radius: 0 !important;
-    border: none !important; border-bottom: 1px solid var(--line) !important;
-    
+    border: none !important;
+    border-bottom: 1px solid var(--line) !important;
+
 }

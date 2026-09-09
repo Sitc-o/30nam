@@ -704,21 +704,70 @@
                 <h2>Cơ cấu tổ chức</h2>
                 <p>Cơ cấu tổ chức của mảng này.</p>
             </div>
-            <div class="org-accordion reveal">
-                <div class="org-card open">
-                    <div class="org-card-head">
-                        <h3>BAN GIÁM ĐỐC</h3>
-                        <div class="org-card-toggle">+</div>
-                    </div>
-                    <div class="org-card-body">
-                        <p>Các thế hệ Giám đốc đã lãnh đạo đơn vị qua các giai đoạn hình thành, xây dựng, phát triển và
-                            vươn tầm.</p>
-                        <div class="org-chips">
-                            <a href="#" class="org-chip">Xem chân dung &rarr;</a>
-                            <a href="nhan-vat-ky-uc.html" class="org-chip">Ký ức các lãnh đạo &rarr;</a>
+            <div class="reveal" style="text-align: center; margin-bottom: 40px; padding: 0 20px;">
+                <h3 style="font-size: 24px; font-weight: 700; color: #333; margin-bottom: 8px;">BAN GIÁM ĐỐC</h3>
+                <p style="color: #666; margin-bottom: 24px;">Các thế hệ Giám đốc đã lãnh đạo đơn vị qua các giai đoạn hình thành, xây dựng, phát triển và vươn tầm.</p>
+
+                <!-- Spotlight layout – giống 20nam.viettelstore.vn/con-nguoi -->
+                <div class="bgd-spotlight">
+
+                    <!-- Người bên trái -->
+                    <div class="bgd-side" data-bgd-trigger
+                        data-photo="assets/images/leaders/bgd-left.webp" data-rank="Đại tá"
+                        data-name="Nguyễn Văn A" data-title="Phó Giám đốc Nhà máy in Viettel"
+                        data-bio="Đồng chí đã có nhiều năm gắn bó với sự nghiệp phát triển của Nhà máy in, đóng góp quan trọng vào quá trình xây dựng và vận hành.">
+                        <div class="bgd-side__photo">
+                            <img src="assets/images/leaders/bgd-left.webp" alt="Phó Giám đốc"
+                                onerror="this.style.display='none'">
+                        </div>
+                        <div class="bgd-info">
+                            <span class="bgd-info__rank">Đại tá</span>
+                            <span class="bgd-info__name">Nguyễn Văn A</span>
+                            <span class="bgd-info__title">Phó Giám đốc<br>Nhà máy in Viettel</span>
                         </div>
                     </div>
+
+                    <!-- Người trung tâm (Giám đốc) -->
+                    <div class="bgd-center" data-bgd-trigger
+                        data-photo="assets/images/leaders/bgd-center.webp" data-rank="Trung tá"
+                        data-name="Nguyễn Văn C"
+                        data-title="Giám đốc Nhà máy in Viettel"
+                        data-bio="Đồng chí là người lãnh đạo có tầm nhìn chiến lược, đã dẫn dắt Nhà máy in Viettel vươn lên mạnh mẽ với tốc độ tăng trưởng vượt bậc.">
+                        <div class="bgd-center__photo">
+                            <img src="assets/images/leaders/bgd-center.webp" alt="Giám đốc Nhà máy in Viettel"
+                                onerror="this.style.display='none'">
+                        </div>
+                        <div class="bgd-info">
+                            <span class="bgd-info__rank">Trung tá</span>
+                            <span class="bgd-info__name">Nguyễn Văn C</span>
+                            <span class="bgd-info__title">Giám đốc<br>Nhà máy in Viettel</span>
+                        </div>
+                    </div>
+
+                    <!-- Người bên phải -->
+                    <div class="bgd-side" data-bgd-trigger data-photo="assets/images/leaders/bgd-right.webp"
+                        data-rank="Thiếu tá" data-name="Trần Văn B" data-title="Phó Giám đốc Nhà máy in Viettel"
+                        data-bio="Đồng chí đã có đóng góp tích cực trong công tác quản lý, điều hành và phát triển hoạt động sản xuất in ấn.">
+                        <div class="bgd-side__photo">
+                            <img src="assets/images/leaders/bgd-right.webp" alt="Phó Giám đốc"
+                                onerror="this.style.display='none'">
+                        </div>
+                        <div class="bgd-info">
+                            <span class="bgd-info__rank">Thiếu tá</span>
+                            <span class="bgd-info__name">Trần Văn B</span>
+                            <span class="bgd-info__title">Phó Giám đốc<br>Nhà máy in Viettel</span>
+                        </div>
+                    </div>
+
+                </div><!-- /.bgd-spotlight -->
+
+                <div class="org-chips" style="margin-top:24px; justify-content: center;">
+                    <a href="#" class="org-chip">Xem chân dung &rarr;</a>
+                    <a href="nhan-vat-ky-uc.html" class="org-chip">Ký ức các lãnh đạo &rarr;</a>
                 </div>
+            </div>
+
+            <div class="org-accordion reveal">
                 <div class="org-card open">
                     <div class="org-card-head">
                         <h3>CÁC PHÒNG BAN</h3>
@@ -759,6 +808,7 @@
     <script src="assets/js/book-menu.js"></script>
     <script src="assets/js/org-accordion.js"></script>
     <script src="assets/js/domain-tabs.js"></script>
+    <script src="assets/js/bgd-modal.js"></script>
 </body>
 
 </html>

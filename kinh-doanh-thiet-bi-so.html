@@ -1213,21 +1213,72 @@
                     <h2>Cơ cấu tổ chức</h2>
                     <p>Cơ cấu tổ chức của mảng này.</p>
                 </div>
-                <div class="org-accordion reveal">
-                    <div class="org-card open">
-                        <div class="org-card-head">
-                            <h3>BAN GIÁM ĐỐC</h3>
-                            <div class="org-card-toggle">+</div>
-                        </div>
-                        <div class="org-card-body">
-                            <p>Các thế hệ Giám đốc đã lãnh đạo đơn vị qua các giai đoạn hình thành, xây dựng, phát triển
-                                và vươn tầm.</p>
-                            <div class="org-chips">
-                                <a href="#" class="org-chip">Xem chân dung &rarr;</a>
-                                <a href="nhan-vat-ky-uc.html" class="org-chip">Ký ức các lãnh đạo &rarr;</a>
+
+                <div class="reveal" style="text-align: center; margin-bottom: 40px; padding: 0 20px;">
+                    <h3 style="font-size: 24px; font-weight: 700; color: #333; margin-bottom: 8px;">BAN GIÁM ĐỐC</h3>
+                    <p style="color: #666; margin-bottom: 24px;">Các thế hệ Giám đốc đã lãnh đạo đơn vị qua các giai
+                        đoạn hình thành, xây dựng, phát triển và vươn tầm.</p>
+
+                    <!-- Spotlight layout – giống 20nam.viettelstore.vn/con-nguoi -->
+                    <div class="bgd-spotlight">
+
+                        <!-- Người bên trái -->
+                        <div class="bgd-side" data-bgd-trigger data-photo="assets/images/Trương Đại Nghĩa_cut.png"
+                            data-rank="Đại tá" data-name="Nguyễn Văn A" data-title="Phó Giám đốc Viettel Store"
+                            data-bio="Đồng chí đã có nhiều năm gắn bó với sự nghiệp phát triển của Viettel Store, đóng góp quan trọng vào quá trình xây dựng và mở rộng hệ thống bán lẻ trên toàn quốc.">
+                            <div class="bgd-side__photo">
+                                <img src="assets/images/Trương Đại Nghĩa_cut.png" alt="Phó Giám đốc"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <div class="bgd-info">
+                                <span class="bgd-info__rank">Thượng tá</span>
+                                <span class="bgd-info__name">Trương Đại Nghĩa</span>
+                                <span class="bgd-info__title">Phó Giám đốc<br>Viettel Store</span>
                             </div>
                         </div>
+
+                        <!-- Người trung tâm (Giám đốc) -->
+                        <div class="bgd-center" data-bgd-trigger data-photo="assets/images/Đinh Thị Dung_cut.png"
+                            data-rank="Trung tá" data-name="Đinh Thị Dung"
+                            data-title="Phó Tổng Giám đốc Viettel Commerce · Giám đốc Viettel Store"
+                            data-bio="Đồng chí Đinh Thị Dung là người lãnh đạo có tầm nhìn chiến lược, đã dẫn dắt Viettel Store vươn lên trở thành một trong những chuỗi bán lẻ uy tín hàng đầu Việt Nam với tốc độ tăng trưởng vượt bậc, đặc biệt trong lĩnh vực thương mại điện tử đa kênh.">
+                            <div class="bgd-center__photo">
+                                <img src="assets/images/Đinh Thị Dung_cut.png" alt="Giám đốc Viettel Store"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <div class="bgd-info">
+                                <span class="bgd-info__rank">Trung tá</span>
+                                <span class="bgd-info__name">Đinh Thị Dung</span>
+                                <span class="bgd-info__title">Phó Tổng Giám đốc Viettel Commerce<br>Giám đốc
+                                    Viettel Store</span>
+                            </div>
+                        </div>
+
+                        <!-- Người bên phải -->
+                        <div class="bgd-side" data-bgd-trigger data-photo="assets/images/leaders/bgd-right.webp"
+                            data-rank="Thiếu tá" data-name="Trần Văn B" data-title="Phó Giám đốc Viettel Store"
+                            data-bio="Đồng chí đã có đóng góp tích cực trong công tác quản lý, điều hành và phát triển hệ thống kinh doanh thiết bị số, góp phần khẳng định vị thế của Viettel Store trên thị trường bán lẻ.">
+                            <div class="bgd-side__photo">
+                                <img src="assets/images/leaders/bgd-right.webp" alt="Phó Giám đốc"
+                                    onerror="this.style.display='none'">
+                            </div>
+                            <div class="bgd-info">
+                                <span class="bgd-info__rank">Thiếu tá</span>
+                                <span class="bgd-info__name">Trần Văn B</span>
+                                <span class="bgd-info__title">Phó Giám đốc<br>Viettel Store</span>
+                            </div>
+                        </div>
+
+                    </div><!-- /.bgd-spotlight -->
+
+                    <div class="org-chips" style="margin-top:24px; justify-content: center;">
+                        <a href="#" class="org-chip">Xem chân dung &rarr;</a>
+                        <a href="nhan-vat-ky-uc.html" class="org-chip">Ký ức các lãnh đạo &rarr;</a>
                     </div>
+                </div>
+
+                <div class="org-accordion reveal">
+
                     <div class="org-card open">
                         <div class="org-card-head">
                             <h3>CÁC PHÒNG BAN</h3>
@@ -1268,6 +1319,7 @@
 
     <script src="assets/js/org-accordion.js"></script>
     <script src="assets/js/domain-tabs.js"></script>
+    <script src="assets/js/bgd-modal.js"></script>
 </body>
 
 </html>
