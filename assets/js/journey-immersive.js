@@ -94,7 +94,7 @@
     // ── HASH CHANGE (Sync with section) ──
     window.addEventListener('hashchange', function() {
         var hash = window.location.hash;
-        var type = hash.replace('#', '');
+        var type = hash.replace('#modal-', '').replace('#', '');
         var indexMap = {
             'khoi-nguon': 0,
             'troi-day': 1,
@@ -129,7 +129,7 @@
     // Init
     var initialHash = window.location.hash;
     var initialIndex = 0;
-    var type = initialHash.replace('#', '');
+    var type = initialHash.replace('#modal-', '').replace('#', '');
     var indexMap = {
         'khoi-nguon': 0,
         'troi-day': 1,

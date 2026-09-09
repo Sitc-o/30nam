@@ -42,6 +42,7 @@ body.journey-immersive {
     will-change: transform;
     transform: scale(1.08);
 }
+
 .fp-section.is-active .fp-bg {
     transform: scale(1);
 }
@@ -66,6 +67,7 @@ body.journey-immersive {
     transform: translateY(40px);
     transition: opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s;
 }
+
 .fp-section.is-active .fp-content {
     opacity: 1;
     transform: translateY(0);
@@ -79,12 +81,13 @@ body.journey-immersive {
     bottom: -20vh;
     left: -10vw;
     right: -10vw;
-    background: radial-gradient(ellipse at 35% 50%, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 65%);
+    background: radial-gradient(ellipse at 35% 50%, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 65%);
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: -1;
     pointer-events: none;
 }
+
 .fp-content:hover::before {
     opacity: 1;
 }
@@ -96,12 +99,13 @@ body.journey-immersive {
     font-weight: 600;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
     margin-bottom: 0.6rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
 }
+
 .fp-era::before {
     content: '';
     display: block;
@@ -115,7 +119,7 @@ body.journey-immersive {
     font-size: clamp(4rem, 12vw, 9rem);
     font-weight: 800;
     line-height: 0.85;
-    color: rgba(255,255,255,0.08);
+    color: rgba(255, 255, 255, 0.08);
     position: absolute;
     right: clamp(1.5rem, 8vw, 8rem);
     bottom: clamp(2rem, 6vh, 6rem);
@@ -127,7 +131,7 @@ body.journey-immersive {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 7vw, 6.5rem);
     font-weight: 800;
-    line-height: 1.0;
+    line-height: 1.25;
     color: #fff;
     margin: 0 0 1.2rem;
     letter-spacing: -0.02em;
@@ -137,7 +141,7 @@ body.journey-immersive {
     font-family: var(--font-body);
     font-size: clamp(0.9rem, 1.8vw, 1.15rem);
     line-height: 1.75;
-    color: rgba(255,255,255,0.82);
+    color: rgba(255, 255, 255, 0.82);
     max-width: 540px;
     margin-bottom: 2rem;
 }
@@ -147,8 +151,8 @@ body.journey-immersive {
     align-items: center;
     gap: 0.6rem;
     padding: 0.75rem 2rem;
-    background: rgba(255,255,255,0.12);
-    border: 1.5px solid rgba(255,255,255,0.45);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
     border-radius: 2px;
     color: #fff;
     font-family: var(--font-heading);
@@ -161,29 +165,52 @@ body.journey-immersive {
     transition: background 0.3s, border-color 0.3s, transform 0.25s;
     width: fit-content;
 }
+
 .fp-cta:hover {
-    background: rgba(255,255,255,0.22);
+    background: rgba(255, 255, 255, 0.22);
     border-color: #fff;
     color: #fff;
     transform: translateY(-2px);
 }
-.fp-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.fp-cta svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
 
 /* ── ACCENT STRIPE (left edge) ── */
 .fp-stripe {
     position: absolute;
-    left: 0; top: 0; bottom: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
     width: 4px;
     transform-origin: bottom;
     transform: scaleY(0);
     transition: transform 0.6s ease 0.5s;
     z-index: 5;
 }
-.fp-section.is-active .fp-stripe { transform: scaleY(1); }
-.fp-section[data-index="0"] .fp-stripe { background: linear-gradient(to top, #e84e00, #ff9a00); }
-.fp-section[data-index="1"] .fp-stripe { background: linear-gradient(to top, #0038a8, #00b4ff); }
-.fp-section[data-index="2"] .fp-stripe { background: linear-gradient(to top, #00682c, #00e676); }
-.fp-section[data-index="3"] .fp-stripe { background: linear-gradient(to top, #5c007a, #ce93d8); }
+
+.fp-section.is-active .fp-stripe {
+    transform: scaleY(1);
+}
+
+.fp-section[data-index="0"] .fp-stripe {
+    background: linear-gradient(to top, #e84e00, #ff9a00);
+}
+
+.fp-section[data-index="1"] .fp-stripe {
+    background: linear-gradient(to top, #0038a8, #00b4ff);
+}
+
+.fp-section[data-index="2"] .fp-stripe {
+    background: linear-gradient(to top, #00682c, #00e676);
+}
+
+.fp-section[data-index="3"] .fp-stripe {
+    background: linear-gradient(to top, #5c007a, #ce93d8);
+}
 
 /* ── NAVIGATION DOTS (right side) ── */
 .fp-nav {
@@ -202,18 +229,20 @@ body.journey-immersive {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.35);
+    background: rgba(255, 255, 255, 0.35);
     border: none;
     cursor: pointer;
     padding: 0;
     transition: background 0.3s, transform 0.3s, height 0.3s;
     position: relative;
 }
+
 .fp-dot.is-active {
     background: #fff;
     height: 28px;
     border-radius: 4px;
 }
+
 .fp-dot::after {
     content: attr(data-label);
     position: absolute;
@@ -225,28 +254,31 @@ body.journey-immersive {
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.1em;
-    color: rgba(255,255,255,0);
+    color: rgba(255, 255, 255, 0);
     text-transform: uppercase;
     pointer-events: none;
     transition: color 0.3s;
 }
+
 .fp-dot:hover::after,
 .fp-dot.is-active::after {
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* ── PROGRESS BAR (bottom) ── */
 .fp-progress {
     position: fixed;
-    bottom: 0; left: 0;
+    bottom: 0;
+    left: 0;
     height: 3px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     width: 100%;
     z-index: 100;
 }
+
 .fp-progress-bar {
     height: 100%;
-    background: rgba(255,255,255,0.7);
+    background: rgba(255, 255, 255, 0.7);
     transition: width 0.85s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
@@ -260,8 +292,9 @@ body.journey-immersive {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.15em;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255, 255, 255, 0.45);
 }
+
 .fp-counter-current {
     color: #fff;
     font-size: 1rem;
@@ -281,21 +314,28 @@ body.journey-immersive {
     opacity: 1;
     transition: opacity 0.5s;
 }
-.fp-scroll-hint.hidden { opacity: 0; pointer-events: none; }
+
+.fp-scroll-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .fp-scroll-hint span {
     font-family: var(--font-heading);
     font-size: 0.65rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
 }
+
 .fp-scroll-arrow {
     width: 24px;
     height: 36px;
-    border: 1.5px solid rgba(255,255,255,0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
     border-radius: 12px;
     position: relative;
 }
+
 .fp-scroll-arrow::after {
     content: '';
     position: absolute;
@@ -304,28 +344,40 @@ body.journey-immersive {
     transform: translateX(-50%);
     width: 4px;
     height: 8px;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 2px;
     animation: scrollDot 1.8s infinite;
 }
+
 @keyframes scrollDot {
-    0%  { opacity: 1; transform: translateX(-50%) translateY(0); }
-    80% { opacity: 0; transform: translateX(-50%) translateY(12px); }
-    100%{ opacity: 0; transform: translateX(-50%) translateY(0); }
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    80% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(12px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 /* ── SECTION INTRO TOP TAG ── */
 .fp-tag {
     display: inline-block;
     padding: 0.3rem 0.9rem;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 2px;
     font-family: var(--font-heading);
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.22em;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     margin-bottom: 1.2rem;
     backdrop-filter: blur(4px);
@@ -339,10 +391,12 @@ body.journey-immersive {
     margin-bottom: 2rem;
     flex-wrap: wrap;
 }
+
 .fp-stat-item {
-    border-left: 2px solid rgba(255,255,255,0.3);
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
     padding-left: 1rem;
 }
+
 .fp-stat-num {
     font-family: var(--font-heading);
     font-size: clamp(1.5rem, 3.5vw, 2.5rem);
@@ -351,16 +405,28 @@ body.journey-immersive {
     line-height: 1;
     margin-bottom: 0.2rem;
 }
+
 .fp-stat-label {
     font-size: 0.75rem;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     letter-spacing: 0.05em;
 }
 
 /* ── MOBILE ADJUSTMENTS ── */
 @media (max-width: 768px) {
-    .fp-nav { right: 1rem; }
-    .fp-dot::after { display: none; }
-    .fp-content { padding: 2rem 1.5rem; }
-    .fp-num { display: none; }
+    .fp-nav {
+        right: 1rem;
+    }
+
+    .fp-dot::after {
+        display: none;
+    }
+
+    .fp-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .fp-num {
+        display: none;
+    }
 }
