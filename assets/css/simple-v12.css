@@ -1911,3 +1911,222 @@ body.event-modal-open {
         /* Tan biến hoàn toàn khi chạm biên */
     }
 }
+
+/*LOGO VIETTEL*/
+/* 1. Khung nền tối mô phỏng chất liệu lót chuột / bàn làm việc */
+.viettel-badge-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 480px;
+    background-color: #2b303a;
+    /* Nền xám than đậm */
+    overflow: hidden;
+}
+
+.viettel-badge-svg {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    overflow: visible;
+}
+
+/* 2. Khối đỏ trung tâm phập phồng (Breathing pulse) */
+.core-bubble {
+    transform-origin: 250px 240px;
+    filter: drop-shadow(0 10px 25px rgba(238, 0, 43, 0.45));
+    animation: coreBreathe 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes coreBreathe {
+    0% {
+        transform: scale(0.98);
+    }
+
+    100% {
+        transform: scale(1.02);
+    }
+}
+
+/* 3. Typography căn chuẩn bên trong */
+.badge-typography {
+    pointer-events: none;
+    transform-origin: 250px 240px;
+    animation: coreBreathe 3.5s ease-in-out infinite alternate;
+}
+
+.badge-typography .txt-bold {
+    fill: #ffffff;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    letter-spacing: 0.5px;
+}
+
+.badge-typography .txt-sub {
+    fill: rgba(255, 255, 255, 0.88);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+/* 4. Các đường viền sóng âm thanh tỏa ra vô tận */
+.sonar-waves .wave-ring {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.35);
+    /* Độ sáng của viền */
+    stroke-width: 1.5px;
+    transform-origin: 250px 240px;
+    animation: waveExpandLoop 6s linear infinite;
+}
+
+/* Kỹ thuật Delay số âm: Giúp sóng dàn hàng đều ngay khi vừa mở web */
+.wave-1 {
+    animation-delay: 0s;
+}
+
+.wave-2 {
+    animation-delay: -1.2s;
+}
+
+.wave-3 {
+    animation-delay: -2.4s;
+}
+
+.wave-4 {
+    animation-delay: -3.6s;
+}
+
+.wave-5 {
+    animation-delay: -4.8s;
+}
+
+@keyframes waveExpandLoop {
+    0% {
+        transform: scale(1.03);
+        opacity: 0.8;
+        stroke-width: 1.8px;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(2.0);
+        opacity: 0;
+        /* Tan biến dần khi ra xa */
+        stroke-width: 0.8px;
+    }
+}
+
+/* 1. Thiết lập thẻ cha để chứa logo chìm và không làm xuất hiện thanh cuộn ngang */
+.simple-hero.hero-org {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* 2. Đẩy chữ nổi lên tầng trên cùng để đọc rõ và bôi đen/click chuột bình thường */
+.simple-hero.hero-org .simple-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* 3. Đưa logo xuống làm nền chìm */
+.hero-watermark-bg {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    /* Đặt logo lệch sang phải màn hình; nếu muốn chính giữa thì để 50% */
+    transform: translate(-50%, -50%);
+    width: 550px;
+    /* Độ to của logo nền */
+    max-width: none;
+    opacity: 0.35;
+    /* Độ mờ: 0.35 giúp nền đỏ không bị che mất chữ trắng */
+    pointer-events: none;
+    /* Chuột xuyên qua, không cản trở tương tác */
+    z-index: 1;
+    /* Nằm dưới chữ */
+}
+
+.hero-watermark-bg .viettel-badge-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* 4. Giữ lại các animation cho sóng và logo (Giữ nguyên hoặc dán vào nếu chưa có) */
+.core-bubble {
+    transform-origin: 250px 240px;
+    animation: coreBreathe 3.5s ease-in-out infinite alternate;
+}
+
+.badge-typography {
+    transform-origin: 250px 240px;
+    animation: coreBreathe 3.5s ease-in-out infinite alternate;
+}
+
+.badge-typography .txt-bold {
+    fill: #ffffff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.badge-typography .txt-sub {
+    fill: rgba(255, 255, 255, 0.9);
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.sonar-waves .wave-ring {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.4);
+    stroke-width: 1.5px;
+    transform-origin: 250px 240px;
+    animation: waveExpandLoop 6s linear infinite;
+}
+
+.wave-1 {
+    animation-delay: 0s;
+}
+
+.wave-2 {
+    animation-delay: -1.2s;
+}
+
+.wave-3 {
+    animation-delay: -2.4s;
+}
+
+.wave-4 {
+    animation-delay: -3.6s;
+}
+
+.wave-5 {
+    animation-delay: -4.8s;
+}
+
+@keyframes coreBreathe {
+    0% {
+        transform: scale(0.98);
+    }
+
+    100% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes waveExpandLoop {
+    0% {
+        transform: scale(1.02);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}

@@ -56,13 +56,44 @@
     <div class="book-menu__footer"><strong>VCM</strong><span>Viettel Commerce · 1997–2027</span></div>
   </aside>
   <main class="simple-main">
-    <section class="simple-hero hero-org anim-ripple-waves-loop">
+    <section class="simple-hero hero-org">
       <!-- BẮT ĐẦU: Đoạn cần thêm mới -->
-      <div class="ripple-bg" aria-hidden="true">
-        <span class="ring ring-1"></span>
-        <span class="ring ring-2"></span>
-        <span class="ring ring-3"></span>
-        <span class="ring ring-4"></span>
+      <div class="hero-watermark-bg" aria-hidden="true">
+        <svg class="viettel-badge-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Path chuẩn: Thân tròn xoe, đuôi cong vát nhọn góc dưới trái -->
+            <path id="viettel-shape" d="M 250 50 
+         C 350 50, 430 130, 430 230 
+         C 430 325, 355 400, 265 402 
+         C 220 403, 180 425, 140 465 
+         C 160 415, 165 370, 150 335 
+         C 100 310, 70 275, 70 230 
+         C 70 130, 150 50, 250 50 Z" />
+
+            <!-- Gradient đỏ đặc trưng Viettel -->
+            <linearGradient id="viettel-red" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ea0029" />
+              <stop offset="100%" stop-color="#b8001f" />
+            </linearGradient>
+          </defs>
+
+          <!-- Các đường viền sóng âm thanh tỏa ra theo đúng hình khối logo -->
+          <g class="sonar-waves">
+            <use href="#viettel-shape" class="wave-ring wave-1" />
+            <use href="#viettel-shape" class="wave-ring wave-2" />
+            <use href="#viettel-shape" class="wave-ring wave-3" />
+            <use href="#viettel-shape" class="wave-ring wave-4" />
+          </g>
+
+          <!-- Khối logo đỏ trung tâm -->
+          <use href="#viettel-shape" class="core-bubble" fill="url(#viettel-red)" />
+
+          <!-- Chữ slogan thương hiệu ở chính giữa -->
+          <g class="badge-typography">
+            <text x="250" y="225" text-anchor="middle" class="txt-bold">Sáng tạo</text>
+            <text x="250" y="255" text-anchor="middle" class="txt-sub">theo cách của bạn</text>
+          </g>
+        </svg>
       </div>
       <!-- KẾT THÚC: Đoạn cần thêm mới -->
       <div class="simple-container"><small>TỔ CHỨC QUA CÁC THỜI KỲ</small>
