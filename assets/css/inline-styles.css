@@ -164,6 +164,7 @@
 .global-inline-21 {
     display: none;
 }
+
 /* ========================================================
 /* ========================================================
    LEADER SECTION - Inspired by 20nam.viettelstore.vn
@@ -180,7 +181,8 @@
 .ldr-section {
     position: relative;
     border-radius: 20px;
-    background: #111111; /* Dark tech theme */
+    background: #111111;
+    /* Dark tech theme */
     padding: 80px 40px;
     overflow: hidden;
     color: #fff;
@@ -189,21 +191,35 @@
 
 .ldr-bg-lines {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     pointer-events: none;
     z-index: 0;
     opacity: 0.8;
 }
+
 .ldr-line {
     stroke-dasharray: 2000;
     stroke-dashoffset: 2000;
     animation: drawLine 8s ease-in-out infinite alternate;
 }
-.ldr-line-2 { animation-delay: 1s; animation-duration: 10s; }
-.ldr-line-3 { animation-delay: 2s; animation-duration: 9s; }
+
+.ldr-line-2 {
+    animation-delay: 1s;
+    animation-duration: 10s;
+}
+
+.ldr-line-3 {
+    animation-delay: 2s;
+    animation-duration: 9s;
+}
 
 @keyframes drawLine {
-    to { stroke-dashoffset: 0; }
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 .ldr-section-header {
@@ -212,6 +228,7 @@
     text-align: center;
     margin-bottom: 60px;
 }
+
 .ldr-section-header small {
     display: block;
     font-size: 13px;
@@ -220,11 +237,13 @@
     letter-spacing: 0.2em;
     margin-bottom: 12px;
 }
+
 .ldr-section-header h2 {
     font-family: 'FS Magistral', sans-serif;
     font-size: 36px;
     margin: 0 0 16px;
 }
+
 .ldr-section-header p {
     color: #999;
     max-width: 600px;
@@ -236,22 +255,27 @@
 .ldr-grid {
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
 }
 
 .ldr-card {
+    width: 340px;
+    flex: 0 0 auto;
+
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 30px 20px;
+    padding: 35px 25px;
     text-align: center;
     cursor: pointer;
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
 }
+
 .ldr-card:hover {
     background: rgba(255, 255, 255, 0.06);
     transform: translateY(-8px);
@@ -260,50 +284,66 @@
 }
 
 .ldr-card__photo {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     margin: 0 auto 20px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid transparent;
     transition: all 0.4s ease;
 }
+
 .ldr-card:hover .ldr-card__photo {
     border-color: #ee0033;
     transform: scale(1.05);
 }
+
 .ldr-card__photo img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
 .ldr-card__placeholder {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     background: #222;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #555;
 }
-.ldr-card__placeholder svg { width: 50%; height: 50%; }
+
+.ldr-card__placeholder svg {
+    width: 50%;
+    height: 50%;
+}
 
 .ldr-card__name {
     display: block;
     font-family: 'FS Magistral', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 6px;
 }
+
 .ldr-card__roles {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin-top: 8px;
 }
+
 .ldr-card__role-item {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.4;
 }
+
 .ldr-card__role-title {
     display: block;
     color: #ccc;
 }
+
 .ldr-card__role-time {
     display: block;
     color: #ee0033;
@@ -311,49 +351,55 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.ldr-card__hover-icon {
-    position: absolute;
-    bottom: -40px; left: 50%;
-    transform: translateX(-50%);
-    width: 30px; height: 30px;
-    background: #ee0033;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.ldr-card__hover-icon svg { width: 16px; height: 16px; color: #fff; }
-.ldr-card:hover .ldr-card__hover-icon {
-    bottom: 20px;
-}
+
 
 /* Modal */
 .ldr-modal {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 9999;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
 }
-.ldr-modal[hidden] { display: none !important; }
+
+.ldr-modal[hidden] {
+    display: none !important;
+}
+
 .ldr-modal__backdrop {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.8);
-    opacity: 0; transition: opacity 0.4s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.4s ease;
     backdrop-filter: blur(5px);
 }
-.ldr-modal.open .ldr-modal__backdrop { opacity: 1; }
+
+.ldr-modal.open .ldr-modal__backdrop {
+    opacity: 1;
+}
 
 .ldr-modal__content {
     position: relative;
     background: #fff;
-    width: 100%; max-width: 600px;
+    width: 100%;
+    max-width: 600px;
     border-radius: 20px;
     overflow: hidden;
     transform: translateY(30px) scale(0.95);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
 }
+
 .ldr-modal.open .ldr-modal__content {
     transform: translateY(0) scale(1);
     opacity: 1;
@@ -368,44 +414,78 @@
     color: #fff;
     position: relative;
 }
+
 .ldr-modal__photo {
-    width: 140px; height: 140px;
-    border-radius: 50%; overflow: hidden;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
     flex-shrink: 0;
     border: 3px solid #ee0033;
 }
-.ldr-modal__photo img { width: 100%; height: 100%; object-fit: cover; }
-.ldr-modal__placeholder { width: 100%; height: 100%; background: #222; display: flex; align-items: center; justify-content: center; color: #555; }
-.ldr-modal__placeholder svg { width: 50%; height: 50%; }
+
+.ldr-modal__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ldr-modal__placeholder {
+    width: 100%;
+    height: 100%;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}
+
+.ldr-modal__placeholder svg {
+    width: 50%;
+    height: 50%;
+}
 
 .ldr-modal__tenure {
     display: inline-block;
     padding: 4px 12px;
-    background: rgba(238,0,51,0.2);
+    background: rgba(238, 0, 51, 0.2);
     color: #ff4d6d;
     border-radius: 999px;
-    font-size: 12px; font-weight: 700;
+    font-size: 12px;
+    font-weight: 700;
     margin-bottom: 12px;
 }
+
 .ldr-modal__name {
     font-family: 'FS Magistral', sans-serif;
-    font-size: 28px; margin: 0 0 8px;
+    font-size: 28px;
+    margin: 0 0 8px;
 }
+
 .ldr-modal__role {
-    color: #aaa; margin: 0; font-size: 15px;
+    color: #aaa;
+    margin: 0;
+    font-size: 15px;
 }
 
 .ldr-modal__close {
     position: absolute;
-    top: 20px; right: 20px;
-    background: rgba(255,255,255,0.1);
-    border: none; color: #fff;
-    width: 36px; height: 36px; border-radius: 50%;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     cursor: pointer;
     transition: background 0.2s;
     font-size: 18px;
 }
-.ldr-modal__close:hover { background: #ee0033; }
+
+.ldr-modal__close:hover {
+    background: #ee0033;
+}
 
 .ldr-modal__body {
     padding: 40px;
@@ -415,27 +495,38 @@
 }
 
 .ldr-cta {
-    text-align: center; margin-top: 50px;
+    text-align: center;
+    margin-top: 50px;
 }
+
 .ldr-cta-btn {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 14px 30px;
-    border: 2px solid #ee0033; color: #ee0033;
-    border-radius: 999px; font-weight: bold; text-decoration: none;
+    border: 2px solid #ee0033;
+    color: #ee0033;
+    border-radius: 999px;
+    font-weight: bold;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
+
 .ldr-cta-btn:hover {
-    background: #ee0033; color: #fff;
+    background: #ee0033;
+    color: #fff;
 }
+
 .ldr-card__rank {
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     color: #ee0033;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 2px;
     font-weight: bold;
 }
+
 .ldr-modal__rank {
     display: block;
     font-size: 16px;
@@ -443,4 +534,32 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 4px;
+}/* Custom styles for mo-hinh-to-chuc.html */
+.hero-org {
+    background: #ee0033 !important;
+    border-bottom: none !important;
+}
+.hero-org small {
+    color: rgba(255,255,255,0.8) !important;
+}
+.hero-org h1 {
+    color: #ffffff !important;
+}
+.hero-org p {
+    color: rgba(255,255,255,0.9) !important;
+}
+
+.section-org {
+    padding-top: 0 !important;
+}
+.section-org .ldr-section {
+    border-radius: 0 !important;
+}
+.section-org .org-list {
+    gap: 0 !important;
+}
+.section-org .org-item {
+    border-radius: 0 !important;
+    border: none !important; border-bottom: 1px solid var(--line) !important;
+    
 }

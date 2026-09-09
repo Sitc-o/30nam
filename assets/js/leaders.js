@@ -49,12 +49,12 @@ const LEADERS = [
     bio: 'Tiểu sử và thông tin chi tiết về Thượng tá Vũ Tam Hòa sẽ được cập nhật tại đây.'
   },
   {
-    img: 'assets/images/Anh BGĐ cac thoi ky/Anh Hung GĐ.jpg',
+    img: 'assets/images/giam-doc-pham-van-hung.jpg',
     rank: 'Đại tá',
     name: 'PHẠM VĂN HÙNG',
     roles: [
       { title: 'Chủ tịch kiêm Giám đốc Công ty', time: '(6.2019-6.2021)' },
-      { title: 'Giám đốc Công ty', time: '(6.2021-...)' }
+      { title: 'Tổng Giám đốc Công ty', time: '(6.2021-...)' }
     ],
     bio: 'Tiểu sử và thông tin chi tiết về Trung tá Phạm Văn Hùng sẽ được cập nhật tại đây.'
   },
@@ -124,12 +124,12 @@ const LEADERS = [
   },
   {
     img: 'assets/images/Anh BGĐ cac thoi ky/Anh quang.jpg',
-    rank: 'Thiếu tá',
+    rank: 'Thiếu tá QNCN',
     name: 'BÙI ÁNH QUANG',
     roles: [
       { title: 'Phó Giám đốc Công ty', time: '(1.2013-4.2013)' },
     ],
-    bio: 'Tiểu sử và thông tin chi tiết về Thiếu tá Bùi Ánh Quang sẽ được cập nhật tại đây.'
+    bio: 'Tiểu sử và thông tin chi tiết về Thiếu tá QNCN Bùi Ánh Quang sẽ được cập nhật tại đây.'
   },
   {
     img: 'assets/images/Anh BGĐ cac thoi ky/Anh Cương Phó GD.jpg',
@@ -157,6 +157,37 @@ const LEADERS = [
       { title: 'Phó Giám đốc Công ty', time: '(12.2019-...)' },
     ],
     bio: 'Tiểu sử và thông tin chi tiết về Thượng tá Nguyễn Anh Tuấn sẽ được cập nhật tại đây.'
+  },
+  //-------------------------------------------
+  {
+    img: 'assets/images/luong-the-quang.jpg',
+    rank: 'Đại tá',
+    name: 'LƯƠNG THẾ QUANG',
+    roles: [
+      { title: 'Bí thư Đảng ủy', time: '(12.2019-...)' },
+      { title: 'Phó Tổng Giám đốc Tổng Công ty', time: '(...-9.2026)' },
+    ],
+    bio: 'Tiểu sử và thông tin chi tiết về Đại tá Lương Thế Quang sẽ được cập nhật tại đây.'
+  },
+  {
+    img: 'assets/images/HAT01391_cut.jpg',
+    rank: 'Trung tá',
+    name: 'ĐINH THỊ DUNG',
+    roles: [
+      { title: 'Phó Tổng Giám đốc Tổng Công ty', time: '(...-...)' },
+      { title: 'Giám đốc Trung tâm Kinh doanh Thiết bị số', time: '(...-...)' }
+    ],
+    bio: 'Tiểu sử và thông tin chi tiết về Trung tá Đinh Thị Dung sẽ được cập nhật tại đây.'
+  },
+  {
+    img: 'assets/images/Ảnh các anh/ChatGPT Image 11_38_43 15 thg 6, 2026.png',
+    rank: 'Trung tá QNCN',
+    name: 'PHẠM TIẾN TUYỀN',
+    roles: [
+      { title: 'Phó Tổng Giám đốc Tổng Công ty', time: '(...-...)' },
+      { title: 'Giám đốc Trung tâm Phân phối', time: '(...-...)' }
+    ],
+    bio: 'Tiểu sử và thông tin chi tiết về Trung tá QNCN Phạm Tiến Tuyền sẽ được cập nhật tại đây.'
   },
 ];
 
@@ -193,9 +224,7 @@ grid.innerHTML = LEADERS.map((ldr, i) => `
           `).join('')}
         </div>
       </figcaption>
-      <div class="ldr-card__hover-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><line x1="12" y1="5" x2="12" y2="19"></line></svg>
-      </div>
+
     </figure>
   `).join('');
 
