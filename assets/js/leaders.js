@@ -170,14 +170,14 @@ const LEADERS = [
     bio: 'Tiểu sử và thông tin chi tiết về Đại tá Lương Thế Quang sẽ được cập nhật tại đây.'
   },
   {
-    img: 'assets/images/HAT01391_cut.png',
+    img: 'assets/images/Đinh Thị Dung_cut.png',
     rank: 'Trung tá',
-    name: 'PHẠM THỊ DUNG',
+    name: 'ĐINH THỊ DUNG',
     roles: [
       { title: 'Phó Tổng Giám đốc Tổng Công ty', time: '(...-...)' },
       { title: 'Giám đốc Trung tâm Kinh doanh Thiết bị số', time: '(...-...)' }
     ],
-    bio: 'Tiểu sử và thông tin chi tiết về Trung tá Phạm Thị Dung sẽ được cập nhật tại đây.'
+    bio: 'Tiểu sử và thông tin chi tiết về Trung tá Đinh Thị Dung sẽ được cập nhật tại đây.'
   },
   {
     img: 'assets/images/Ảnh các anh/ChatGPT Image 11_38_43 15 thg 6, 2026.png',
@@ -228,8 +228,8 @@ function personHTML(ldr, i) {
    ================================================================ */
 const IDX = {
   chuTich: LEADERS.findIndex(l => l.name === 'ĐỖ MINH PHƯƠNG'),
-  tgd:     LEADERS.findIndex(l => l.name === 'PHẠM VĂN HÙNG'),
-  phoTrai: LEADERS.findIndex(l => l.name === 'PHẠM THỊ DUNG'),
+  tgd: LEADERS.findIndex(l => l.name === 'PHẠM VĂN HÙNG'),
+  phoTrai: LEADERS.findIndex(l => l.name === 'ĐINH THỊ DUNG'),
   phoPhai: LEADERS.findIndex(l => l.name === 'PHẠM TIẾN TUYỀN')
 };
 
@@ -310,9 +310,9 @@ document.body.addEventListener('click', e => {
 /* ================================================================
    LIGHTBOX — click photo to zoom
    ================================================================ */
-const lightbox   = document.getElementById('ldrLightbox');
-const lbImg      = document.getElementById('ldrLightboxImg');
-const lbClose    = document.getElementById('ldrLightboxClose');
+const lightbox = document.getElementById('ldrLightbox');
+const lbImg = document.getElementById('ldrLightboxImg');
+const lbClose = document.getElementById('ldrLightboxClose');
 
 function openLightbox(src) {
   if (!lightbox) return;

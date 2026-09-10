@@ -21,14 +21,28 @@
   z-index: 0;
   opacity: 0.6;
 }
+
 .ldr-line {
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
   animation: drawLine 8s ease-in-out infinite alternate;
 }
-.ldr-line-2 { animation-delay: 1s; animation-duration: 10s; }
-.ldr-line-3 { animation-delay: 2s; animation-duration: 9s; }
-@keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+.ldr-line-2 {
+  animation-delay: 1s;
+  animation-duration: 10s;
+}
+
+.ldr-line-3 {
+  animation-delay: 2s;
+  animation-duration: 9s;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 
 .ldr-section-header {
   position: relative;
@@ -37,6 +51,7 @@
   margin: 0 auto 48px;
   padding: 0 40px;
 }
+
 .ldr-section-header small {
   display: block;
   font-size: 12px;
@@ -46,6 +61,7 @@
   text-transform: uppercase;
   margin-bottom: 10px;
 }
+
 .ldr-section-header h2 {
   font-family: FSMagistral, sans-serif;
   font-size: 30px;
@@ -53,12 +69,13 @@
   margin: 0 0 12px;
   color: #111;
 }
+
 .ldr-section-header p {
   color: #666;
   max-width: 580px;
   font-size: 15px;
   line-height: 1.65;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .ldr-level-label {
@@ -72,6 +89,7 @@
   color: #111;
   letter-spacing: 0.01em;
   border-left: 4px solid #ee0033;
+  font-family: FS Magistral, sans-serif;
 }
 
 .ldr-person-list {
@@ -79,7 +97,7 @@
   z-index: 1;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 0px;
 }
 
 .ldr-person-row {
@@ -87,24 +105,40 @@
   grid-template-columns: 1fr 1fr;
   gap: 0 48px;
 }
+
 .ldr-person-row.single {
-  grid-template-columns: 560px;
+  grid-template-columns: 680px;
+  /* Tăng chiều rộng khối tại đây */
   justify-content: center;
 }
 
+/* Chỉ kích hoạt khi có thêm class align-left */
+.ldr-person-row.single.align-left {
+  justify-content: start;
+  padding-left: 0;
+  /* Hoặc chỉnh lề thụt vào theo ý bạn */
+}
+
+/* 2. ĐIỀU CHỈNH LẠI CỘT CHỨA ẢNH (Cũ: 190px 1fr) */
 .ldr-person {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 0 24px;
-  padding: 32px 0;
+  grid-template-columns: 230px 1fr;
+  /* Tăng cột ảnh từ 190px lên 230px cho khớp với ảnh mới */
+  gap: 0 28px;
+  /* Tăng nhẹ khoảng cách giữa ảnh và chữ nếu muốn thoáng hơn */
+  padding: 36px 0;
+  /* Có thể tăng padding nếu muốn khối dài thêm */
   border-bottom: 1px solid #ddd;
   align-items: start;
 }
-.ldr-person:last-child { border-bottom: none; }
+
+.ldr-person:last-child {
+  border-bottom: none;
+}
 
 .ldr-person__photo {
-  width: 190px;
-  height: 230px;
+  width: 230px;
+  height: 280px;
   overflow: hidden;
   border-radius: 6px;
   background: #ddd;
@@ -112,6 +146,7 @@
   cursor: zoom-in;
   position: relative;
 }
+
 .ldr-person__photo img {
   width: 100%;
   height: 100%;
@@ -120,7 +155,11 @@
   display: block;
   transition: transform 0.35s ease;
 }
-.ldr-person__photo:hover img { transform: scale(1.05); }
+
+.ldr-person__photo:hover img {
+  transform: scale(1.05);
+}
+
 .ldr-person__photo-placeholder {
   width: 100%;
   height: 100%;
@@ -130,7 +169,11 @@
   background: #ccc;
   color: #888;
 }
-.ldr-person__photo-placeholder svg { width: 48px; height: 48px; }
+
+.ldr-person__photo-placeholder svg {
+  width: 48px;
+  height: 48px;
+}
 
 .ldr-person__info {
   display: flex;
@@ -138,6 +181,7 @@
   gap: 4px;
   padding-top: 2px;
 }
+
 .ldr-person__position {
   font-size: 12px;
   color: #888;
@@ -146,6 +190,7 @@
   letter-spacing: 0.07em;
   margin-bottom: 2px;
 }
+
 .ldr-person__rank {
   font-size: 12px;
   color: #ee0033;
@@ -153,6 +198,7 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+
 .ldr-person__name {
   font-family: FSMagistral, sans-serif;
   font-size: 20px;
@@ -161,17 +207,20 @@
   margin: 4px 0 10px;
   line-height: 1.2;
 }
+
 .ldr-person__roles {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 10px;
 }
+
 .ldr-person__role-item {
   font-size: 13.5px;
   line-height: 1.55;
   color: #444;
 }
+
 .ldr-person__role-time {
   color: #ee0033;
   font-size: 12.5px;
@@ -185,10 +234,12 @@
   opacity: 0;
   transition: max-height 0.4s ease, opacity 0.35s ease;
 }
+
 .ldr-person.expanded .ldr-person__bio-wrap {
   max-height: 800px;
   opacity: 1;
 }
+
 .ldr-person__bio {
   font-size: 14px;
   line-height: 1.75;
@@ -210,13 +261,20 @@
   margin-top: 6px;
   transition: color 0.2s;
 }
-.ldr-person__toggle:hover { color: #ee0033; }
+
+.ldr-person__toggle:hover {
+  color: #ee0033;
+}
+
 .ldr-person__toggle svg {
   width: 14px;
   height: 14px;
   transition: transform 0.3s ease;
 }
-.ldr-person.expanded .ldr-person__toggle svg { transform: rotate(180deg); }
+
+.ldr-person.expanded .ldr-person__toggle svg {
+  transform: rotate(180deg);
+}
 
 .ldr-cta {
   position: relative;
@@ -226,6 +284,7 @@
   padding: 0 40px;
   text-align: center;
 }
+
 .ldr-cta-btn {
   display: inline-flex;
   align-items: center;
@@ -240,37 +299,62 @@
   transition: all 0.25s ease;
   letter-spacing: 0.03em;
 }
-.ldr-cta-btn:hover { background: #ee0033; color: #fff; }
+
+.ldr-cta-btn:hover {
+  background: #ee0033;
+  color: #fff;
+}
 
 .ldr-lightbox {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.9);
   display: none;
   align-items: center;
   justify-content: center;
   cursor: zoom-out;
 }
+
 .ldr-lightbox.open {
   display: flex;
   animation: lbFadeIn 0.25s ease forwards;
 }
-@keyframes lbFadeIn { from { opacity:0; } to { opacity:1; } }
+
+@keyframes lbFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .ldr-lightbox img {
   max-width: 88vw;
   max-height: 88vh;
   object-fit: contain;
   border-radius: 4px;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
   animation: lbZoom 0.3s ease forwards;
 }
-@keyframes lbZoom { from { transform: scale(0.88); } to { transform: scale(1); } }
+
+@keyframes lbZoom {
+  from {
+    transform: scale(0.88);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 .ldr-lightbox__close {
   position: absolute;
   top: 18px;
   right: 22px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   border: none;
   color: #fff;
   font-size: 22px;
@@ -284,14 +368,36 @@
   transition: background 0.2s;
   line-height: 1;
 }
-.ldr-lightbox__close:hover { background: #ee0033; }
+
+.ldr-lightbox__close:hover {
+  background: #ee0033;
+}
 
 @media (max-width: 960px) {
-  .ldr-person-row { grid-template-columns: 1fr; }
-  .ldr-section-header, .ldr-level-label, .ldr-person-list, .ldr-cta { padding-left: 20px; padding-right: 20px; }
-  .ldr-level-label { padding-left: 16px; }
+  .ldr-person-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ldr-section-header,
+  .ldr-level-label,
+  .ldr-person-list,
+  .ldr-cta {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .ldr-level-label {
+    padding-left: 16px;
+  }
 }
+
 @media (max-width: 580px) {
-  .ldr-person { grid-template-columns: 1fr; }
-  .ldr-person__photo { width: 100%; height: 260px; }
+  .ldr-person {
+    grid-template-columns: 1fr;
+  }
+
+  .ldr-person__photo {
+    width: 100%;
+    height: 260px;
+  }
 }
