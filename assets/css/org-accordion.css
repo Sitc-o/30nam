@@ -6,13 +6,15 @@
     gap: 16px;
     padding: 20px 0;
 }
+
 .org-card {
     background: #fff;
     border: 1px solid #eaeaea;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     overflow: hidden;
 }
+
 .org-card-head {
     padding: 24px;
     display: flex;
@@ -22,9 +24,11 @@
     user-select: none;
     transition: background 0.2s;
 }
+
 .org-card-head:hover {
     background: #fafafa;
 }
+
 .org-card-head h3 {
     margin: 0;
     font-size: 1.1rem;
@@ -33,6 +37,7 @@
     color: #333;
     letter-spacing: 0.5px;
 }
+
 .org-card-toggle {
     color: var(--red, #e30019);
     font-size: 1.8rem;
@@ -40,34 +45,48 @@
     font-weight: 300;
     transition: transform 0.3s ease;
 }
+
 .org-card.open .org-card-toggle {
     transform: rotate(45deg);
 }
+
 .org-card-body {
     padding: 0 24px 24px;
     display: none;
     border-top: 1px solid #eaeaea;
 }
+
 .org-card.open .org-card-body {
     display: block;
     animation: fadeInOrg 0.4s ease;
     padding-top: 24px;
 }
+
 @keyframes fadeInOrg {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
 .org-card-body p {
     margin-top: 0;
     margin-bottom: 20px;
     color: #666;
     font-size: 0.95rem;
 }
+
 .org-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
+
 .org-chip {
     display: inline-block;
     background: #f2f2f2;
@@ -79,6 +98,7 @@
     text-decoration: none;
     transition: all 0.2s;
 }
+
 a.org-chip:hover {
     background: #e6e6e6;
     color: #111;
@@ -108,6 +128,7 @@ a.org-chip:hover {
     cursor: pointer;
     transition: transform 0.25s ease;
 }
+
 .bgd-side:hover {
     transform: translateY(-6px);
 }
@@ -121,8 +142,9 @@ a.org-chip:hover {
     flex-shrink: 0;
     transition: box-shadow 0.25s ease;
 }
+
 .bgd-side:hover .bgd-side__photo {
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .bgd-side__photo img {
@@ -197,6 +219,7 @@ a.org-chip:hover {
 .bgd-spotlight .bgd-side:first-child {
     order: -1;
 }
+
 .bgd-spotlight .bgd-side:last-child {
     order: 1;
 }
@@ -208,10 +231,12 @@ a.org-chip:hover {
         align-items: center;
         gap: 24px;
     }
+
     .bgd-center__photo {
         width: 220px;
         height: 220px;
     }
+
     .bgd-side__photo {
         width: 160px;
         height: 160px;
@@ -229,12 +254,13 @@ a.org-chip:hover {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(4px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
+
 .bgd-modal-overlay.open {
     opacity: 1;
     pointer-events: auto;
@@ -245,13 +271,14 @@ a.org-chip:hover {
     border-radius: 20px;
     width: 100%;
     max-width: 560px;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     transform: translateY(24px) scale(0.97);
-    transition: transform 0.35s cubic-bezier(0.25,0.8,0.25,1), opacity 0.35s ease;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.35s ease;
     opacity: 0;
     position: relative;
 }
+
 .bgd-modal-overlay.open .bgd-modal {
     transform: translateY(0) scale(1);
     opacity: 1;
@@ -272,10 +299,11 @@ a.org-chip:hover {
     height: 110px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid rgba(255,255,255,0.6);
+    border: 3px solid rgba(255, 255, 255, 0.6);
     flex-shrink: 0;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
 }
+
 .bgd-modal__photo img {
     width: 100%;
     height: 100%;
@@ -283,7 +311,9 @@ a.org-chip:hover {
     object-position: top center;
 }
 
-.bgd-modal__meta { flex: 1; }
+.bgd-modal__meta {
+    flex: 1;
+}
 
 .bgd-modal__rank {
     display: inline-block;
@@ -291,9 +321,10 @@ a.org-chip:hover {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 6px;
 }
+
 .bgd-modal__name {
     font-size: 22px;
     font-weight: 900;
@@ -303,9 +334,10 @@ a.org-chip:hover {
     margin: 0 0 6px;
     line-height: 1.2;
 }
+
 .bgd-modal__title {
     font-size: 13px;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.5;
     margin: 0;
 }
@@ -318,7 +350,7 @@ a.org-chip:hover {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     color: #fff;
     font-size: 20px;
@@ -328,8 +360,9 @@ a.org-chip:hover {
     transition: background 0.2s;
     padding: 0;
 }
+
 .bgd-modal__close:hover {
-    background: rgba(255,255,255,0.35);
+    background: rgba(255, 255, 255, 0.35);
 }
 
 /* Body */
@@ -339,5 +372,11 @@ a.org-chip:hover {
     font-size: 14.5px;
     line-height: 1.8;
 }
-.bgd-modal__body p { margin: 0 0 14px; }
-.bgd-modal__body p:last-child { margin-bottom: 0; }
+
+.bgd-modal__body p {
+    margin: 0 0 14px;
+}
+
+.bgd-modal__body p:last-child {
+    margin-bottom: 0;
+}

@@ -170,7 +170,7 @@ const LEADERS = [
     bio: 'Tiểu sử và thông tin chi tiết về Đại tá Lương Thế Quang sẽ được cập nhật tại đây.'
   },
   {
-    img: 'assets/images/HAT01391_cut.jpg',
+    img: 'assets/images/HAT01391_cut.png',
     rank: 'Trung tá',
     name: 'ĐINH THỊ DUNG',
     roles: [
@@ -238,8 +238,8 @@ function openModal(index) {
 
   mRole.innerHTML = ldr.roles.map(r => `
       <div style="margin-bottom: 6px;">
-        <strong style="color: #fff;">${r.title}</strong> <br>
-        <span style="color: #ee0033; font-size: 14px;">${r.time}</span>
+        <strong style="color: #f2f2f2;">${r.title}</strong> <br>
+        <span style="color: #f2f2f2; font-size: 14px;">${r.time}</span>
       </div>
     `).join('');
 
