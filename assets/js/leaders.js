@@ -172,12 +172,12 @@ const LEADERS = [
   {
     img: 'assets/images/HAT01391_cut.png',
     rank: 'Trung tá',
-    name: 'ĐINH THỊ DUNG',
+    name: 'PHẠM THỊ DUNG',
     roles: [
       { title: 'Phó Tổng Giám đốc Tổng Công ty', time: '(...-...)' },
       { title: 'Giám đốc Trung tâm Kinh doanh Thiết bị số', time: '(...-...)' }
     ],
-    bio: 'Tiểu sử và thông tin chi tiết về Trung tá Đinh Thị Dung sẽ được cập nhật tại đây.'
+    bio: 'Tiểu sử và thông tin chi tiết về Trung tá Phạm Thị Dung sẽ được cập nhật tại đây.'
   },
   {
     img: 'assets/images/Ảnh các anh/ChatGPT Image 11_38_43 15 thg 6, 2026.png',
@@ -191,83 +191,150 @@ const LEADERS = [
   },
 ];
 
-const grid = document.getElementById('ldrGrid');
-const modal = document.getElementById('ldrModal');
-const mBackdrop = document.getElementById('ldrModalBackdrop');
-const mClose = document.getElementById('ldrModalClose');
-const mImg = document.getElementById('ldrModalImg');
-const mPlaceholder = document.getElementById('ldrModalPlaceholder');
-const mName = document.getElementById('ldrModalName');
-const mRole = document.getElementById('ldrModalRole');
-const mBio = document.getElementById('ldrModalBio');
+/* ================================================================
+   HELPERS
+   ================================================================ */
+const PLACEHOLDER_SVG = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/></svg>`;
+const CHEVRON_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
 
-// Render cards
-grid.innerHTML = LEADERS.map((ldr, i) => `
-    <figure class="ldr-card" tabindex="0" data-index="${i}">
-      <div class="ldr-card__photo">
-        <img src="${ldr.img}" alt="${ldr.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="ldr-card__placeholder" style="display:none">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" />
-          </svg>
-        </div>
+function personHTML(ldr, i) {
+  const rolesHTML = ldr.roles.map(r => `
+    <div class="ldr-person__role-item">
+      ${r.title} <span class="ldr-person__role-time">${r.time}</span>
+    </div>`).join('');
+
+  return `
+  <div class="ldr-person" data-index="${i}">
+    <div class="ldr-person__photo" data-photo-zoom="${ldr.img}" title="Bấm để xem ảnh lớn">
+      <img src="${ldr.img}" alt="${ldr.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="ldr-person__photo-placeholder" style="display:none">${PLACEHOLDER_SVG}</div>
+    </div>
+    <div class="ldr-person__info">
+      ${ldr.rank ? `<span class="ldr-person__rank">${ldr.rank}</span>` : ''}
+      <h3 class="ldr-person__name">${ldr.name}</h3>
+      <div class="ldr-person__roles">${rolesHTML}</div>
+      <div class="ldr-person__bio-wrap">
+        <p class="ldr-person__bio">${ldr.bio}</p>
       </div>
-      <figcaption class="ldr-card__info">
-        <span class="ldr-card__rank">${ldr.rank}</span>
-        <span class="ldr-card__name">${ldr.name}</span>
-        <div class="ldr-card__roles">
-          ${ldr.roles.map(r => `
-            <div class="ldr-card__role-item">
-              <span class="ldr-card__role-title">${r.title}</span>
-              <span class="ldr-card__role-time">${r.time}</span>
-            </div>
-          `).join('')}
-        </div>
-      </figcaption>
-
-    </figure>
-  `).join('');
-
-// Modal logic
-function openModal(index) {
-  const ldr = LEADERS[index];
-  mImg.src = ldr.img;
-  mImg.onerror = () => { mImg.style.display = 'none'; mPlaceholder.style.display = 'flex'; };
-  mImg.onload = () => { mImg.style.display = 'block'; mPlaceholder.style.display = 'none'; };
-  mName.innerHTML = `<span class="ldr-modal__rank">${ldr.rank}</span> ${ldr.name}`;
-
-  mRole.innerHTML = ldr.roles.map(r => `
-      <div style="margin-bottom: 6px;">
-        <strong style="color: #f2f2f2;">${r.title}</strong> <br>
-        <span style="color: #f2f2f2; font-size: 14px;">${r.time}</span>
-      </div>
-    `).join('');
-
-  mBio.innerHTML = '<p>' + ldr.bio + '</p>';
-
-  modal.hidden = false;
-  document.body.style.overflow = 'hidden';
-  requestAnimationFrame(() => modal.classList.add('open'));
+      <button class="ldr-person__toggle" type="button">
+        Xem thêm thông tin ${CHEVRON_SVG}
+      </button>
+    </div>
+  </div>`;
 }
 
-function closeModal() {
-  modal.classList.remove('open');
-  setTimeout(() => {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-  }, 400);
+/* ================================================================
+   SPLIT leaders into current / past
+   ================================================================ */
+const IDX = {
+  chuTich: LEADERS.findIndex(l => l.name === 'ĐỖ MINH PHƯƠNG'),
+  tgd:     LEADERS.findIndex(l => l.name === 'PHẠM VĂN HÙNG'),
+  phoTrai: LEADERS.findIndex(l => l.name === 'PHẠM THỊ DUNG'),
+  phoPhai: LEADERS.findIndex(l => l.name === 'PHẠM TIẾN TUYỀN')
+};
+
+const otherCurrent = [], past = [];
+for (let i = 0; i < LEADERS.length; i++) {
+  if (Object.values(IDX).includes(i)) continue;
+  const isCurrent = LEADERS[i].roles.some(r => r.time.includes('...'));
+  (isCurrent ? otherCurrent : past).push(i);
 }
 
-grid.addEventListener('click', e => {
-  const card = e.target.closest('.ldr-card');
-  if (card) openModal(+card.dataset.index);
-});
-grid.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const card = e.target.closest('.ldr-card');
-    if (card) openModal(+card.dataset.index);
+/* ================================================================
+   RENDER — Current leaders (hierarchy)
+   ================================================================ */
+const treeCurrent = document.getElementById('ldrTreeCurrent');
+if (treeCurrent) {
+  let html = '';
+
+  // Level 1: Chủ Tịch Tổng Công Ty
+  if (IDX.chuTich !== -1) {
+    html += `<div class="ldr-level-label">Chủ Tịch Tổng Công Ty</div>`;
+    html += `<div class="ldr-person-list"><div class="ldr-person-row single">`;
+    html += personHTML(LEADERS[IDX.chuTich], IDX.chuTich);
+    html += `</div></div>`;
   }
+
+  // Level 2: Tổng Giám Đốc
+  if (IDX.tgd !== -1) {
+    html += `<div class="ldr-level-label">Tổng Giám Đốc</div>`;
+    html += `<div class="ldr-person-list"><div class="ldr-person-row single">`;
+    html += personHTML(LEADERS[IDX.tgd], IDX.tgd);
+    html += `</div></div>`;
+  }
+
+  // Level 3: Phó Tổng Giám Đốc
+  if (IDX.phoTrai !== -1 || IDX.phoPhai !== -1) {
+    html += `<div class="ldr-level-label">Phó Tổng Giám Đốc</div>`;
+    html += `<div class="ldr-person-list"><div class="ldr-person-row">`;
+    if (IDX.phoTrai !== -1) html += personHTML(LEADERS[IDX.phoTrai], IDX.phoTrai);
+    if (IDX.phoPhai !== -1) html += personHTML(LEADERS[IDX.phoPhai], IDX.phoPhai);
+    html += `</div></div>`;
+  }
+
+  // Level 4: Giám Đốc & Phó Giám Đốc
+  if (otherCurrent.length > 0) {
+    html += `<div class="ldr-level-label">Giám Đốc &amp; Phó Giám Đốc</div>`;
+    html += `<div class="ldr-person-list"><div class="ldr-person-row">`;
+    otherCurrent.forEach(id => { html += personHTML(LEADERS[id], id); });
+    html += `</div></div>`;
+  }
+
+  treeCurrent.innerHTML = html;
+}
+
+/* ================================================================
+   RENDER — Past leaders (grid, 2-column)
+   ================================================================ */
+const gridPast = document.getElementById('ldrGridPast');
+if (gridPast) {
+  let html = `<div class="ldr-person-list"><div class="ldr-person-row">`;
+  past.forEach(id => { html += personHTML(LEADERS[id], id); });
+  html += `</div></div>`;
+  gridPast.innerHTML = html;
+}
+
+/* ================================================================
+   TOGGLE bio expand / collapse
+   ================================================================ */
+document.body.addEventListener('click', e => {
+  const btn = e.target.closest('.ldr-person__toggle');
+  if (!btn) return;
+  const person = btn.closest('.ldr-person');
+  const isExpanded = person.classList.toggle('expanded');
+  btn.innerHTML = isExpanded
+    ? `Thu gọn ${CHEVRON_SVG}`
+    : `Xem thêm thông tin ${CHEVRON_SVG}`;
 });
 
-mClose.addEventListener('click', closeModal);
-mBackdrop.addEventListener('click', closeModal);
+/* ================================================================
+   LIGHTBOX — click photo to zoom
+   ================================================================ */
+const lightbox   = document.getElementById('ldrLightbox');
+const lbImg      = document.getElementById('ldrLightboxImg');
+const lbClose    = document.getElementById('ldrLightboxClose');
+
+function openLightbox(src) {
+  if (!lightbox) return;
+  lbImg.src = src;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.body.addEventListener('click', e => {
+  const ph = e.target.closest('[data-photo-zoom]');
+  if (ph) { e.stopPropagation(); openLightbox(ph.dataset.photoZoom); }
+});
+if (lbClose) lbClose.addEventListener('click', closeLightbox);
+if (lightbox) lightbox.addEventListener('click', e => {
+  if (e.target === lightbox || e.target === lbImg) closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+

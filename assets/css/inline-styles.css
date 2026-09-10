@@ -1,4 +1,4 @@
-﻿/* Extracted global inline styles */
+/* Extracted global inline styles */
 @font-face {
     font-family: 'FSMagistral';
     src: url('../fonts/FSMagistral-Light.ttf') format('truetype');
@@ -577,3 +577,5 @@
     border-bottom: 1px solid var(--line) !important;
 
 }
+
+
