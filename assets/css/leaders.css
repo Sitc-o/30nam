@@ -1,17 +1,62 @@
 /* ================================================================
-   LEADERS PAGE - Anthropic-inspired layout
-   Photo (left, large) + Info panel (right)
-   Level headings in bold above each group
+   LEADERS PAGE — modern / bright / tech redesign
+   Palette: white + red only, no dark background.
+   Structure encoded visually: org-chart node/connector lines for
+   hierarchy levels, vertical timeline dots for role history,
+   grayscale→color treatment to separate "current" vs "past".
    ================================================================ */
 
 .ldr-section {
+  --ldr-white: #ffffff;
+  --ldr-bg: #fbfafa;
+  --ldr-red: #ee0033;
+  --ldr-red-2: #ff4d6d;
+  --ldr-red-deep: #a4001f;
+  --ldr-red-wash: #fff3f5;
+  --ldr-ink: #14171c;
+  --ldr-grey: #6b7280;
+  --ldr-line: #ececef;
+  --ldr-grid: #f1eef0;
+
   position: relative;
-  background: #f7f7f7;
-  padding: 72px 0 80px;
+  background: var(--ldr-bg);
+  padding: 88px 0 96px;
   overflow: hidden;
-  color: #111;
+  color: var(--ldr-ink);
   margin-bottom: 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--ldr-line);
+}
+
+/* Dot-grid + soft red glow — bright, technical, no dark surfaces */
+.ldr-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(var(--ldr-grid) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+.ldr-section::after {
+  content: "";
+  position: absolute;
+  top: -180px;
+  right: -160px;
+  width: 480px;
+  height: 480px;
+  z-index: 0;
+  background: radial-gradient(circle, rgba(238, 0, 51, 0.10) 0%, rgba(238, 0, 51, 0) 70%);
+  pointer-events: none;
+}
+
+#lanh-dao-cac-thoi-ky.ldr-section::after {
+  top: auto;
+  bottom: -180px;
+  right: auto;
+  left: -160px;
+  background: radial-gradient(circle, rgba(238, 0, 51, 0.07) 0%, rgba(238, 0, 51, 0) 70%);
 }
 
 .ldr-bg-lines {
@@ -19,21 +64,27 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
+  opacity: 0.9;
 }
 
 .ldr-line {
-  stroke-dasharray: 2000;
+  stroke: var(--ldr-red);
+  stroke-dasharray: 6 10;
   stroke-dashoffset: 2000;
+  opacity: 0.12;
   animation: drawLine 8s ease-in-out infinite alternate;
 }
 
 .ldr-line-2 {
+  stroke: var(--ldr-red-deep);
+  opacity: 0.06;
   animation-delay: 1s;
   animation-duration: 10s;
 }
 
 .ldr-line-3 {
+  stroke: var(--ldr-red);
+  opacity: 0.1;
   animation-delay: 2s;
   animation-duration: 9s;
 }
@@ -44,6 +95,10 @@
   }
 }
 
+/* ================================================================
+   SECTION HEADER
+   ================================================================ */
+
 .ldr-section-header {
   position: relative;
   z-index: 1;
@@ -53,52 +108,124 @@
 }
 
 .ldr-section-header small {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
   font-weight: 700;
-  color: #ee0033;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  color: var(--ldr-red);
+  letter-spacing: 0.14em;
+  margin-bottom: 14px;
+}
+
+.ldr-section-header small::before {
+  content: "";
+  width: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ldr-red), var(--ldr-red-2));
+  border-radius: 2px;
 }
 
 .ldr-section-header h2 {
   font-family: FSMagistral, sans-serif;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 800;
   margin: 0 0 12px;
-  color: #111;
+  color: var(--ldr-ink);
+  letter-spacing: -0.01em;
 }
 
 .ldr-section-header p {
-  color: #666;
+  color: var(--ldr-grey);
   max-width: 580px;
   font-size: 15px;
   line-height: 1.65;
-  margin: 0 auto;
+  margin: 0;
 }
+
+/* ================================================================
+   LEVEL LABEL — org-chart node with connector stem into its row
+   ================================================================ */
 
 .ldr-level-label {
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   max-width: 1100px;
-  margin: 48px auto 4px;
-  padding: 0 40px 0 44px;
-  font-size: 17px;
+  margin: 60px auto 0;
+  padding: 0 40px;
+  font-size: 16px;
   font-weight: 800;
-  color: #111;
-  letter-spacing: 0.01em;
-  border-left: 4px solid #ee0033;
-  font-family: FS Magistral, sans-serif;
+  color: var(--ldr-ink);
+  font-family: FSMagistral, sans-serif;
+  border-left: none;
 }
 
+.ldr-level-label::before {
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ldr-red);
+  box-shadow: 0 0 0 4px var(--ldr-red-wash);
+}
+
+.ldr-level-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--ldr-line) 0%, transparent 100%);
+  max-width: 220px;
+}
+
+#ban-lanh-dao-hien-tai .ldr-level-label:first-of-type::before {
+  animation: nodePulse 2.4s ease-out infinite;
+}
+
+@keyframes nodePulse {
+  0% {
+    box-shadow: 0 0 0 4px var(--ldr-red-wash);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(238, 0, 51, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 4px rgba(238, 0, 51, 0);
+  }
+}
+
+/* stem connecting the node to the row of people beneath it */
 .ldr-person-list {
   position: relative;
   z-index: 1;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 0px;
+  padding: 0;
 }
+
+.ldr-level-label+.ldr-person-list {
+  margin-top: 4px;
+  padding-top: 24px;
+}
+
+.ldr-level-label+.ldr-person-list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 45px;
+  width: 1px;
+  height: 24px;
+  background: var(--ldr-line);
+}
+
+/* ================================================================
+   ROW / CARD LAYOUT
+   ================================================================ */
 
 .ldr-person-row {
   display: grid;
@@ -108,43 +235,64 @@
 
 .ldr-person-row.single {
   grid-template-columns: 680px;
-  /* Tăng chiều rộng khối tại đây */
   justify-content: center;
 }
 
-/* Chỉ kích hoạt khi có thêm class align-left */
 .ldr-person-row.single.align-left {
   justify-content: start;
   padding-left: 0;
-  /* Hoặc chỉnh lề thụt vào theo ý bạn */
 }
 
-/* 2. ĐIỀU CHỈNH LẠI CỘT CHỨA ẢNH (Cũ: 190px 1fr) */
 .ldr-person {
   display: grid;
-  grid-template-columns: 230px 1fr;
-  /* Tăng cột ảnh từ 190px lên 230px cho khớp với ảnh mới */
-  gap: 0 28px;
-  /* Tăng nhẹ khoảng cách giữa ảnh và chữ nếu muốn thoáng hơn */
-  padding: 36px 0;
-  /* Có thể tăng padding nếu muốn khối dài thêm */
-  border-bottom: 1px solid #ddd;
+  grid-template-columns: 330px 1fr;
+  gap: 0 32px;
+  padding: 36px 20px;
+  margin: 0 -20px;
+  border-bottom: 1px solid var(--ldr-line);
+  border-radius: 14px;
   align-items: start;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.ldr-person:hover {
+  background: var(--ldr-white);
+  box-shadow: 0 18px 40px -22px rgba(164, 0, 31, 0.35);
+  transform: translateY(-2px);
 }
 
 .ldr-person:last-child {
   border-bottom: none;
 }
 
+/* Photo frame — thin gradient ring + geometric corner mark */
 .ldr-person__photo {
-  width: 230px;
-  height: 280px;
+  width: 330px;
+  height: 480px;
   overflow: hidden;
-  border-radius: 6px;
-  background: #ddd;
+  border-radius: 14px;
+  background: var(--ldr-grid);
   flex-shrink: 0;
   cursor: zoom-in;
   position: relative;
+  box-shadow: 0 0 0 1px var(--ldr-line), 0 16px 32px -20px rgba(20, 23, 28, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+.ldr-person:hover .ldr-person__photo {
+  box-shadow: 0 0 0 2px var(--ldr-red), 0 20px 44px -18px rgba(164, 0, 31, 0.4);
+}
+
+.ldr-person__photo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  z-index: 2;
+  background: linear-gradient(135deg, var(--ldr-red), var(--ldr-red-2));
+  clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .ldr-person__photo img {
@@ -166,8 +314,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ccc;
-  color: #888;
+  background: var(--ldr-grid);
+  color: #b6b6bb;
 }
 
 .ldr-person__photo-placeholder svg {
@@ -175,16 +323,30 @@
   height: 48px;
 }
 
+/* Archive treatment for "past leaders": monochrome → color on hover */
+#lanh-dao-cac-thoi-ky .ldr-person__photo img {
+  filter: contrast(1.02);
+}
+
+#lanh-dao-cac-thoi-ky .ldr-person__photo:hover img {
+  filter: contrast(1.02);
+  transform: scale(1.05);
+}
+
+/* ================================================================
+   INFO PANEL
+   ================================================================ */
+
 .ldr-person__info {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding-top: 2px;
+  padding-top: 4px;
 }
 
 .ldr-person__position {
   font-size: 12px;
-  color: #888;
+  color: var(--ldr-grey);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -192,38 +354,71 @@
 }
 
 .ldr-person__rank {
-  font-size: 12px;
-  color: #ee0033;
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 11.5px;
+  color: var(--ldr-red);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border: 1px solid var(--ldr-red);
+  border-radius: 999px;
+  background: var(--ldr-red-wash);
+  letter-spacing: 0.03em;
 }
 
 .ldr-person__name {
   font-family: FSMagistral, sans-serif;
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 800;
-  color: #111;
-  margin: 4px 0 10px;
+  color: var(--ldr-ink);
+  margin: 10px 0 14px;
   line-height: 1.2;
 }
 
+/* Role list rendered as a vertical career timeline — the content
+   really is sequential, so the dot/line device carries meaning. */
 .ldr-person__roles {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 10px;
+  gap: 14px;
+  margin-bottom: 14px;
+  padding-left: 18px;
+}
+
+.ldr-person__roles::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--ldr-line);
 }
 
 .ldr-person__role-item {
+  position: relative;
   font-size: 13.5px;
   line-height: 1.55;
-  color: #444;
+  color: #3a3d42;
+}
+
+.ldr-person__role-item::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ldr-white);
+  border: 2px solid var(--ldr-red);
 }
 
 .ldr-person__role-time {
-  color: #ee0033;
+  color: var(--ldr-red);
   font-size: 12.5px;
+  font-weight: 600;
   display: inline-block;
   margin-top: 1px;
 }
@@ -243,27 +438,33 @@
 .ldr-person__bio {
   font-size: 14px;
   line-height: 1.75;
-  color: #444;
-  margin: 0 0 10px;
+  color: #3a3d42;
+  margin: 4px 0 10px;
+  padding: 14px 16px;
+  background: var(--ldr-red-wash);
+  border-left: 2px solid var(--ldr-red);
+  border-radius: 0 8px 8px 0;
 }
 
 .ldr-person__toggle {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
   font-size: 13px;
-  color: #555;
-  padding: 0;
+  font-weight: 600;
+  color: var(--ldr-grey);
+  padding: 4px 0;
   font-family: inherit;
-  margin-top: 6px;
+  margin-top: 8px;
   transition: color 0.2s;
 }
 
-.ldr-person__toggle:hover {
-  color: #ee0033;
+.ldr-person__toggle:hover,
+.ldr-person__toggle:focus-visible {
+  color: var(--ldr-red);
 }
 
 .ldr-person__toggle svg {
@@ -276,11 +477,15 @@
   transform: rotate(180deg);
 }
 
+/* ================================================================
+   CTA
+   ================================================================ */
+
 .ldr-cta {
   position: relative;
   z-index: 1;
   max-width: 1100px;
-  margin: 52px auto 0;
+  margin: 60px auto 0;
   padding: 0 40px;
   text-align: center;
 }
@@ -288,28 +493,48 @@
 .ldr-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 13px 28px;
-  border: 2px solid #ee0033;
-  color: #ee0033;
+  gap: 10px;
+  padding: 15px 32px;
+  border: none;
+  color: var(--ldr-white);
+  background: linear-gradient(135deg, var(--ldr-red) 0%, var(--ldr-red-2) 100%);
   border-radius: 999px;
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
-  transition: all 0.25s ease;
-  letter-spacing: 0.03em;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 24px -10px rgba(164, 0, 31, 0.55);
+}
+
+.ldr-cta-btn svg {
+  transition: transform 0.25s ease;
 }
 
 .ldr-cta-btn:hover {
-  background: #ee0033;
-  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -12px rgba(164, 0, 31, 0.6);
 }
+
+.ldr-cta-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.ldr-cta-btn:focus-visible {
+  outline: 2px solid var(--ldr-red-deep);
+  outline-offset: 3px;
+}
+
+/* ================================================================
+   LIGHTBOX — dark red-tinted scrim (kept dark enough for contrast
+   on a photo viewer, but never pure black per brand rule)
+   ================================================================ */
 
 .ldr-lightbox {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(30, 4, 10, 0.92);
   display: none;
   align-items: center;
   justify-content: center;
@@ -335,8 +560,8 @@
   max-width: 88vw;
   max-height: 88vh;
   object-fit: contain;
-  border-radius: 4px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08), 0 24px 64px rgba(0, 0, 0, 0.5);
   animation: lbZoom 0.3s ease forwards;
 }
 
@@ -356,7 +581,7 @@
   right: 22px;
   background: rgba(255, 255, 255, 0.12);
   border: none;
-  color: #fff;
+  color: var(--ldr-white);
   font-size: 22px;
   width: 42px;
   height: 42px;
@@ -369,12 +594,39 @@
   line-height: 1;
 }
 
-.ldr-lightbox__close:hover {
-  background: #ee0033;
+.ldr-lightbox__close:hover,
+.ldr-lightbox__close:focus-visible {
+  background: var(--ldr-red);
 }
+
+/* ================================================================
+   ACCESSIBILITY / MOTION
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ldr-line,
+  .ldr-level-label::before,
+  .ldr-person,
+  .ldr-person__photo img,
+  .ldr-cta-btn,
+  .ldr-cta-btn svg {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
 
 @media (max-width: 960px) {
   .ldr-person-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .ldr-person-row.single {
     grid-template-columns: 1fr;
   }
 
@@ -386,18 +638,24 @@
     padding-right: 20px;
   }
 
-  .ldr-level-label {
-    padding-left: 16px;
+  .ldr-level-label::after {
+    max-width: 100px;
   }
 }
 
 @media (max-width: 580px) {
   .ldr-person {
     grid-template-columns: 1fr;
+    padding: 24px 16px;
+    margin: 0 -16px;
   }
 
   .ldr-person__photo {
     width: 100%;
-    height: 260px;
+    height: 320px;
+  }
+
+  .ldr-section-header h2 {
+    font-size: 26px;
   }
 }
