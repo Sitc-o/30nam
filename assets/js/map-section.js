@@ -29,53 +29,86 @@ const defaultData = {
     desc: "<p>Nơi đây đánh dấu nhiều chặng đường quan trọng trong sự phát triển của Viettel Store. Với sự nỗ lực không ngừng nghỉ, chúng tôi mang đến dịch vụ tốt nhất cho người dân địa phương.</p><p>Sứ mệnh của chúng tôi là phủ sóng mọi miền Tổ quốc, mang công nghệ đến gần hơn với mọi nhà.</p>"
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. TIMELINE ANIMATION BẢN ĐỒ ---
-    const mapGroup = document.getElementById('vietnam-map-group');
-    const islandsGroup = document.getElementById('islands-group');
-    const textHero = document.getElementById('map-hero');
-
-    if (mapGroup && islandsGroup && textHero) {
-        const provinceNodes = mapGroup.querySelectorAll('.absolute.province-wrapper');
-        const islandNodes = islandsGroup.querySelectorAll('.pointer-events-auto');
-        const allPieces = [...provinceNodes, ...islandNodes];
-
-        allPieces.sort((a, b) => {
-            const topA = parseFloat(a.style.top || 0);
-            const topB = parseFloat(b.style.top || 0);
-            return topA - topB;
-        });
-
-        allPieces.forEach(piece => {
-            piece.classList.add('province-fall-setup');
-        });
-
-        setTimeout(() => {
-            allPieces.forEach((piece, index) => {
-                setTimeout(() => {
-                    piece.classList.add('province-dropped');
-                }, index * 8);
-            });
-
-            const totalDropTime = (allPieces.length * 8) + 400;
-
-            setTimeout(() => {
-                mapGroup.classList.add('map-shift-left');
-                islandsGroup.classList.add('map-shift-left');
-
-                setTimeout(() => {
-                    textHero.classList.add('is-visible');
-                }, 600);
-            }, totalDropTime + 200);
-        }, 200);
+window.addEventListener('load', () => {
+    if (typeof gsap === 'undefined') {
+        console.error("GSAP chưa được tải.");
+        return;
     }
 
-    // --- 2. XỬ LÝ TOOLTIP VÀ MODAL ---
-    const tooltip = document.getElementById('province-tooltip');
     const mapContainer = document.getElementById('map-container');
+    const islandsGroup = document.getElementById('islands-group');
+    const heroOverlay = document.querySelector('.map-text-overlay');
+
+    // Bắt thẻ bọc của Hà Nội
+    const hanoiWrapper = document.querySelector('.province-wrapper[data-province="ha-noi"]');
+    // Bắt toàn bộ các thẻ bao tỉnh khác (loại trừ Hà Nội)
+    const allWrappers = Array.from(document.querySelectorAll('#vietnam-map-group .province-wrapper'));
+    const otherWrappers = allWrappers.filter(el => el !== hanoiWrapper && !el.contains(hanoiWrapper));
+
+    if (!mapContainer || !hanoiWrapper) return;
+
+    // 1. TÍNH TỌA ĐỘ TÂM HÀ NỘI CHÍNH XÁC
+    const hRect = hanoiWrapper.getBoundingClientRect();
+    const mRect = mapContainer.getBoundingClientRect();
+    const originX = ((hRect.left + hRect.width / 2 - mRect.left) / mRect.width) * 100;
+    const originY = ((hRect.top + hRect.height / 2 - mRect.top) / mRect.height) * 100;
+
+    // 2. KHỞI TẠO: Phóng to 3.5 lần tại vị trí Hà Nội
+    gsap.set(mapContainer, {
+        transformOrigin: `${originX}% ${originY}%`,
+        scale: 3.5,
+        force3D: true
+    });
+
+    // Chỉ hiển thị duy nhất Hà Nội
+    gsap.set(hanoiWrapper, { opacity: 1, scale: 1 });
+
+    // Ẩn toàn bộ các tỉnh thành còn lại và các đảo
+    const elementsToAssemble = [...otherWrappers];
+    if (islandsGroup) elementsToAssemble.push(islandsGroup);
+
+    gsap.set(elementsToAssemble, {
+        opacity: 0,
+        scale: 0.85,
+        transformOrigin: "center center"
+    });
+
+    if (heroOverlay) {
+        gsap.set(heroOverlay, { opacity: 0, x: 40 });
+    }
+
+    // 3. GSAP TIMELINE: ZOOM OUT VỀ KÍCH THƯỚC CHUẨN (SCALE 1)
+    const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+    tl
+        // Bước A: Zoom out về kích thước gốc 100% (to rõ, sắc nét)
+        .to(mapContainer, {
+            scale: 1,
+            duration: 1.5,
+            ease: 'power2.inOut'
+        })
+        // Bước B: Các tỉnh thành bay vào lắp ghép từ Bắc vào Nam
+        .to(elementsToAssemble, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.55,
+            stagger: {
+                amount: 0.85,
+                from: 'start'
+            }
+        }, "-=0.3")
+        // Bước C: Tiêu đề trượt vào
+        .to(heroOverlay, {
+            opacity: 1,
+            x: 0,
+            duration: 0.6
+        }, "+=0.1");
+
+    // 4. MODAL & TOOLTIP
+    const tooltip = document.getElementById('province-tooltip');
     const modal = document.getElementById('map-modal');
-    const modalBackdrop = document.getElementById('modal-backdrop');
     const modalCloseBtn = document.getElementById('modal-close');
+    const modalBackdrop = document.getElementById('modal-backdrop');
 
     const modalTitle = document.getElementById('modal-title');
     const modalImage = document.getElementById('modal-image');
@@ -83,9 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMetrics = document.getElementById('modal-metrics');
     const modalDesc = document.getElementById('modal-desc');
 
-    const provincePaths = document.querySelectorAll('.province-path');
-
-    provincePaths.forEach(path => {
+    document.querySelectorAll('.province-path').forEach(path => {
         const wrapper = path.closest('.province-wrapper');
         let provId = path.getAttribute('data-province')
             || wrapper?.getAttribute('data-province')
@@ -107,35 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = (provId && provinceData[provId]) ? provinceData[provId] : defaultData;
         const provName = (provId && provinceData[provId]) ? provinceData[provId].name : formatName(provId);
 
-        // path.addEventListener('mousemove', (e) => {
-        //     path.style.fill = '#b51016';
-        //     if (tooltip) {
-        //         tooltip.style.opacity = '1';
-        //         tooltip.style.left = e.clientX + 'px';
-        //         tooltip.style.top = e.clientY + 'px';
-        //         tooltip.innerHTML = provName;
-        //     }
-        // });
-
         path.addEventListener('mousemove', (e) => {
-            path.style.fill = '#b51016';
-            if (tooltip) {
-                tooltip.style.opacity = '1';
-                tooltip.style.left = e.clientX + 'px';
-                tooltip.style.top = e.clientY + 'px';
-
-                // Lấy tọa độ top/left từ thẻ bọc ngoài để hiện thẳng lên tooltip
-                const topVal = wrapper ? wrapper.style.top : '';
-                const leftVal = wrapper ? wrapper.style.left : '';
-
-                tooltip.innerHTML = `${provName} <br><small style="color:#ffeb3b;font-size:11px;">top: ${topVal} | left: ${leftVal}</small>`;
-            }
+            if (!tooltip) return;
+            tooltip.style.opacity = '1';
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = e.clientY + 'px';
+            tooltip.innerHTML = provName;
         });
 
         path.addEventListener('mouseleave', () => {
-            if (path.getAttribute('fill') !== 'white') {
-                path.style.fill = '#ED1C24';
-            }
             if (tooltip) tooltip.style.opacity = '0';
         });
 
@@ -157,33 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            const rect = path.getBoundingClientRect();
-            const mapRect = mapContainer.getBoundingClientRect();
-
-            const centerX = rect.left + rect.width / 2 - mapRect.left;
-            const centerY = rect.top + rect.height / 2 - mapRect.top;
-
-            const originX = (centerX / mapRect.width) * 100;
-            const originY = (centerY / mapRect.height) * 100;
-
-            mapContainer.style.transformOrigin = `${originX}% ${originY}%`;
-            mapContainer.style.transform = 'scale(3)';
-
-            setTimeout(() => {
-                if (modal) modal.classList.add('is-active');
-            }, 400);
+            if (modal) modal.classList.add('is-active');
         });
     });
 
-    // --- 3. ĐÓNG MODAL ---
     const closeModal = () => {
-        if (!modal) return;
-        modal.classList.remove('is-active');
-        setTimeout(() => {
-            if (mapContainer) {
-                mapContainer.style.transform = 'scale(1)';
-            }
-        }, 300);
+        if (modal) modal.classList.remove('is-active');
     };
 
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
