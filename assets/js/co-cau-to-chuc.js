@@ -333,3 +333,157 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
 });
+
+/* ─── DEPT GALLERY OVERLAY (HORIZONTAL SCROLL) ─────────── */
+const deptOverlay = document.getElementById('deptOverlay');
+const deptCloseBtn = document.getElementById('deptCloseBtn');
+const deptScrollArea = document.getElementById('deptScrollArea');
+const deptGalleryContent = document.getElementById('deptGalleryContent');
+const deptRows = document.querySelectorAll('.dept-row');
+
+const DEPT_DATA = {
+  'DEP.01': {
+    name: 'Phòng Chiến lược',
+    desc: 'Tham mưu xây dựng chiến lược tổng thể, hoạch định kế hoạch dài hạn và phân tích cơ hội phát triển của Tổng Công ty. Đây là bộ não phân tích số liệu, dự báo xu hướng thị trường, đưa ra các kịch bản kinh doanh và các định hướng chiến lược trọng tâm nhằm duy trì vị thế cạnh tranh của Viettel Commerce trên thương trường.',
+    images: [
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80',
+      'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80'
+    ]
+  },
+  'DEP.02': {
+    name: 'Phòng Hành chính',
+    desc: 'Quản trị hành chính, văn thư lưu trữ và đảm bảo công tác hậu cần cho toàn bộ hoạt động của Tổng Công ty. Cung cấp môi trường làm việc chuyên nghiệp, trang thiết bị đầy đủ và điều phối các sự kiện nội bộ, giúp các phòng ban khác an tâm công tác.',
+    images: [
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+      'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&q=80',
+      'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80',
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80'
+    ]
+  },
+  'DEP.03': {
+    name: 'Phòng Pháp chế & Đầu tư',
+    desc: 'Tư vấn pháp lý, quản lý rủi ro, thẩm định hợp đồng và điều phối các hoạt động đầu tư của Tổng Công ty. Đảm bảo mọi hoạt động kinh doanh tuân thủ nghiêm ngặt quy định pháp luật và quy chế của Tập đoàn, đồng thời tối ưu hóa hiệu quả các dự án đầu tư.',
+    images: [
+      'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80',
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80',
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80',
+      'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1200&q=80'
+    ]
+  },
+  'DEP.04': {
+    name: 'Phòng Nhân sự',
+    desc: 'Tuyển dụng, đào tạo phát triển nhân tài, xây dựng chính sách đãi ngộ và văn hóa doanh nghiệp của Tổng Công ty. Xây dựng môi trường làm việc năng động, sáng tạo, tạo động lực cho cán bộ nhân viên cống hiến và phát triển sự nghiệp lâu dài.',
+    images: [
+      'https://images.unsplash.com/photo-1542744094-24638ea0b3b5?w=800&q=80',
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80',
+      'https://images.unsplash.com/photo-1552581234-26160f608093?w=600&q=80',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80'
+    ]
+  },
+  'DEP.05': {
+    name: 'Phòng Tài chính – Kế toán',
+    desc: 'Quản lý tài chính doanh nghiệp, lập báo cáo kế toán, kiểm soát dòng tiền và đảm bảo tuân thủ các quy định tài chính. Tham mưu cho Ban Giám đốc về các quyết định tài chính chiến lược, đảm bảo nguồn vốn luôn lưu thông ổn định và hiệu quả.',
+    images: [
+      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80'
+    ]
+  },
+  'DEP.06': {
+    name: 'Phòng Chính trị',
+    desc: 'Công tác tư tưởng, chính trị; xây dựng đơn vị vững mạnh toàn diện về đạo đức, kỷ luật và tinh thần Viettel. Định hướng tư tưởng, lan tỏa văn hóa người lính, xây dựng khối đại đoàn kết thống nhất trong toàn Tổng Công ty.',
+    images: [
+      'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80',
+      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80',
+      'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80',
+      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1200&q=80'
+    ]
+  },
+  'DEP.07': {
+    name: 'Phòng Công nghệ Thông tin',
+    desc: 'Quản trị hạ tầng công nghệ, phát triển hệ thống số hóa và thúc đẩy chuyển đổi số toàn diện trong Tổng Công ty. Cung cấp các công cụ và nền tảng số hiện đại giúp tối ưu hóa quy trình nghiệp vụ, tăng cường năng suất lao động.',
+    images: [
+      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=800&q=80',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80',
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80'
+    ]
+  }
+};
+
+function openDeptOverlay(id) {
+  const data = DEPT_DATA[id];
+  if (!data) return;
+  
+  deptGalleryContent.innerHTML = `
+    <!-- Khối 1: Giới thiệu -->
+    <div class="editorial-block editorial-block--intro">
+      <span class="dept-code">${id}</span>
+      <h2>${data.name}</h2>
+      <p>${data.desc}</p>
+      <div class="polaroid">
+        <img src="${data.images[0]}" alt="${data.name} image 1" />
+      </div>
+    </div>
+    
+    <!-- Khối 2: Asymmetric -->
+    <div class="editorial-block editorial-block--collage">
+      <div class="collage-col-left">
+        <img src="${data.images[1]}" alt="Image 2" />
+        <img src="${data.images[2]}" alt="Image 3" />
+      </div>
+      <div class="collage-col-right">
+        <img src="${data.images[3]}" alt="Image 4" />
+      </div>
+    </div>
+    
+    <!-- Khối 3: Panorama -->
+    <div class="editorial-block editorial-block--panorama">
+      <img src="${data.images[0]}" alt="Panorama" />
+      <h3 class="panorama-text">Vững bước tiên phong</h3>
+    </div>
+  `;
+  
+  if (deptOverlay) {
+    deptOverlay.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+    if (deptScrollArea) deptScrollArea.scrollLeft = 0;
+  }
+}
+
+function closeDeptOverlay() {
+  if (deptOverlay) {
+    deptOverlay.classList.remove('is-active');
+    document.body.style.overflow = '';
+  }
+}
+
+deptRows.forEach(row => {
+  row.addEventListener('click', () => {
+    const codeEl = row.querySelector('.dept-row__code');
+    if (codeEl) {
+      openDeptOverlay(codeEl.textContent.trim());
+    }
+  });
+});
+
+if (deptCloseBtn) deptCloseBtn.addEventListener('click', closeDeptOverlay);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && deptOverlay && deptOverlay.classList.contains('is-active')) {
+    closeDeptOverlay();
+  }
+});
+
+if (deptScrollArea) {
+  deptScrollArea.addEventListener('wheel', (e) => {
+    // Chỉ cuộn ngang khi trên desktop
+    if (window.innerWidth > 768) {
+      e.preventDefault();
+      deptScrollArea.scrollLeft += e.deltaY;
+    }
+  });
+}
