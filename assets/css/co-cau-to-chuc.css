@@ -883,12 +883,13 @@ ol {
   text-transform: uppercase;
 }
 
-/* ─── SECTION 3: BENTO GRID ──────────────────────────────── */
+/* ─── SECTION 3: SPOTLIGHT BENTO GRID ────────────────────── */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
+  grid-auto-flow: dense;
   gap: 20px;
+  position: relative;
 }
 
 .bento-card {
@@ -896,47 +897,41 @@ ol {
   border: 1px solid var(--gray-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.bento-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--red-border);
-}
+/* Default state */
+.bento-card--wide { grid-column: span 2; }
+.bento-card:not(.bento-card--wide) { grid-column: span 1; }
 
-.bento-card--wide {
-  grid-column: span 2;
-}
-
-.bento-card--primary {}
-
-.bento-card--secondary {}
+/* Hover states */
+.bento-card.is-expanded { grid-column: span 3; }
+.bento-card.is-collapsed { grid-column: span 1; }
 
 .bento-card__img-wrap {
   overflow: hidden;
   position: relative;
   background: var(--gray-soft);
+  width: 100%;
 }
 
-.bento-card--primary .bento-card__img-wrap {
-  aspect-ratio: 16/7;
-}
-
-.bento-card__img-wrap--sm {
-  aspect-ratio: 16/9;
-}
+.bento-card--primary .bento-card__img-wrap { aspect-ratio: 16/7; }
+.bento-card__img-wrap--sm { aspect-ratio: 16/9; }
 
 .bento-card__img-wrap img {
-  transition: transform 0.6s var(--ease-out);
-}
-
-.bento-card:hover .bento-card__img-wrap img {
-  transform: scale(1.04);
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s var(--ease-out), filter 0.4s, opacity 0.4s;
 }
 
 .bento-card__body {
   padding: 28px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .bento-card__header {
@@ -963,9 +958,7 @@ ol {
   line-height: 1.25;
 }
 
-.bento-card--primary .bento-card__title {
-  font-size: 22px;
-}
+.bento-card--primary .bento-card__title { font-size: 22px; }
 
 .bento-card__desc {
   font-size: 14px;
@@ -974,23 +967,90 @@ ol {
   margin-bottom: 18px;
 }
 
-.bento-card__stats {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.bento-card__stats span {
-  font-size: 13px;
-  color: var(--slate);
-  display: flex;
+.bento-card__link {
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--red);
+  margin-top: 8px;
+  transition: gap 0.2s;
 }
 
-.bento-card__stats strong {
-  font-weight: 700;
-  color: var(--charcoal);
+.bento-card__link:hover { gap: 11px; }
+
+/* ─── DESKTOP SPOTLIGHT EFFECTS ──────────────────────────── */
+@media (min-width: 768px) {
+  /* Default inactive look for all cards, unless hovered */
+  .bento-card .bento-card__img-wrap img {
+    filter: saturate(0.6);
+    opacity: 0.8;
+  }
+  
+  .bento-card .bento-card__desc,
+  .bento-card .bento-card__link {
+    opacity: 0;
+    transform: translateY(10px);
+    max-height: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, transform 0.4s var(--ease-out), max-height 0.4s;
+  }
+
+  /* When card is expanded (hovered) */
+  .bento-card.is-expanded .bento-card__img-wrap img {
+    filter: saturate(1);
+    opacity: 1;
+  }
+  
+  .bento-card.is-expanded .bento-card__desc,
+  .bento-card.is-expanded .bento-card__link {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 300px;
+  }
+  
+  .bento-card.is-expanded .bento-card__desc { margin-bottom: 18px; }
+  .bento-card.is-expanded .bento-card__link { margin-top: 8px; }
+  
+  /* Fallback if no card is hovered (e.g. initial state) */
+  .bento-grid:not(.has-active) .bento-card .bento-card__img-wrap img {
+    filter: saturate(0.8);
+    opacity: 0.9;
+  }
+  
+  /* ─── EXPLICIT REORDERING CHO TỪNG CARD ─── */
+  /* Default DOM order matching layout: Card0(2), Card1(1) || Card2(1), Card3(2) */
+  .bento-card[data-index="0"] { order: 1; }
+  .bento-card[data-index="1"] { order: 2; }
+  .bento-card[data-index="2"] { order: 3; }
+  .bento-card[data-index="3"] { order: 4; }
+
+  /* Hover Card 0 (Thiết bị số): row1(Card0), row2(Card2, Card3, Card1) */
+  .bento-grid[data-active="0"] .bento-card[data-index="0"] { order: 1; }
+  .bento-grid[data-active="0"] .bento-card[data-index="2"] { order: 2; }
+  .bento-grid[data-active="0"] .bento-card[data-index="3"] { order: 3; }
+  .bento-grid[data-active="0"] .bento-card[data-index="1"] { order: 4; }
+
+  /* Hover Card 1 (Phân phối): row1(Card1), row2(Card0, Card2, Card3) */
+  .bento-grid[data-active="1"] .bento-card[data-index="1"] { order: 1; }
+  .bento-grid[data-active="1"] .bento-card[data-index="0"] { order: 2; }
+  .bento-grid[data-active="1"] .bento-card[data-index="2"] { order: 3; }
+  .bento-grid[data-active="1"] .bento-card[data-index="3"] { order: 4; }
+
+  /* Hover Card 2 (Dịch vụ TM): row1(Card0, Card1, Card3), row2(Card2) */
+  .bento-grid[data-active="2"] .bento-card[data-index="0"] { order: 1; }
+  .bento-grid[data-active="2"] .bento-card[data-index="1"] { order: 2; }
+  .bento-grid[data-active="2"] .bento-card[data-index="3"] { order: 3; }
+  .bento-grid[data-active="2"] .bento-card[data-index="2"] { order: 4; }
+
+  /* Hover Card 3 (Công nghệ in): row1(Card2, Card0, Card1), row2(Card3) */
+  .bento-grid[data-active="3"] .bento-card[data-index="2"] { order: 1; }
+  .bento-grid[data-active="3"] .bento-card[data-index="0"] { order: 2; }
+  .bento-grid[data-active="3"] .bento-card[data-index="1"] { order: 3; }
+  .bento-grid[data-active="3"] .bento-card[data-index="3"] { order: 4; }
 }
 
 /* ─── QUOTE BAND ─────────────────────────────────────────── */
