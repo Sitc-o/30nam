@@ -240,3 +240,80 @@ grid.addEventListener('keydown', e => {
 
 mClose.addEventListener('click', closeModal);
 mBackdrop.addEventListener('click', closeModal);
+
+function initSpotlightBento() {
+  const grid = document.querySelector('.bento-grid');
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.bento-card'));
+  let activeCard = null;
+
+  cards.forEach((c, i) => c.dataset.index = i);
+
+  function updateGrid(newActiveCard) {
+    if (window.innerWidth < 768) return; 
+    if (newActiveCard === activeCard) return;
+
+    const firstRects = cards.map(c => c.getBoundingClientRect());
+
+    activeCard = newActiveCard;
+    if (activeCard) {
+      grid.classList.add('has-active');
+      grid.dataset.active = cards.indexOf(activeCard);
+      cards.forEach(c => {
+        c.classList.toggle('is-expanded', c === activeCard);
+        c.classList.toggle('is-collapsed', c !== activeCard);
+      });
+    } else {
+      grid.classList.remove('has-active');
+      grid.removeAttribute('data-active');
+      cards.forEach(c => {
+        c.classList.remove('is-expanded', 'is-collapsed');
+      });
+    }
+
+    const lastRects = cards.map(c => c.getBoundingClientRect());
+
+    cards.forEach((c, i) => {
+      const f = firstRects[i];
+      const l = lastRects[i];
+      
+      const dx = f.left - l.left;
+      const dy = f.top - l.top;
+      const dw = f.width / l.width;
+      const dh = f.height / l.height;
+
+      if (dx === 0 && dy === 0 && dw === 1 && dh === 1) return;
+
+      c.animate([
+        { transform: `translate(${dx}px, ${dy}px) scale(${dw}, ${dh})`, transformOrigin: 'top left' },
+        { transform: 'translate(0, 0) scale(1, 1)', transformOrigin: 'top left' }
+      ], {
+        duration: 400,
+        easing: 'ease-out',
+        fill: 'both'
+      });
+
+      const imgWrap = c.querySelector('.bento-card__img-wrap');
+      const body = c.querySelector('.bento-card__body');
+      
+      [imgWrap, body].forEach(el => {
+        if (!el) return;
+        el.animate([
+          { transform: `scale(${1/dw}, ${1/dh})`, transformOrigin: 'top left' },
+          { transform: 'scale(1, 1)', transformOrigin: 'top left' }
+        ], {
+          duration: 400,
+          easing: 'ease-out',
+          fill: 'both'
+        });
+      });
+    });
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => updateGrid(card));
+  });
+  grid.addEventListener('mouseleave', () => updateGrid(null));
+}
+
+document.addEventListener('DOMContentLoaded', initSpotlightBento);

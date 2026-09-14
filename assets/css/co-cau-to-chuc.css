@@ -883,17 +883,21 @@ ol {
   text-transform: uppercase;
 }
 
-/* ─── SECTION 3: SPOTLIGHT BENTO GRID ────────────────────── */
+/* --- SECTION 3: SPOTLIGHT BENTO GRID ---------------------- */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-flow: dense;
-  gap: 20px;
+  grid-auto-rows: 280px; /* Kh�a c?ng chi?u cao tab */
+  gap: 16px;
   position: relative;
+  max-width: 1060px; /* Thu nh? tr?c x */
+  margin: 0 auto;    /* Can gi?a grid */
 }
 
 .bento-card {
-  background: var(--white);
+  text-decoration: none;
+  background: var(--charcoal);
   border: 1px solid var(--gray-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -911,14 +915,12 @@ ol {
 .bento-card.is-collapsed { grid-column: span 1; }
 
 .bento-card__img-wrap {
-  overflow: hidden;
-  position: relative;
-  background: var(--gray-soft);
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
+  z-index: 1;
 }
-
-.bento-card--primary .bento-card__img-wrap { aspect-ratio: 16/7; }
-.bento-card__img-wrap--sm { aspect-ratio: 16/9; }
 
 .bento-card__img-wrap img {
   object-fit: cover;
@@ -928,24 +930,15 @@ ol {
 }
 
 .bento-card__body {
-  padding: 28px;
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 40px 24px 24px; 
   width: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.bento-card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.bento-card__index {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--slate-light);
-  letter-spacing: 0.08em;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%);
+  color: var(--white);
 }
 
 .bento-card__title {
@@ -953,8 +946,8 @@ ol {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--charcoal);
-  margin-bottom: 10px;
+  color: var(--white);
+  margin-bottom: 6px;
   line-height: 1.25;
 }
 
@@ -962,25 +955,12 @@ ol {
 
 .bento-card__desc {
   font-size: 14px;
-  line-height: 1.7;
-  color: var(--slate);
-  margin-bottom: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 12px;
 }
 
-.bento-card__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--red);
-  margin-top: 8px;
-  transition: gap 0.2s;
-}
-
-.bento-card__link:hover { gap: 11px; }
-
-/* ─── DESKTOP SPOTLIGHT EFFECTS ──────────────────────────── */
+/* --- DESKTOP SPOTLIGHT EFFECTS ---------------------------- */
 @media (min-width: 768px) {
   /* Default inactive look for all cards, unless hovered */
   .bento-card .bento-card__img-wrap img {
@@ -988,8 +968,7 @@ ol {
     opacity: 0.8;
   }
   
-  .bento-card .bento-card__desc,
-  .bento-card .bento-card__link {
+  .bento-card .bento-card__desc {
     opacity: 0;
     transform: translateY(10px);
     max-height: 0;
@@ -1005,15 +984,12 @@ ol {
     opacity: 1;
   }
   
-  .bento-card.is-expanded .bento-card__desc,
-  .bento-card.is-expanded .bento-card__link {
+  .bento-card.is-expanded .bento-card__desc {
     opacity: 1;
     transform: translateY(0);
     max-height: 300px;
+    margin-bottom: 18px;
   }
-  
-  .bento-card.is-expanded .bento-card__desc { margin-bottom: 18px; }
-  .bento-card.is-expanded .bento-card__link { margin-top: 8px; }
   
   /* Fallback if no card is hovered (e.g. initial state) */
   .bento-grid:not(.has-active) .bento-card .bento-card__img-wrap img {
@@ -1021,32 +997,32 @@ ol {
     opacity: 0.9;
   }
   
-  /* ─── EXPLICIT REORDERING CHO TỪNG CARD ─── */
+  /* --- EXPLICIT REORDERING CHO T?NG CARD --- */
   /* Default DOM order matching layout: Card0(2), Card1(1) || Card2(1), Card3(2) */
   .bento-card[data-index="0"] { order: 1; }
   .bento-card[data-index="1"] { order: 2; }
   .bento-card[data-index="2"] { order: 3; }
   .bento-card[data-index="3"] { order: 4; }
 
-  /* Hover Card 0 (Thiết bị số): row1(Card0), row2(Card2, Card3, Card1) */
+  /* Hover Card 0 (Thi?t b? s?): row1(Card0), row2(Card2, Card3, Card1) */
   .bento-grid[data-active="0"] .bento-card[data-index="0"] { order: 1; }
   .bento-grid[data-active="0"] .bento-card[data-index="2"] { order: 2; }
   .bento-grid[data-active="0"] .bento-card[data-index="3"] { order: 3; }
   .bento-grid[data-active="0"] .bento-card[data-index="1"] { order: 4; }
 
-  /* Hover Card 1 (Phân phối): row1(Card1), row2(Card0, Card2, Card3) */
+  /* Hover Card 1 (Ph�n ph?i): row1(Card1), row2(Card0, Card2, Card3) */
   .bento-grid[data-active="1"] .bento-card[data-index="1"] { order: 1; }
   .bento-grid[data-active="1"] .bento-card[data-index="0"] { order: 2; }
   .bento-grid[data-active="1"] .bento-card[data-index="2"] { order: 3; }
   .bento-grid[data-active="1"] .bento-card[data-index="3"] { order: 4; }
 
-  /* Hover Card 2 (Dịch vụ TM): row1(Card0, Card1, Card3), row2(Card2) */
+  /* Hover Card 2 (D?ch v? TM): row1(Card0, Card1, Card3), row2(Card2) */
   .bento-grid[data-active="2"] .bento-card[data-index="0"] { order: 1; }
   .bento-grid[data-active="2"] .bento-card[data-index="1"] { order: 2; }
   .bento-grid[data-active="2"] .bento-card[data-index="3"] { order: 3; }
   .bento-grid[data-active="2"] .bento-card[data-index="2"] { order: 4; }
 
-  /* Hover Card 3 (Công nghệ in): row1(Card2, Card0, Card1), row2(Card3) */
+  /* Hover Card 3 (C�ng ngh? in): row1(Card2, Card0, Card1), row2(Card3) */
   .bento-grid[data-active="3"] .bento-card[data-index="2"] { order: 1; }
   .bento-grid[data-active="3"] .bento-card[data-index="0"] { order: 2; }
   .bento-grid[data-active="3"] .bento-card[data-index="1"] { order: 3; }
