@@ -1,0 +1,453 @@
+/* ================================================================
+   ORG SCROLLYTELLING — Light Scrollytelling (Split-Screen Sticky)
+   Split: 38% pinned map | 62% scrolling content
+   Works alongside leaders.css, simple-v12.css
+   ================================================================ */
+
+/* ── Reset section-org default top padding ── */
+.section-org { padding-top: 0 !important; }
+.section-org .org-list { gap: 0 !important; }
+.section-org .ldr-section { border-radius: 0 !important; }
+.section-org .org-item {
+  border-radius: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+/* ================================================================
+   WRAPPER — flex row container for the two-column split
+   ================================================================ */
+.org-scrolly-wrapper {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  background: var(--paper);
+}
+
+/* ================================================================
+   LEFT COLUMN — Sticky Map (38%)
+   ================================================================ */
+.org-scrolly-map {
+  position: sticky;
+  top: 80px; /* below .simple-header height */
+  width: 38%;
+  flex-shrink: 0;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px 48px 40px;
+  overflow: hidden;
+  background: #fafafa;
+  border-right: 1px solid #ececef;
+  z-index: 2;
+}
+
+/* Subtle dot-grid background on map panel */
+.org-scrolly-map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#e4e4e8 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Pyramid SVG ── */
+.org-map-pyramid {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 280px;
+  flex-shrink: 0;
+}
+
+.org-map-pyramid svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Tier polygons — default: muted grey */
+.pyr-tier {
+  fill: #e0dfe4;
+  transition: fill 0.45s ease, filter 0.45s ease;
+  cursor: default;
+}
+
+/* Tier divider lines */
+.pyr-divider {
+  stroke: #ffffff;
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+/* Tier labels inside pyramid */
+.pyr-tier-label {
+  font-family: 'FS Magistral', sans-serif;
+  font-weight: 700;
+  fill: #aaa;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  transition: fill 0.4s ease;
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+.pyr-tier-num {
+  font-family: 'FS Magistral', sans-serif;
+  font-weight: 800;
+  fill: rgba(0,0,0,0.25);
+  font-size: 13px;
+  transition: fill 0.4s ease;
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+/* ACTIVE tier — bright red glow */
+.pyr-tier.active {
+  fill: #ee0033;
+  filter: drop-shadow(0 4px 18px rgba(238, 0, 51, 0.45));
+}
+
+.pyr-tier-label.active {
+  fill: rgba(255,255,255,0.92);
+}
+
+.pyr-tier-num.active {
+  fill: rgba(255,255,255,0.7);
+}
+
+/* ── Connector line from pyramid to text ── */
+.org-map-connector {
+  width: 2px;
+  height: 28px;
+  background: linear-gradient(to bottom, #ee0033, transparent);
+  margin: 0 auto 0;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: opacity 0.3s ease, transform 0.35s ease;
+}
+
+.org-map-connector.visible {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* ── Text panel below pyramid ── */
+.org-map-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 4px;
+  min-height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.org-map-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #ee0033;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.org-map-eyebrow.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.org-map-label {
+  font-family: 'FS Magistral', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #14171c;
+  line-height: 1.25;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.38s ease 0.05s, transform 0.38s ease 0.05s;
+}
+
+.org-map-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.org-map-desc {
+  font-size: 12.5px;
+  color: #6b7280;
+  line-height: 1.6;
+  max-width: 200px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.38s ease 0.1s, transform 0.38s ease 0.1s;
+}
+
+.org-map-desc.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================================================
+   RIGHT COLUMN — Scrolling content (62%)
+   ================================================================ */
+.org-scrolly-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Story section wrapper — each of the 4 tiers */
+.org-story-section {
+  position: relative;
+}
+
+/* Eyebrow banner at top of each section */
+.org-story-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 28px 40px 0;
+  margin-bottom: -8px;
+  position: relative;
+  z-index: 3;
+}
+
+.org-story-eyebrow .tier-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ee0033;
+  color: #fff;
+  font-family: 'FS Magistral', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(238,0,51,0.35);
+}
+
+.org-story-eyebrow .tier-title {
+  font-family: 'FS Magistral', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #ee0033;
+  text-transform: uppercase;
+}
+
+.org-story-eyebrow .tier-sub {
+  font-size: 11.5px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ── Stagger reveal for cards entering viewport ── */
+.org-story-section .ldr-section,
+.org-story-section .org-item {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.org-story-section .ldr-section.story-visible,
+.org-story-section .org-item.story-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for org-tags children (departments / centers) */
+.org-story-section .org-tags button:nth-child(1),
+.org-story-section .org-tags a:nth-child(1) { transition-delay: 0.00s; }
+.org-story-section .org-tags button:nth-child(2),
+.org-story-section .org-tags a:nth-child(2) { transition-delay: 0.08s; }
+.org-story-section .org-tags button:nth-child(3),
+.org-story-section .org-tags a:nth-child(3) { transition-delay: 0.16s; }
+.org-story-section .org-tags button:nth-child(4),
+.org-story-section .org-tags a:nth-child(4) { transition-delay: 0.24s; }
+.org-story-section .org-tags button:nth-child(5),
+.org-story-section .org-tags a:nth-child(5) { transition-delay: 0.32s; }
+.org-story-section .org-tags button:nth-child(6),
+.org-story-section .org-tags a:nth-child(6) { transition-delay: 0.40s; }
+.org-story-section .org-tags button:nth-child(7),
+.org-story-section .org-tags a:nth-child(7) { transition-delay: 0.48s; }
+
+/* ================================================================
+   FLOATING QUICK-NAV (Fixed right side)
+   ================================================================ */
+.org-float-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.org-float-nav__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  /* Label tooltip on hover */
+}
+
+/* The dot */
+.org-float-nav__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #c4c4c8;
+  background: transparent;
+  flex-shrink: 0;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.org-float-nav__btn:hover .org-float-nav__dot,
+.org-float-nav__btn.active .org-float-nav__dot {
+  border-color: #ee0033;
+  background: #ee0033;
+  transform: scale(1.3);
+}
+
+/* Label — hidden by default, appears on hover */
+.org-float-nav__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #14171c;
+  white-space: nowrap;
+  background: rgba(255,255,255,0.92);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #ececef;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.org-float-nav__btn:hover .org-float-nav__label,
+.org-float-nav__btn.active .org-float-nav__label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ================================================================
+   ACCESSIBILITY — Reduced Motion
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .org-story-section .ldr-section,
+  .org-story-section .org-item,
+  .org-map-eyebrow,
+  .org-map-label,
+  .org-map-desc,
+  .org-map-connector,
+  .pyr-tier,
+  .pyr-tier-label,
+  .pyr-tier-num {
+    transition: none !important;
+    animation: none !important;
+  }
+  /* Show everything immediately */
+  .org-story-section .ldr-section,
+  .org-story-section .org-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ================================================================
+   RESPONSIVE — Tablet 769–1023px: narrow map
+   ================================================================ */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .org-scrolly-map {
+    width: 42%;
+    padding: 32px 20px 32px 24px;
+  }
+  .org-story-eyebrow {
+    padding: 20px 24px 0;
+  }
+}
+
+/* ================================================================
+   RESPONSIVE — Mobile ≤ 768px: disable sticky, linear flow
+   ================================================================ */
+@media (max-width: 768px) {
+  .org-scrolly-wrapper {
+    flex-direction: column;
+  }
+
+  /* Map becomes a simple top banner, not sticky */
+  .org-scrolly-map {
+    position: static;
+    width: 100%;
+    height: auto;
+    min-height: unset;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 20px;
+    border-right: none;
+    border-bottom: 1px solid #ececef;
+    gap: 12px;
+    display: none; /* Hide map panel on mobile — float nav replaces it */
+  }
+
+  .org-scrolly-content {
+    width: 100%;
+  }
+
+  .org-story-eyebrow {
+    padding: 16px 20px 0;
+  }
+
+  /* Floating nav moves to bottom on mobile */
+  .org-float-nav {
+    top: auto;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    gap: 12px;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid #ececef;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+
+  .org-float-nav__label {
+    display: none; /* dots only on mobile */
+  }
+
+  /* Cards: simple fade-up instead of translate */
+  .org-story-section .ldr-section,
+  .org-story-section .org-item {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
