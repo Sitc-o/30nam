@@ -259,20 +259,19 @@ function initSpotlightBento() {
 
     activeCard = newActiveCard;
     if (activeCard) {
-      const sortedByPos = [...cards].sort((a, b) => {
-        const rectA = a.getBoundingClientRect();
-        const rectB = b.getBoundingClientRect();
-        if (Math.abs(rectA.top - rectB.top) > 20) {
-          return rectA.top - rectB.top;
-        }
-        return rectA.left - rectB.left;
-      });
-
       const rectTarget = activeCard.getBoundingClientRect();
       const minTop = Math.min(...cards.map(c => c.getBoundingClientRect().top));
       const isRow1 = Math.abs(rectTarget.top - minTop) < 20;
 
-      const others = sortedByPos.filter(c => c !== activeCard);
+      const others = [...cards].filter(c => c !== activeCard);
+      
+      others.sort((a, b) => {
+        const rA = a.getBoundingClientRect();
+        const rB = b.getBoundingClientRect();
+        const centerA = rA.left + rA.width / 2;
+        const centerB = rB.left + rB.width / 2;
+        return centerA - centerB;
+      });
 
       if (isRow1) {
         activeCard.style.order = 1;
