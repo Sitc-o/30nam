@@ -262,38 +262,34 @@ function initSpotlightBento() {
       const rectTarget = activeCard.getBoundingClientRect();
       const minTop = Math.min(...cards.map(c => c.getBoundingClientRect().top));
       const isRow1 = Math.abs(rectTarget.top - minTop) < 20;
-
-      const others = [...cards].filter(c => c !== activeCard);
       
-      others.sort((a, b) => {
-        const rA = a.getBoundingClientRect();
-        const rB = b.getBoundingClientRect();
-        
-        // 1. Sort by horizontal physical position (left edge)
-        if (Math.abs(rA.left - rB.left) > 10) {
-          return rA.left - rB.left;
-        }
-        
-        // 2. Tie-breaker for items with the same left edge (e.g. C0 and C2, or C1 and C0)
-        // The item that is "changing rows" gets pushed into the slot first (wins the tie-break)
-        // An item is changing rows if its current row is the same as the activeCard's current row
-        const aIsRow1 = Math.abs(rA.top - minTop) < 20;
-        const bIsRow1 = Math.abs(rB.top - minTop) < 20;
-        const aChanging = aIsRow1 === isRow1; 
-        const bChanging = bIsRow1 === isRow1;
-        
-        if (aChanging !== bChanging) {
-          return aChanging ? -1 : 1;
-        }
-        
-        return parseInt(a.dataset.index) - parseInt(b.dataset.index);
-      });
+      const activeIdx = parseInt(activeCard.dataset.index);
+      
+      // Vòng tròn băng chuyền: C0 (Top-Left) -> C1 (Top-Right) -> C3 (Bottom-Right) -> C2 (Bottom-Left)
+      const ring = [0, 1, 3, 2];
+      const activeRingIdx = ring.indexOf(activeIdx);
+      
+      // Lấy 3 thẻ tiếp theo trong vòng tròn
+      const othersRing = [
+        ring[(activeRingIdx + 1) % 4],
+        ring[(activeRingIdx + 2) % 4],
+        ring[(activeRingIdx + 3) % 4]
+      ];
+      
+      // Hàng trên chạy từ Trái sang Phải, Hàng dưới chạy từ Phải sang Trái (theo chiều kim đồng hồ)
+      // Nếu activeCard nằm ở hàng 1 (isRow1), 3 thẻ kia bị đẩy xuống hàng 2 => Phải điền từ Phải sang Trái
+      // Nếu activeCard nằm ở hàng 2, 3 thẻ kia bị đẩy lên hàng 1 => Điền từ Trái sang Phải
+      const othersSequence = isRow1 ? [...othersRing].reverse() : [...othersRing];
 
       if (isRow1) {
         activeCard.style.order = 1;
-        others.forEach((c, i) => c.style.order = i + 2);
+        othersSequence.forEach((idx, pos) => {
+          cards[idx].style.order = pos + 2; // 2, 3, 4
+        });
       } else {
-        others.forEach((c, i) => c.style.order = i + 1);
+        othersSequence.forEach((idx, pos) => {
+          cards[idx].style.order = pos + 1; // 1, 2, 3
+        });
         activeCard.style.order = 4;
       }
 
