@@ -259,6 +259,29 @@ function initSpotlightBento() {
 
     activeCard = newActiveCard;
     if (activeCard) {
+      const sortedByPos = [...cards].sort((a, b) => {
+        const rectA = a.getBoundingClientRect();
+        const rectB = b.getBoundingClientRect();
+        if (Math.abs(rectA.top - rectB.top) > 20) {
+          return rectA.top - rectB.top;
+        }
+        return rectA.left - rectB.left;
+      });
+
+      const rectTarget = activeCard.getBoundingClientRect();
+      const minTop = Math.min(...cards.map(c => c.getBoundingClientRect().top));
+      const isRow1 = Math.abs(rectTarget.top - minTop) < 20;
+
+      const others = sortedByPos.filter(c => c !== activeCard);
+
+      if (isRow1) {
+        activeCard.style.order = 1;
+        others.forEach((c, i) => c.style.order = i + 2);
+      } else {
+        others.forEach((c, i) => c.style.order = i + 1);
+        activeCard.style.order = 4;
+      }
+
       grid.classList.add('has-active');
       grid.dataset.active = cards.indexOf(activeCard);
       cards.forEach(c => {
@@ -270,6 +293,7 @@ function initSpotlightBento() {
       grid.removeAttribute('data-active');
       cards.forEach(c => {
         c.classList.remove('is-expanded', 'is-collapsed');
+        c.style.order = '';
       });
     }
 

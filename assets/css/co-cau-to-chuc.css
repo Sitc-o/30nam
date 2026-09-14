@@ -1003,30 +1003,6 @@ ol {
   .bento-card[data-index="1"] { order: 2; }
   .bento-card[data-index="2"] { order: 3; }
   .bento-card[data-index="3"] { order: 4; }
-
-  /* Hover Card 0 (Thi?t b? s?): row1(Card0), row2(Card2, Card3, Card1) */
-  .bento-grid[data-active="0"] .bento-card[data-index="0"] { order: 1; }
-  .bento-grid[data-active="0"] .bento-card[data-index="2"] { order: 2; }
-  .bento-grid[data-active="0"] .bento-card[data-index="3"] { order: 3; }
-  .bento-grid[data-active="0"] .bento-card[data-index="1"] { order: 4; }
-
-  /* Hover Card 1 (Ph�n ph?i): row1(Card1), row2(Card0, Card2, Card3) */
-  .bento-grid[data-active="1"] .bento-card[data-index="1"] { order: 1; }
-  .bento-grid[data-active="1"] .bento-card[data-index="0"] { order: 2; }
-  .bento-grid[data-active="1"] .bento-card[data-index="2"] { order: 3; }
-  .bento-grid[data-active="1"] .bento-card[data-index="3"] { order: 4; }
-
-  /* Hover Card 2 (D?ch v? TM): row1(Card0, Card1, Card3), row2(Card2) */
-  .bento-grid[data-active="2"] .bento-card[data-index="0"] { order: 1; }
-  .bento-grid[data-active="2"] .bento-card[data-index="1"] { order: 2; }
-  .bento-grid[data-active="2"] .bento-card[data-index="3"] { order: 3; }
-  .bento-grid[data-active="2"] .bento-card[data-index="2"] { order: 4; }
-
-  /* Hover Card 3 (C�ng ngh? in): row1(Card2, Card0, Card1), row2(Card3) */
-  .bento-grid[data-active="3"] .bento-card[data-index="2"] { order: 1; }
-  .bento-grid[data-active="3"] .bento-card[data-index="0"] { order: 2; }
-  .bento-grid[data-active="3"] .bento-card[data-index="1"] { order: 3; }
-  .bento-grid[data-active="3"] .bento-card[data-index="3"] { order: 4; }
 }
 
 /* ─── QUOTE BAND ─────────────────────────────────────────── */
