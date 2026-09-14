@@ -8,6 +8,7 @@ const headerCSS = `
 :root {
     --nav-height-initial: 100px;
     --nav-height-shrunk: 68px;
+    --nav-visible-height: 100px;
     --nav-brand-red: #ee0033;
     --nav-text: #1a1a1a;
     --nav-text-muted: #555555;
@@ -303,6 +304,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             lastScrollY = currentScrollY;
         }
+
+        // C. Update CSS Variable for sticky elements
+        let visibleHeight = 0;
+        if (!header.classList.contains('is-hidden')) {
+            visibleHeight = header.classList.contains('is-shrunk') ? 68 : 100;
+        }
+        document.documentElement.style.setProperty('--nav-visible-height', visibleHeight + 'px');
 
         isTicking = false;
     };

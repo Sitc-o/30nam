@@ -492,7 +492,7 @@ ol {
 /* ─── STICKY SUB-NAVIGATION ──────────────────────────────── */
 .subnav {
   position: sticky;
-  top: var(--header-h);
+  top: var(--nav-visible-height, var(--header-h));
   z-index: 90;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
@@ -842,7 +842,7 @@ ol {
 /* Department preview panel */
 .dept-preview {
   position: sticky;
-  top: calc(var(--header-h) + var(--subnav-h) + 24px);
+  top: calc(var(--nav-visible-height, var(--header-h)) + var(--subnav-h) + 24px);
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4/3;
