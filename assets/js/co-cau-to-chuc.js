@@ -263,21 +263,26 @@ function initSpotlightBento() {
       const minTop = Math.min(...cards.map(c => c.getBoundingClientRect().top));
       const isRow1 = Math.abs(rectTarget.top - minTop) < 20;
 
-      const others = [...cards].filter(c => c !== activeCard);
+      const activeIdx = parseInt(activeCard.dataset.index);
       
-      others.sort((a, b) => {
-        const rA = a.getBoundingClientRect();
-        const rB = b.getBoundingClientRect();
-        const centerA = rA.left + rA.width / 2;
-        const centerB = rB.left + rB.width / 2;
-        return centerA - centerB;
-      });
+      // Bản đồ định tuyến (Conveyor Sequence) để đảm bảo trượt vòng tròn mượt mà
+      const sequenceMap = {
+        0: [2, 3, 1], // Khi hover C0, 3 thẻ còn lại luôn xếp theo thứ tự C2 -> C3 -> C1
+        1: [0, 2, 3], // Khi hover C1, thứ tự là C0 -> C2 -> C3
+        2: [0, 1, 3], // Khi hover C2, thứ tự là C0 -> C1 -> C3
+        3: [2, 0, 1]  // Khi hover C3, thứ tự là C2 -> C0 -> C1
+      };
+      const othersSequence = sequenceMap[activeIdx];
 
       if (isRow1) {
         activeCard.style.order = 1;
-        others.forEach((c, i) => c.style.order = i + 2);
+        othersSequence.forEach((idx, pos) => {
+          cards[idx].style.order = pos + 2;
+        });
       } else {
-        others.forEach((c, i) => c.style.order = i + 1);
+        othersSequence.forEach((idx, pos) => {
+          cards[idx].style.order = pos + 1;
+        });
         activeCard.style.order = 4;
       }
 
