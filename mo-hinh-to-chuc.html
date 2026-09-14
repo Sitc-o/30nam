@@ -8,288 +8,136 @@
   <link rel="stylesheet" href="assets/css/simple-v12.css">
   <link rel="stylesheet" href="assets/css/book-menu.css">
   <link rel="stylesheet" href="assets/css/page-transitions.css?v=15">
-  <link rel="stylesheet" href="assets/css/inline-styles.css?v=20260909_3">
-  <link rel="stylesheet" href="assets/css/leaders.css?v=20260910">
-  <link rel="stylesheet" href="assets/css/org-scrolly.css?v=20260914">
-  <!-- GSAP ScrollTo (optional, for smooth float-nav jumps) -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollToPlugin.min.js" defer></script>
+  <link rel="stylesheet" href="assets/css/inline-styles.css?v=1788779838371">
 </head>
 
 <body class="simple-v12">
   <script src="assets/js/header.js"></script>
   <div class="menu-backdrop" data-close-menu></div>
-
+  <aside class="book-menu" aria-hidden="true">
+    <div class="book-menu__head">
+      <div><small>MỤC LỤC</small>
+        <h1>30 năm Viettel Commerce</h1>
+      </div><button type="button" data-close-menu aria-label="Đóng menu">×</button>
+    </div>
+    <div class="book-menu__grid">
+      <section><span>01</span>
+        <h2>Giới thiệu</h2><a href="gioi-thieu.html">Lời nói đầu</a><a href="gioi-thieu.html#qua-trinh-hinh-thanh">Quá
+          trình hình thành và phát triển</a><a href="gioi-thieu.html#cac-linh-vuc">Các lĩnh vực</a><a
+          href="thanh-tuu-khen-thuong.html">Thành tựu tiêu biểu</a>
+      </section>
+      <section><span>02</span>
+        <h2>Hành trình</h2><a href="hanh-trinh.html">Tổng quan 4 hành trình</a><a href="khoi-nguon-1997-2005.html">Khởi
+          nguồn 1997–2005</a><a href="troi-day-2006-2014.html">Trỗi dậy 2006–2014</a><a
+          href="tang-toc-2015-2027.html">Tăng tốc 2015–2022</a><a href="vuon-tam-2023-2027.html">Vươn tầm
+          2023–2027</a><a href="bien-nien-30-nam.html">Biên niên 30 năm</a>
+      </section>
+      <section>
+        <h2>Mô hình tổ chức</h2><a href="mo-hinh-to-chuc.html#lanh-dao-cac-thoi-ky">Giám đốc các thời kỳ</a><a
+          href="mo-hinh-to-chuc.html#khoi-co-quan">Khối cơ quan Tổng Công ty</a><a
+          href="mo-hinh-to-chuc.html#cac-trung-tam">Các Trung tâm thuộc Tổng Công ty</a><a
+          href="mo-hinh-to-chuc.html#dang-va-doan-the">Đảng bộ và tổ chức quần chúng</a>
+      </section>
+      <section><span>04</span>
+        <h2>Các lĩnh vực</h2><a href="kinh-doanh-thiet-bi-so.html">Kinh doanh thiết bị số</a><a
+          href="phan-phoi.html">Phân phối</a><a href="dich-vu-thuong-mai.html">Dịch vụ Thương mại</a><a
+          href="cong-nghe-in.html">Công nghệ in</a>
+      </section>
+      <section><span>05</span>
+        <h2>Dấu ấn</h2><a href="thanh-tuu-khen-thuong.html">Danh hiệu và giải thưởng</a><a
+          href="thanh-tuu-chi-tiet-v11.html">Nội dung thành tựu chi tiết</a><a href="nhan-vat-ky-uc.html">Nhân vật và ký
+          ức</a><a href="cong-tac-dang.html">Công tác Đảng</a>
+      </section>
+      <section><span>06</span>
+        <h2>Tra cứu</h2><a href="phu-luc.html">Phụ lục</a><a href="CONTENT_COVERAGE.html">Đối soát nội dung</a><a
+          href="ket-luan.html">Kết luận</a>
+      </section>
+    </div>
+    <div class="book-menu__footer"><strong>VCM</strong><span>Viettel Commerce · 1997–2027</span></div>
+  </aside>
   <main class="simple-main">
-    <!-- HERO -->
-    <section class="simple-hero hero-org">
-      <div class="hero-watermark-bg" aria-hidden="true">
-        <svg class="viettel-badge-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <path id="viettel-shape" d="M 250 50
-         C 350 50, 430 130, 430 230
-         C 430 325, 355 400, 265 402
-         C 220 403, 180 425, 140 465
-         C 160 415, 165 370, 150 335
-         C 100 310, 70 275, 70 230
-         C 70 130, 150 50, 250 50 Z" />
-            <linearGradient id="viettel-red" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ea0029" />
-              <stop offset="100%" stop-color="#b8001f" />
-            </linearGradient>
-          </defs>
-          <g class="sonar-waves">
-            <use href="#viettel-shape" class="wave-ring wave-1" />
-            <use href="#viettel-shape" class="wave-ring wave-2" />
-            <use href="#viettel-shape" class="wave-ring wave-3" />
-            <use href="#viettel-shape" class="wave-ring wave-4" />
-          </g>
-          <use href="#viettel-shape" class="core-bubble" fill="url(#viettel-red)" />
-          <g class="badge-typography">
-            <text x="250" y="225" text-anchor="middle" class="txt-bold">Sáng tạo</text>
-            <text x="250" y="255" text-anchor="middle" class="txt-sub">theo cách của bạn</text>
-          </g>
-        </svg>
-      </div>
+    <section class="simple-hero">
       <div class="simple-container"><small>TỔ CHỨC QUA CÁC THỜI KỲ</small>
-        <h1>MÔ HÌNH TỔ CHỨC</h1>
+        <h1>TỔ CHỨC CHÍNH QUYỀN</h1>
         <p>Cơ cấu lãnh đạo, khối cơ quan, các trung tâm và tổ chức Đảng – quần chúng của Tổng Công ty.</p>
       </div>
     </section>
-
-    <!-- MAIN SECTION — Scrollytelling wrapper -->
-    <section class="simple-section section-org">
-
-      <!-- ══════════════════════════════════════════════════
-           SPLIT-SCREEN WRAPPER
-           Left: sticky pyramid map (38%)
-           Right: scrolling content (62%)
-      ══════════════════════════════════════════════════ -->
-      <div class="org-scrolly-wrapper">
-
-        <!-- ── LEFT: Sticky Pyramid Map ── -->
-        <aside class="org-scrolly-map" aria-label="Bản đồ điều hướng tổ chức" aria-hidden="true">
-
-          <!-- SVG Kim tự tháp 4 tầng -->
-          <div class="org-map-pyramid">
-            <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-
-              <!-- Tier 1 — Đỉnh: Ban Lãnh đạo -->
-              <polygon class="pyr-tier" data-tier="1"
-                points="120,20 168,82 72,82" />
-
-              <!-- Tier 2 — Khối Cơ quan -->
-              <polygon class="pyr-tier" data-tier="2"
-                points="72,88 168,88 192,150 48,150" />
-
-              <!-- Tier 3 — Trung tâm -->
-              <polygon class="pyr-tier" data-tier="3"
-                points="48,156 192,156 216,218 24,218" />
-
-              <!-- Tier 4 — Đảng bộ & Quần chúng -->
-              <polygon class="pyr-tier" data-tier="4"
-                points="24,224 216,224 240,280 0,280" />
-
-              <!-- Divider lines -->
-              <line class="pyr-divider" x1="72"  y1="84"  x2="168" y2="84" />
-              <line class="pyr-divider" x1="48"  y1="152" x2="192" y2="152" />
-              <line class="pyr-divider" x1="24"  y1="220" x2="216" y2="220" />
-
-              <!-- Tier numbers -->
-              <text class="pyr-tier-num" data-tier="1" x="120" y="60">01</text>
-              <text class="pyr-tier-num" data-tier="2" x="120" y="125">02</text>
-              <text class="pyr-tier-num" data-tier="3" x="120" y="191">03</text>
-              <text class="pyr-tier-num" data-tier="4" x="120" y="256">04</text>
-
-              <!-- Tier labels -->
-              <text class="pyr-tier-label" data-tier="1" x="120" y="74">BAN LÃNH ĐẠO</text>
-              <text class="pyr-tier-label" data-tier="2" x="120" y="139">KHỐI CƠ QUAN</text>
-              <text class="pyr-tier-label" data-tier="3" x="120" y="205">TRUNG TÂM</text>
-              <text class="pyr-tier-label" data-tier="4" x="120" y="270">ĐẢNG &amp; QUẦN CHÚNG</text>
-            </svg>
-          </div>
-
-          <!-- Connector line -->
-          <div class="org-map-connector"></div>
-
-          <!-- Dynamic text panel -->
-          <div class="org-map-text">
-            <span class="org-map-eyebrow"></span>
-            <strong class="org-map-label"></strong>
-            <p class="org-map-desc"></p>
-          </div>
-        </aside>
-
-        <!-- ── RIGHT: Scrolling content ── -->
-        <div class="org-scrolly-content">
-
-          <!-- ════════ TẦNG 1 — Ban Lãnh đạo ════════ -->
-          <div class="org-story-section" id="section-leaders">
-            <div class="org-story-eyebrow">
-              <span class="tier-num">01</span>
-              <span class="tier-title">BỘ NÃO CHIẾN LƯỢC</span>
-              <span class="tier-sub">Ban Lãnh đạo Tổng Công ty</span>
-            </div>
-
-            <article class="ldr-section reveal open" id="ban-lanh-dao-hien-tai">
-              <!-- Animated Background Lines -->
+    <section class="simple-section">
+      <div class="simple-container">
+        <div id="tab-chinh-quyen">
+          <div class="org-list">
+                                    <article class="ldr-section reveal open" id="lanh-dao-cac-thoi-ky">
+              <!-- Animated Background Lines (FPT style) -->
               <div class="ldr-bg-lines">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                  <path class="ldr-line ldr-line-1" d="M0,50 Q200,150 400,50 T800,50" fill="none" stroke="#ee0033"
-                    stroke-width="1.5" opacity="0.15" />
-                  <path class="ldr-line ldr-line-2" d="M0,150 Q250,50 500,150 T1000,150" fill="none" stroke="#2c2c2c"
-                    stroke-width="1.5" opacity="0.08" />
-                  <path class="ldr-line ldr-line-3" d="M0,250 Q300,350 600,250 T1200,250" fill="none" stroke="#ee0033"
-                    stroke-width="1.5" opacity="0.15" />
+                  <path class="ldr-line ldr-line-1" d="M0,50 Q200,150 400,50 T800,50" fill="none" stroke="#ee0033" stroke-width="1.5" opacity="0.15"/>
+                  <path class="ldr-line ldr-line-2" d="M0,150 Q250,50 500,150 T1000,150" fill="none" stroke="#2c2c2c" stroke-width="1.5" opacity="0.08"/>
+                  <path class="ldr-line ldr-line-3" d="M0,250 Q300,350 600,250 T1200,250" fill="none" stroke="#ee0033" stroke-width="1.5" opacity="0.15"/>
                 </svg>
               </div>
-              <div class="ldr-section-header">
-                <small>TỔ CHỨC BỘ MÁY</small>
-                <h2>BAN LÃNH ĐẠO HIỆN TẠI</h2>
-                <p>Ban lãnh đạo đương nhiệm của Viettel Commerce.</p>
-              </div>
-              <div class="ldr-tree" id="ldrTreeCurrent"></div>
-            </article>
 
-            <article class="ldr-section reveal open" id="lanh-dao-cac-thoi-ky">
-              <div class="ldr-bg-lines">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                  <path class="ldr-line ldr-line-1" d="M0,50 Q200,150 400,50 T800,50" fill="none" stroke="#ee0033"
-                    stroke-width="1.5" opacity="0.15" />
-                  <path class="ldr-line ldr-line-2" d="M0,150 Q250,50 500,150 T1000,150" fill="none" stroke="#2c2c2c"
-                    stroke-width="1.5" opacity="0.08" />
-                  <path class="ldr-line ldr-line-3" d="M0,250 Q300,350 600,250 T1200,250" fill="none" stroke="#ee0033"
-                    stroke-width="1.5" opacity="0.15" />
-                </svg>
-              </div>
               <div class="ldr-section-header">
                 <small>LÃNH ĐẠO QUA CÁC THỜI KỲ</small>
                 <h2>TỔNG GIÁM ĐỐC – GIÁM ĐỐC</h2>
                 <p>Các thế hệ Giám đốc đã lãnh đạo đơn vị qua các giai đoạn hình thành, xây dựng, phát triển và vươn tầm.</p>
               </div>
-              <div class="ldr-grid" id="ldrGridPast"></div>
+
+              <!-- Container for JS injected cards -->
+              <div class="ldr-grid" id="ldrGrid"></div>
+
               <div class="ldr-cta">
                 <a href="nhan-vat-ky-uc.html" class="ldr-cta-btn">
                   <span>Ký ức các lãnh đạo</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
               </div>
             </article>
+            <article class="org-item reveal open"><button data-org>KHỐI CƠ QUAN TỔNG CÔNG TY <span>＋</span></button>
+              <div class="org-content">
+                <div class="org-tags"><button type="button" class="dept-open" data-dept="PHÒNG CHIẾN LƯỢC">PHÒNG CHIẾN
+                    LƯỢC</button><button type="button" class="dept-open" data-dept="PHÒNG HÀNH CHÍNH">PHÒNG HÀNH
+                    CHÍNH</button><button type="button" class="dept-open" data-dept="PHÒNG PHÁP CHẾ & ĐẦU TƯ">PHÒNG PHÁP
+                    CHẾ & ĐẦU TƯ</button><button type="button" class="dept-open" data-dept="PHÒNG NHÂN SỰ">PHÒNG NHÂN
+                    SỰ</button><button type="button" class="dept-open" data-dept="PHÒNG TÀI CHÍNH - KẾ TOÁN">PHÒNG TÀI
+                    CHÍNH - KẾ TOÁN</button><button type="button" class="dept-open" data-dept="PHÒNG CHÍNH TRỊ">PHÒNG
+                    CHÍNH TRỊ</button><button type="button" class="dept-open"
+                    data-dept="PHÒNG CÔNG NGHỆ THÔNG TIN">PHÒNG
+                    CÔNG NGHỆ THÔNG TIN</button></div>
+              </div>
+            </article>
+            <article class="org-item reveal open"><button data-org>CÁC TRUNG TÂM THUỘC TỔNG CÔNG TY
+                <span>＋</span></button>
+              <div class="org-content">
+                <div class="org-tags"><a href="kinh-doanh-thiet-bi-so.html">Trung tâm Kinh doanh Thiết bị số</a><a
+                    href="phan-phoi.html">Trung tâm Phân phối</a><a href="dich-vu-thuong-mai.html">Trung tâm Dịch vụ
+                    Thương mại</a><a href="cong-nghe-in.html">Trung tâm Công nghệ In</a></div>
+              </div>
+            </article>
           </div>
-          <!-- /TẦNG 1 -->
-
-          <!-- ════════ TẦNG 2 — Khối Cơ quan ════════ -->
-          <div class="org-story-section" id="section-depts">
-            <div class="org-story-eyebrow">
-              <span class="tier-num">02</span>
-              <span class="tier-title">HỆ THẦN KINH ĐIỀU PHỐI</span>
-              <span class="tier-sub">Khối Cơ quan Tổng Công ty</span>
-            </div>
-
-            <div class="org-list">
-              <article class="org-item reveal open">
-                <button data-org>KHỐI CƠ QUAN TỔNG CÔNG TY <span>＋</span></button>
-                <div class="org-content">
-                  <div class="org-tags">
-                    <button type="button" class="dept-open" data-dept="PHÒNG CHIẾN LƯỢC">PHÒNG CHIẾN LƯỢC</button>
-                    <button type="button" class="dept-open" data-dept="PHÒNG HÀNH CHÍNH">PHÒNG HÀNH CHÍNH</button>
-                    <button type="button" class="dept-open" data-dept="PHÒNG PHÁP CHẾ & ĐẦU TƯ">PHÒNG PHÁP CHẾ &amp; ĐẦU TƯ</button>
-                    <button type="button" class="dept-open" data-dept="PHÒNG NHÂN SỰ">PHÒNG NHÂN SỰ</button>
-                    <button type="button" class="dept-open" data-dept="PHÒNG TÀI CHÍNH - KẾ TOÁN">PHÒNG TÀI CHÍNH - KẾ TOÁN</button>
-                    <button type="button" class="dept-open" data-dept="PHÒNG CHÍNH TRỊ">PHÒNG CHÍNH TRỊ</button>
-                    <button type="button" class="dept-open" data-dept="PHÒNG CÔNG NGHỆ THÔNG TIN">PHÒNG CÔNG NGHỆ THÔNG TIN</button>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-          <!-- /TẦNG 2 -->
-
-          <!-- ════════ TẦNG 3 — Các Trung tâm ════════ -->
-          <div class="org-story-section" id="section-centers">
-            <div class="org-story-eyebrow">
-              <span class="tier-num">03</span>
-              <span class="tier-title">CÁNH TAY THỰC THI</span>
-              <span class="tier-sub">Các Trung tâm trực thuộc Tổng Công ty</span>
-            </div>
-
-            <div class="org-list">
-              <article class="org-item reveal open">
-                <button data-org>CÁC TRUNG TÂM THUỘC TỔNG CÔNG TY <span>＋</span></button>
-                <div class="org-content">
-                  <div class="org-tags">
-                    <a href="kinh-doanh-thiet-bi-so.html">Trung tâm Kinh doanh Thiết bị số</a>
-                    <a href="phan-phoi.html">Trung tâm Phân phối</a>
-                    <a href="dich-vu-thuong-mai.html">Trung tâm Dịch vụ Thương mại</a>
-                    <a href="cong-nghe-in.html">Trung tâm Công nghệ In</a>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-          <!-- /TẦNG 3 -->
-
-          <!-- ════════ TẦNG 4 — Đảng bộ & Quần chúng ════════ -->
-          <div class="org-story-section" id="section-party">
-            <div class="org-story-eyebrow">
-              <span class="tier-num">04</span>
-              <span class="tier-title">NỀN TẢNG CHÍNH TRỊ</span>
-              <span class="tier-sub">Đảng bộ &amp; Tổ chức Quần chúng</span>
-            </div>
-
-            <div class="org-list global-inline-21">
-              <article class="org-item reveal open">
-                <button data-org>ĐẢNG BỘ TỔNG CÔNG TY VÀ CÁC TỔ CHỨC QUẦN CHÚNG<span>＋</span></button>
-                <div class="org-content">
-                  <p>Đảng bộ Tổng Công ty giữ vai trò lãnh đạo toàn diện; các tổ chức quần chúng đồng hành xây dựng đơn vị vững mạnh.</p>
-                  <div class="org-tags">
-                    <button type="button" class="org-popup-open" data-org-popup="ĐẢNG BỘ TỔNG CÔNG TY">ĐẢNG BỘ TỔNG CÔNG TY</button>
-                    <button type="button" class="org-popup-open" data-org-popup="CÔNG ĐOÀN CƠ SỞ TỔNG CÔNG TY">CÔNG ĐOÀN CƠ SỞ TỔNG CÔNG TY</button>
-                    <button type="button" class="org-popup-open" data-org-popup="HỘI PHỤ NỮ CƠ SỞ TỔNG CÔNG TY">HỘI PHỤ NỮ CƠ SỞ TỔNG CÔNG TY</button>
-                    <button type="button" class="org-popup-open" data-org-popup="ĐOÀN CƠ SỞ TỔNG CÔNG TY">ĐOÀN CƠ SỞ TỔNG CÔNG TY</button>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-          <!-- /TẦNG 4 -->
-
         </div>
-        <!-- /org-scrolly-content -->
-
+        <div id="tab-dang" class="global-inline-21">
+          <div class="org-list">
+            <article class="org-item reveal open"><button data-org>ĐẢNG BỘ TỔNG CÔNG TY VÀ CÁC TỔ CHỨC QUẦN
+                CHÚNG<span>＋</span></button>
+              <div class="org-content">
+                <p>Đảng bộ Tổng Công ty giữ vai trò lãnh đạo toàn diện; các tổ chức quần chúng đồng hành xây dựng đơn vị
+                  vững mạnh.</p>
+                <div class="org-tags"><button type="button" class="org-popup-open"
+                    data-org-popup="ĐẢNG BỘ TỔNG CÔNG TY">ĐẢNG BỘ TỔNG CÔNG TY</button><button type="button"
+                    class="org-popup-open" data-org-popup="CÔNG ĐOÀN CƠ SỞ TỔNG CÔNG TY">CÔNG ĐOÀN CƠ SỞ TỔNG CÔNG
+                    TY</button><button type="button" class="org-popup-open"
+                    data-org-popup="HỘI PHỤ NỮ CƠ SỞ TỔNG CÔNG TY">HỘI PHỤ NỮ CƠ SỞ TỔNG CÔNG TY</button><button
+                    type="button" class="org-popup-open" data-org-popup="ĐOÀN CƠ SỞ TỔNG CÔNG TY">ĐOÀN CƠ SỞ TỔNG CÔNG
+                    TY</button></div>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
-      <!-- /org-scrolly-wrapper -->
-
     </section>
   </main>
-
-  <!-- ── Floating Quick-Nav (outside wrapper for fixed positioning) ── -->
-  <nav class="org-float-nav" aria-label="Điều hướng nhanh tổ chức">
-    <button class="org-float-nav__btn" data-target="section-leaders" data-tier="1" title="Ban Lãnh đạo" aria-label="Nhảy đến Ban Lãnh đạo">
-      <span class="org-float-nav__label">Ban Lãnh đạo</span>
-      <span class="org-float-nav__dot"></span>
-    </button>
-    <button class="org-float-nav__btn" data-target="section-depts" data-tier="2" title="Khối Cơ quan" aria-label="Nhảy đến Khối Cơ quan">
-      <span class="org-float-nav__label">Khối Cơ quan</span>
-      <span class="org-float-nav__dot"></span>
-    </button>
-    <button class="org-float-nav__btn" data-target="section-centers" data-tier="3" title="Các Trung tâm" aria-label="Nhảy đến Các Trung tâm">
-      <span class="org-float-nav__label">Các Trung tâm</span>
-      <span class="org-float-nav__dot"></span>
-    </button>
-    <button class="org-float-nav__btn" data-target="section-party" data-tier="4" title="Đảng & Quần chúng" aria-label="Nhảy đến Đảng và Tổ chức Quần chúng">
-      <span class="org-float-nav__label">Đảng &amp; Quần chúng</span>
-      <span class="org-float-nav__dot"></span>
-    </button>
-  </nav>
-
   <script src="assets/js/footer.js"></script>
 
-  <!-- Dept dialog -->
   <dialog class="portrait-dialog" id="deptDialog">
     <form method="dialog"><button class="portrait-close" aria-label="Đóng">×</button></form>
     <div class="portrait-head">
@@ -300,8 +148,6 @@
     </div>
     <div class="dept-grid" id="deptDialogGrid"></div>
   </dialog>
-
-  <!-- Org popup dialog -->
   <dialog class="portrait-dialog org-popup-dialog" id="orgPopup">
     <form method="dialog"><button class="portrait-close" aria-label="Đóng">×</button></form>
     <div class="org-popup-body">
@@ -312,8 +158,6 @@
       <div class="dept-grid org-popup-photos" id="orgPopupPhotos"></div>
     </div>
   </dialog>
-
-  <!-- Search dialog -->
   <dialog class="search-dialog">
     <form method="dialog"><button class="search-close">×</button></form>
     <div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Tìm mốc thời gian, nhân vật, lĩnh vực…"
@@ -322,20 +166,34 @@
       <p>Nhập từ khóa để tìm trong toàn bộ website.</p>
     </div>
   </dialog>
-
   <script src="assets/js/search-index.js"></script>
   <script src="assets/js/simple-v12.js"></script>
   <script src="assets/js/book-menu.js"></script>
-
-  <!-- Lightbox for photo zoom -->
-  <div class="ldr-lightbox" id="ldrLightbox">
-    <button class="ldr-lightbox__close" id="ldrLightboxClose" aria-label="Đóng">&#x2715;</button>
-    <img id="ldrLightboxImg" src="" alt="">
+  <!-- FPT Style Leader Modal -->
+  <div class="ldr-modal" id="ldrModal" hidden>
+    <div class="ldr-modal__backdrop" id="ldrModalBackdrop"></div>
+    <div class="ldr-modal__content">
+      <div class="ldr-modal__top">
+        <div class="ldr-modal__photo">
+          <img id="ldrModalImg" src="" alt="">
+          <div id="ldrModalPlaceholder" class="ldr-modal__placeholder" style="display:none">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" />
+            </svg>
+          </div>
+        </div>
+        <div class="ldr-modal__header">
+          
+          <h2 class="ldr-modal__name" id="ldrModalName"></h2>
+          <p class="ldr-modal__role" id="ldrModalRole"></p>
+        </div>
+        <button class="ldr-modal__close" id="ldrModalClose" aria-label="Đóng">✕</button>
+      </div>
+      <div class="ldr-modal__body" id="ldrModalBio"></div>
+    </div>
   </div>
 
-  <script src="assets/js/leaders.js?v=20260910"></script>
-  <!-- Scrollytelling controller — loads last so GSAP is ready -->
-  <script src="assets/js/org-scrolly.js?v=20260914"></script>
+  <script src="assets/js/leaders.js?v=1788779838371"></script>
 </body>
 
 </html>
