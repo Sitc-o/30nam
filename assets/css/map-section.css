@@ -131,6 +131,12 @@
 
 .province-wrapper {
     pointer-events: auto !important;
+    /* Bắt buộc giữ để click/hover được */
+    will-change: transform, opacity;
+    /* Tối ưu render phần cứng */
+    transform: translateZ(0);
+    /* Ép GPU tải bộ lọc trước để chống giật */
+    backface-visibility: hidden;
 }
 
 .province-path {

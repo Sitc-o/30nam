@@ -30,81 +30,83 @@ const defaultData = {
 };
 
 window.addEventListener('load', () => {
-    if (typeof gsap === 'undefined') {
-        console.error("GSAP chưa được tải.");
-        return;
-    }
+    if (typeof gsap === 'undefined') return;
+
+    // 1. TẮT CƠ CHẾ NHẢY CÓC: Cấm GSAP tua nhanh khi có giật lag chuyển trang
+    gsap.ticker.lagSmoothing(0);
 
     const mapContainer = document.getElementById('map-container');
     const islandsGroup = document.getElementById('islands-group');
     const heroOverlay = document.querySelector('.map-text-overlay');
 
-    // Bắt thẻ bọc của Hà Nội
     const hanoiWrapper = document.querySelector('.province-wrapper[data-province="ha-noi"]');
-    // Bắt toàn bộ các thẻ bao tỉnh khác (loại trừ Hà Nội)
     const allWrappers = Array.from(document.querySelectorAll('#vietnam-map-group .province-wrapper'));
     const otherWrappers = allWrappers.filter(el => el !== hanoiWrapper && !el.contains(hanoiWrapper));
 
     if (!mapContainer || !hanoiWrapper) return;
 
-    // 1. TÍNH TỌA ĐỘ TÂM HÀ NỘI CHÍNH XÁC
+    // 2. TÍNH TỌA ĐỘ TÂM HÀ NỘI
     const hRect = hanoiWrapper.getBoundingClientRect();
     const mRect = mapContainer.getBoundingClientRect();
     const originX = ((hRect.left + hRect.width / 2 - mRect.left) / mRect.width) * 100;
     const originY = ((hRect.top + hRect.height / 2 - mRect.top) / mRect.height) * 100;
 
-    // 2. KHỞI TẠO: Phóng to 3.5 lần tại vị trí Hà Nội
+    // 3. THIẾT LẬP BAN ĐẦU
     gsap.set(mapContainer, {
         transformOrigin: `${originX}% ${originY}%`,
         scale: 3.5,
         force3D: true
     });
 
-    // Chỉ hiển thị duy nhất Hà Nội
     gsap.set(hanoiWrapper, { opacity: 1, scale: 1 });
 
-    // Ẩn toàn bộ các tỉnh thành còn lại và các đảo
     const elementsToAssemble = [...otherWrappers];
     if (islandsGroup) elementsToAssemble.push(islandsGroup);
 
+    // Kỹ thuật Warm-up: Dùng autoAlpha và ép tạo layer GPU sẵn sàng
     gsap.set(elementsToAssemble, {
-        opacity: 0,
-        scale: 0.85,
-        transformOrigin: "center center"
+        autoAlpha: 0,
+        scale: 0.88,
+        transformOrigin: "center center",
+        force3D: true
     });
 
     if (heroOverlay) {
-        gsap.set(heroOverlay, { opacity: 0, x: 40 });
+        gsap.set(heroOverlay, { autoAlpha: 0, x: 30 });
     }
 
-    // 3. GSAP TIMELINE: ZOOM OUT VỀ KÍCH THƯỚC CHUẨN (SCALE 1)
-    const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+    // 4. TIMELINE: Delay 0.35s để hiệu ứng chuyển trang tắt hẳn rồi mới bắt đầu diễn hoạt
+    const tl = gsap.timeline({
+        delay: 0.35,
+        defaults: { ease: 'power2.out' }
+    });
 
     tl
-        // Bước A: Zoom out về kích thước gốc 100% (to rõ, sắc nét)
+        // Bước A: Zoom out về kích thước chuẩn
         .to(mapContainer, {
             scale: 1,
-            duration: 1.5,
+            duration: 1.4,
             ease: 'power2.inOut'
         })
-        // Bước B: Các tỉnh thành bay vào lắp ghép từ Bắc vào Nam
+        // Bước B: Các tỉnh xuất hiện mượt mà (autoAlpha kích hoạt cả opacity lẫn visibility)
         .to(elementsToAssemble, {
-            opacity: 1,
+            autoAlpha: 1,
             scale: 1,
-            duration: 0.55,
+            duration: 0.6,
             stagger: {
-                amount: 0.85,
-                from: 'start'
+                amount: 0.9,
+                from: 'start',
+                ease: 'power1.out'
             }
-        }, "-=0.3")
-        // Bước C: Tiêu đề trượt vào
+        }, "-=0.2")
+        // Bước C: Hiện tiêu đề
         .to(heroOverlay, {
-            opacity: 1,
+            autoAlpha: 1,
             x: 0,
             duration: 0.6
         }, "+=0.1");
 
-    // 4. MODAL & TOOLTIP
+    // 5. TOOLTIP & MODAL
     const tooltip = document.getElementById('province-tooltip');
     const modal = document.getElementById('map-modal');
     const modalCloseBtn = document.getElementById('modal-close');
@@ -173,7 +175,8 @@ window.addEventListener('load', () => {
     });
 
     const closeModal = () => {
-        if (modal) modal.classList.remove('is-active');
+        if (!modal) return;
+        modal.classList.remove('is-active');
     };
 
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
