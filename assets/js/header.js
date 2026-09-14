@@ -234,7 +234,6 @@ const headerHTML = `
             <div class="nav-dropdown">
                 <a href="mo-hinh-to-chuc.html">MÔ HÌNH TỔ CHỨC</a>
                 <div class="nav-submenu">
-                    <a href="mo-hinh-to-chuc.html#tab-chinh-quyen">Tổ chức chính quyền</a>
                     <a href="co-cau-to-chuc.html#tab">Cơ Cấu</a>
                 </div>
             </div>
