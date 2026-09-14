@@ -161,85 +161,87 @@ const LEADERS = [
 ];
 
 const grid = document.getElementById('ldrGrid');
-const modal = document.getElementById('ldrModal');
-const mBackdrop = document.getElementById('ldrModalBackdrop');
-const mClose = document.getElementById('ldrModalClose');
-const mImg = document.getElementById('ldrModalImg');
-const mPlaceholder = document.getElementById('ldrModalPlaceholder');
-const mName = document.getElementById('ldrModalName');
-const mRole = document.getElementById('ldrModalRole');
-const mBio = document.getElementById('ldrModalBio');
+if (grid) {
+  const modal = document.getElementById('ldrModal');
+  const mBackdrop = document.getElementById('ldrModalBackdrop');
+  const mClose = document.getElementById('ldrModalClose');
+  const mImg = document.getElementById('ldrModalImg');
+  const mPlaceholder = document.getElementById('ldrModalPlaceholder');
+  const mName = document.getElementById('ldrModalName');
+  const mRole = document.getElementById('ldrModalRole');
+  const mBio = document.getElementById('ldrModalBio');
 
-// Render cards
-grid.innerHTML = LEADERS.map((ldr, i) => `
-    <figure class="ldr-card" tabindex="0" data-index="${i}">
-      <div class="ldr-card__photo">
-        <img src="${ldr.img}" alt="${ldr.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="ldr-card__placeholder" style="display:none">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" />
-          </svg>
+  // Render cards
+  grid.innerHTML = LEADERS.map((ldr, i) => `
+      <figure class="ldr-card" tabindex="0" data-index="${i}">
+        <div class="ldr-card__photo">
+          <img src="${ldr.img}" alt="${ldr.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ldr-card__placeholder" style="display:none">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" />
+            </svg>
+          </div>
         </div>
-      </div>
-      <figcaption class="ldr-card__info">
-        <span class="ldr-card__rank">${ldr.rank}</span>
-        <span class="ldr-card__name">${ldr.name}</span>
-        <div class="ldr-card__roles">
-          ${ldr.roles.map(r => `
-            <div class="ldr-card__role-item">
-              <span class="ldr-card__role-title">${r.title}</span>
-              <span class="ldr-card__role-time">${r.time}</span>
-            </div>
-          `).join('')}
-        </div>
-      </figcaption>
+        <figcaption class="ldr-card__info">
+          <span class="ldr-card__rank">${ldr.rank}</span>
+          <span class="ldr-card__name">${ldr.name}</span>
+          <div class="ldr-card__roles">
+            ${ldr.roles.map(r => `
+              <div class="ldr-card__role-item">
+                <span class="ldr-card__role-title">${r.title}</span>
+                <span class="ldr-card__role-time">${r.time}</span>
+              </div>
+            `).join('')}
+          </div>
+        </figcaption>
 
-    </figure>
-  `).join('');
-
-// Modal logic
-function openModal(index) {
-  const ldr = LEADERS[index];
-  mImg.src = ldr.img;
-  mImg.onerror = () => { mImg.style.display = 'none'; mPlaceholder.style.display = 'flex'; };
-  mImg.onload = () => { mImg.style.display = 'block'; mPlaceholder.style.display = 'none'; };
-  mName.innerHTML = `<span class="ldr-modal__rank">${ldr.rank}</span> ${ldr.name}`;
-
-  mRole.innerHTML = ldr.roles.map(r => `
-      <div style="margin-bottom: 6px;">
-        <strong style="color: #fff;">${r.title}</strong> <br>
-        <span style="color: #ee0033; font-size: 14px;">${r.time}</span>
-      </div>
+      </figure>
     `).join('');
 
-  mBio.innerHTML = '<p>' + ldr.bio + '</p>';
+  // Modal logic
+  function openModal(index) {
+    const ldr = LEADERS[index];
+    mImg.src = ldr.img;
+    mImg.onerror = () => { mImg.style.display = 'none'; mPlaceholder.style.display = 'flex'; };
+    mImg.onload = () => { mImg.style.display = 'block'; mPlaceholder.style.display = 'none'; };
+    mName.innerHTML = `<span class="ldr-modal__rank">${ldr.rank}</span> ${ldr.name}`;
 
-  modal.hidden = false;
-  document.body.style.overflow = 'hidden';
-  requestAnimationFrame(() => modal.classList.add('open'));
-}
+    mRole.innerHTML = ldr.roles.map(r => `
+        <div style="margin-bottom: 6px;">
+          <strong style="color: #fff;">${r.title}</strong> <br>
+          <span style="color: #ee0033; font-size: 14px;">${r.time}</span>
+        </div>
+      `).join('');
 
-function closeModal() {
-  modal.classList.remove('open');
-  setTimeout(() => {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-  }, 400);
-}
+    mBio.innerHTML = '<p>' + ldr.bio + '</p>';
 
-grid.addEventListener('click', e => {
-  const card = e.target.closest('.ldr-card');
-  if (card) openModal(+card.dataset.index);
-});
-grid.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => modal.classList.add('open'));
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    setTimeout(() => {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }, 400);
+  }
+
+  grid.addEventListener('click', e => {
     const card = e.target.closest('.ldr-card');
     if (card) openModal(+card.dataset.index);
-  }
-});
+  });
+  grid.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const card = e.target.closest('.ldr-card');
+      if (card) openModal(+card.dataset.index);
+    }
+  });
 
-mClose.addEventListener('click', closeModal);
-mBackdrop.addEventListener('click', closeModal);
+  mClose.addEventListener('click', closeModal);
+  mBackdrop.addEventListener('click', closeModal);
+}
 
 function initSpotlightBento() {
   const grid = document.querySelector('.bento-grid');
@@ -317,3 +319,17 @@ function initSpotlightBento() {
 }
 
 document.addEventListener('DOMContentLoaded', initSpotlightBento);
+
+// REVEAL ANIMATIONS ON SCROLL (Fixed missing observer)
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+});
