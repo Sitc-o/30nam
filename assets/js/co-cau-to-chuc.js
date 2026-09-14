@@ -263,26 +263,37 @@ function initSpotlightBento() {
       const minTop = Math.min(...cards.map(c => c.getBoundingClientRect().top));
       const isRow1 = Math.abs(rectTarget.top - minTop) < 20;
 
-      const activeIdx = parseInt(activeCard.dataset.index);
+      const others = [...cards].filter(c => c !== activeCard);
       
-      // Bản đồ định tuyến (Conveyor Sequence) để đảm bảo trượt vòng tròn mượt mà
-      const sequenceMap = {
-        0: [2, 3, 1], // Khi hover C0, 3 thẻ còn lại luôn xếp theo thứ tự C2 -> C3 -> C1
-        1: [0, 2, 3], // Khi hover C1, thứ tự là C0 -> C2 -> C3
-        2: [0, 1, 3], // Khi hover C2, thứ tự là C0 -> C1 -> C3
-        3: [2, 0, 1]  // Khi hover C3, thứ tự là C2 -> C0 -> C1
-      };
-      const othersSequence = sequenceMap[activeIdx];
+      others.sort((a, b) => {
+        const rA = a.getBoundingClientRect();
+        const rB = b.getBoundingClientRect();
+        
+        // 1. Sort by horizontal physical position (left edge)
+        if (Math.abs(rA.left - rB.left) > 10) {
+          return rA.left - rB.left;
+        }
+        
+        // 2. Tie-breaker for items with the same left edge (e.g. C0 and C2, or C1 and C0)
+        // The item that is "changing rows" gets pushed into the slot first (wins the tie-break)
+        // An item is changing rows if its current row is the same as the activeCard's current row
+        const aIsRow1 = Math.abs(rA.top - minTop) < 20;
+        const bIsRow1 = Math.abs(rB.top - minTop) < 20;
+        const aChanging = aIsRow1 === isRow1; 
+        const bChanging = bIsRow1 === isRow1;
+        
+        if (aChanging !== bChanging) {
+          return aChanging ? -1 : 1;
+        }
+        
+        return parseInt(a.dataset.index) - parseInt(b.dataset.index);
+      });
 
       if (isRow1) {
         activeCard.style.order = 1;
-        othersSequence.forEach((idx, pos) => {
-          cards[idx].style.order = pos + 2;
-        });
+        others.forEach((c, i) => c.style.order = i + 2);
       } else {
-        othersSequence.forEach((idx, pos) => {
-          cards[idx].style.order = pos + 1;
-        });
+        others.forEach((c, i) => c.style.order = i + 1);
         activeCard.style.order = 4;
       }
 
