@@ -7,43 +7,43 @@
 /* ─── CUSTOM FONTS ──────────────────────────────────────── */
 @font-face {
   font-family: 'FS Magistral';
-  src: url('assets/fonts/FSMagistral-Light.ttf') format('truetype');
+  src: url('../fonts/FSMagistral-Light.ttf') format('truetype');
   font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'FS Magistral';
-  src: url('assets/fonts/FSMagistral-Book.ttf') format('truetype');
+  src: url('../fonts/FSMagistral-Book.ttf') format('truetype');
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'FS Magistral';
-  src: url('assets/fonts/FSMagistral-Medium.ttf') format('truetype');
+  src: url('../fonts/FSMagistral-Medium.ttf') format('truetype');
   font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'FS Magistral';
-  src: url('assets/fonts/FSMagistral-Bold.ttf') format('truetype');
+  src: url('../fonts/FSMagistral-Bold.ttf') format('truetype');
   font-weight: 700;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'FS Magistral';
-  src: url('assets/fonts/FSMagistral-ExtraBold.ttf') format('truetype');
+  src: url('../fonts/FSMagistral-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-display: swap;
 }
 
 @font-face {
   font-family: '1FTV Autography';
-  src: url('assets/fonts/1FTVAutography.ttf') format('truetype'),
-    url('assets/fonts/1FTV-Autography.ttf') format('truetype');
+  src: url('../fonts/DancingScript.ttf') format('truetype'),
+    url('../fonts/DancingScript.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
