@@ -43,7 +43,7 @@ Trung tâm Xuất nhập khẩu được giao trọng trách này. Trước đó
             {
                 year: "Năm 2006", milestone: "Công ty chính thức thực hiện chế độ doanh nghiệp nhà nước hạch toán độc lập, theo cơ chế thị trường", desc: `Thực hiện chủ trương củng cố cải tổ mô hình tổ chức, đáp ứng yêu cầu kinh doanh dịch vụ viễn thông trong tình hình mới, Tổng Công ty Viễn thông Quân đội đã xây dựng đề án thành lập các Công ty thành viên và trình Bộ Quốc phòng phê duyệt. Ngày 12 tháng 1 năm 2006, Bộ trưởng Bộ Quốc phòng ra Quyết định số 11/2006/QĐ-BQP thành lập Công ty Trách nhiệm hữu hạn Nhà nước một thành viên Thương mại và Xuất nhập khẩu Viettel thuộc Tổng Công ty Viễn thông Quân đội (tên viết tắt là VIETTELIMEX). Văn phòng giao dịch tại số 6, lô 14B, phường Trung Hòa, quận Cầu Giấy, thành phố Hà Nội. Quyết định ghi rõ: Công ty Trách nhiệm hữu hạn nhà nước một thành viên Thương mại và Xuất nhập khẩu Viettel có vốn điều lệ là 35 tỷ đồng, là doanh nghiệp 100% vốn do Tổng Công ty Viễn thông Quân đội đầu tư, có con dấu riêng, được mở tài khoản tại ngân hàng theo quy định của pháp luật, hoạt động theo Luật Doanh nghiệp và Điều lệ của Tổng Công ty do Bộ Quốc phòng phê duyệt.
 Từ đây, Công ty chính thức thực hiện chế độ doanh nghiệp nhà nước hạch toán độc lập, theo cơ chế thị trường. Khi được hỏi, “trước đây đơn vị hạch toán phụ thuộc; “mọi quyết định kế hoạch, thu, chi đã có trên lo, nay hạch toán độc lập, với cương vị Giám đốc Công ty, anh có lo không?”; Đại tá Đỗ Ngọc Cường từng chia sẻ: “Lúc đó rất vui; tuy ban đầu cũng có chút lo lắng một chút, nhưng vững tâm vì mình tin với lực lượng của mình được đào tạo cơ bản, nhiệt tình trách nhiệm, mình tin là sẽ làm được và điều quan trọng là được cấp trên tin tưởng; mình được tự chủ, quyết định mọi điều, điều đó quan trọng lắm”. Mình tự lớn lên, trưởng thành từ chính nội lực của mình là chính, đó là truyền thống tốt đẹp của Công ty trong chặng đường xây dựng và phát triển.  
-`, img: "assets/images/Cac qđ/5. Sự kiện số 5- QĐ11 2026  vv thành lập CTTNHHNNMTVTM&XNK viettel thuộc TCTVTQĐ.pdf", caption: "Ra mắt mạng di động, 2002"
+`, img: "assets/images/Cac qđ/5. Sự kiện số 5- QĐ11 2026  vv thành lập CTTNHHNNMTVTM&XNK viettel thuộc TCTVTQĐ.pdf"
             },
             {
                 year: "Ngày 03 tháng 5 năm 2006", milestone: `Khai trương Siêu thị VKO Ngọc Khánh, Ba Đình, Hà Nội`, desc: `Năm 2006, khi đã phát triển đầy đủ dịch vụ viễn thông; đặc biệt là dịch vụ điện thoại di động phát triển nhanh chóng; Tổng Công ty Viễn thông Quân đội chủ trương phải lập riêng cho mình một hệ thống kênh phân phối dịch vụ và thiết bị đầu cuối thay vì phụ thuộc vào hệ thống các đại lý trước đây. Tổng Công ty đã chỉ đạo  Công ty Viễn thông Viettel  “tổ chức quy hoạch kênh phân phối các cửa hàng, đại lý và điểm bán hàng tại các tỉnh, thành phố” , một mặt chỉ đạo và đầu tư cho Công ty Thương mại và Xuất Nhập khẩu, nghiên cứu lập phương án, tổ chức xây dựng 1-2 siêu thị đầu tiên để làm điểm trước khi nhân rộng với quan điểm phải ở thành phố lớn, nơi kinh doanh đông đúc, sầm uất, đẹp, thể hiện nổi bật hình ảnh thương hiệu Viettel. Địa điểm đầu tiên lựa chọn đặt siêu thị là khu vực triển lãm quốc gia, tại góc ngã tư mặt phố Giảng Võ giao với phố Ngọc Khánh Hà Nội (thường gọi là khu Trung tâm thương mại VKO). Từ tháng 2 năm 2006, Công ty đã bắt tay vào công tác chuẩn bị thuê đối tác thiết kế, thi công với quan điểm làm siêu thị đầu tiên phải nổi bật về hình thức, rộng rãi và tiện ích.    
@@ -266,12 +266,20 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
             let photosHTML = "";
             photos.forEach((photo, idx) => {
                 const photoRot = rotations[(i + idx * 3) % rotations.length];
+
+                // Kiểm tra xem file có phải là định dạng PDF không
+                const isPdf = photo.src.toLowerCase().endsWith('.pdf');
+
+                // Nếu là PDF thì dùng iframe, ngược lại dùng img
+                const mediaHTML = isPdf
+                    ? `<iframe src="${photo.src}" width="100%" height="400px" style="border: none;"></iframe>`
+                    : `<img src="${photo.src}" alt="${m.year}">`;
                 photosHTML += `
                     <div class="scrapbook-photo-item" style="transform: rotate(${photoRot}deg);">
                         <div class="scrapbook-photo-wrapper">
                             <span class="corner-tr"></span>
                             <span class="corner-bl"></span>
-                            <img src="${photo.src}" alt="${m.year}">
+                            ${mediaHTML}
                         </div>
                         <p class="scrapbook-caption font-deco">${photo.caption || ""}</p>
                     </div>
