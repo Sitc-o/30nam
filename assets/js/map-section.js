@@ -155,6 +155,23 @@ window.addEventListener('load', () => {
         path.addEventListener('click', () => {
             if (tooltip) tooltip.style.opacity = '0';
 
+            // Tính toán vị trí tâm của tỉnh để zoom in
+            if (wrapper && mapContainer && typeof gsap !== 'undefined') {
+                const pRect = wrapper.getBoundingClientRect();
+                const mRect = mapContainer.getBoundingClientRect();
+                
+                // Tính phần trăm vị trí tâm của tỉnh so với map container (khi scale đang là 1)
+                const originX = ((pRect.left + pRect.width / 2 - mRect.left) / mRect.width) * 100;
+                const originY = ((pRect.top + pRect.height / 2 - mRect.top) / mRect.height) * 100;
+                
+                gsap.to(mapContainer, {
+                    transformOrigin: `${originX}% ${originY}%`,
+                    scale: 2.5,
+                    duration: 0.8,
+                    ease: 'power2.inOut'
+                });
+            }
+
             if (modalMetrics) modalMetrics.innerHTML = '';
             if (modalTitle) modalTitle.textContent = provName;
             if (modalSubtitle) modalSubtitle.textContent = data.coords;
@@ -177,6 +194,15 @@ window.addEventListener('load', () => {
     const closeModal = () => {
         if (!modal) return;
         modal.classList.remove('is-active');
+        
+        // Zoom out về kích thước ban đầu
+        if (mapContainer && typeof gsap !== 'undefined') {
+            gsap.to(mapContainer, {
+                scale: 1,
+                duration: 0.8,
+                ease: 'power2.inOut'
+            });
+        }
     };
 
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);

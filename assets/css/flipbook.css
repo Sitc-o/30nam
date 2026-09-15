@@ -704,10 +704,90 @@
     left: 0;
     right: 0;
     bottom: 0;
-    pointer-events: none;
+    pointer-events: none; /* Khóa tương tác trong lúc rớt */
+    will-change: transform;
     /* Xuyên qua không chặn click */
     z-index: 5;
 }
+
+/* --- CUSTOM LIGHTBOX CHO ẢNH TRONG SÁCH FLIPBOOK --- */
+.custom-lightbox {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.custom-lightbox.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-lightbox-backdrop {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.custom-lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.1s ease-out;
+  cursor: grab;
+  position: relative;
+  z-index: 2;
+}
+
+.custom-lightbox-img:active {
+  cursor: grabbing;
+}
+
+.custom-lightbox-close {
+  position: absolute;
+  top: 20px; right: 30px;
+  background: none; border: none;
+  color: white; font-size: 50px;
+  line-height: 1;
+  cursor: pointer; z-index: 10;
+  padding: 10px;
+}
+
+.custom-lightbox-prev,
+.custom-lightbox-next {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none; color: white;
+  font-size: 60px;
+  cursor: pointer;
+  padding: 10px 20px;
+  z-index: 10;
+  transition: background 0.3s;
+}
+
+.custom-lightbox-prev:hover,
+.custom-lightbox-next:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.custom-lightbox-prev { left: 20px; }
+.custom-lightbox-next { right: 20px; }
+
 
 /* Trang lẻ (Bìa trước, Mặt phải) -> Gáy sách nằm ở bên TRÁI */
 /* Cải tiến gáy sách sâu và chân thực hơn theo ảnh mẫu */
