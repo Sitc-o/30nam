@@ -1763,11 +1763,22 @@ ol {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--white);
   opacity: 0;
   pointer-events: none;
   transform: translateY(20px);
   transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  
+  /* Nền chia đường chéo cách điệu */
+  background-color: #ffffff;
+  background-image: 
+    /* Ánh sáng đỏ lan tỏa ở góc phải dưới */
+    radial-gradient(circle at 95% 90%, rgba(238,0,51,0.1) 0%, transparent 40%),
+    /* Điểm nhấn vạch đỏ đậm */
+    linear-gradient(110deg, transparent 38%, var(--red) 38%, var(--red) 38.2%, transparent 38.3%),
+    /* Vạch mờ song song */
+    linear-gradient(110deg, transparent 39.5%, rgba(238,0,51,0.15) 39.5%, rgba(238,0,51,0.15) 39.6%, transparent 39.7%),
+    /* Nửa bên phải màu đỏ nhạt (giúp chữ vẫn dễ đọc) */
+    linear-gradient(110deg, #ffffff 38%, #fff4f6 38%, #fce1e6 100%);
 }
 
 .dept-overlay.is-active {
@@ -1881,6 +1892,26 @@ ol {
   object-fit: cover;
 }
 
+.polaroid .polaroid-caption {
+  display: block;
+  width: 90%; /* Giới hạn chiều rộng để không bao giờ bị tràn ra ngoài viền ảnh */
+  margin: 12px auto 0 auto;
+  
+  font-family: var(--font-body); /* Dùng font cơ bản (Roboto/Arial) gọn gàng hơn */
+  font-size: 11px; /* Thu nhỏ chữ lại để vừa vặn */
+  color: #f0003c; /* Màu chữ đỏ hồng giống hệt mẫu */
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.4;
+  letter-spacing: 0px;
+  text-align: center;
+  
+  background-color: #ffeff2; /* Nền hồng rất nhạt */
+  border: 1px solid #ffb3c6; /* Viền mỏng và thanh thoát hơn */
+  border-radius: 100px;
+  padding: 6px 12px; /* Giảm padding để badge không bị phình to */
+}
+
 /* Khối 2: Asymmetric Grid */
 .editorial-block--collage {
   width: 900px;
@@ -1896,19 +1927,34 @@ ol {
   gap: 32px;
 }
 
-.collage-col-left img {
+figure.collage-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.collage-col-left figure.collage-item img {
   width: 100%;
   height: 300px;
   object-fit: cover;
   border-radius: 8px;
 }
 
-.collage-col-right img {
+.collage-col-right figure.collage-item img {
   width: 100%;
   height: 632px;
   /* matches left side height + gap */
   object-fit: cover;
   border-radius: 8px;
+}
+
+.collage-caption {
+  font-family: 'FSMagistral', sans-serif;
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  text-align: center;
 }
 
 /* Khối 3: Panorama */
@@ -1936,6 +1982,19 @@ ol {
   font-size: 64px;
   line-height: 1;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.panorama-caption {
+  position: absolute;
+  bottom: 30px;
+  left: 60px;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'FSMagistral', sans-serif;
+  font-size: 14px;
+  backdrop-filter: blur(4px);
 }
 
 @media (max-width: 1100px) {

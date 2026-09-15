@@ -380,8 +380,15 @@ const DEPT_DATA = {
   'DEP.01': {
     name: 'Phòng Chiến lược',
     desc: 'Tham mưu xây dựng chiến lược tổng thể, hoạch định kế hoạch dài hạn và phân tích cơ hội phát triển của Tổng Công ty. Đây là bộ não phân tích số liệu, dự báo xu hướng thị trường, đưa ra các kịch bản kinh doanh và các định hướng chiến lược trọng tâm nhằm duy trì vị thế cạnh tranh của Viettel Commerce trên thương trường.',
+    captions: [
+      'Đồng chí Nguyễn Quốc Tuấn - Trưởng phòng Chiến lược Tổng Công ty',
+      'Thảo luận chiến lược kinh doanh',
+      'Phân tích biểu đồ tăng trưởng',
+      'Làm việc nhóm cùng đối tác',
+      'Tập thể Phòng Chiến lược'
+    ],
     images: [
-      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Chiến lược.jpg',
+      'assets/images/Ảnh các anh/Anh Quốc Tuấn.png',
       'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80',
       'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
       'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80',
@@ -391,6 +398,13 @@ const DEPT_DATA = {
   'DEP.02': {
     name: 'Phòng Hành chính',
     desc: 'Quản trị hành chính, văn thư lưu trữ và đảm bảo công tác hậu cần cho toàn bộ hoạt động của Tổng Công ty. Cung cấp môi trường làm việc chuyên nghiệp, trang thiết bị đầy đủ và điều phối các sự kiện nội bộ, giúp các phòng ban khác an tâm công tác.',
+    captions: [
+      'Ban Lãnh đạo Phòng Hành chính',
+      'Nội dung chú thích ảnh 2',
+      'Nội dung chú thích ảnh 3',
+      'Nội dung chú thích ảnh 4',
+      'Nội dung chú thích ảnh panorama'
+    ],
     images: [
       'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
       'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&q=80',
@@ -402,6 +416,13 @@ const DEPT_DATA = {
   'DEP.03': {
     name: 'Phòng Pháp chế & Đầu tư',
     desc: 'Tư vấn pháp lý, quản lý rủi ro, thẩm định hợp đồng và điều phối các hoạt động đầu tư của Tổng Công ty. Đảm bảo mọi hoạt động kinh doanh tuân thủ nghiêm ngặt quy định pháp luật và quy chế của Tập đoàn, đồng thời tối ưu hóa hiệu quả các dự án đầu tư.',
+    captions: [
+      'Ban Lãnh đạo Phòng Pháp chế & Đầu tư',
+      'Nội dung chú thích ảnh 2',
+      'Nội dung chú thích ảnh 3',
+      'Nội dung chú thích ảnh 4',
+      'Nội dung chú thích ảnh panorama'
+    ],
     images: [
       'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80',
       'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80',
@@ -413,8 +434,15 @@ const DEPT_DATA = {
   'DEP.04': {
     name: 'Phòng Nhân sự',
     desc: 'Tuyển dụng, đào tạo phát triển nhân tài, xây dựng chính sách đãi ngộ và văn hóa doanh nghiệp của Tổng Công ty. Xây dựng môi trường làm việc năng động, sáng tạo, tạo động lực cho cán bộ nhân viên cống hiến và phát triển sự nghiệp lâu dài.',
+    captions: [
+      'Đồng chí Phan Sỹ Nhân - Trưởng phòng Nhân sự Tổng Công ty',
+      'Nội dung chú thích ảnh 2',
+      'Nội dung chú thích ảnh 3',
+      'Nội dung chú thích ảnh 4',
+      'Nội dung chú thích ảnh panorama'
+    ],
     images: [
-      'https://images.unsplash.com/photo-1542744094-24638ea0b3b5?w=800&q=80',
+      'assets/images/Ảnh các anh/Đồng chí Phan Sỹ Nhân Trưởng phòng Nhân sự Tổng Công ty.png',
       'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80',
       'https://images.unsplash.com/photo-1552581234-26160f608093?w=600&q=80',
       'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80',
@@ -424,6 +452,13 @@ const DEPT_DATA = {
   'DEP.05': {
     name: 'Phòng Tài chính – Kế toán',
     desc: 'Quản lý tài chính doanh nghiệp, lập báo cáo kế toán, kiểm soát dòng tiền và đảm bảo tuân thủ các quy định tài chính. Tham mưu cho Ban Giám đốc về các quyết định tài chính chiến lược, đảm bảo nguồn vốn luôn lưu thông ổn định và hiệu quả.',
+    captions: [
+      'Ban Lãnh đạo Phòng Tài chính – Kế toán',
+      'Nội dung chú thích ảnh 2',
+      'Nội dung chú thích ảnh 3',
+      'Nội dung chú thích ảnh 4',
+      'Nội dung chú thích ảnh panorama'
+    ],
     images: [
       'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
@@ -435,8 +470,15 @@ const DEPT_DATA = {
   'DEP.06': {
     name: 'Phòng Chính trị',
     desc: 'Công tác tư tưởng, chính trị; xây dựng đơn vị vững mạnh toàn diện về đạo đức, kỷ luật và tinh thần Viettel. Định hướng tư tưởng, lan tỏa văn hóa người lính, xây dựng khối đại đoàn kết thống nhất trong toàn Tổng Công ty.',
+    captions: [
+      'Đồng chí Hà Minh Tuấn - Trưởng phòng Chính trị Tổng Công ty',
+      'Nội dung chú thích ảnh 2',
+      'Nội dung chú thích ảnh 3',
+      'Nội dung chú thích ảnh 4',
+      'Nội dung chú thích ảnh panorama'
+    ],
     images: [
-      'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80',
+      'assets/images/Ảnh các anh/Đồng chí Hà Minh Tuấn Trưởng phòng Chính trị Tổng Công ty.png',
       'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80',
       'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80',
       'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1200&q=80',
@@ -446,6 +488,13 @@ const DEPT_DATA = {
   'DEP.07': {
     name: 'Phòng Công nghệ Thông tin',
     desc: 'Quản trị hạ tầng công nghệ, phát triển hệ thống số hóa và thúc đẩy chuyển đổi số toàn diện trong Tổng Công ty. Cung cấp các công cụ và nền tảng số hiện đại giúp tối ưu hóa quy trình nghiệp vụ, tăng cường năng suất lao động.',
+    captions: [
+      'Ban Lãnh đạo Phòng Công nghệ Thông tin',
+      'Nội dung chú thích ảnh 2',
+      'Nội dung chú thích ảnh 3',
+      'Nội dung chú thích ảnh 4',
+      'Nội dung chú thích ảnh panorama'
+    ],
     images: [
       'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=800&q=80',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',
@@ -468,17 +517,27 @@ function openDeptOverlay(id) {
       <p>${data.desc}</p>
       <div class="polaroid">
         <img src="${data.images[0]}" alt="${data.name} image 1" />
+        ${data.captions && data.captions[0] ? `<p class="polaroid-caption">${data.captions[0]}</p>` : ''}
       </div>
     </div>
     
     <!-- Khối 2: Asymmetric -->
     <div class="editorial-block editorial-block--collage">
       <div class="collage-col-left">
-        <img src="${data.images[1]}" alt="Image 2" />
-        <img src="${data.images[2]}" alt="Image 3" />
+        <figure class="collage-item">
+          <img src="${data.images[1]}" alt="Image 2" />
+          ${data.captions && data.captions[1] ? `<figcaption class="collage-caption">${data.captions[1]}</figcaption>` : ''}
+        </figure>
+        <figure class="collage-item">
+          <img src="${data.images[2]}" alt="Image 3" />
+          ${data.captions && data.captions[2] ? `<figcaption class="collage-caption">${data.captions[2]}</figcaption>` : ''}
+        </figure>
       </div>
       <div class="collage-col-right">
-        <img src="${data.images[3]}" alt="Image 4" />
+        <figure class="collage-item">
+          <img src="${data.images[3]}" alt="Image 4" />
+          ${data.captions && data.captions[3] ? `<figcaption class="collage-caption">${data.captions[3]}</figcaption>` : ''}
+        </figure>
       </div>
     </div>
     
@@ -486,6 +545,7 @@ function openDeptOverlay(id) {
     <div class="editorial-block editorial-block--panorama">
       <img src="${data.images[4]}" alt="Panorama" />
       <h3 class="panorama-text">Vững bước tiên phong</h3>
+      ${data.captions && data.captions[4] ? `<figcaption class="panorama-caption">${data.captions[4]}</figcaption>` : ''}
     </div>
   `;
 
@@ -538,6 +598,7 @@ const initLightbox = () => {
     <div class="custom-lightbox-backdrop"></div>
     <div class="custom-lightbox-content">
       <img src="" class="custom-lightbox-img" alt="Phóng to" draggable="false" />
+      <div class="custom-lightbox-caption" style="position:absolute; bottom:-50px; left:0; width:100%; text-align:center; color:white; font-family:'FSMagistral', sans-serif; font-size:16px; font-weight:500; text-shadow:0 2px 4px rgba(0,0,0,0.8); pointer-events:none;"></div>
     </div>
     <button class="custom-lightbox-close" title="Đóng (Esc)">&times;</button>
     <button class="custom-lightbox-prev" title="Ảnh trước (Mũi tên trái)">&lsaquo;</button>
@@ -546,6 +607,7 @@ const initLightbox = () => {
   document.body.appendChild(lightbox);
 
   const imgEl = lightbox.querySelector('.custom-lightbox-img');
+  const captionEl = lightbox.querySelector('.custom-lightbox-caption');
   const backdrop = lightbox.querySelector('.custom-lightbox-backdrop');
   const closeBtn = lightbox.querySelector('.custom-lightbox-close');
   const prevBtn = lightbox.querySelector('.custom-lightbox-prev');
@@ -574,7 +636,9 @@ const initLightbox = () => {
   };
 
   const updateImage = () => {
-    imgEl.src = currentImages[currentIndex];
+    const current = currentImages[currentIndex];
+    imgEl.src = current.src;
+    captionEl.innerHTML = current.caption ? current.caption : '';
     currentZoom = 1;
     translateX = 0;
     translateY = 0;
@@ -582,13 +646,13 @@ const initLightbox = () => {
   };
 
   const prevImage = (e) => {
-    if(e) e.stopPropagation();
+    if (e) e.stopPropagation();
     currentIndex = (currentIndex > 0) ? currentIndex - 1 : currentImages.length - 1;
     updateImage();
   };
 
   const nextImage = (e) => {
-    if(e) e.stopPropagation();
+    if (e) e.stopPropagation();
     currentIndex = (currentIndex < currentImages.length - 1) ? currentIndex + 1 : 0;
     updateImage();
   };
@@ -627,14 +691,14 @@ const initLightbox = () => {
     startY = e.clientY - translateY;
     imgEl.style.cursor = 'grabbing';
   });
-  
+
   window.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     translateX = e.clientX - startX;
     translateY = e.clientY - startY;
     updateTransform();
   });
-  
+
   window.addEventListener('mouseup', () => {
     isDragging = false;
     imgEl.style.cursor = 'grab';
@@ -644,9 +708,22 @@ const initLightbox = () => {
   document.body.addEventListener('click', (e) => {
     if (e.target.tagName === 'IMG' && e.target.closest('#deptGalleryContent')) {
       const container = e.target.closest('#deptGalleryContent');
-      // Lấy danh sách ảnh hiện tại trong gallery
+      // Lấy danh sách ảnh hiện tại trong gallery kèm chú thích
       const allImgNodes = Array.from(container.querySelectorAll('img'));
-      const allImgs = allImgNodes.map(img => img.src);
+      const allImgs = allImgNodes.map(img => {
+        let caption = '';
+        if (img.closest('.polaroid')) {
+          const capEl = img.closest('.polaroid').querySelector('.polaroid-caption');
+          if (capEl) caption = capEl.textContent;
+        } else if (img.closest('.collage-item')) {
+          const capEl = img.closest('.collage-item').querySelector('.collage-caption');
+          if (capEl) caption = capEl.textContent;
+        } else if (img.closest('.editorial-block--panorama')) {
+          const capEl = img.closest('.editorial-block--panorama').querySelector('.panorama-caption');
+          if (capEl) caption = capEl.textContent;
+        }
+        return { src: img.src, caption: caption };
+      });
       const index = allImgNodes.indexOf(e.target);
       if (index !== -1) {
         openLightbox(allImgs, index);
