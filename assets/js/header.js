@@ -232,10 +232,12 @@ const headerHTML = `
                 </div>
             </div>
             <div class="nav-dropdown">
-                <a href="mo-hinh-to-chuc.html">MÔ HÌNH TỔ CHỨC</a>
+                <a href="co-cau-to-chuc.html">MÔ HÌNH TỔ CHỨC</a>
+                <!-- 
                 <div class="nav-submenu">
                     <a href="co-cau-to-chuc.html#tab">Cơ Cấu</a>
                 </div>
+                -->
             </div>
             <a href="thanh-tuu-khen-thuong.html">THÀNH TỰU</a>
         </nav>
