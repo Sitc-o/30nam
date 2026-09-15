@@ -43,7 +43,11 @@ Trung tâm Xuất nhập khẩu được giao trọng trách này. Trước đó
             {
                 year: "Năm 2006", milestone: "Công ty chính thức thực hiện chế độ doanh nghiệp nhà nước hạch toán độc lập, theo cơ chế thị trường", desc: `Thực hiện chủ trương củng cố cải tổ mô hình tổ chức, đáp ứng yêu cầu kinh doanh dịch vụ viễn thông trong tình hình mới, Tổng Công ty Viễn thông Quân đội đã xây dựng đề án thành lập các Công ty thành viên và trình Bộ Quốc phòng phê duyệt. Ngày 12 tháng 1 năm 2006, Bộ trưởng Bộ Quốc phòng ra Quyết định số 11/2006/QĐ-BQP thành lập Công ty Trách nhiệm hữu hạn Nhà nước một thành viên Thương mại và Xuất nhập khẩu Viettel thuộc Tổng Công ty Viễn thông Quân đội (tên viết tắt là VIETTELIMEX). Văn phòng giao dịch tại số 6, lô 14B, phường Trung Hòa, quận Cầu Giấy, thành phố Hà Nội. Quyết định ghi rõ: Công ty Trách nhiệm hữu hạn nhà nước một thành viên Thương mại và Xuất nhập khẩu Viettel có vốn điều lệ là 35 tỷ đồng, là doanh nghiệp 100% vốn do Tổng Công ty Viễn thông Quân đội đầu tư, có con dấu riêng, được mở tài khoản tại ngân hàng theo quy định của pháp luật, hoạt động theo Luật Doanh nghiệp và Điều lệ của Tổng Công ty do Bộ Quốc phòng phê duyệt.
 Từ đây, Công ty chính thức thực hiện chế độ doanh nghiệp nhà nước hạch toán độc lập, theo cơ chế thị trường. Khi được hỏi, “trước đây đơn vị hạch toán phụ thuộc; “mọi quyết định kế hoạch, thu, chi đã có trên lo, nay hạch toán độc lập, với cương vị Giám đốc Công ty, anh có lo không?”; Đại tá Đỗ Ngọc Cường từng chia sẻ: “Lúc đó rất vui; tuy ban đầu cũng có chút lo lắng một chút, nhưng vững tâm vì mình tin với lực lượng của mình được đào tạo cơ bản, nhiệt tình trách nhiệm, mình tin là sẽ làm được và điều quan trọng là được cấp trên tin tưởng; mình được tự chủ, quyết định mọi điều, điều đó quan trọng lắm”. Mình tự lớn lên, trưởng thành từ chính nội lực của mình là chính, đó là truyền thống tốt đẹp của Công ty trong chặng đường xây dựng và phát triển.  
-`, img: "assets/images/Cac qđ/5. Sự kiện số 5- QĐ11 2026  vv thành lập CTTNHHNNMTVTM&XNK viettel thuộc TCTVTQĐ.pdf"
+`, images: [
+                    { src: "cac qd/5. Sự kiện số 5- QĐ11 2026  vv thành lập CTTNHHNNMTVTM&XNK viettel thuộc TCTVTQĐ_page-0001.jpg", caption: "Lễ thành lập Viettel, 1997" },
+                    { src: "cac qd/5. Sự kiện số 5- QĐ11 2026  vv thành lập CTTNHHNNMTVTM&XNK viettel thuộc TCTVTQĐ_page-0002.jpg", caption: "Lễ thành lập Viettel, 1997" },
+
+                ]
             },
             {
                 year: "Ngày 03 tháng 5 năm 2006", milestone: `Khai trương Siêu thị VKO Ngọc Khánh, Ba Đình, Hà Nội`, desc: `Năm 2006, khi đã phát triển đầy đủ dịch vụ viễn thông; đặc biệt là dịch vụ điện thoại di động phát triển nhanh chóng; Tổng Công ty Viễn thông Quân đội chủ trương phải lập riêng cho mình một hệ thống kênh phân phối dịch vụ và thiết bị đầu cuối thay vì phụ thuộc vào hệ thống các đại lý trước đây. Tổng Công ty đã chỉ đạo  Công ty Viễn thông Viettel  “tổ chức quy hoạch kênh phân phối các cửa hàng, đại lý và điểm bán hàng tại các tỉnh, thành phố” , một mặt chỉ đạo và đầu tư cho Công ty Thương mại và Xuất Nhập khẩu, nghiên cứu lập phương án, tổ chức xây dựng 1-2 siêu thị đầu tiên để làm điểm trước khi nhân rộng với quan điểm phải ở thành phố lớn, nơi kinh doanh đông đúc, sầm uất, đẹp, thể hiện nổi bật hình ảnh thương hiệu Viettel. Địa điểm đầu tiên lựa chọn đặt siêu thị là khu vực triển lãm quốc gia, tại góc ngã tư mặt phố Giảng Võ giao với phố Ngọc Khánh Hà Nội (thường gọi là khu Trung tâm thương mại VKO). Từ tháng 2 năm 2006, Công ty đã bắt tay vào công tác chuẩn bị thuê đối tác thiết kế, thi công với quan điểm làm siêu thị đầu tiên phải nổi bật về hình thức, rộng rãi và tiện ích.    
@@ -255,7 +259,7 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
                 </div>
             `;
 
-            // Trang PHẢI - Ảnh dán (Hỗ trợ 1 hoặc nhiều ảnh tự co giãn)
+            // Trang PHẢI - Ảnh dán & Chuyển đổi Trang 1 / Trang 2 (Khung ôm sát ảnh)
             let photos = [];
             if (m.images && Array.isArray(m.images)) {
                 photos = m.images;
@@ -263,33 +267,56 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
                 photos = [{ src: m.img, caption: m.caption }];
             }
 
-            let photosHTML = "";
-            photos.forEach((photo, idx) => {
-                const photoRot = rotations[(i + idx * 3) % rotations.length];
+            let rightContentHTML = "";
 
-                // Kiểm tra xem file có phải là định dạng PDF không
-                const isPdf = photo.src.toLowerCase().endsWith('.pdf');
+            if (photos.length > 1) {
+                let imgsHTML = "";
+                let tabsHTML = "";
 
-                // Nếu là PDF thì dùng iframe, ngược lại dùng img
-                const mediaHTML = isPdf
-                    ? `<iframe src="${photo.src}" width="100%" height="400px" style="border: none;"></iframe>`
-                    : `<img src="${photo.src}" alt="${m.year}">`;
-                photosHTML += `
-                    <div class="scrapbook-photo-item" style="transform: rotate(${photoRot}deg);">
+                photos.forEach((photo, idx) => {
+                    const isActive = idx === 0;
+                    imgsHTML += `
+                        <img src="${photo.src}" 
+                             alt="${photo.caption || m.year}" 
+                             class="stack-img ${isActive ? 'active' : ''}" 
+                             data-index="${idx}" 
+                             data-caption="${photo.caption || ''}" 
+                             style="${isActive ? 'display: block;' : 'display: none;'}">
+                    `;
+                    tabsHTML += `
+                        <button type="button" class="stack-tab-btn ${isActive ? 'active' : ''}" data-target="${idx}">
+                            Trang ${idx + 1}
+                        </button>
+                    `;
+                });
+
+                rightContentHTML = `
+                    <div class="scrapbook-photo-item formal-stack-item">
+                        <div class="scrapbook-photo-wrapper auto-fit-wrapper">
+                            ${imgsHTML}
+                        </div>
+                        <div class="stack-controller">
+                            <div class="stack-tabs">${tabsHTML}</div>
+                            <p class="scrapbook-caption font-deco stack-caption-text">${photos[0].caption || ""}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const photo = photos[0] || { src: "", caption: "" };
+                rightContentHTML = `
+                    <div class="scrapbook-photo-item">
                         <div class="scrapbook-photo-wrapper">
-                            <span class="corner-tr"></span>
-                            <span class="corner-bl"></span>
-                            ${mediaHTML}
+                            <img src="${photo.src}" alt="${m.year}">
                         </div>
                         <p class="scrapbook-caption font-deco">${photo.caption || ""}</p>
                     </div>
                 `;
-            });
+            }
 
             pagesHTML += `
                 <div class="page scrapbook-right">
-                    <div class="page-content scrapbook-gallery" data-count="${photos.length}">
-                        ${photosHTML}
+                    <div class="page-content scrapbook-gallery">
+                        ${rightContentHTML}
                     </div>
                     <div class="page-number">${i * 2 + 2}</div>
                 </div>
@@ -329,7 +356,6 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
 
         // Expose để book-timeline.js có thể hook vào
         window.bookPageFlip = pageFlip;
-
         // ==========================================
         // LIGHTBOX & EVENT INTERCEPTION
         // ==========================================
@@ -427,18 +453,58 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
             el.addEventListener("pointerdown", stopProp);
             el.addEventListener("pointermove", stopProp);
         });
-        // Click ảnh để mở zoom
+        // Click ảnh để mở zoom (chỉ mở ảnh đang nằm ở mặt trên)
         document.querySelectorAll(".scrapbook-photo-wrapper img").forEach(img => {
-            img.style.cursor = "zoom-in";
             img.addEventListener("click", (e) => {
+                const card = img.closest(".stack-card");
+                // Nếu là thẻ nằm sau thì không mở zoom mà nhường cho click đổi vị trí
+                if (card && card.classList.contains("behind")) return;
+
                 e.stopPropagation();
                 lightboxImg.src = img.src;
-                const wrapper = img.closest(".scrapbook-photo-item") || img.closest(".page-content");
-                const captionEl = wrapper.querySelector(".scrapbook-caption");
-                lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
+
+                const stackItem = img.closest(".formal-stack-item");
+                if (stackItem) {
+                    const captionEl = stackItem.querySelector(".stack-caption-text");
+                    lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
+                } else {
+                    const wrapper = img.closest(".scrapbook-photo-item");
+                    const captionEl = wrapper ? wrapper.querySelector(".scrapbook-caption") : null;
+                    lightboxCaption.textContent = captionEl ? captionEl.textContent : "";
+                }
 
                 lightbox.style.display = "flex";
                 setTimeout(() => lightbox.classList.add("active"), 10);
+            });
+        });
+
+        // Xử lý chuyển đổi ảnh khi bấm Tab (Trang 1 / Trang 2)
+        document.querySelectorAll('.formal-stack-item').forEach(stackItem => {
+            const imgs = stackItem.querySelectorAll('.stack-img');
+            const tabs = stackItem.querySelectorAll('.stack-tab-btn');
+            const captionEl = stackItem.querySelector('.stack-caption-text');
+
+            tabs.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Không gây lật trang sách
+                    const targetIdx = parseInt(btn.getAttribute('data-target'));
+
+                    // Đổi active cho nút bấm
+                    tabs.forEach(t => t.classList.toggle('active', parseInt(t.getAttribute('data-target')) === targetIdx));
+
+                    // Ẩn/Hiện ảnh tương ứng (Khung vàng sẽ tự co giãn theo ảnh được hiển thị)
+                    imgs.forEach(img => {
+                        const idx = parseInt(img.getAttribute('data-index'));
+                        if (idx === targetIdx) {
+                            img.style.display = 'block';
+                            img.classList.add('active');
+                            if (captionEl) captionEl.textContent = img.getAttribute('data-caption') || '';
+                        } else {
+                            img.style.display = 'none';
+                            img.classList.remove('active');
+                        }
+                    });
+                });
             });
         });
 
