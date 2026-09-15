@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
+﻿/* ═══════════════════════════════════════════════════════════
    CO CAU TO CHUC — Corporate Org Structure Page
    Design System: IOI-inspired editorial, VCM Brand
    ═══════════════════════════════════════════════════════════ */
@@ -888,11 +888,14 @@ ol {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-flow: dense;
-  grid-auto-rows: 280px; /* Kh�a c?ng chi?u cao tab */
+  grid-auto-rows: 280px;
+  /* Kh�a c?ng chi?u cao tab */
   gap: 16px;
   position: relative;
-  max-width: 1060px; /* Thu nh? tr?c x */
-  margin: 0 auto;    /* Can gi?a grid */
+  max-width: 1060px;
+  /* Thu nh? tr?c x */
+  margin: 0 auto;
+  /* Can gi?a grid */
 }
 
 .bento-card {
@@ -907,12 +910,22 @@ ol {
 }
 
 /* Default state */
-.bento-card--wide { grid-column: span 2; }
-.bento-card:not(.bento-card--wide) { grid-column: span 1; }
+.bento-card--wide {
+  grid-column: span 2;
+}
+
+.bento-card:not(.bento-card--wide) {
+  grid-column: span 1;
+}
 
 /* Hover states */
-.bento-card.is-expanded { grid-column: span 3; }
-.bento-card.is-collapsed { grid-column: span 1; }
+.bento-card.is-expanded {
+  grid-column: span 3;
+}
+
+.bento-card.is-collapsed {
+  grid-column: span 1;
+}
 
 .bento-card__img-wrap {
   position: absolute;
@@ -933,11 +946,11 @@ ol {
   position: relative;
   z-index: 2;
   margin-top: auto;
-  padding: 40px 24px 24px; 
+  padding: 40px 24px 24px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
   color: var(--white);
 }
 
@@ -951,7 +964,9 @@ ol {
   line-height: 1.25;
 }
 
-.bento-card--primary .bento-card__title { font-size: 22px; }
+.bento-card--primary .bento-card__title {
+  font-size: 22px;
+}
 
 .bento-card__desc {
   font-size: 14px;
@@ -962,12 +977,13 @@ ol {
 
 /* --- DESKTOP SPOTLIGHT EFFECTS ---------------------------- */
 @media (min-width: 768px) {
+
   /* Default inactive look for all cards, unless hovered */
   .bento-card .bento-card__img-wrap img {
     filter: saturate(0.6);
     opacity: 0.8;
   }
-  
+
   .bento-card .bento-card__desc {
     opacity: 0;
     transform: translateY(10px);
@@ -983,26 +999,37 @@ ol {
     filter: saturate(1);
     opacity: 1;
   }
-  
+
   .bento-card.is-expanded .bento-card__desc {
     opacity: 1;
     transform: translateY(0);
     max-height: 300px;
     margin-bottom: 18px;
   }
-  
+
   /* Fallback if no card is hovered (e.g. initial state) */
   .bento-grid:not(.has-active) .bento-card .bento-card__img-wrap img {
     filter: saturate(0.8);
     opacity: 0.9;
   }
-  
+
   /* --- EXPLICIT REORDERING CHO T?NG CARD --- */
   /* Default DOM order matching layout: Card0(2), Card1(1) || Card2(1), Card3(2) */
-  .bento-card[data-index="0"] { order: 1; }
-  .bento-card[data-index="1"] { order: 2; }
-  .bento-card[data-index="2"] { order: 3; }
-  .bento-card[data-index="3"] { order: 4; }
+  .bento-card[data-index="0"] {
+    order: 1;
+  }
+
+  .bento-card[data-index="1"] {
+    order: 2;
+  }
+
+  .bento-card[data-index="2"] {
+    order: 3;
+  }
+
+  .bento-card[data-index="3"] {
+    order: 4;
+  }
 }
 
 /* ─── QUOTE BAND ─────────────────────────────────────────── */
@@ -1742,11 +1769,13 @@ ol {
   transform: translateY(20px);
   transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
 }
+
 .dept-overlay.is-active {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
+
 .dept-overlay__close {
   position: fixed;
   top: 32px;
@@ -1765,12 +1794,14 @@ ol {
   box-shadow: var(--shadow-card);
   transition: all 0.3s;
 }
+
 .dept-overlay__close:hover {
   background: var(--red);
   color: var(--white);
   border-color: var(--red);
   transform: translateX(-4px);
 }
+
 .dept-overlay__scroll-area {
   width: 100%;
   height: 100%;
@@ -1779,9 +1810,11 @@ ol {
   overscroll-behavior-x: contain;
   scrollbar-width: none;
 }
+
 .dept-overlay__scroll-area::-webkit-scrollbar {
   display: none;
 }
+
 .editorial-gallery {
   display: flex;
   height: 100%;
@@ -1789,11 +1822,13 @@ ol {
   gap: 120px;
   width: max-content;
 }
+
 .editorial-block {
   height: 100%;
   display: flex;
   flex-shrink: 0;
 }
+
 /* Khối 1: Text & Polaroid */
 .editorial-block--intro {
   width: 950px;
@@ -1802,6 +1837,7 @@ ol {
   position: relative;
   padding-right: 380px;
 }
+
 .editorial-block--intro .dept-code {
   font-family: var(--font-body);
   color: var(--red);
@@ -1810,6 +1846,7 @@ ol {
   letter-spacing: 0.1em;
   margin-bottom: 16px;
 }
+
 .editorial-block--intro h2 {
   font-family: var(--font-head);
   font-size: 72px;
@@ -1818,12 +1855,14 @@ ol {
   margin-bottom: 32px;
   color: var(--charcoal);
 }
+
 .editorial-block--intro p {
   font-size: 18px;
   line-height: 1.8;
   color: var(--slate);
   max-width: 500px;
 }
+
 .polaroid {
   position: absolute;
   right: 0;
@@ -1832,14 +1871,16 @@ ol {
   width: 320px;
   background: white;
   padding: 12px 12px 40px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--gray-border);
 }
+
 .polaroid img {
   width: 100%;
   height: 380px;
   object-fit: cover;
 }
+
 /* Khối 2: Asymmetric Grid */
 .editorial-block--collage {
   width: 900px;
@@ -1848,23 +1889,28 @@ ol {
   gap: 32px;
   align-items: center;
 }
+
 .collage-col-left {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
+
 .collage-col-left img {
   width: 100%;
   height: 300px;
   object-fit: cover;
   border-radius: 8px;
 }
+
 .collage-col-right img {
   width: 100%;
-  height: 632px; /* matches left side height + gap */
+  height: 632px;
+  /* matches left side height + gap */
   object-fit: cover;
   border-radius: 8px;
 }
+
 /* Khối 3: Panorama */
 .editorial-block--panorama {
   width: 1200px;
@@ -1874,11 +1920,13 @@ ol {
   height: calc(100vh - 160px);
   margin: auto 0;
 }
+
 .editorial-block--panorama img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .panorama-text {
   position: absolute;
   bottom: 60px;
@@ -1887,21 +1935,70 @@ ol {
   font-family: var(--font-script);
   font-size: 64px;
   line-height: 1;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 1100px) {
-  .editorial-gallery { padding: 60px 40px; gap: 60px; }
-  .editorial-block--intro h2 { font-size: 48px; }
+  .editorial-gallery {
+    padding: 60px 40px;
+    gap: 60px;
+  }
+
+  .editorial-block--intro h2 {
+    font-size: 48px;
+  }
 }
+
 @media (max-width: 768px) {
-  .dept-overlay__scroll-area { overflow-x: hidden; overflow-y: auto; }
-  .editorial-gallery { flex-direction: column; width: 100%; padding: 100px 20px 40px; gap: 40px; }
-  .editorial-block { width: 100%; height: auto; }
-  .editorial-block--intro { align-items: flex-start; justify-content: flex-start; padding-right: 0; }
-  .polaroid { position: relative; right: auto; top: auto; transform: none; margin-top: 40px; width: 100%; }
-  .editorial-block--collage { grid-template-columns: 1fr; width: 100%; }
-  .collage-col-right img { height: 400px; }
-  .editorial-block--panorama { width: 100%; height: 400px; }
-  .panorama-text { font-size: 40px; left: 20px; bottom: 20px; }
+  .dept-overlay__scroll-area {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .editorial-gallery {
+    flex-direction: column;
+    width: 100%;
+    padding: 100px 20px 40px;
+    gap: 40px;
+  }
+
+  .editorial-block {
+    width: 100%;
+    height: auto;
+  }
+
+  .editorial-block--intro {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+
+  .polaroid {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .editorial-block--collage {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .collage-col-right img {
+    height: 400px;
+  }
+
+  .editorial-block--panorama {
+    width: 100%;
+    height: 400px;
+  }
+
+  .panorama-text {
+    font-size: 40px;
+    left: 20px;
+    bottom: 20px;
+  }
 }

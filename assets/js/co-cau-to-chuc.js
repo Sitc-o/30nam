@@ -252,7 +252,7 @@ function initSpotlightBento() {
   cards.forEach((c, i) => c.dataset.index = i);
 
   function updateGrid(newActiveCard) {
-    if (window.innerWidth < 768) return; 
+    if (window.innerWidth < 768) return;
     if (newActiveCard === activeCard) return;
 
     const firstRects = cards.map(c => c.getBoundingClientRect());
@@ -262,20 +262,20 @@ function initSpotlightBento() {
       const rectTarget = activeCard.getBoundingClientRect();
       const minTop = Math.min(...cards.map(c => c.getBoundingClientRect().top));
       const isRow1 = Math.abs(rectTarget.top - minTop) < 20;
-      
+
       const activeIdx = parseInt(activeCard.dataset.index);
-      
+
       // Vòng tròn băng chuyền: C0 (Top-Left) -> C1 (Top-Right) -> C3 (Bottom-Right) -> C2 (Bottom-Left)
       const ring = [0, 1, 3, 2];
       const activeRingIdx = ring.indexOf(activeIdx);
-      
+
       // Lấy 3 thẻ tiếp theo trong vòng tròn
       const othersRing = [
         ring[(activeRingIdx + 1) % 4],
         ring[(activeRingIdx + 2) % 4],
         ring[(activeRingIdx + 3) % 4]
       ];
-      
+
       // Hàng trên chạy từ Trái sang Phải, Hàng dưới chạy từ Phải sang Trái (theo chiều kim đồng hồ)
       // Nếu activeCard nằm ở hàng 1 (isRow1), 3 thẻ kia bị đẩy xuống hàng 2 => Phải điền từ Phải sang Trái
       // Nếu activeCard nằm ở hàng 2, 3 thẻ kia bị đẩy lên hàng 1 => Điền từ Trái sang Phải
@@ -313,7 +313,7 @@ function initSpotlightBento() {
     cards.forEach((c, i) => {
       const f = firstRects[i];
       const l = lastRects[i];
-      
+
       const dx = f.left - l.left;
       const dy = f.top - l.top;
       const dw = f.width / l.width;
@@ -325,21 +325,21 @@ function initSpotlightBento() {
         { transform: `translate(${dx}px, ${dy}px) scale(${dw}, ${dh})`, transformOrigin: 'top left' },
         { transform: 'translate(0, 0) scale(1, 1)', transformOrigin: 'top left' }
       ], {
-        duration: 400,
+        duration: 250,
         easing: 'ease-out',
         fill: 'both'
       });
 
       const imgWrap = c.querySelector('.bento-card__img-wrap');
       const body = c.querySelector('.bento-card__body');
-      
+
       [imgWrap, body].forEach(el => {
         if (!el) return;
         el.animate([
-          { transform: `scale(${1/dw}, ${1/dh})`, transformOrigin: 'top left' },
+          { transform: `scale(${1 / dw}, ${1 / dh})`, transformOrigin: 'top left' },
           { transform: 'scale(1, 1)', transformOrigin: 'top left' }
         ], {
-          duration: 400,
+          duration: 250,
           easing: 'ease-out',
           fill: 'both'
         });
@@ -381,10 +381,11 @@ const DEPT_DATA = {
     name: 'Phòng Chiến lược',
     desc: 'Tham mưu xây dựng chiến lược tổng thể, hoạch định kế hoạch dài hạn và phân tích cơ hội phát triển của Tổng Công ty. Đây là bộ não phân tích số liệu, dự báo xu hướng thị trường, đưa ra các kịch bản kinh doanh và các định hướng chiến lược trọng tâm nhằm duy trì vị thế cạnh tranh của Viettel Commerce trên thương trường.',
     images: [
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Chiến lược.jpg',
       'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80',
       'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
-      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80'
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Chiến lược.jpg',
     ]
   },
   'DEP.02': {
@@ -394,7 +395,8 @@ const DEPT_DATA = {
       'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
       'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&q=80',
       'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80',
-      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80'
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Hành chính.jpg',
     ]
   },
   'DEP.03': {
@@ -404,7 +406,8 @@ const DEPT_DATA = {
       'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80',
       'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80',
       'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80',
-      'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1200&q=80'
+      'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1200&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng PC và ĐT.jpg',
     ]
   },
   'DEP.04': {
@@ -414,7 +417,8 @@ const DEPT_DATA = {
       'https://images.unsplash.com/photo-1542744094-24638ea0b3b5?w=800&q=80',
       'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80',
       'https://images.unsplash.com/photo-1552581234-26160f608093?w=600&q=80',
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80'
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Nhân sự.png',
     ]
   },
   'DEP.05': {
@@ -424,7 +428,8 @@ const DEPT_DATA = {
       'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
       'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80'
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Tài chính.jpg',
     ]
   },
   'DEP.06': {
@@ -434,7 +439,8 @@ const DEPT_DATA = {
       'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80',
       'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80',
       'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80',
-      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1200&q=80'
+      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1200&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Chính trị.jpg',
     ]
   },
   'DEP.07': {
@@ -444,7 +450,8 @@ const DEPT_DATA = {
       'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=800&q=80',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80',
-      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80'
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
+      'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng CNTT.jpg',
     ]
   }
 };
@@ -452,7 +459,7 @@ const DEPT_DATA = {
 function openDeptOverlay(id) {
   const data = DEPT_DATA[id];
   if (!data) return;
-  
+
   deptGalleryContent.innerHTML = `
     <!-- Khối 1: Giới thiệu -->
     <div class="editorial-block editorial-block--intro">
@@ -477,11 +484,11 @@ function openDeptOverlay(id) {
     
     <!-- Khối 3: Panorama -->
     <div class="editorial-block editorial-block--panorama">
-      <img src="${data.images[0]}" alt="Panorama" />
+      <img src="${data.images[4]}" alt="Panorama" />
       <h3 class="panorama-text">Vững bước tiên phong</h3>
     </div>
   `;
-  
+
   if (deptOverlay) {
     deptOverlay.classList.add('is-active');
     document.body.style.overflow = 'hidden';
