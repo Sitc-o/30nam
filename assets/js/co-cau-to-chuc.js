@@ -545,7 +545,7 @@ function openDeptOverlay(id) {
     <div class="editorial-block editorial-block--panorama">
       <img src="${data.images[4]}" alt="Panorama" />
       <h3 class="panorama-text">Vững bước tiên phong</h3>
-      ${data.captions && data.captions[4] ? `<figcaption class="panorama-caption">${data.captions[4]}</figcaption>` : ''}
+      <!-- ${data.captions && data.captions[4] ? `<figcaption class="panorama-caption">${data.captions[4]}</figcaption>` : ''} -->
     </div>
   `;
 
