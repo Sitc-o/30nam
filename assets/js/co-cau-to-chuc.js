@@ -529,3 +529,130 @@ if (deptScrollArea) {
     }
   });
 }
+
+// --- CUSTOM LIGHTBOX CHO ẢNH TRONG GALLERY ---
+const initLightbox = () => {
+  const lightbox = document.createElement('div');
+  lightbox.className = 'custom-lightbox';
+  lightbox.innerHTML = `
+    <div class="custom-lightbox-backdrop"></div>
+    <div class="custom-lightbox-content">
+      <img src="" class="custom-lightbox-img" alt="Phóng to" draggable="false" />
+    </div>
+    <button class="custom-lightbox-close" title="Đóng (Esc)">&times;</button>
+    <button class="custom-lightbox-prev" title="Ảnh trước (Mũi tên trái)">&lsaquo;</button>
+    <button class="custom-lightbox-next" title="Ảnh tiếp (Mũi tên phải)">&rsaquo;</button>
+  `;
+  document.body.appendChild(lightbox);
+
+  const imgEl = lightbox.querySelector('.custom-lightbox-img');
+  const backdrop = lightbox.querySelector('.custom-lightbox-backdrop');
+  const closeBtn = lightbox.querySelector('.custom-lightbox-close');
+  const prevBtn = lightbox.querySelector('.custom-lightbox-prev');
+  const nextBtn = lightbox.querySelector('.custom-lightbox-next');
+
+  let currentImages = [];
+  let currentIndex = 0;
+  let currentZoom = 1;
+  let isDragging = false;
+  let startX, startY;
+  let translateX = 0, translateY = 0;
+
+  const openLightbox = (images, index) => {
+    currentImages = images;
+    currentIndex = index;
+    updateImage();
+    lightbox.classList.add('is-active');
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-active');
+  };
+
+  const updateTransform = () => {
+    imgEl.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+  };
+
+  const updateImage = () => {
+    imgEl.src = currentImages[currentIndex];
+    currentZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateTransform();
+  };
+
+  const prevImage = (e) => {
+    if(e) e.stopPropagation();
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : currentImages.length - 1;
+    updateImage();
+  };
+
+  const nextImage = (e) => {
+    if(e) e.stopPropagation();
+    currentIndex = (currentIndex < currentImages.length - 1) ? currentIndex + 1 : 0;
+    updateImage();
+  };
+
+  closeBtn.addEventListener('click', closeLightbox);
+  backdrop.addEventListener('click', closeLightbox);
+  prevBtn.addEventListener('click', prevImage);
+  nextBtn.addEventListener('click', nextImage);
+
+  // Bàn phím
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('is-active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
+  });
+
+  // Lăn chuột phóng to / thu nhỏ
+  lightbox.addEventListener('wheel', (e) => {
+    if (!lightbox.classList.contains('is-active')) return;
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      currentZoom += 0.15; // Lăn lên -> Phóng to
+    } else {
+      currentZoom -= 0.15; // Lăn xuống -> Thu nhỏ
+    }
+    if (currentZoom < 0.5) currentZoom = 0.5;
+    if (currentZoom > 5) currentZoom = 5;
+    updateTransform();
+  }, { passive: false });
+
+  // Kéo thả khi phóng to (Pan)
+  imgEl.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX - translateX;
+    startY = e.clientY - translateY;
+    imgEl.style.cursor = 'grabbing';
+  });
+  
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    translateX = e.clientX - startX;
+    translateY = e.clientY - startY;
+    updateTransform();
+  });
+  
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    imgEl.style.cursor = 'grab';
+  });
+
+  // Lắng nghe click vào ảnh trong Overlay
+  document.body.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('#deptGalleryContent')) {
+      const container = e.target.closest('#deptGalleryContent');
+      // Lấy danh sách ảnh hiện tại trong gallery
+      const allImgNodes = Array.from(container.querySelectorAll('img'));
+      const allImgs = allImgNodes.map(img => img.src);
+      const index = allImgNodes.indexOf(e.target);
+      if (index !== -1) {
+        openLightbox(allImgs, index);
+      }
+    }
+  });
+};
+
+document.addEventListener('DOMContentLoaded', initLightbox);
