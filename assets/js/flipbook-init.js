@@ -299,7 +299,7 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
                     `;
                     tabsHTML += `
                         <button type="button" class="stack-tab-btn ${isActive ? 'active' : ''}" data-target="${idx}">
-                            Trang ${idx + 1}
+                            Ảnh ${idx + 1}
                         </button>
                     `;
                 });
@@ -610,7 +610,7 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
         document.addEventListener('keydown', (e) => {
             // KHÔNG lật trang nếu Lightbox đang mở
             if (document.querySelector('.custom-lightbox.is-active')) return;
-            
+
             if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
 
             if (e.key === 'ArrowRight') {
@@ -637,9 +637,9 @@ Công tác chỉ đạo xây dựng đơn vị vững mạnh toàn diện mẫu 
 
 // --- CUSTOM LIGHTBOX CHO ẢNH TRONG SÁCH FLIPBOOK ---
 const initFlipbookLightbox = () => {
-  const lightbox = document.createElement('div');
-  lightbox.className = 'custom-lightbox';
-  lightbox.innerHTML = `
+    const lightbox = document.createElement('div');
+    lightbox.className = 'custom-lightbox';
+    lightbox.innerHTML = `
     <div class="custom-lightbox-backdrop"></div>
     <div class="custom-lightbox-content">
       <img src="" class="custom-lightbox-img" alt="Phóng to" draggable="false" />
@@ -648,140 +648,140 @@ const initFlipbookLightbox = () => {
     <button class="custom-lightbox-prev" title="Ảnh trước (Mũi tên trái)">&lsaquo;</button>
     <button class="custom-lightbox-next" title="Ảnh tiếp (Mũi tên phải)">&rsaquo;</button>
   `;
-  document.body.appendChild(lightbox);
+    document.body.appendChild(lightbox);
 
-  const imgEl = lightbox.querySelector('.custom-lightbox-img');
-  const backdrop = lightbox.querySelector('.custom-lightbox-backdrop');
-  const closeBtn = lightbox.querySelector('.custom-lightbox-close');
-  const prevBtn = lightbox.querySelector('.custom-lightbox-prev');
-  const nextBtn = lightbox.querySelector('.custom-lightbox-next');
+    const imgEl = lightbox.querySelector('.custom-lightbox-img');
+    const backdrop = lightbox.querySelector('.custom-lightbox-backdrop');
+    const closeBtn = lightbox.querySelector('.custom-lightbox-close');
+    const prevBtn = lightbox.querySelector('.custom-lightbox-prev');
+    const nextBtn = lightbox.querySelector('.custom-lightbox-next');
 
-  let currentImages = [];
-  let currentIndex = 0;
-  let currentZoom = 1;
-  let isDragging = false;
-  let startX, startY;
-  let translateX = 0, translateY = 0;
+    let currentImages = [];
+    let currentIndex = 0;
+    let currentZoom = 1;
+    let isDragging = false;
+    let startX, startY;
+    let translateX = 0, translateY = 0;
 
-  const openLightbox = (images, index) => {
-    currentImages = images;
-    currentIndex = index;
-    updateImage();
-    lightbox.classList.add('is-active');
-  };
+    const openLightbox = (images, index) => {
+        currentImages = images;
+        currentIndex = index;
+        updateImage();
+        lightbox.classList.add('is-active');
+    };
 
-  const closeLightbox = () => {
-    lightbox.classList.remove('is-active');
-  };
+    const closeLightbox = () => {
+        lightbox.classList.remove('is-active');
+    };
 
-  const updateTransform = () => {
-    imgEl.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
-  };
+    const updateTransform = () => {
+        imgEl.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+    };
 
-  const updateImage = () => {
-    imgEl.src = currentImages[currentIndex];
-    currentZoom = 1;
-    translateX = 0;
-    translateY = 0;
-    updateTransform();
-  };
+    const updateImage = () => {
+        imgEl.src = currentImages[currentIndex];
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateTransform();
+    };
 
-  const prevImage = (e) => {
-    if(e) e.stopPropagation();
-    currentIndex = (currentIndex > 0) ? currentIndex - 1 : currentImages.length - 1;
-    updateImage();
-  };
+    const prevImage = (e) => {
+        if (e) e.stopPropagation();
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : currentImages.length - 1;
+        updateImage();
+    };
 
-  const nextImage = (e) => {
-    if(e) e.stopPropagation();
-    currentIndex = (currentIndex < currentImages.length - 1) ? currentIndex + 1 : 0;
-    updateImage();
-  };
+    const nextImage = (e) => {
+        if (e) e.stopPropagation();
+        currentIndex = (currentIndex < currentImages.length - 1) ? currentIndex + 1 : 0;
+        updateImage();
+    };
 
-  closeBtn.addEventListener('click', closeLightbox);
-  backdrop.addEventListener('click', closeLightbox);
-  prevBtn.addEventListener('click', prevImage);
-  nextBtn.addEventListener('click', nextImage);
+    closeBtn.addEventListener('click', closeLightbox);
+    backdrop.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
 
-  // Bàn phím
-  window.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('is-active')) return;
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      closeLightbox();
-      return;
-    }
-    if (e.key === 'ArrowLeft') { 
-      e.preventDefault();
-      e.stopImmediatePropagation(); 
-      prevImage(); 
-    }
-    if (e.key === 'ArrowRight') { 
-      e.preventDefault();
-      e.stopImmediatePropagation(); 
-      nextImage(); 
-    }
-  }, true);
-
-  window.addEventListener('keyup', (e) => {
-    if (!lightbox.classList.contains('is-active')) return;
-    if (['Escape', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-    }
-  }, true);
-
-  // Lăn chuột phóng to / thu nhỏ
-  lightbox.addEventListener('wheel', (e) => {
-    if (!lightbox.classList.contains('is-active')) return;
-    e.preventDefault();
-    if (e.deltaY < 0) {
-      currentZoom += 0.15; // Lăn lên -> Phóng to
-    } else {
-      currentZoom -= 0.15; // Lăn xuống -> Thu nhỏ
-    }
-    if (currentZoom < 0.5) currentZoom = 0.5;
-    if (currentZoom > 5) currentZoom = 5;
-    updateTransform();
-  }, { passive: false });
-
-  // Kéo thả khi phóng to (Pan)
-  imgEl.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startX = e.clientX - translateX;
-    startY = e.clientY - translateY;
-    imgEl.style.cursor = 'grabbing';
-  });
-  
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    translateX = e.clientX - startX;
-    translateY = e.clientY - startY;
-    updateTransform();
-  });
-  
-  window.addEventListener('mouseup', () => {
-    isDragging = false;
-    imgEl.style.cursor = 'grab';
-  });
-
-  // Lắng nghe click vào ảnh trong sách
-  document.body.addEventListener('click', (e) => {
-    if (e.target.tagName === 'IMG' && e.target.closest('#flipbook')) {
-      // Find the page container to get all images on the current spread
-      const bookContainer = e.target.closest('#flipbook');
-      const allImgNodes = Array.from(bookContainer.querySelectorAll('img')).filter(img => !img.classList.contains('full-cover')); // Exclude covers if needed
-      
-      if (allImgNodes.length > 0) {
-        const allImgs = allImgNodes.map(img => img.src);
-        const index = allImgNodes.indexOf(e.target);
-        if (index !== -1) {
-          openLightbox(allImgs, index);
+    // Bàn phím
+    window.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('is-active')) return;
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            closeLightbox();
+            return;
         }
-      }
-    }
-  });
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            prevImage();
+        }
+        if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            nextImage();
+        }
+    }, true);
+
+    window.addEventListener('keyup', (e) => {
+        if (!lightbox.classList.contains('is-active')) return;
+        if (['Escape', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        }
+    }, true);
+
+    // Lăn chuột phóng to / thu nhỏ
+    lightbox.addEventListener('wheel', (e) => {
+        if (!lightbox.classList.contains('is-active')) return;
+        e.preventDefault();
+        if (e.deltaY < 0) {
+            currentZoom += 0.15; // Lăn lên -> Phóng to
+        } else {
+            currentZoom -= 0.15; // Lăn xuống -> Thu nhỏ
+        }
+        if (currentZoom < 0.5) currentZoom = 0.5;
+        if (currentZoom > 5) currentZoom = 5;
+        updateTransform();
+    }, { passive: false });
+
+    // Kéo thả khi phóng to (Pan)
+    imgEl.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        imgEl.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+        isDragging = false;
+        imgEl.style.cursor = 'grab';
+    });
+
+    // Lắng nghe click vào ảnh trong sách
+    document.body.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('#flipbook')) {
+            // Find the page container to get all images on the current spread
+            const bookContainer = e.target.closest('#flipbook');
+            const allImgNodes = Array.from(bookContainer.querySelectorAll('img')).filter(img => !img.classList.contains('full-cover')); // Exclude covers if needed
+
+            if (allImgNodes.length > 0) {
+                const allImgs = allImgNodes.map(img => img.src);
+                const index = allImgNodes.indexOf(e.target);
+                if (index !== -1) {
+                    openLightbox(allImgs, index);
+                }
+            }
+        }
+    });
 };
 
 document.addEventListener('DOMContentLoaded', initFlipbookLightbox);
