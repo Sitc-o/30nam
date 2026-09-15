@@ -28,7 +28,7 @@
     document.querySelectorAll('.ldr-section').forEach((sec, i) => {
       const overlay = sec.querySelector('.ldr-hero__overlay');
       const bg      = sec.querySelector('.ldr-hero__bg');
-      const content = sec.querySelector('.ldr-content');
+      const content = sec.querySelector('.ldr-grid');
       const cards   = sec.querySelectorAll('.ldr-card-wrap');
 
       // 1. Hiệu ứng làm mờ/tối ảnh Hero khi nội dung bắt đầu trượt lên
