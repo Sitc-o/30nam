@@ -536,11 +536,7 @@ ol {
   transition: all 0.2s var(--ease-out);
 }
 
-.subnav__pill:hover {
-  color: var(--charcoal);
-  background: var(--gray-soft);
-}
-
+.subnav__pill:hover,
 .subnav__pill.active {
   color: var(--red);
   background: var(--red-light);
@@ -554,6 +550,7 @@ ol {
   letter-spacing: 0.04em;
 }
 
+.subnav__pill:hover .subnav__pill-num,
 .subnav__pill.active .subnav__pill-num {
   opacity: 1;
 }
@@ -1874,6 +1871,11 @@ ol {
   max-width: 500px;
 }
 
+.editorial-block--intro.has-pho-phong {
+  width: 1300px;
+  padding-right: 720px;
+}
+
 .polaroid {
   position: absolute;
   right: 0;
@@ -1884,6 +1886,18 @@ ol {
   padding: 12px 12px 40px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--gray-border);
+}
+
+.editorial-block--intro.has-pho-phong .polaroid--truong {
+  right: 350px;
+  transform: translateY(-50%) rotate(-2deg);
+  z-index: 2;
+}
+
+.editorial-block--intro.has-pho-phong .polaroid--pho {
+  right: 10px;
+  transform: translateY(-50%) rotate(2deg);
+  z-index: 1;
 }
 
 .polaroid img {
@@ -1939,6 +1953,10 @@ figure.collage-item {
   height: 300px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.collage-col-left figure.collage-item:only-child img {
+  height: 632px;
 }
 
 .collage-col-right figure.collage-item img {

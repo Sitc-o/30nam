@@ -11,6 +11,13 @@
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/co-cau-to-chuc.css" />
+
+  <!-- Cinematic Leadership Dependencies -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="assets/css/lanh-dao-cinematic.css" />
 </head>
 
 <body>
@@ -128,138 +135,186 @@
           </div>
         </div>
 
-        <!-- Cấp 1: Chủ tịch -->
-        <div class="hierarchy-level reveal-item">
-          <div class="hierarchy-level__label">
-            <span class="hierarchy-level__line"></span>
-            <span>Chủ Tịch Tổng Công Ty</span>
-            <span class="hierarchy-level__line"></span>
+
+      </div> <!-- Close section__container -->
+      <div class="ldr-master-wrapper">
+        <div class="ldr-section" id="ldr-0">
+          <div class="ldr-hero">
+            <img class="ldr-hero__bg" src="assets/images/Ảnh các anh/PTGD Đỗ Minh Phương nhấn mạnh tư duy toàn cầu.png"
+              alt="" />
+            <div class="ldr-hero__overlay"></div>
           </div>
-          <div class="leadership-grid leadership-grid--single">
-            <article class="leader-card leader-card--featured" data-id="phuong">
-              <div class="leader-card__media">
-                <img src="assets/images/Anh BGĐ cac thoi ky/Anh Phuong.jpg"
-                  onerror="this.src='https:/images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80&auto=format&fit=crop&crop=faces,center'"
-                  alt="Thiếu tướng Đỗ Minh Phương" loading="lazy" />
-                <div class="leader-card__overlay"></div>
-              </div>
-              <div class="leader-card__body">
-                <div class="leader-card__meta">
-                  <span class="badge badge--red">Hội Đồng Quản Trị</span>
-                </div>
-                <span class="leader-card__rank">Thiếu tướng</span>
-                <h3 class="leader-card__name">ĐỖ MINH PHƯƠNG</h3>
-                <p class="leader-card__role-title">Chủ tịch Tổng Công ty<br /><small>kiêm Phó Tổng Giám đốc Tập đoàn
-                    (5.2017–6.2018)</small></p>
-                <p class="leader-card__philosophy">
-                  <em class="script-accent">Tầm nhìn chiến lược —</em>
-                  Dẫn dắt Viettel Commerce phát triển toàn diện, bền vững.
-                </p>
-                <button class="leader-card__cta" onclick="openModal('phuong')">
-                  Xem tiểu sử
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </article>
+
+          <div class="ldr-grid ldr-grid--a">
+            <div class="ldr-text-block">
+              <!-- <p class="lt-serial">01 // CHIẾN LƯỢC</p> -->
+              <p class="lt-rank">Thiếu tướng</p>
+              <h2 class="lt-name">ĐỖ MINH<br />PHƯƠNG</h2>
+              <q class="lt-quote">Tầm nhìn chiến lược — Dẫn dắt Viettel Commerce phát triển toàn diện, bền vững.</q>
+              <p class="lt-bio">Với tư duy chiến lược tầm xa và bản lĩnh quân sự được tôi luyện qua nhiều thập niên,
+                Thiếu
+                tướng Đỗ Minh Phương đặt nền móng vững chắc cho hành trình phát triển của Tổng Công ty, định hình những
+                bước
+                đi tiên phong trên thị trường.</p>
+              <p class="lt-role">Chủ tịch Tổng Công ty<br />kiêm Phó Tổng Giám đốc Tập đoàn<br /><strong
+                  style="color:rgba(245,224,192,.75)">5.2017 — 6.2018</strong></p>
+            </div>
+            <div class="ldr-card-wrap img-top-left shape-tall frame-yellow">
+              <img class="ldr-card" src="assets/images/Anh BGĐ cac thoi ky/Anh Phuong.jpg" alt="Chân dung" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
+            <div class="ldr-card-wrap img-bot-left shape-landscape frame-thin">
+              <img class="ldr-card"
+                src="assets/images/Ảnh các anh/PTGD Đỗ Minh Phương_Viettel tự tin phát triển các sản phẩm số.png"
+                alt="Nhấn mạnh tư duy toàn cầu" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
+            <div class="ldr-card-wrap img-bot-right shape-square">
+              <img class="ldr-card" src="assets/images/Ảnh các anh/PTGD Đỗ Minh Phương khoanh tay.png"
+                alt="Phát triển sản phẩm số" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
           </div>
         </div>
 
-        <!-- Cấp 2: Tổng Giám đốc -->
-        <div class="hierarchy-level reveal-item">
-          <div class="hierarchy-level__label">
-            <span class="hierarchy-level__line"></span>
-            <span>Tổng Giám Đốc</span>
-            <span class="hierarchy-level__line"></span>
+        <!-- ════════════════════════════════════════════════════════
+       LEADER 2 — ĐẠI TÁ PHẠM VĂN HÙNG
+       Layout B: Text Left (Jason style)
+  ════════════════════════════════════════════════════════ -->
+        <div class="ldr-section" id="ldr-1">
+          <div class="ldr-hero">
+            <img class="ldr-hero__bg" src="assets/images/Ảnh các anh/Phạm Văn Hùng__Anh nghĩ chúng ta sẽ làm được.png"
+              alt="" />
+            <div class="ldr-hero__overlay"></div>
           </div>
-          <div class="leadership-grid leadership-grid--single">
-            <article class="leader-card leader-card--featured" data-id="hung">
-              <div class="leader-card__media">
-                <img src="assets/images/giam-doc-pham-van-hung.jpg"
-                  onerror="this.src='https:/images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80&auto=format&fit=crop&crop=faces,center'"
-                  alt="Đại tá Phạm Văn Hùng" loading="lazy" />
-                <div class="leader-card__overlay"></div>
-              </div>
-              <div class="leader-card__body">
-                <div class="leader-card__meta">
-                  <span class="badge badge--red">Ban Điều Hành</span>
-                </div>
-                <span class="leader-card__rank">Đại tá</span>
-                <h3 class="leader-card__name">PHẠM VĂN HÙNG</h3>
-                <p class="leader-card__role-title">Tổng Giám đốc Tổng Công ty<br /><small>Chủ tịch kiêm Giám đốc
-                    (6.2019–6.2021)</small></p>
-                <p class="leader-card__philosophy">
-                  <em class="script-accent">Kiến tạo đổi mới —</em>
-                  Lãnh đạo bằng hành động, dẫn dắt bằng kết quả thực tiễn.
-                </p>
-                <button class="leader-card__cta" onclick="openModal('hung')">
-                  Xem tiểu sử
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </article>
+
+          <div class="ldr-grid ldr-grid--b">
+            <div class="ldr-text-block">
+              <!-- <p class="lt-serial">02 // ĐIỀU HÀNH</p> -->
+              <p class="lt-rank">Đại tá</p>
+              <h2 class="lt-name">PHẠM VĂN<br />HÙNG</h2>
+              <q class="lt-quote">Kiến tạo đổi mới — Lãnh đạo bằng hành động, dẫn dắt bằng kết quả thực tiễn.</q>
+              <p class="lt-bio">Phong cách lãnh đạo quyết đoán và thực thi mạnh mẽ của Đại tá Phạm Văn Hùng tạo nên
+                những bước
+                đột phá quan trọng trong hoạt động kinh doanh và văn hóa kỷ luật của Tổng Công ty. Ông luôn là người
+                truyền
+                cảm hứng sâu sắc đến đội ngũ.</p>
+              <p class="lt-role">Tổng Giám đốc Tổng Công ty<br /><strong style="color:rgba(245,224,192,.75)">Chủ tịch
+                  kiêm
+                  Giám đốc — 6.2019 / 6.2021</strong></p>
+            </div>
+            <div class="ldr-card-wrap img-top-right shape-tall frame-red">
+              <img class="ldr-card" src="assets/images/giam-doc-pham-van-hung.jpg" alt="Đại tá Phạm Văn Hùng" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
+            <div class="ldr-card-wrap img-bot-left shape-landscape frame-thin">
+              <img class="ldr-card" src="assets/images/Ảnh các anh/Phạm Văn Hùng phát biểu tại buổi lễ.png"
+                alt="Anh nghĩ chúng ta sẽ làm được" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
+            <div class="ldr-card-wrap img-bot-right shape-square">
+              <img class="ldr-card"
+                src="assets/images/Ảnh các anh/Đồng chí Phạm Văn Hùng Tổng Giám đốc Tổng Công ty_(1).png"
+                alt="Hợp tác" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
           </div>
         </div>
 
-        <!-- Cấp 3: Phó Tổng Giám đốc -->
-        <div class="hierarchy-level reveal-item">
-          <div class="hierarchy-level__label">
-            <span class="hierarchy-level__line"></span>
-            <span>Phó Tổng Giám Đốc</span>
-            <span class="hierarchy-level__line"></span>
+        <!-- ════════════════════════════════════════════════════════
+       LEADER 3 — TRUNG TÁ ĐINH THỊ DUNG
+       Layout A: Text Right
+  ════════════════════════════════════════════════════════ -->
+        <div class="ldr-section" id="ldr-2">
+          <div class="ldr-hero">
+            <img class="ldr-hero__bg" src="assets/images/Ảnh các anh/Đinh Thị Dung tại văn phòng.png" alt="" />
+            <div class="ldr-hero__overlay"></div>
           </div>
-          <div class="leadership-grid leadership-grid--duo">
-            <article class="leader-card" data-id="dung">
-              <div class="leader-card__media">
-                <img src="assets/images/Đinh Thị Dung_cut.png"
-                  onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format&fit=crop&crop=faces,center'"
-                  alt="Trung tá Đinh Thị Dung" loading="lazy" />
-                <div class="leader-card__overlay"></div>
-              </div>
-              <div class="leader-card__body">
-                <div class="leader-card__meta">
-                  <span class="badge badge--red">Ban Điều Hành</span>
-                </div>
-                <span class="leader-card__rank">Trung tá</span>
-                <h3 class="leader-card__name">ĐINH THỊ DUNG</h3>
-                <p class="leader-card__role-title">Phó Tổng Giám đốc<br />kiêm Giám đốc TT Kinh doanh Thiết bị số</p>
-                <button class="leader-card__cta" onclick="openModal('dung')">
-                  Xem tiểu sử
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </article>
 
-            <article class="leader-card" data-id="tuyen">
-              <div class="leader-card__media">
-                <img
-                  src="assets/images/Ảnh các anh/Đồng chí Phạm Tiến Tuyền Phó Tổng Giám đốc Tổng Công ty Giám đốc Trung tâm Phân phối.png"
-                  onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format&fit=crop&crop=faces,center'"
-                  alt="Trung tá QNCN Phạm Tiến Tuyền" loading="lazy" />
-                <div class="leader-card__overlay"></div>
-              </div>
-              <div class="leader-card__body">
-                <div class="leader-card__meta">
-                  <span class="badge badge--red">Ban Điều Hành</span>
-                </div>
-                <span class="leader-card__rank">Trung tá QNCN</span>
-                <h3 class="leader-card__name">PHẠM TIẾN TUYỀN</h3>
-                <p class="leader-card__role-title">Phó Tổng Giám đốc<br />kiêm Giám đốc Trung tâm Phân phối</p>
-                <button class="leader-card__cta" onclick="openModal('tuyen')">
-                  Xem tiểu sử
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </article>
+          <div class="ldr-grid ldr-grid--a">
+            <div class="ldr-text-block">
+              <!-- <p class="lt-serial">03 // THIẾT BỊ SỐ</p> -->
+              <p class="lt-rank">Trung tá</p>
+              <h2 class="lt-name">ĐINH THỊ<br />DUNG</h2>
+              <q class="lt-quote">Tiên phong chuyển đổi — Định vị chuẩn mực mới cho hệ thống thiết bị số.</q>
+              <p class="lt-bio">Với năng lực chiến lược và tinh thần dám nghĩ dám làm, Trung tá Đinh Thị Dung dẫn dắt hệ
+                thống
+                kinh doanh thiết bị số hướng tới những chuẩn mực vận hành và trải nghiệm khách hàng mới mẻ, góp phần
+                củng cố
+                vị thế dẫn đầu của Viettel.</p>
+              <p class="lt-role">Phó Tổng Giám đốc<br />kiêm Giám đốc Trung tâm Kinh doanh Thiết bị số</p>
+            </div>
+            <div class="ldr-card-wrap img-top-left shape-tall frame-yellow">
+              <img class="ldr-card" src="assets/images/Ảnh các anh/Đinh Thị Dung ảnh dọc.png" alt="Chân dung" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
+            <div class="ldr-card-wrap img-bot-left shape-landscape frame-thin">
+              <img class="ldr-card" src="assets/images/Ảnh các anh/Đinh Thị Dung khẳng định vị thế TOP 3.png"
+                alt="Khẳng định vị thế TOP 3" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
+            <div class="ldr-card-wrap img-bot-right shape-square">
+              <img class="ldr-card" src="assets/images/Ảnh các anh/Đinh Thị Dung ảnh dọc 2(vuông).png"
+                alt="Làm việc tại văn phòng" />
+              <div class="ldr-card-expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg></div>
+            </div>
           </div>
         </div>
+
+        <!-- ════════════════════════════════════════════════════════
+       LEADER 4 — TRUNG TÁ QNCN PHẠM TIẾN TUYỀN
+       Layout B: Text Left (Placeholder)
+  ════════════════════════════════════════════════════════ -->
+        <div class="ldr-section" id="ldr-3">
+          <div class="ldr-hero">
+            <div class="ldr-hero__bg"
+              style="background: linear-gradient(135deg, #090002 0%, #1a0006 50%, #0b0003 100%);">
+            </div>
+            <div class="ldr-hero__overlay"></div>
+          </div>
+
+          <div class="ldr-grid ldr-grid--b">
+            <div class="ldr-text-block">
+              <!-- <p class="lt-serial">04 // PHÂN PHỐI</p> -->
+              <p class="lt-rank">Trung tá QNCN</p>
+              <h2 class="lt-name">PHẠM TIẾN<br />TUYỀN</h2>
+              <q class="lt-quote">Mạng lưới vững chắc — Tối ưu hóa chuỗi phân phối đa kênh toàn quốc.</q>
+              <p class="lt-bio">Kiến trúc và vận hành hệ thống phân phối diện rộng trên toàn quốc, kết nối mạng lưới
+                logistics
+                tinh gọn và hiệu quả để đưa sản phẩm Viettel đến mọi thị trường, đảm bảo dòng chảy thương mại xuyên
+                suốt.</p>
+              <p class="lt-role">Phó Tổng Giám đốc<br />kiêm Giám đốc Trung tâm Phân phối</p>
+            </div>
+            <div class="ldr-card-wrap img-top-right shape-square" style="grid-row: 1/3;">
+              <div class="l-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                </svg>
+                <p>Hình ảnh<br />đang cập nhật</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section__container"> <!-- Re-open section__container -->
 
         <!-- Cấp 4: Giám đốc và Phó Giám đốc đương nhiệm -->
         <div class="hierarchy-level reveal-item">
@@ -726,6 +781,7 @@
     </div>
   </div>
 
+  <script src="assets/js/lanh-dao-cinematic.js"></script>
   <script src="assets/js/co-cau-to-chuc.js"></script>
 </body>
 

@@ -388,7 +388,7 @@ const DEPT_DATA = {
       'Tập thể Phòng Chiến lược'
     ],
     images: [
-      'assets/images/Ảnh các anh/Anh Quốc Tuấn.png',
+      'assets/images/Ảnh các anh/Đồng chí Lê Quốc Tuấn Trưởng phòng Chiến lược Tổng Công ty.png',
       'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80',
       'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
       'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80',
@@ -399,15 +399,17 @@ const DEPT_DATA = {
     name: 'Phòng Hành chính',
     desc: 'Quản trị hành chính, văn thư lưu trữ và đảm bảo công tác hậu cần cho toàn bộ hoạt động của Tổng Công ty. Cung cấp môi trường làm việc chuyên nghiệp, trang thiết bị đầy đủ và điều phối các sự kiện nội bộ, giúp các phòng ban khác an tâm công tác.',
     captions: [
-      'Ban Lãnh đạo Phòng Hành chính',
-      'Nội dung chú thích ảnh 2',
+      'Đồng chí Trịnh Công Xuân Trưởng phòng Hành chính Tổng Công ty',
+      'Đồng chí Nguyễn Thị Lan Oanh Phó phòng Phòng Hành chính Tổng Công ty',
       'Nội dung chú thích ảnh 3',
       'Nội dung chú thích ảnh 4',
       'Nội dung chú thích ảnh panorama'
     ],
     images: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-      'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&q=80',
+      'assets/images/Ảnh các anh/Đồng chí Trịnh Công Xuân Trưởng phòng Hành chính Tổng Công ty.png',
+
+      'assets/images/Ảnh các anh/Đồng chí Nguyễn Thị Lan Oanh Phó phòng Phòng Hành chính Tổng Công ty.png',
+
       'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80',
       'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80',
       'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Hành chính.jpg',
@@ -417,14 +419,14 @@ const DEPT_DATA = {
     name: 'Phòng Pháp chế & Đầu tư',
     desc: 'Tư vấn pháp lý, quản lý rủi ro, thẩm định hợp đồng và điều phối các hoạt động đầu tư của Tổng Công ty. Đảm bảo mọi hoạt động kinh doanh tuân thủ nghiêm ngặt quy định pháp luật và quy chế của Tập đoàn, đồng thời tối ưu hóa hiệu quả các dự án đầu tư.',
     captions: [
-      'Ban Lãnh đạo Phòng Pháp chế & Đầu tư',
+      'Đồng chí Trần Thị Ngọc Mai Trưởng phòng Pháp chế & Đầu tư Tổng Công ty',
       'Nội dung chú thích ảnh 2',
       'Nội dung chú thích ảnh 3',
       'Nội dung chú thích ảnh 4',
       'Nội dung chú thích ảnh panorama'
     ],
     images: [
-      'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80',
+      'assets/images/Ảnh các anh/Đồng chí Trần Thị Ngọc Mai Trưởng phòng Pháp chế & Đầu tư Tổng Công ty.png',
       'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80',
       'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80',
       'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1200&q=80',
@@ -453,15 +455,15 @@ const DEPT_DATA = {
     name: 'Phòng Tài chính – Kế toán',
     desc: 'Quản lý tài chính doanh nghiệp, lập báo cáo kế toán, kiểm soát dòng tiền và đảm bảo tuân thủ các quy định tài chính. Tham mưu cho Ban Giám đốc về các quyết định tài chính chiến lược, đảm bảo nguồn vốn luôn lưu thông ổn định và hiệu quả.',
     captions: [
-      'Ban Lãnh đạo Phòng Tài chính – Kế toán',
-      'Nội dung chú thích ảnh 2',
+      'Đồng chí Nguyễn Đức Hiển Trưởng phòng Tài chính Kế toán Tổng Công ty',
+      'Đồng chí Nguyễn Văn Khánh Phó phòng Phòng Tài chính Kế toán Tổng Công ty',
       'Nội dung chú thích ảnh 3',
       'Nội dung chú thích ảnh 4',
       'Nội dung chú thích ảnh panorama'
     ],
     images: [
-      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
+      'assets/images/Ảnh các anh/Đồng chí Nguyễn Đức Hiển Trưởng phòng Tài chính Kế toán Tổng Công ty.png',
+      'assets/images/Ảnh các anh/Đồng chí Nguyễn Văn Khánh Phó phòng Phòng Tài chính Kế toán Tổng Công ty.png',
       'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80',
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
       'assets/images/Ảnh các phòng ban phục vụ 30 năm/Phòng Tài chính.jpg',
@@ -489,14 +491,14 @@ const DEPT_DATA = {
     name: 'Phòng Công nghệ Thông tin',
     desc: 'Quản trị hạ tầng công nghệ, phát triển hệ thống số hóa và thúc đẩy chuyển đổi số toàn diện trong Tổng Công ty. Cung cấp các công cụ và nền tảng số hiện đại giúp tối ưu hóa quy trình nghiệp vụ, tăng cường năng suất lao động.',
     captions: [
-      'Ban Lãnh đạo Phòng Công nghệ Thông tin',
+      'Đồng chí Khuất Duy Sơn Trưởng phòng Công nghệ thông tin Tổng Công ty',
       'Nội dung chú thích ảnh 2',
       'Nội dung chú thích ảnh 3',
       'Nội dung chú thích ảnh 4',
       'Nội dung chú thích ảnh panorama'
     ],
     images: [
-      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=800&q=80',
+      'assets/images/Ảnh các anh/Đồng chí Khuất Duy Sơn Trưởng phòng Công nghệ thông tin Tổng Công ty.png',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80',
       'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
@@ -509,38 +511,86 @@ function openDeptOverlay(id) {
   const data = DEPT_DATA[id];
   if (!data) return;
 
+  const hasPhoPhong = data.captions && data.captions[1] && data.captions[1].toLowerCase().includes('phó phòng');
+
+  let introHTML = '';
+  let collageHTML = '';
+
+  if (hasPhoPhong) {
+    introHTML = `
+      <!-- Khối 1: Giới thiệu -->
+      <div class="editorial-block editorial-block--intro has-pho-phong">
+        <span class="dept-code">${id}</span>
+        <h2>${data.name}</h2>
+        <p>${data.desc}</p>
+        <div class="polaroid polaroid--truong">
+          <img src="${data.images[0]}" alt="${data.name} image 1" />
+          ${data.captions && data.captions[0] ? `<p class="polaroid-caption">${data.captions[0]}</p>` : ''}
+        </div>
+        <div class="polaroid polaroid--pho">
+          <img src="${data.images[1]}" alt="${data.name} image 2" />
+          ${data.captions && data.captions[1] ? `<p class="polaroid-caption">${data.captions[1]}</p>` : ''}
+        </div>
+      </div>
+    `;
+
+    collageHTML = `
+      <!-- Khối 2: Asymmetric -->
+      <div class="editorial-block editorial-block--collage">
+        <div class="collage-col-left">
+          <figure class="collage-item">
+            <img src="${data.images[2]}" alt="Image 3" />
+            ${data.captions && data.captions[2] ? `<figcaption class="collage-caption">${data.captions[2]}</figcaption>` : ''}
+          </figure>
+        </div>
+        <div class="collage-col-right">
+          <figure class="collage-item">
+            <img src="${data.images[3]}" alt="Image 4" />
+            ${data.captions && data.captions[3] ? `<figcaption class="collage-caption">${data.captions[3]}</figcaption>` : ''}
+          </figure>
+        </div>
+      </div>
+    `;
+  } else {
+    introHTML = `
+      <!-- Khối 1: Giới thiệu -->
+      <div class="editorial-block editorial-block--intro">
+        <span class="dept-code">${id}</span>
+        <h2>${data.name}</h2>
+        <p>${data.desc}</p>
+        <div class="polaroid">
+          <img src="${data.images[0]}" alt="${data.name} image 1" />
+          ${data.captions && data.captions[0] ? `<p class="polaroid-caption">${data.captions[0]}</p>` : ''}
+        </div>
+      </div>
+    `;
+    
+    collageHTML = `
+      <!-- Khối 2: Asymmetric -->
+      <div class="editorial-block editorial-block--collage">
+        <div class="collage-col-left">
+          <figure class="collage-item">
+            <img src="${data.images[1]}" alt="Image 2" />
+            ${data.captions && data.captions[1] ? `<figcaption class="collage-caption">${data.captions[1]}</figcaption>` : ''}
+          </figure>
+          <figure class="collage-item">
+            <img src="${data.images[2]}" alt="Image 3" />
+            ${data.captions && data.captions[2] ? `<figcaption class="collage-caption">${data.captions[2]}</figcaption>` : ''}
+          </figure>
+        </div>
+        <div class="collage-col-right">
+          <figure class="collage-item">
+            <img src="${data.images[3]}" alt="Image 4" />
+            ${data.captions && data.captions[3] ? `<figcaption class="collage-caption">${data.captions[3]}</figcaption>` : ''}
+          </figure>
+        </div>
+      </div>
+    `;
+  }
+
   deptGalleryContent.innerHTML = `
-    <!-- Khối 1: Giới thiệu -->
-    <div class="editorial-block editorial-block--intro">
-      <span class="dept-code">${id}</span>
-      <h2>${data.name}</h2>
-      <p>${data.desc}</p>
-      <div class="polaroid">
-        <img src="${data.images[0]}" alt="${data.name} image 1" />
-        ${data.captions && data.captions[0] ? `<p class="polaroid-caption">${data.captions[0]}</p>` : ''}
-      </div>
-    </div>
-    
-    <!-- Khối 2: Asymmetric -->
-    <div class="editorial-block editorial-block--collage">
-      <div class="collage-col-left">
-        <figure class="collage-item">
-          <img src="${data.images[1]}" alt="Image 2" />
-          ${data.captions && data.captions[1] ? `<figcaption class="collage-caption">${data.captions[1]}</figcaption>` : ''}
-        </figure>
-        <figure class="collage-item">
-          <img src="${data.images[2]}" alt="Image 3" />
-          ${data.captions && data.captions[2] ? `<figcaption class="collage-caption">${data.captions[2]}</figcaption>` : ''}
-        </figure>
-      </div>
-      <div class="collage-col-right">
-        <figure class="collage-item">
-          <img src="${data.images[3]}" alt="Image 4" />
-          ${data.captions && data.captions[3] ? `<figcaption class="collage-caption">${data.captions[3]}</figcaption>` : ''}
-        </figure>
-      </div>
-    </div>
-    
+    ${introHTML}
+    ${collageHTML}
     <!-- Khối 3: Panorama -->
     <div class="editorial-block editorial-block--panorama">
       <img src="${data.images[4]}" alt="Panorama" />
@@ -733,3 +783,53 @@ const initLightbox = () => {
 };
 
 document.addEventListener('DOMContentLoaded', initLightbox);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // --- SUBNAV SCROLLSPY ---
+  const subnavPills = document.querySelectorAll('.subnav__pill');
+  if (!subnavPills.length) return;
+
+  const sections = Array.from(subnavPills).map(pill => document.querySelector(pill.getAttribute('href'))).filter(Boolean);
+
+  // ScrollSpy behavior
+  const onScroll = () => {
+    let currentId = '';
+    const scrollPos = window.scrollY + 200; // offset for sticky headers
+
+    sections.forEach(sec => {
+      if (sec.offsetTop <= scrollPos) {
+        currentId = sec.getAttribute('id');
+      }
+    });
+
+    if (currentId) {
+      subnavPills.forEach(pill => {
+        pill.classList.remove('active');
+        if (pill.getAttribute('href') === '#' + currentId) {
+          pill.classList.add('active');
+        }
+      });
+    }
+  };
+
+  window.addEventListener('scroll', onScroll);
+  // Trigger once
+  onScroll();
+
+  // Smooth scroll on click
+  subnavPills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(pill.getAttribute('href'));
+      if (target) {
+        const headerOffset = 100; // approximate sticky header height
+        const targetPos = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({
+          top: targetPos,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
