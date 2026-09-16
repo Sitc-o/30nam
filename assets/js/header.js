@@ -221,6 +221,7 @@ const headerHTML = `
             <img class="brand-logo" src="assets/images/logo/viettel-commerce-light.svg" alt="Viettel Commerce" width="160" height="92">
         </a>
         <nav class="modern-nav">
+            <a href="index.html">TRANG CHỦ</a>
             <a href="gioi-thieu.html">GIỚI THIỆU</a>
             <div class="nav-dropdown">
                 <a href="hanh-trinh.html">HÀNH TRÌNH</a>
