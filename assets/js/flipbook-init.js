@@ -104,10 +104,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const isHeading2 = blockText.startsWith('## ');
                 const headingText = blockText.replace(isHeading2 ? '## ' : '# ', '').replace(/\n/g, '<br>');
                 
-                // THÊM VÀO MỤC LỤC
-                let rawTitle = headingText.replace(/<br>/g, ' ');
-                window.bookTOC.push({ level: isHeading2 ? 2 : 1, title: rawTitle, pageIndex: pageCount + 2 });
-                
                 // H1 (Phần) to hơn, có gạch đôi. H2 (Chương) nhỏ hơn, không gạch.
                 const fontSize = isHeading2 ? "1.4rem" : "1.6rem";
                 const dividerHTML = isHeading2 ? "" : `<div class="scrapbook-divider" style="width: 60%; margin: 15px auto 30px auto; border-top: 1px solid #c92a2a; border-bottom: 2px solid #ee0033; height: 4px; background: transparent;"></div>`;
@@ -118,16 +114,29 @@ document.addEventListener('DOMContentLoaded', async function () {
                     </div>
                     ${dividerHTML}
                 `;
+                
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = hHTML;
+                
+                let rawTitle = headingText.replace(/<br>/g, ' ');
+                let tocRecorded = false;
+                
                 Array.from(tempDiv.childNodes).forEach(n => {
                     measureBox.appendChild(n.cloneNode(true));
                     if (measureBox.scrollHeight > MAX_HEIGHT) {
                         measureBox.removeChild(measureBox.lastChild);
                         commitPage();
                         measureBox.appendChild(n.cloneNode(true));
+                        currentPage.appendChild(n.cloneNode(true));
+                    } else {
+                        currentPage.appendChild(n.cloneNode(true));
                     }
-                    currentPage.appendChild(n.cloneNode(true));
+                    
+                    // Ghi nhận TOC ngay sau khi tiêu đề đã được chèn vào đúng trang (pageCount hiện tại đã chính xác)
+                    if (n.nodeType === 1 && n.classList.contains('scrapbook-year') && !tocRecorded) {
+                        window.bookTOC.push({ level: isHeading2 ? 2 : 1, title: rawTitle, pageIndex: pageCount + 2 });
+                        tocRecorded = true;
+                    }
                 });
             } else if (blockText.startsWith('[anh:') && blockText.endsWith(']')) {
                 const src = blockText.replace('[anh:', '').replace(']', '').trim();
@@ -357,7 +366,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                         li.style.paddingLeft = '20px';
                         li.style.color = '#333';
                     }
-                    li.innerHTML = `<span>${item.title}</span><span style="color:#999; font-size:0.9rem;">Trang ${item.pageIndex + 1}</span>`;
+                    // Số trang in trên giấy = pageCount + 1
+                    // Mà pageIndex = pageCount + 2 
+                    // => Số trang in trên giấy = pageIndex - 1
+                    li.innerHTML = `<span>${item.title}</span><span style="color:#999; font-size:0.9rem;">Trang ${item.pageIndex - 1}</span>`;
                     li.addEventListener('click', () => {
                         window.bookPageFlip.turnToPage(item.pageIndex);
                         closeAllPanels();
