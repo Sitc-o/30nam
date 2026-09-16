@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', async function () {
+        function getOpenTags(html) {
+            const stack = [];
+            const regex = /<\/?([a-z0-9]+)[^>]*>/gi;
+            let match;
+            while ((match = regex.exec(html)) !== null) {
+                const tagFull = match[0];
+                const tagName = match[1].toLowerCase();
+                if (['br', 'hr', 'img'].includes(tagName)) continue;
+                if (tagFull.startsWith('</')) {
+                    if (stack.length > 0 && stack[stack.length - 1].tag === tagName) {
+                        stack.pop();
+                    }
+                } else {
+                    stack.push({ tag: tagName, full: tagFull });
+                }
+            }
+            return stack.map(s => s.full).join('');
+        }
+
     const flipbookEl = document.getElementById('flipbook');
     const PageFlipClass = (typeof StPageFlip !== 'undefined') ? StPageFlip.PageFlip : (typeof St !== 'undefined' ? St.PageFlip : null);
     if (!flipbookEl || !PageFlipClass) return;
@@ -24,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const isRightSide = (pageCount % 2 === 0);
             pagesHTML += `
                 <div class="page ${isRightSide ? 'scrapbook-right' : 'scrapbook-left'} custom-flow-page">
-                    <div class="page-content scrapbook-desc" style="padding: 40px 35px 40px 40px; overflow: hidden; width: 100%; height: 100%; text-align: justify; box-sizing:border-box;">
+                    <div class="page-content scrapbook-desc" style="padding: 40px 35px 40px 40px !important; overflow: hidden; width: 100%; height: 100%; text-align: justify; box-sizing:border-box; display: block !important;">
                         ${currentPage.innerHTML}
                     </div>
                     <div class="page-number" style="position:absolute; bottom:15px; ${isRightSide ? 'right:20px;' : 'left:20px;'} font-size:0.9rem; color:#888;">${pageCount + 1}</div>
@@ -37,9 +56,63 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         for (let blockText of blocks) {
             blockText = blockText.trim();
-            if (blockText.startsWith('# ')) {
-                isFirstParagraph = true; // Tiêu đề mới -> Đoạn văn tiếp theo sẽ có Drop Cap
-                const hHTML = `<div class="scrapbook-year" style="font-size:2.2rem; margin-top:20px; margin-bottom:15px; color:#ee0033; font-weight:bold; font-family:sans-serif;">${blockText.replace('# ', '')}</div><div class="scrapbook-divider" style="height:2px; background:#c92a2a; margin-bottom:20px;"></div>`;
+
+            // KÍCH HOẠT NGẮT TRANG THỦ CÔNG
+            if (blockText === '[ngat-trang]' || blockText === '---') {
+                if (currentPage.childNodes.length > 0) {
+                    commitPage();
+                }
+                continue;
+            }
+
+            // ĐỌC THẺ ĐỊNH DẠNG (Có thể dùng kết hợp nhiều thẻ)
+            let isNoIndent = false;
+            let isCenter = false;
+            let isRight = false;
+            let isSignature = false;
+            let isDropCap = false;
+            
+            while (true) {
+                if (blockText.startsWith('[sat-le]')) {
+                    blockText = blockText.substring(8).trim();
+                    isNoIndent = true;
+                } else if (blockText.startsWith('[giua]')) {
+                    blockText = blockText.substring(6).trim();
+                    isCenter = true;
+                } else if (blockText.startsWith('[phai]')) {
+                    blockText = blockText.substring(6).trim();
+                    isRight = true;
+                } else if (blockText.startsWith('[ky-ten]')) {
+                    blockText = blockText.substring(8).trim();
+                    isSignature = true;
+                } else if (blockText.startsWith('[chu-to]')) {
+                    blockText = blockText.substring(8).trim();
+                    isDropCap = true;
+                } else {
+                    break;
+                }
+            }
+
+            if (blockText.startsWith('## ') || blockText.startsWith('# ')) {
+                isFirstParagraph = true; // Tiêu đề mới -> Đoạn văn tiếp theo sẽ xem xét Drop Cap
+                let alignStyle = "";
+                if (isCenter) alignStyle = "text-align: center;";
+                if (isRight) alignStyle = "text-align: right;";
+                
+                // Xác định cấp độ tiêu đề
+                const isHeading2 = blockText.startsWith('## ');
+                const headingText = blockText.replace(isHeading2 ? '## ' : '# ', '').replace(/\n/g, '<br>');
+                
+                // H1 (Phần) to hơn, có gạch đôi. H2 (Chương) nhỏ hơn, không gạch.
+                const fontSize = isHeading2 ? "1.4rem" : "1.6rem";
+                const dividerHTML = isHeading2 ? "" : `<div class="scrapbook-divider" style="width: 60%; margin: 15px auto 30px auto; border-top: 1px solid #c92a2a; border-bottom: 2px solid #ee0033; height: 4px; background: transparent;"></div>`;
+                
+                const hHTML = `
+                    <div class="scrapbook-year" style="font-size:${fontSize}; line-height:1.4; margin-top:20px; margin-bottom:15px; color:#ee0033; font-weight:bold; font-family:'Times New Roman', Times, serif; ${alignStyle}">
+                        ${headingText}
+                    </div>
+                    ${dividerHTML}
+                `;
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = hHTML;
                 Array.from(tempDiv.childNodes).forEach(n => {
@@ -72,14 +145,59 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
                 currentPage.appendChild(node.cloneNode(true));
             } else {
-                const pText = blockText.replace(/\n/g, '<br>');
-                const pNode = document.createElement('p');
-                pNode.style.cssText = "text-indent:1.5rem; margin-bottom:12px; line-height:1.6; color:#333;";
+                let lines = [];
+                // Nếu có định dạng đặc biệt hoặc là tiểu mục (in đậm), ta gom chung thành 1 đoạn văn chứa <br>
+                if (isNoIndent || isCenter || isRight || isSignature || blockText.startsWith('<b>')) {
+                    lines = [blockText.replace(/\n/g, '<br>')];
+                } else {
+                    // Nếu là đoạn văn bình thường, mỗi dòng xuống dòng sẽ tạo thành 1 thẻ <p> riêng để lùi đầu dòng!
+                    lines = blockText.split('\n');
+                }
+
+                for (let i = 0; i < lines.length; i++) {
+                    const pText = lines[i].trim();
+                    if (!pText) continue;
+
+                    const pNode = document.createElement('p');
+                    // Chỉ cách đoạn (margin-bottom: 12px) nếu đây là dòng cuối cùng của block (nghĩa là sau đó có Enter 2 lần)
+                    // Nếu ấn Enter 1 lần (dòng giữa block), margin-bottom sẽ bằng 0
+                    let marginBottom = (i === lines.length - 1) ? "12px" : "0px";
+                    pNode.style.cssText = `text-indent:1.5rem; margin-top:0px; margin-bottom:${marginBottom}; line-height:1.6; color:#333;`;
+                
+                if (isNoIndent) pNode.style.textIndent = "0";
+                if (isCenter) {
+                    pNode.style.textIndent = "0";
+                    pNode.style.textAlign = "center";
+                }
+                if (isRight) {
+                    pNode.style.textIndent = "0";
+                    pNode.style.textAlign = "right";
+                }
+                if (isSignature) {
+                    pNode.style.textIndent = "0";
+                    pNode.style.textAlign = "center";
+                    pNode.style.marginTop = "30px";
+                    pNode.style.marginBottom = "30px";
+                    pNode.style.fontWeight = "500";
+                }
+
                 pNode.innerHTML = pText;
                 
-                if (isFirstParagraph) {
-                    pNode.classList.add('drop-cap-p');
+                let applyDropCap = false;
+                
+                if (isDropCap && i === 0) {
+                    applyDropCap = true;
+                } else if (isFirstParagraph) {
+                    // Tự động Drop Cap cho đoạn văn đầu tiên sau Tiêu đề
+                    if (!isNoIndent && !isCenter && !isRight && !isSignature && !pText.startsWith('<b>') && !pText.startsWith('1.') && !pText.startsWith('2.') && !pText.startsWith('3.')) {
+                        applyDropCap = true;
+                    }
                     isFirstParagraph = false;
+                }
+
+                if (applyDropCap) {
+                    pNode.classList.add('drop-cap-p');
+                    pNode.style.textIndent = "0"; // Không lùi đầu dòng cho đoạn có drop-cap
                 }
 
                 measureBox.appendChild(pNode.cloneNode(true));
@@ -87,12 +205,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                     currentPage.appendChild(pNode.cloneNode(true));
                 } else {
                     measureBox.removeChild(measureBox.lastChild);
+                    
                     let words = pText.split(' ');
                     let currentP_measure = pNode.cloneNode();
-                    let currentP_real = pNode.cloneNode();
                     measureBox.appendChild(currentP_measure);
-                    currentPage.appendChild(currentP_real);
-
+                    
                     let left = 0, right = words.length - 1, bestFit = 0;
                     while (left <= right) {
                         let mid = Math.floor((left+right)/2);
@@ -104,13 +221,32 @@ document.addEventListener('DOMContentLoaded', async function () {
                             right = mid - 1;
                         }
                     }
+                    
+                    // CHỐNG RỚT CHỮ (Orphan) VÀ CẮT NGANG TIỂU MỤC
+                    // Lưu ý: isDropCap (thẻ [chu-to]) là đoạn văn dài bình thường, bắt buộc phải cho phép cắt trang!
+                    let isSubheading = pText.startsWith('<b>') || isSignature;
+                    if ((isSubheading || bestFit < 10) && currentPage.childNodes.length > 0) {
+                        measureBox.removeChild(currentP_measure);
+                        commitPage();
+                        i--; // Lùi lại 1 bước để xử lý lại chính đoạn văn này trên trang giấy mới
+                        continue;
+                    }
+
                     if (bestFit === 0) bestFit = 1; 
                     
-                    currentP_measure.innerHTML = words.slice(0, bestFit).join(' ');
-                    currentP_real.innerHTML = words.slice(0, bestFit).join(' ');
+                    let currentP_real = pNode.cloneNode();
+                    currentPage.appendChild(currentP_real);
+                    
+                    let bestFitText1 = words.slice(0, bestFit).join(' ');
+                    currentP_measure.innerHTML = bestFitText1;
+                    currentP_real.innerHTML = bestFitText1;
                     commitPage();
                     
                     let remainingWords = words.slice(bestFit);
+                    let openTags1 = getOpenTags(bestFitText1);
+                    if (remainingWords.length > 0 && openTags1) {
+                        remainingWords[0] = openTags1 + remainingWords[0];
+                    }
                     while (remainingWords.length > 0) {
                         currentP_measure = pNode.cloneNode();
                         currentP_real = pNode.cloneNode();
@@ -118,6 +254,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                         // Đảm bảo phần chữ bị cắt sang trang sau KHÔNG bị dính drop-cap
                         currentP_measure.classList.remove('drop-cap-p');
                         currentP_real.classList.remove('drop-cap-p');
+
+                        // Bỏ lùi đầu dòng vì đây là đoạn đang viết dở bị vắt sang trang
+                        currentP_measure.style.textIndent = "0";
+                        currentP_real.style.textIndent = "0";
 
                         measureBox.appendChild(currentP_measure);
                         currentPage.appendChild(currentP_real);
@@ -141,12 +281,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                         }
                         if (bestFit === 0) bestFit = 1; 
                         
-                        currentP_measure.innerHTML = remainingWords.slice(0, bestFit).join(' ');
-                        currentP_real.innerHTML = remainingWords.slice(0, bestFit).join(' ');
+                        let bestFitText2 = remainingWords.slice(0, bestFit).join(' ');
+                        currentP_measure.innerHTML = bestFitText2;
+                        currentP_real.innerHTML = bestFitText2;
                         commitPage();
-                        remainingWords = remainingWords.slice(bestFit);
+                        
+                        let nextRemaining = remainingWords.slice(bestFit);
+                        let openTags2 = getOpenTags(bestFitText2);
+                        if (nextRemaining.length > 0 && openTags2) {
+                            nextRemaining[0] = openTags2 + nextRemaining[0];
+                        }
+                        remainingWords = nextRemaining;
                     }
                 }
+                } // Đóng vòng lặp for
             }
         }
 
