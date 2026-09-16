@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let pagesHTML = '';
         let currentPage = document.createElement('div');
         let pageCount = 0;
+        let isFirstParagraph = true; // Theo dõi đoạn văn đầu tiên sau mỗi tiêu đề
 
         function commitPage() {
             const isRightSide = (pageCount % 2 === 0);
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         for (let blockText of blocks) {
             blockText = blockText.trim();
             if (blockText.startsWith('# ')) {
+                isFirstParagraph = true; // Tiêu đề mới -> Đoạn văn tiếp theo sẽ có Drop Cap
                 const hHTML = `<div class="scrapbook-year" style="font-size:2.2rem; margin-top:20px; margin-bottom:15px; color:#ee0033; font-weight:bold; font-family:sans-serif;">${blockText.replace('# ', '')}</div><div class="scrapbook-divider" style="height:2px; background:#c92a2a; margin-bottom:20px;"></div>`;
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = hHTML;
@@ -74,6 +76,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const pNode = document.createElement('p');
                 pNode.style.cssText = "text-indent:1.5rem; margin-bottom:12px; line-height:1.6; color:#333;";
                 pNode.innerHTML = pText;
+                
+                if (isFirstParagraph) {
+                    pNode.classList.add('drop-cap-p');
+                    isFirstParagraph = false;
+                }
 
                 measureBox.appendChild(pNode.cloneNode(true));
                 if (measureBox.scrollHeight <= MAX_HEIGHT) {
@@ -97,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             right = mid - 1;
                         }
                     }
-                    if (bestFit === 0) bestFit = 1; // Prevent infinite loop
+                    if (bestFit === 0) bestFit = 1; 
                     
                     currentP_measure.innerHTML = words.slice(0, bestFit).join(' ');
                     currentP_real.innerHTML = words.slice(0, bestFit).join(' ');
@@ -107,6 +114,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                     while (remainingWords.length > 0) {
                         currentP_measure = pNode.cloneNode();
                         currentP_real = pNode.cloneNode();
+                        
+                        // Đảm bảo phần chữ bị cắt sang trang sau KHÔNG bị dính drop-cap
+                        currentP_measure.classList.remove('drop-cap-p');
+                        currentP_real.classList.remove('drop-cap-p');
+
                         measureBox.appendChild(currentP_measure);
                         currentPage.appendChild(currentP_real);
                         
@@ -127,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 right = mid - 1;
                             }
                         }
-                        if (bestFit === 0) bestFit = 1; // Prevent infinite loop
+                        if (bestFit === 0) bestFit = 1; 
                         
                         currentP_measure.innerHTML = remainingWords.slice(0, bestFit).join(' ');
                         currentP_real.innerHTML = remainingWords.slice(0, bestFit).join(' ');
