@@ -2030,7 +2030,9 @@ Nhìn lại chặng đường 3 thập kỷ đã qua, mỗi trang sử của T�
 Bước vào giai đoạn phát triển tiếp theo, thế giới và khu vực đang chuyển dịch với tốc độ chóng mặt cùng những diễn biến địa chính trị cực kỳ phức tạp. Cuộc Cách mạng Công nghiệp 4.0 đang bùng nổ mạnh mẽ trên quy mô toàn cầu với sự thống trị của các nền tảng công nghệ lõi tiên tiến nhất. Trong bối cảnh Việt Nam đẩy nhanh tiến trình hội nhập quốc tế sâu rộng và mạnh mẽ, nền kinh tế đất nước đón nhận những thời cơ, vận hội vĩ đại nhưng cũng phải trực diện đối mặt với một môi trường thương mại đầy giông bão. Sức ép bão hòa của tổng cầu và tính chất cạnh tranh khốc liệt trên các lĩnh vực bán lẻ, phân phối, xuất nhập khẩu thiết bị viễn thông công nghệ cao đòi hỏi một tư duy nhạy bén và năng lực thích ứng thần tốc.
 Phát huy những thành tựu có ý nghĩa lịch sử đã đạt được, tập thể Viettel Commerce quyết tâm giữ vững tinh thần tiến công, chủ động đối mặt và vượt qua mọi thách thức. Với bệ phóng vững chắc của tình đoàn kết thống nhất đồng lòng trong ngôi nhà chung Viettel Commerce, bằng ý chí tự lực tự cường và sức sáng tạo không giới hạn, Đảng ủy, Ban Tổng Giám đốc cùng toàn thể người lao động sẽ làm chủ hoàn toàn công nghệ lõi Big Data, AI, Cloud và hạ tầng số hiện đại. Tổng Công ty kiên định mục tiêu chiến lược: vươn lên trở thành công ty bán lẻ số 1 Việt Nam về ứng dụng công nghệ. Tổng Công ty cam kết khẳng định mạnh mẽ thế và lực vượt trội, bứt phá tăng trưởng nhanh, hoàn thành xuất sắc mọi nhiệm vụ sản xuất kinh doanh gắn liền với trách nhiệm quốc phòng, an ninh quốc gia trong thời kỳ mới – thời kỳ Tổng Công ty Thương mại và Xuất nhập khẩu Viettel tự tin vươn tầm thế giới, kiêu hãnh tiên phong cùng đất nước bước vào kỷ nguyên vươn mình vĩ đại của dân tộc.
 
-[giua] # PHỤ LỤC
+---
+
+[giua] # PHỤ LỤC 
 
 [giua] ## Phụ lục 1
 NHỮNG PHẦN THƯỞNG CAO QUÝ 
@@ -2079,6 +2081,7 @@ Năm 2022: Chủ tịch nước tặng Huân chương Lap động hạng Nhất.
 - Công đoàn cơ sở Công ty trong những năm qua được Bộ Quốc Phòng, Tổng cục Chính trị, Tập đoàn tặng thưởng Cờ thi đua, Bằng khen và nhiều phần thưởng khác. Năm 2021 được Tổng cục Chính trị tặng Bằng khen.  
 
 * Thành tích về Đảng: Liên tục các từ năm: 2006 đến năm 2021 Đảng bộ Công ty luôn đạt trong sạch vững mạnh, trong đó có năm 2008, 2009, 2011, 2014, 2019, 2020, 2021 trong sạch vững mạnh tiêu biểu.
+
 [giua] ## Phụ lục 2
 CHI BỘ, ĐẢNG BỘ TỔNG CÔNG TY QUA CÁC NHIỆM KỲ ĐẠI HỘI
  
@@ -2216,7 +2219,11 @@ II. DANH SÁCH 07 CÁN BỘ THUỘC PHÒNG XUẤT NHẬP KHẨU (TIỀN THÂN C�
 Đồng chí Nguyễn Thị Minh Nguyệt (sau này là Trưởng phòng Kế hoạch – Tổng hợp Trung tâm XNK), Trợ lý.
 Đồng chí Lê Phú Lâm, Trợ lý.
 Đồng chí Bùi Ánh Quang (sau này là Thiếu tá QNCN)
-III. DANH SÁCH BAN GIÁM ĐỐC/TỔNG GIÁM ĐỐC CÔNG TY/TỔNG CÔNG TY, TRUNG TÂM; TRƯỞNG, PHÓ PHÒNG, BAN QUA CÁC THỜI KỲ
+
+[giua] ## Phụ lục 3
+DANH SÁCH BAN GIÁM ĐỐC/TỔNG GIÁM ĐỐC CÔNG TY/TỔNG CÔNG TY, TRUNG TÂM; 
+TRƯỞNG, PHÓ PHÒNG, BAN QUA CÁC THỜI KỲ
+
 Các đồng chí Chủ tịch, Giám đốc/Tổng Giám đốc
 STT
 Cấp bậc/Họ và tên
