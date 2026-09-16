@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let currentPage = document.createElement('div');
         let pageCount = 0;
         let isFirstParagraph = true; // Theo dõi đoạn văn đầu tiên sau mỗi tiêu đề
+        window.bookTOC = [];
 
         function commitPage() {
             const isRightSide = (pageCount % 2 === 0);
@@ -102,6 +103,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Xác định cấp độ tiêu đề
                 const isHeading2 = blockText.startsWith('## ');
                 const headingText = blockText.replace(isHeading2 ? '## ' : '# ', '').replace(/\n/g, '<br>');
+                
+                // THÊM VÀO MỤC LỤC
+                let rawTitle = headingText.replace(/<br>/g, ' ');
+                window.bookTOC.push({ level: isHeading2 ? 2 : 1, title: rawTitle, pageIndex: pageCount + 2 });
                 
                 // H1 (Phần) to hơn, có gạch đôi. H2 (Chương) nhỏ hơn, không gạch.
                 const fontSize = isHeading2 ? "1.4rem" : "1.6rem";
@@ -310,6 +315,208 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
         window.bookPageFlip = pageFlip;
+        // HI?N TH? TOOLBAR SAU KHI LOAD XONG
+        const toolbar = document.getElementById('book-toolbar');
+        if (toolbar) toolbar.style.opacity = '1';
+
+        // X? L� M?C L?C
+        const btnToc = document.getElementById('btn-toc');
+        const panelToc = document.getElementById('panel-toc');
+        const btnTocClose = document.getElementById('toc-close');
+        const tocList = document.getElementById('toc-list');
+        const btnSearch = document.getElementById('btn-search');
+        const panelSearch = document.getElementById('panel-search');
+
+        function closeAllPanels() {
+            panelToc.style.opacity = '0';
+            panelToc.style.pointerEvents = 'none';
+            panelToc.style.transform = 'translateX(-50%) translateY(20px)';
+            panelSearch.style.opacity = '0';
+            panelSearch.style.pointerEvents = 'none';
+            panelSearch.style.transform = 'translateX(-50%) translateY(20px)';
+        }
+
+        btnToc.addEventListener('click', () => {
+            if (panelToc.style.opacity === '1') {
+                closeAllPanels();
+            } else {
+                closeAllPanels();
+                // Render TOC
+                tocList.innerHTML = '';
+                window.bookTOC.forEach(item => {
+                    let li = document.createElement('li');
+                    li.style.padding = '8px 0';
+                    li.style.borderBottom = '1px dashed #ddd';
+                    li.style.cursor = 'pointer';
+                    li.style.display = 'flex';
+                    li.style.justifyContent = 'space-between';
+                    if (item.level === 1) {
+                        li.style.fontWeight = 'bold';
+                        li.style.color = '#ee0033';
+                    } else {
+                        li.style.paddingLeft = '20px';
+                        li.style.color = '#333';
+                    }
+                    li.innerHTML = `<span>${item.title}</span><span style="color:#999; font-size:0.9rem;">Trang ${item.pageIndex + 1}</span>`;
+                    li.addEventListener('click', () => {
+                        window.bookPageFlip.turnToPage(item.pageIndex);
+                        closeAllPanels();
+                    });
+                    tocList.appendChild(li);
+                });
+                
+                panelToc.style.opacity = '1';
+                panelToc.style.pointerEvents = 'auto';
+                panelToc.style.transform = 'translateX(-50%) translateY(0)';
+            }
+        });
+
+        btnTocClose.addEventListener('click', closeAllPanels);
+
+        // X? L� T�M KI?M (VS CODE STYLE)
+        const searchInput = document.getElementById('search-input');
+        const searchCount = document.getElementById('search-count');
+        const btnSearchUp = document.getElementById('search-up');
+        const btnSearchDown = document.getElementById('search-down');
+        const btnSearchClose = document.getElementById('search-close');
+        
+        let searchResults = [];
+        let currentSearchIndex = -1;
+
+        function clearHighlights() {
+            document.querySelectorAll('mark.search-highlight').forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
+            searchResults = [];
+            currentSearchIndex = -1;
+            searchCount.textContent = '0 / 0';
+        }
+
+        function goToMatch(index) {
+            if (searchResults.length === 0) return;
+            if (currentSearchIndex >= 0 && searchResults[currentSearchIndex]) {
+                searchResults[currentSearchIndex].style.backgroundColor = '#ffeb3b'; // yellow
+            }
+            
+            currentSearchIndex = index;
+            const target = searchResults[currentSearchIndex];
+            target.style.backgroundColor = '#ff9800'; // orange (active)
+            searchCount.textContent = `${currentSearchIndex + 1} / ${searchResults.length}`;
+            
+            let pageIdx = parseInt(target.dataset.page);
+            if (window.bookPageFlip) {
+                window.bookPageFlip.turnToPage(pageIdx);
+            }
+        }
+
+        function performSearch(query) {
+            clearHighlights();
+            if (!query.trim()) return;
+
+            // Lấy tất cả các trang
+            const pages = document.querySelectorAll('.page');
+            const regex = new RegExp(query, 'gi');
+
+            pages.forEach((page, idx) => {
+                // page index trong DOM của .page chính là số trang thật của bookPageFlip!
+                let pageIndex = idx; 
+
+                const walker = document.createTreeWalker(page, NodeFilter.SHOW_TEXT, null, false);
+                const nodesToReplace = [];
+                let node;
+                while (node = walker.nextNode()) {
+                    if (regex.test(node.nodeValue)) {
+                        nodesToReplace.push(node);
+                    }
+                }
+
+                nodesToReplace.forEach(node => {
+                    const matchText = node.nodeValue;
+                    const fragment = document.createDocumentFragment();
+                    
+                    let lastIdx = 0;
+                    let m;
+                    regex.lastIndex = 0;
+                    while ((m = regex.exec(matchText)) !== null) {
+                        if (m.index > lastIdx) {
+                            fragment.appendChild(document.createTextNode(matchText.substring(lastIdx, m.index)));
+                        }
+                        const mark = document.createElement('mark');
+                        mark.className = 'search-highlight';
+                        mark.style.backgroundColor = '#ffeb3b';
+                        mark.style.color = 'black';
+                        mark.style.padding = '0';
+                        mark.textContent = m[0];
+                        mark.dataset.page = pageIndex;
+                        fragment.appendChild(mark);
+                        searchResults.push(mark);
+                        lastIdx = regex.lastIndex;
+                    }
+                    if (lastIdx < matchText.length) {
+                        fragment.appendChild(document.createTextNode(matchText.substring(lastIdx)));
+                    }
+                    node.parentNode.replaceChild(fragment, node);
+                });
+            });
+            
+            if (searchResults.length > 0) {
+                goToMatch(0);
+            } else {
+                searchCount.textContent = '0 / 0';
+            }
+        }
+
+        btnSearch.addEventListener('click', () => {
+            if (panelSearch.style.opacity === '1') {
+                closeAllPanels();
+            } else {
+                closeAllPanels();
+                panelSearch.style.opacity = '1';
+                panelSearch.style.pointerEvents = 'auto';
+                panelSearch.style.transform = 'translateX(-50%) translateY(0)';
+                searchInput.focus();
+            }
+        });
+
+        btnSearchClose.addEventListener('click', () => {
+            closeAllPanels();
+            clearHighlights();
+        });
+
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                performSearch(e.target.value);
+            }, 500);
+        });
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                if (searchResults.length > 0) {
+                    let nextIdx = (currentSearchIndex + 1) % searchResults.length;
+                    if (e.shiftKey) {
+                        nextIdx = (currentSearchIndex - 1 + searchResults.length) % searchResults.length;
+                    }
+                    goToMatch(nextIdx);
+                }
+            }
+        });
+
+        btnSearchDown.addEventListener('click', () => {
+            if (searchResults.length > 0) {
+                goToMatch((currentSearchIndex + 1) % searchResults.length);
+            }
+        });
+
+        btnSearchUp.addEventListener('click', () => {
+            if (searchResults.length > 0) {
+                goToMatch((currentSearchIndex - 1 + searchResults.length) % searchResults.length);
+            }
+        });
+
         
         // Hiện sách lên mượt mà sau khi đã dàn trang và setup xong xuôi
         const flipContainerOuter = document.querySelector('.container-flipbook');

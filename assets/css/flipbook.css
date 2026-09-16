@@ -704,7 +704,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    pointer-events: none; /* Khóa tương tác trong lúc rớt */
+    pointer-events: none;
+    /* Khóa tương tác trong lúc rớt */
     will-change: transform;
     /* Xuyên qua không chặn click */
     z-index: 5;
@@ -712,81 +713,98 @@
 
 /* --- CUSTOM LIGHTBOX CHO ẢNH TRONG SÁCH FLIPBOOK --- */
 .custom-lightbox {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
 }
 
 .custom-lightbox.is-active {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .custom-lightbox-backdrop {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
 }
 
 .custom-lightbox-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .custom-lightbox-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transition: transform 0.1s ease-out;
-  cursor: grab;
-  position: relative;
-  z-index: 2;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.1s ease-out;
+    cursor: grab;
+    position: relative;
+    z-index: 2;
 }
 
 .custom-lightbox-img:active {
-  cursor: grabbing;
+    cursor: grabbing;
 }
 
 .custom-lightbox-close {
-  position: absolute;
-  top: 20px; right: 30px;
-  background: none; border: none;
-  color: white; font-size: 50px;
-  line-height: 1;
-  cursor: pointer; z-index: 10;
-  padding: 10px;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 50px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px;
 }
 
 .custom-lightbox-prev,
 .custom-lightbox-next {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.1);
-  border: none; color: white;
-  font-size: 60px;
-  cursor: pointer;
-  padding: 10px 20px;
-  z-index: 10;
-  transition: background 0.3s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 60px;
+    cursor: pointer;
+    padding: 10px 20px;
+    z-index: 10;
+    transition: background 0.3s;
 }
 
 .custom-lightbox-prev:hover,
 .custom-lightbox-next:hover {
-  background: rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.custom-lightbox-prev { left: 20px; }
-.custom-lightbox-next { right: 20px; }
+.custom-lightbox-prev {
+    left: 20px;
+}
+
+.custom-lightbox-next {
+    right: 20px;
+}
 
 
 /* Trang lẻ (Bìa trước, Mặt phải) -> Gáy sách nằm ở bên TRÁI */
@@ -1152,6 +1170,7 @@
 .scrapbook-photo-wrapper::after {
     display: none !important;
 }
+
 /* ============================================================
    T? �?NG D�N TRANG (AUTO-PAGINATION)
    ============================================================ */
@@ -1159,13 +1178,16 @@
     column-width: 475px;
     column-gap: 75px;
     column-fill: auto;
-    height: 653px; /* Chi?u cao c? d?nh: 733 - 40 - 40 */
+    height: 653px;
+    /* Chi?u cao c? d?nh: 733 - 40 - 40 */
     width: max-content;
     display: block;
     position: absolute;
-    left: 40px; /* B� cho padding left d� set l� 40px */
+    left: 40px;
+    /* B� cho padding left d� set l� 40px */
     top: 40px;
 }
+
 .book-flow p {
     text-align: justify;
     text-indent: 1.5rem;
@@ -1175,6 +1197,7 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.05rem;
 }
+
 .book-flow .drop-cap-p::first-letter {
     font-family: 'Times New Roman', Times, serif;
     font-size: 3.8rem;
@@ -1185,6 +1208,7 @@
     margin-bottom: -4px;
     line-height: 0.8;
 }
+
 .book-flow .scrapbook-year {
     font-family: var(--font-heading, "FSMagistral", sans-serif);
     font-size: 2rem;
@@ -1193,8 +1217,10 @@
     line-height: 1.1;
     margin-bottom: 12px;
     text-shadow: 1px 1px 0px rgba(139, 26, 26, 0.2), 2px 2px 4px rgba(0, 0, 0, 0.1);
-    break-after: avoid; /* Kh�ng du?c ng?t trang ngay sau ti�u d? */
+    break-after: avoid;
+    /* Kh�ng du?c ng?t trang ngay sau ti�u d? */
 }
+
 .book-flow .scrapbook-divider {
     width: 100%;
     max-width: 300px;
@@ -1203,18 +1229,192 @@
     margin-bottom: 20px;
     break-after: avoid;
 }
+
 .book-flow .scrapbook-photo-wrapper {
-    break-inside: avoid; /* Tr�nh ?nh b? chia l�m d�i ? m�p trang */
+    break-inside: avoid;
+    /* Tr�nh ?nh b? chia l�m d�i ? m�p trang */
     margin: 20px 0;
     display: flex;
     justify-content: center;
     width: 100%;
 }
+
 .book-flow .scrapbook-photo-wrapper img {
     max-width: 100%;
-    max-height: 400px; /* Gi?i h?n d? kh�ng chi?m h?t c? 1 trang */
+    max-height: 400px;
+    /* Gi?i h?n d? kh�ng chi?m h?t c? 1 trang */
     object-fit: contain;
     border-radius: 4px;
-    box-shadow: 2px 3px 10px rgba(0,0,0,0.15);
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.15);
     cursor: zoom-in;
+}
+
+/* BOOK TOOLBAR & PANELS */
+#book-toolbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#btn-toc,
+#btn-search {
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#btn-toc:hover,
+#btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#btn-toc {
+    background: #ee0033;
+    color: white;
+    border: none;
+}
+
+#btn-search {
+    background: #fff;
+    color: #ee0033;
+    border: 2px solid #ee0033;
+}
+
+#panel-toc,
+#panel-search {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    width: 400px;
+    max-width: 90vw;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+#panel-toc {
+    max-height: 60vh;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.toc-header h3 {
+    margin: 0;
+    color: #ee0033;
+    font-family: 'Times New Roman', serif;
+}
+
+#toc-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+    line-height: 1;
+}
+
+#toc-close:hover {
+    color: #333;
+}
+
+#toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* C�c th? li du?c t?o d?ng qua JS cung n�n gom class n?u c?n, nhung ta d� t?o inline trong JS. Ta s? c?p nh?t JS sau n?u c?n, ho?c d? JS set inline style cho m�u d? ch? n?i. Hi?n t?i d? nguy�n JS. */
+
+#panel-search {
+    background: #f3f3f3;
+    color: #cccccc;
+    border-radius: 5px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-family: sans-serif;
+    border: 2px solid #ee0033;
+}
+
+#search-input {
+    background: #f3f3f3;
+    border: 1px solid #3c3c3c;
+    color: #111111;
+    padding: 6px 10px;
+    border-radius: 3px;
+    outline: none;
+    flex-grow: 1;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+#search-input:focus {
+    border-color: #ee0033;
+}
+
+#search-count {
+    margin: 0 10px;
+    font-size: 12px;
+    min-width: 50px;
+    text-align: center;
+    color: #888;
+}
+
+.search-btn-icon {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 5px;
+}
+
+.search-btn-icon:hover {
+    color: white;
+}
+
+.search-divider {
+    width: 1px;
+    height: 20px;
+    background: #444;
+    margin: 0 10px;
+}
+
+/* Highlight class d�ng trong JS */
+mark.search-highlight {
+    background-color: #ffeb3b;
+    color: black;
+    padding: 0;
 }
