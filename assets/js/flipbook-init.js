@@ -150,6 +150,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
         window.bookPageFlip = pageFlip;
+        
+        // Hiện sách lên mượt mà sau khi đã dàn trang và setup xong xuôi
+        const flipContainerOuter = document.querySelector('.container-flipbook');
+        if (flipContainerOuter) {
+            flipContainerOuter.style.opacity = '1';
+        }
 
         // ==========================================
         // TÍNH NĂNG CINEMATIC CAMERA (TRƯỢT KHUNG ĐỒNG THỜI)
