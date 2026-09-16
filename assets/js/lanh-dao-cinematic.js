@@ -1,14 +1,7 @@
 (() => {
   'use strict';
 
-  /* ─── 1. LENIS SMOOTH SCROLL ─── */
-  const lenis = new Lenis({
-    duration: 1.15,
-    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(time => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
+  /* ─── 1. GSAP SCROLLTRIGGER ─── */
   gsap.registerPlugin(ScrollTrigger);
 
   /* ─── 2. INTRO ANIMATION ─── */
@@ -38,9 +31,9 @@
           ease: 'none',
           scrollTrigger: {
             trigger: content,
-            start: 'top 90%', // Bắt đầu làm tối khi content chạm 90% màn hình
-            end: 'top 15%',   // Tối hoàn toàn khi content lên gần top
-            scrub: true
+            start: 'top 90%', 
+            end: 'top 15%',   
+            scrub: 1.5
           }
         });
       }
@@ -55,7 +48,7 @@
             trigger: sec,
             start: 'top top',
             end: 'bottom top',
-            scrub: true
+            scrub: 1.5
           }
         });
       }
@@ -93,7 +86,7 @@
       dot.addEventListener('click', () => {
         const target = document.getElementById(dot.dataset.target);
         if (target) {
-          lenis.scrollTo(target, { offset: 0, duration: 1.6, easing: t => 1 - Math.pow(1 - t, 4) });
+          target.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
