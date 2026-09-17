@@ -18,16 +18,17 @@ body {
     transform-origin: center bottom;
     will-change: transform, border-radius, box-shadow;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-radius 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.6s ease;
+    overflow: hidden !important; 
+    transition: transform 0.85s cubic-bezier(0.25, 1, 0.3, 1), 
+                border-radius 0.85s cubic-bezier(0.25, 1, 0.3, 1),
+                box-shadow 0.85s ease;
 }
 
 /* TRẠNG THÁI BÚNG MỞ GIỐNG IOI: Giữ lại đúng 200px thẻ ở mép trên màn hình */
 #page-reveal-wrapper.footer-expanded {
     /* Đáy ban đầu cách đáy 70px; nâng lên để mép dưới dừng ở vị trí 200px từ đỉnh */
     transform: translateY(calc(-100vh + 270px)) scale(0.95);
-    border-radius: 0 0 32px 32px;
+    border-radius: 0 0 50px 50px !important;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     cursor: pointer;
 }
@@ -337,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function lockTemporarily() {
         isLocked = true;
-        setTimeout(() => { isLocked = false; }, 400);
+        setTimeout(() => { isLocked = false; }, 850);
     }
 
     function isAtBottom() {
