@@ -381,6 +381,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
         window.bookPageFlip = pageFlip;
+        
+        window.bookTOC.unshift({ level: 1, title: 'Bìa trước', pageIndex: 0, isCover: true });
+        window.bookTOC.push({ level: 1, title: 'Bìa sau', pageIndex: pageFlip.getPageCount() - 1, isCover: true });
 
         // ==========================================
         // TÍNH NĂNG CINEMATIC CAMERA (VARIABLES & HELPERS)
@@ -459,7 +462,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     // Số trang in trên giấy = pageCount + 1
                     // Mà pageIndex = pageCount + 2 
                     // => Số trang in trên giấy = pageIndex - 1
-                    li.innerHTML = `<span>${item.title}</span><span style="color:#999; font-size:0.9rem;">Trang ${item.pageIndex - 1}</span>`;
+                    let pageLabel = item.isCover ? '' : `Trang ${item.pageIndex - 1}`;
+                    li.innerHTML = `<span>${item.title}</span><span style="color:#999; font-size:0.9rem;">${pageLabel}</span>`;
                     li.addEventListener('click', () => {
                         navigateToPage(item.pageIndex);
                         closeAllPanels();
