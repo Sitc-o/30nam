@@ -98,22 +98,42 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             }
 
-            if (blockText.startsWith('## ') || blockText.startsWith('# ')) {
+            if (blockText.startsWith('### ') || blockText.startsWith('## ') || blockText.startsWith('# ')) {
                 isFirstParagraph = true; // Tiêu đề mới -> Đoạn văn tiếp theo sẽ xem xét Drop Cap
                 let alignStyle = "";
                 if (isCenter) alignStyle = "text-align: center;";
                 if (isRight) alignStyle = "text-align: right;";
                 
                 // Xác định cấp độ tiêu đề
-                const isHeading2 = blockText.startsWith('## ');
-                const headingText = blockText.replace(isHeading2 ? '## ' : '# ', '').replace(/\n/g, '<br>');
+                const isHeading3 = blockText.startsWith('### ');
+                const isHeading2 = !isHeading3 && blockText.startsWith('## ');
+                const isHeading1 = !isHeading3 && !isHeading2;
                 
-                // H1 (Phần) to hơn, có gạch đôi. H2 (Chương) nhỏ hơn, không gạch.
-                const fontSize = isHeading2 ? "1.4rem" : "1.6rem";
-                const dividerHTML = isHeading2 ? "" : `<div class="scrapbook-divider" style="width: 60%; margin: 15px auto 30px auto; border-top: 1px solid #c92a2a; border-bottom: 2px solid #ee0033; height: 4px; background: transparent;"></div>`;
+                const headingText = blockText.replace(isHeading3 ? '### ' : (isHeading2 ? '## ' : '# '), '').replace(/\n/g, '<br>');
+                
+                let fontSize = "1.6rem";
+                let fontColor = "#ee0033";
+                let fontWeight = "bold";
+                let textTransform = "none";
+                let dividerHTML = "";
+                let tocLevel = 1;
+                
+                if (isHeading1) {
+                    tocLevel = 1;
+                    fontSize = "1.6rem";
+                    dividerHTML = `<div class="scrapbook-divider" style="width: 60%; margin: 15px auto 30px auto; border-top: 1px solid #c92a2a; border-bottom: 2px solid #ee0033; height: 4px; background: transparent;"></div>`;
+                } else if (isHeading2) {
+                    tocLevel = 2;
+                    fontSize = "1.4rem";
+                } else if (isHeading3) {
+                    tocLevel = 3;
+                    fontSize = "1.2rem";
+                    alignStyle = "text-align: center;"; // Bắt buộc căn giữa
+                    textTransform = "uppercase"; // Bắt buộc viết hoa
+                }
                 
                 const hHTML = `
-                    <div class="scrapbook-year" style="font-size:${fontSize}; line-height:1.4; margin-top:20px; margin-bottom:15px; color:#ee0033; font-weight:bold; font-family:'Times New Roman', Times, serif; ${alignStyle}">
+                    <div class="scrapbook-year" style="font-size:${fontSize}; line-height:1.4; margin-top:20px; margin-bottom:15px; color:${fontColor}; font-weight:${fontWeight}; text-transform:${textTransform}; font-family:'Times New Roman', Times, serif; ${alignStyle}">
                         ${headingText}
                     </div>
                     ${dividerHTML}
@@ -123,6 +143,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 tempDiv.innerHTML = hHTML;
                 
                 let rawTitle = headingText.replace(/<br>/g, ' ');
+                // Nếu là H3 thì tự động viết hoa tên trong mục lục luôn
+                if (isHeading3) {
+                    rawTitle = rawTitle.toUpperCase();
+                }
+                
                 let tocRecorded = false;
                 
                 Array.from(tempDiv.childNodes).forEach(n => {
@@ -138,7 +163,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     
                     // Ghi nhận TOC ngay sau khi tiêu đề đã được chèn vào đúng trang (pageCount hiện tại đã chính xác)
                     if (n.nodeType === 1 && n.classList.contains('scrapbook-year') && !tocRecorded) {
-                        window.bookTOC.push({ level: isHeading2 ? 2 : 1, title: rawTitle, pageIndex: pageCount + 2 });
+                        window.bookTOC.push({ level: tocLevel, title: rawTitle, pageIndex: pageCount + 2 });
                         tocRecorded = true;
                     }
                 });
@@ -454,9 +479,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                     if (item.level === 1) {
                         li.style.fontWeight = 'bold';
                         li.style.color = '#ee0033';
-                    } else {
+                    } else if (item.level === 2) {
                         li.style.paddingLeft = '20px';
                         li.style.color = '#333';
+                    } else if (item.level === 3) {
+                        li.style.paddingLeft = '30px';
+                        li.style.color = '#333';
+                        li.style.fontWeight = 'bold'; // In đậm trong mục lục (giống yêu cầu)
                     }
                     // Số trang in trên giấy = pageCount + 1
                     // Mà pageIndex = pageCount + 2 
