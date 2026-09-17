@@ -504,7 +504,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     let pageLabel = item.isCover ? '' : `Trang ${item.pageIndex - 1}`;
                     
                     let toggleIcon = '';
-                    let isExpanded = false; // Mặc định thu gọn các nhánh con
+                    let isExpanded = true; // Mặc định mở rộng các nhánh con theo yêu cầu
                     
                     if (item.hasChildren) {
                         const transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
