@@ -43,9 +43,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         function commitPage() {
             const isRightSide = (pageCount % 2 === 0);
+            let extraStyles = 'display: block !important;';
+            if (currentPage.childNodes.length === 1 && currentPage.firstChild.nodeType === 1 && currentPage.firstChild.classList.contains('photo-grid-container')) {
+                extraStyles = 'display: flex !important; flex-direction: column; justify-content: center;';
+            }
             pagesHTML += `
                 <div class="page ${isRightSide ? 'scrapbook-right' : 'scrapbook-left'} custom-flow-page">
-                    <div class="page-content scrapbook-desc" style="padding: 40px 35px 40px 40px !important; overflow: hidden; width: 100%; height: 100%; text-align: justify; box-sizing:border-box; display: block !important;">
+                    <div class="page-content scrapbook-desc" style="overflow: hidden; width: 100%; height: 100%; text-align: justify; box-sizing:border-box; ${extraStyles}">
                         ${currentPage.innerHTML}
                     </div>
                     <div class="page-number" style="position:absolute; bottom:15px; ${isRightSide ? 'right:20px;' : 'left:20px;'} font-size:0.9rem; color:#888;">${pageCount + 1}</div>
@@ -146,9 +150,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const photoBlocks = innerText.split(';').map(p => p.trim()).filter(p => p);
                 
                 let photosHTML = '';
-                const isGrid = photoBlocks.length > 1;
-                // Nếu là grid thì dùng flexbox, nếu 1 ảnh thì canh giữa bình thường
-                const gridStyle = isGrid ? 'display:flex; flex-wrap:wrap; gap:15px; justify-content:center; align-items:flex-start;' : 'display:flex; flex-direction:column; align-items:center;';
+                const count = photoBlocks.length;
+                
+                let gridStyle = '';
+                if (count === 1) {
+                    gridStyle = 'display:flex; flex-direction:column; align-items:center; justify-content:center;';
+                } else if (count === 2) {
+                    gridStyle = 'display:flex; flex-direction:column; align-items:center; gap:15px; justify-content:center;';
+                } else {
+                    gridStyle = 'display:flex; flex-wrap:wrap; gap:15px; justify-content:center; align-items:flex-start;';
+                }
                 
                 const loadPromises = [];
 
@@ -161,13 +172,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                         caption = parts.slice(1).join('|').trim();
                     }
                     
-                    let captionHTML = caption ? `<div class="scrapbook-caption" style="font-size:0.9rem; font-style:italic; color:#666; margin-top:8px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>` : '';
+                    let captionHTML = caption ? `<div class="scrapbook-caption" style="font-size:0.9rem; font-style:italic; color:#666; margin-top:10px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>` : '';
                     
-                    // Nếu ghép nhiều ảnh thì giảm max-height và set width
-                    let itemWidth = isGrid ? (photoBlocks.length === 2 ? 'calc(50% - 10px)' : 'calc(33.33% - 10px)') : 'auto';
-                    let imgMaxHeight = isGrid ? '280px' : '420px';
+                    let itemWidth = 'auto';
+                    let imgMaxHeight = '500px';
+                    if (count === 1) { itemWidth = '100%'; }
+                    
+                    if (count === 2) {
+                        itemWidth = '100%';
+                        imgMaxHeight = '235px';
+                    } else if (count >= 3) {
+                        itemWidth = 'calc(50% - 10px)';
+                        imgMaxHeight = '220px';
+                    }
 
-                    // Chú ý: captionHTML nằm NGOÀI scrapbook-photo-wrapper để không bị dính viền vàng
                     photosHTML += `<div style="width:${itemWidth}; display:flex; flex-direction:column; align-items:center;">
                         <div class="scrapbook-photo-wrapper" style="margin:0; display:inline-block;">
                             <img src="${src}" style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;" />
@@ -182,9 +200,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                     }));
                 });
 
-                const finalHTML = `<div style="margin:25px 0; width:100%; ${gridStyle}">${photosHTML}</div>`;
+                const finalHTML = `<div class="photo-grid-container" style="margin:15px 0; width:100%; ${gridStyle}">${photosHTML}</div>`;
                 
                 await Promise.all(loadPromises);
+                console.log(finalHTML);
                 
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = finalHTML;
@@ -669,14 +688,25 @@ document.addEventListener('DOMContentLoaded', async function () {
         const lightbox = document.getElementById("photo-lightbox");
         const lightboxImg = document.getElementById("lightbox-img");
         
-        document.body.addEventListener('click', (e) => {
+        // Prevent StPageFlip from flipping/dragging when interacting with images
+        const stopFlip = (e) => {
             if (e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page')) {
                 e.stopPropagation();
+            }
+        };
+        ['mousedown', 'touchstart', 'pointerdown', 'mouseup', 'touchend', 'pointerup'].forEach(evt => {
+            window.addEventListener(evt, stopFlip, true);
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page')) {
+                e.stopPropagation();
+                e.preventDefault();
                 lightboxImg.src = e.target.src;
                 lightbox.style.display = "flex";
                 setTimeout(() => lightbox.classList.add("active"), 10);
             }
-        });
+        }, true);
 
         const closeLightbox = () => {
             lightbox.classList.remove("active");
@@ -690,4 +720,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         alert("Lỗi quá trình dàn trang: " + e.message);
     }
 });
+
+
+
+
 

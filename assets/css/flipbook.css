@@ -554,7 +554,7 @@
    SCRAPBOOK: Layout trang Phải (Ảnh dán)
    ============================================================ */
 .page.scrapbook-right .page-content {
-    padding: 15px 20px 35px 20px !important;
+    padding: 40px 40px 40px 35px !important;
     justify-content: center;
     align-items: center;
 }
