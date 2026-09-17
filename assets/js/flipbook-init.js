@@ -725,10 +725,56 @@ document.addEventListener('DOMContentLoaded', async function () {
         const lightbox = document.getElementById("photo-lightbox");
         const lightboxImg = document.getElementById("lightbox-img");
         
-        // Prevent StPageFlip from flipping/dragging when interacting with images
+        // Cho phép bôi đen chữ nhưng vẫn click để lật trang được
+        let textDownPos = {x: 0, y: 0};
+        let textDownTime = 0;
+
         const stopFlip = (e) => {
-            if (e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page')) {
+            const isImage = e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page');
+            const isText = e.target.closest('.scrapbook-desc') && !isImage;
+
+            if (isImage) {
                 e.stopPropagation();
+                return;
+            }
+
+            if (isText) {
+                e.stopPropagation(); // Ngăn StPageFlip chiếm quyền điều khiển chuột để có thể bôi đen
+
+                if (e.type === 'mousedown' || e.type === 'touchstart' || e.type === 'pointerdown') {
+                    textDownPos = { 
+                        x: e.clientX || (e.touches && e.touches[0].clientX) || 0, 
+                        y: e.clientY || (e.touches && e.touches[0].clientY) || 0 
+                    };
+                    textDownTime = Date.now();
+                } else if (e.type === 'mouseup' || e.type === 'touchend' || e.type === 'pointerup') {
+                    const currentX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX) || 0;
+                    const currentY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY) || 0;
+                    
+                    const dx = Math.abs(currentX - textDownPos.x);
+                    const dy = Math.abs(currentY - textDownPos.y);
+                    const dt = Date.now() - textDownTime;
+
+                    // Nếu click nhanh (không bôi đen), lật trang
+                    if (dx < 5 && dy < 5 && dt < 500) {
+                        const page = e.target.closest('.page');
+                        if (page) {
+                            window.getSelection().removeAllRanges();
+                            const isRight = page.classList.contains('scrapbook-right');
+                            if (isRight) {
+                                let dest = pageFlip.getCurrentPageIndex() + 2;
+                                if (dest >= pageFlip.getPageCount() - 1) predictedTarget = 'right';
+                                else predictedTarget = 'center';
+                                pageFlip.flipNext();
+                            } else {
+                                let dest = pageFlip.getCurrentPageIndex() - 2;
+                                if (dest <= 0) predictedTarget = 'left';
+                                else predictedTarget = 'center';
+                                pageFlip.flipPrev();
+                            }
+                        }
+                    }
+                }
             }
         };
         ['mousedown', 'touchstart', 'pointerdown', 'mouseup', 'touchend', 'pointerup'].forEach(evt => {
