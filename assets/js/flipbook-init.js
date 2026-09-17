@@ -728,6 +728,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Cho phép bôi đen chữ nhưng vẫn click để lật trang được
         let textDownPos = {x: 0, y: 0};
         let textDownTime = 0;
+        let lastTextFlipTime = 0;
 
         const stopFlip = (e) => {
             const isImage = e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page');
@@ -757,20 +758,23 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                     // Nếu click nhanh (không bôi đen), lật trang
                     if (dx < 5 && dy < 5 && dt < 500) {
-                        const page = e.target.closest('.page');
-                        if (page) {
-                            window.getSelection().removeAllRanges();
-                            const isRight = page.classList.contains('scrapbook-right');
-                            if (isRight) {
-                                let dest = pageFlip.getCurrentPageIndex() + 2;
-                                if (dest >= pageFlip.getPageCount() - 1) predictedTarget = 'right';
-                                else predictedTarget = 'center';
-                                pageFlip.flipNext();
-                            } else {
-                                let dest = pageFlip.getCurrentPageIndex() - 2;
-                                if (dest <= 0) predictedTarget = 'left';
-                                else predictedTarget = 'center';
-                                pageFlip.flipPrev();
+                        if (Date.now() - lastTextFlipTime > 500) {
+                            lastTextFlipTime = Date.now();
+                            const page = e.target.closest('.page');
+                            if (page) {
+                                window.getSelection().removeAllRanges();
+                                const isRight = page.classList.contains('scrapbook-right');
+                                if (isRight) {
+                                    let dest = pageFlip.getCurrentPageIndex() + 2;
+                                    if (dest >= pageFlip.getPageCount() - 1) predictedTarget = 'right';
+                                    else predictedTarget = 'center';
+                                    pageFlip.flipNext();
+                                } else {
+                                    let dest = pageFlip.getCurrentPageIndex() - 2;
+                                    if (dest <= 0) predictedTarget = 'left';
+                                    else predictedTarget = 'center';
+                                    pageFlip.flipPrev();
+                                }
                             }
                         }
                     }
