@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         innerCover.insertAdjacentHTML('afterend', pagesHTML);
 
         const pageFlip = new PageFlipClass(flipbookEl, {
-            width: 550, height: 733, size: "stretch", minWidth: 300, maxWidth: 550, minHeight: 400, maxHeight: 700, maxShadowOpacity: 0.02, showCover: true, usePortrait: true, mobileScrollSupport: false, flippingTime: 700
+            width: 550, height: 733, size: "stretch", minWidth: 300, maxWidth: 550, minHeight: 400, maxHeight: 700, maxShadowOpacity: 0.02, showCover: true, usePortrait: true, mobileScrollSupport: false, flippingTime: 700, showPageCorners: false
         });
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
