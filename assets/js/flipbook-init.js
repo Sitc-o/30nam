@@ -472,6 +472,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const processedTOC = window.bookTOC.map((item, index) => {
                     const nextItem = window.bookTOC[index + 1];
                     item.hasChildren = nextItem && nextItem.level > item.level;
+                    if (item.isExpanded === undefined) {
+                        item.isExpanded = true;
+                    }
                     return item;
                 });
 
@@ -504,10 +507,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                     let pageLabel = item.isCover ? '' : `Trang ${item.pageIndex - 1}`;
                     
                     let toggleIcon = '';
-                    let isExpanded = true; // Mặc định mở rộng các nhánh con theo yêu cầu
                     
                     if (item.hasChildren) {
-                        const transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
+                        const transform = item.isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
                         // Nút toggle bự hơn chút để dễ bấm
                         toggleIcon = `<span class="toc-toggle" style="margin-right: 8px; display:inline-block; width:16px; height:16px; text-align:center; line-height:16px; font-size:0.7rem; color:#fff; background:#999; border-radius:3px; transition: transform 0.2s; transform: ${transform};">&#9654;</span>`;
                     } else {
@@ -535,9 +537,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 if (childrenContainer.style.display === 'none') {
                                     childrenContainer.style.display = 'block';
                                     toggleEl.style.transform = 'rotate(90deg)';
+                                    item.isExpanded = true;
                                 } else {
                                     childrenContainer.style.display = 'none';
                                     toggleEl.style.transform = 'rotate(0deg)';
+                                    item.isExpanded = false;
                                 }
                             }
                             return;
@@ -555,7 +559,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     childrenContainer.className = 'toc-children';
                     childrenContainer.style.padding = '0';
                     childrenContainer.style.margin = '0';
-                    childrenContainer.style.display = isExpanded ? 'block' : 'none'; 
+                    childrenContainer.style.display = item.isExpanded ? 'block' : 'none'; 
                     
                     if (item.hasChildren) {
                         li.appendChild(childrenContainer);
