@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     tocLevel = 3;
                     fontSize = "1.2rem";
                     alignStyle = "text-align: center;"; // Bắt buộc căn giữa
-                    textTransform = "uppercase"; // Bắt buộc viết hoa
+                    fontColor = "#333"; // Màu đen theo yêu cầu
                 }
                 
                 const hHTML = `
@@ -143,10 +143,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 tempDiv.innerHTML = hHTML;
                 
                 let rawTitle = headingText.replace(/<br>/g, ' ');
-                // Nếu là H3 thì tự động viết hoa tên trong mục lục luôn
-                if (isHeading3) {
-                    rawTitle = rawTitle.toUpperCase();
-                }
                 
                 let tocRecorded = false;
                 
