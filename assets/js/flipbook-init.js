@@ -729,26 +729,40 @@ document.addEventListener('DOMContentLoaded', async function () {
         let textDownPos = {x: 0, y: 0};
         let textDownTime = 0;
         let lastTextFlipTime = 0;
+        let isTextDown = false;
+        let hadSelectionOnDown = false;
 
         const stopFlip = (e) => {
             const isImage = e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page');
-            const isText = e.target.closest('.scrapbook-desc') && !isImage;
 
             if (isImage) {
-                e.stopPropagation();
+                if (e.type === 'mousedown' || e.type === 'touchstart' || e.type === 'pointerdown') {
+                    e.stopPropagation();
+                }
                 return;
             }
 
-            if (isText) {
-                e.stopPropagation(); // Ngăn StPageFlip chiếm quyền điều khiển chuột để có thể bôi đen
+            if (e.type === 'mousedown' || e.type === 'touchstart' || e.type === 'pointerdown') {
+                const sel = window.getSelection();
+                hadSelectionOnDown = (sel && sel.toString().trim().length > 0);
 
-                if (e.type === 'mousedown' || e.type === 'touchstart' || e.type === 'pointerdown') {
+                const isText = e.target.closest('.scrapbook-desc');
+                if (isText) {
+                    isTextDown = true;
+                    e.stopPropagation(); // Ngăn StPageFlip chiếm quyền điều khiển chuột để có thể bôi đen
+                    
                     textDownPos = { 
                         x: e.clientX || (e.touches && e.touches[0].clientX) || 0, 
                         y: e.clientY || (e.touches && e.touches[0].clientY) || 0 
                     };
                     textDownTime = Date.now();
-                } else if (e.type === 'mouseup' || e.type === 'touchend' || e.type === 'pointerup') {
+                } else {
+                    isTextDown = false;
+                }
+            } else if (e.type === 'mouseup' || e.type === 'touchend' || e.type === 'pointerup') {
+                if (isTextDown) {
+                    e.stopPropagation(); // Chỉ chặn nhả chuột nếu trước đó bấm vào text
+                    
                     const currentX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX) || 0;
                     const currentY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY) || 0;
                     
@@ -756,10 +770,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const dy = Math.abs(currentY - textDownPos.y);
                     const dt = Date.now() - textDownTime;
 
-                    // Nếu click nhanh (không bôi đen), lật trang
                     if (dx < 5 && dy < 5 && dt < 500) {
                         if (Date.now() - lastTextFlipTime > 500) {
                             lastTextFlipTime = Date.now();
+                            
+                            if (hadSelectionOnDown) {
+                                // Nếu trước đó đang bôi đen, click 1 lần chỉ để hủy bôi đen, KHÔNG lật trang
+                                window.getSelection().removeAllRanges();
+                                return;
+                            }
+
                             const page = e.target.closest('.page');
                             if (page) {
                                 window.getSelection().removeAllRanges();
