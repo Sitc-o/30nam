@@ -381,11 +381,44 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
         window.bookPageFlip = pageFlip;
-        // HI?N TH? TOOLBAR SAU KHI LOAD XONG
+
+        // ==========================================
+        // TÍNH NĂNG CINEMATIC CAMERA (VARIABLES & HELPERS)
+        // ==========================================
+        let predictedTarget = null;
+
+        function getShiftAmount() {
+            const wrapper = document.querySelector('.stf__wrapper');
+            return wrapper ? wrapper.offsetWidth / 4 : 0;
+        }
+
+        function navigateToPage(pageIndex) {
+            if (!window.bookPageFlip) return;
+            
+            if (pageIndex <= 0) { 
+                predictedTarget = 'left'; 
+            } else if (pageIndex >= window.bookPageFlip.getPageCount() - 1) { 
+                predictedTarget = 'right'; 
+            } else { 
+                predictedTarget = 'center'; 
+            }
+            
+            const container = document.querySelector('.container-flipbook');
+            const shiftAmount = getShiftAmount();
+            if (container && window.bookPageFlip.getOrientation() !== 'portrait') {
+                if (predictedTarget === 'center') container.style.transform = `translateX(0px)`;
+                else if (predictedTarget === 'left') container.style.transform = `translateX(-${shiftAmount}px)`;
+                else if (predictedTarget === 'right') container.style.transform = `translateX(${shiftAmount}px)`;
+            }
+
+            window.bookPageFlip.turnToPage(pageIndex);
+        }
+
+        // HIỆN THỊ TOOLBAR SAU KHI LOAD XONG
         const toolbar = document.getElementById('book-toolbar');
         if (toolbar) toolbar.style.opacity = '1';
 
-        // X? L� M?C L?C
+        // XỬ LÝ MỤC LỤC
         const btnToc = document.getElementById('btn-toc');
         const panelToc = document.getElementById('panel-toc');
         const btnTocClose = document.getElementById('toc-close');
@@ -428,7 +461,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     // => Số trang in trên giấy = pageIndex - 1
                     li.innerHTML = `<span>${item.title}</span><span style="color:#999; font-size:0.9rem;">Trang ${item.pageIndex - 1}</span>`;
                     li.addEventListener('click', () => {
-                        window.bookPageFlip.turnToPage(item.pageIndex);
+                        navigateToPage(item.pageIndex);
                         closeAllPanels();
                     });
                     tocList.appendChild(li);
@@ -476,7 +509,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             
             let pageIdx = parseInt(target.dataset.page);
             if (window.bookPageFlip) {
-                window.bookPageFlip.turnToPage(pageIdx);
+                navigateToPage(pageIdx);
             }
         }
 
@@ -596,12 +629,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         // ==========================================
         // TÍNH NĂNG CINEMATIC CAMERA (TRƯỢT KHUNG ĐỒNG THỜI)
         // ==========================================
-        let predictedTarget = null;
-
-        function getShiftAmount() {
-            const wrapper = document.querySelector('.stf__wrapper');
-            return wrapper ? wrapper.offsetWidth / 4 : 0;
-        }
 
         const flipContainer = document.querySelector('.container-flipbook');
         if (flipContainer) {
@@ -677,8 +704,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.addEventListener('keydown', (e) => {
             if (document.querySelector('.photo-lightbox.active')) return;
             if (e.key === 'ArrowLeft') {
+                let dest = pageFlip.getCurrentPageIndex() - 2;
+                if (dest <= 0) predictedTarget = 'left';
+                else predictedTarget = 'center';
                 pageFlip.flipPrev();
             } else if (e.key === 'ArrowRight') {
+                let dest = pageFlip.getCurrentPageIndex() + 2;
+                if (dest >= pageFlip.getPageCount() - 1) predictedTarget = 'right';
+                else predictedTarget = 'center';
                 pageFlip.flipNext();
             }
         });
