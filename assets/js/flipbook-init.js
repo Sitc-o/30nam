@@ -1,3 +1,4 @@
+window.onerror = function(msg, url, line) { alert('ERROR: ' + msg + '\\nLine: ' + line); };
 document.addEventListener('DOMContentLoaded', async function () {
         function getOpenTags(html) {
             const stack = [];
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const innerCover = flipbookEl.querySelectorAll('.page-cover-inner')[0];
 
     try {
-        const response = await fetch('assets/content/bien nien su all.txt');
+        const response = await fetch('assets/content/bien nien su all.txt?v=' + Date.now());
         const rawText = await response.text();
         const blocks = rawText.split(/\n\s*\n/).filter(b => b.trim() !== '');
 
@@ -139,17 +140,54 @@ document.addEventListener('DOMContentLoaded', async function () {
                     }
                 });
             } else if (blockText.startsWith('[anh:') && blockText.endsWith(']')) {
-                const src = blockText.replace('[anh:', '').replace(']', '').trim();
-                const imgHTML = `<div class="scrapbook-photo-wrapper" style="margin:20px 0; text-align:center;"><img src="${src}" style="max-height:400px; max-width:100%; border-radius:4px;" /></div>`;
+                const innerText = blockText.substring(5, blockText.length - 1).trim();
                 
-                await new Promise(r => {
-                    const img = new Image();
-                    img.onload = img.onerror = r;
-                    img.src = src;
+                // Hỗ trợ nhiều ảnh ghép lại bằng dấu chấm phẩy ;
+                const photoBlocks = innerText.split(';').map(p => p.trim()).filter(p => p);
+                
+                let photosHTML = '';
+                const isGrid = photoBlocks.length > 1;
+                // Nếu là grid thì dùng flexbox, nếu 1 ảnh thì canh giữa bình thường
+                const gridStyle = isGrid ? 'display:flex; flex-wrap:wrap; gap:15px; justify-content:center; align-items:flex-start;' : 'display:flex; flex-direction:column; align-items:center;';
+                
+                const loadPromises = [];
+
+                photoBlocks.forEach(pb => {
+                    let src = pb;
+                    let caption = '';
+                    if (pb.includes('|')) {
+                        const parts = pb.split('|');
+                        src = parts[0].trim();
+                        caption = parts.slice(1).join('|').trim();
+                    }
+                    
+                    let captionHTML = caption ? `<div class="scrapbook-caption" style="font-size:0.9rem; font-style:italic; color:#666; margin-top:8px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>` : '';
+                    
+                    // Nếu ghép nhiều ảnh thì giảm max-height và set width
+                    let itemWidth = isGrid ? (photoBlocks.length === 2 ? 'calc(50% - 10px)' : 'calc(33.33% - 10px)') : 'auto';
+                    let imgMaxHeight = isGrid ? '280px' : '420px';
+
+                    // Chú ý: captionHTML nằm NGOÀI scrapbook-photo-wrapper để không bị dính viền vàng
+                    photosHTML += `<div style="width:${itemWidth}; display:flex; flex-direction:column; align-items:center;">
+                        <div class="scrapbook-photo-wrapper" style="margin:0; display:inline-block;">
+                            <img src="${src}" style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;" />
+                        </div>
+                        ${captionHTML}
+                    </div>`;
+
+                    loadPromises.push(new Promise(r => {
+                        const img = new Image();
+                        img.onload = img.onerror = r;
+                        img.src = src;
+                    }));
                 });
+
+                const finalHTML = `<div style="margin:25px 0; width:100%; ${gridStyle}">${photosHTML}</div>`;
+                
+                await Promise.all(loadPromises);
                 
                 const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = imgHTML;
+                tempDiv.innerHTML = finalHTML;
                 let node = tempDiv.firstChild;
                 measureBox.appendChild(node.cloneNode(true));
                 if (measureBox.scrollHeight > MAX_HEIGHT) {
@@ -652,3 +690,4 @@ document.addEventListener('DOMContentLoaded', async function () {
         alert("Lỗi quá trình dàn trang: " + e.message);
     }
 });
+
