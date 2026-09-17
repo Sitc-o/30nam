@@ -1,6 +1,12 @@
 const footerCSS = `
 <style>
-/* 1. Nền body */
+/* 1. Ép Header luôn có nền trắng đục 100% để chống xuyên thấu màu đỏ */
+header, .site-header, .header, nav {
+    background-color: #ffffff !important;
+    position: relative;
+    z-index: 100 !important;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -13,27 +19,24 @@ body {
     z-index: 2;
     background-color: #ffffff;
     min-height: 100vh;
-    margin-bottom: 70px; /* Chiều cao dải peek bar đáy trang */
-    /* QUAN TRỌNG: Neo gốc ở đáy để chiều dài của từng trang không làm lệch vị trí */
+    margin-bottom: 70px;
     transform-origin: center bottom;
     will-change: transform, border-radius, box-shadow;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
-    overflow: hidden !important; 
-    transition: transform 0.85s cubic-bezier(0.25, 1, 0.3, 1), 
-                border-radius 0.85s cubic-bezier(0.25, 1, 0.3, 1),
-                box-shadow 0.85s ease;
+    overflow: hidden !important; /* Cắt góc bo tròn cho cả các khối nền đen bên trong */
+    transition: transform 0.9s cubic-bezier(0.25, 1, 0.3, 1), 
+                border-radius 0.9s cubic-bezier(0.25, 1, 0.3, 1),
+                box-shadow 0.9s ease;
 }
 
-/* TRẠNG THÁI BÚNG MỞ GIỐNG IOI: Giữ lại đúng 200px thẻ ở mép trên màn hình */
+/* Trạng thái búng mở: Bo góc 50px dứt khoát */
 #page-reveal-wrapper.footer-expanded {
-    /* Đáy ban đầu cách đáy 70px; nâng lên để mép dưới dừng ở vị trí 200px từ đỉnh */
     transform: translateY(calc(-100vh + 270px)) scale(0.95);
     border-radius: 0 0 50px 50px !important;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     cursor: pointer;
 }
 
-/* Nút mũi tên cuộn ngược lên nằm trên thẻ trắng giống hệt IOI */
 .card-restore-btn {
     position: absolute;
     bottom: 24px;
@@ -67,7 +70,7 @@ body {
     transform: translateY(0) scale(1);
 }
 
-/* 3. Footer toàn màn hình nền đỏ Viettel */
+/* 3. Footer: Mặc định ẩn hoàn toàn (opacity: 0) khi đang ở trên đầu trang */
 .site-footer {
     position: fixed;
     bottom: 0;
@@ -79,11 +82,23 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* Dành khoảng trống 200px ở trên đỉnh để không bị thẻ trắng che mất chữ */
     padding: 210px 0 0;
     box-sizing: border-box;
     font-family: 'Roboto', Arial, sans-serif;
     overflow: hidden;
+    
+    /* Ẩn ngầm chống lộ màu đỏ */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Chỉ hiện khi cuộn xuống gần đáy */
+.site-footer.footer-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 #footer-wave-canvas {
@@ -165,7 +180,6 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
-/* 4. Thanh Peek Bar đáy trang */
 .footer-bottom-bar {
     height: 70px;
     border-top: 1px solid rgba(255, 255, 255, 0.18);
@@ -204,7 +218,6 @@ body {
     transform: rotate(180deg);
 }
 
-/* 5. Responsive */
 @media(max-width: 1050px) {
     .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
 }
@@ -214,6 +227,8 @@ body {
         position: static !important;
         height: auto !important;
         padding: 40px 0 20px;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
     #page-reveal-wrapper {
         margin-bottom: 0 !important;
@@ -231,7 +246,6 @@ body {
 const footerHTML = `
 <footer class="site-footer">
     <canvas id="footer-wave-canvas"></canvas>
-    
     <div class="footer-center-content">
         <div class="container footer-top">
             <div class="footer-brand">
@@ -277,7 +291,7 @@ const footerHTML = `
 
 document.write(footerCSS + footerHTML);
 
-// 6. Xử lý Logic Gom thẻ, Cử chỉ Snap & Nút phục hồi
+// 4. Quản lý hiển thị và cử chỉ
 document.addEventListener('DOMContentLoaded', () => {
     const footer = document.querySelector('.site-footer');
     if (!footer) return;
@@ -308,7 +322,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Chèn nút mũi tên thu hồi giống IOI vào đáy của khối wrapper
     if (!document.querySelector('.card-restore-btn')) {
         const restoreBtn = document.createElement('div');
         restoreBtn.className = 'card-restore-btn';
@@ -338,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function lockTemporarily() {
         isLocked = true;
-        setTimeout(() => { isLocked = false; }, 850);
+        setTimeout(() => { isLocked = false; }, 900);
     }
 
     function isAtBottom() {
@@ -347,7 +360,27 @@ document.addEventListener('DOMContentLoaded', () => {
         return scrollY >= maxScroll - 15;
     }
 
-    // Lắng nghe lăn chuột
+    // Kiểm tra vị trí để bật/tắt hiển thị Footer ngầm
+    function checkFooterVisibility() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+        // Khi cuộn tới cách đáy dưới 1.2 lần chiều cao màn hình thì mới kích hoạt Footer
+        if (scrollY >= maxScroll - (window.innerHeight * 1.2)) {
+            footer.classList.add('footer-visible');
+        } else {
+            footer.classList.remove('footer-visible');
+            if (isExpanded) closeFooter();
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+        checkFooterVisibility();
+    }, { passive: true });
+
+    checkFooterVisibility();
+
+    // Bắt cử chỉ cuộn chuột
     window.addEventListener('wheel', (e) => {
         if (window.innerWidth <= 768) return;
 
@@ -362,7 +395,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // Bấm nút mũi tên hoặc bấm trực tiếp vào dải thẻ ở mép trên để đóng lại
     const toggleBtn = document.querySelector('.footer-toggle-btn');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', (e) => {
@@ -371,10 +403,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    wrapper.addEventListener('click', (e) => {
-        if (isExpanded) {
-            closeFooter();
-        }
+    wrapper.addEventListener('click', () => {
+        if (isExpanded) closeFooter();
     });
 
     // Vẽ Canvas Sóng Nền
@@ -389,26 +419,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderWaves() {
-        ctx.clearRect(0, 0, width, height);
-        step += 0.012;
+        if (footer.classList.contains('footer-visible')) {
+            ctx.clearRect(0, 0, width, height);
+            step += 0.012;
 
-        const totalLines = 6;
-        for (let i = 0; i < totalLines; i++) {
-            ctx.beginPath();
-            ctx.lineWidth = 1.2;
-            const opacity = 0.07 + (i / totalLines) * 0.18;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            const totalLines = 6;
+            for (let i = 0; i < totalLines; i++) {
+                ctx.beginPath();
+                ctx.lineWidth = 1.2;
+                const opacity = 0.07 + (i / totalLines) * 0.18;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
 
-            const baseY = height * 0.44 + (i * 25);
-            ctx.moveTo(0, baseY);
+                const baseY = height * 0.44 + (i * 25);
+                ctx.moveTo(0, baseY);
 
-            for (let x = 0; x <= width; x += 16) {
-                const waveY = baseY +
-                    Math.sin(x * 0.003 + step + i * 0.7) * 26 +
-                    Math.cos(x * 0.007 - step * 0.6 + i) * 14;
-                ctx.lineTo(x, waveY);
+                for (let x = 0; x <= width; x += 16) {
+                    const waveY = baseY +
+                        Math.sin(x * 0.003 + step + i * 0.7) * 26 +
+                        Math.cos(x * 0.007 - step * 0.6 + i) * 14;
+                    ctx.lineTo(x, waveY);
+                }
+                ctx.stroke();
             }
-            ctx.stroke();
         }
         requestAnimationFrame(renderWaves);
     }
