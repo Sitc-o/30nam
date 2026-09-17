@@ -465,34 +465,113 @@ document.addEventListener('DOMContentLoaded', async function () {
                 closeAllPanels();
                 // Render TOC
                 tocList.innerHTML = '';
-                window.bookTOC.forEach(item => {
+                
+                let parentStack = [{ level: 0, container: tocList }];
+                
+                // Tiền xử lý để biết item nào có con
+                const processedTOC = window.bookTOC.map((item, index) => {
+                    const nextItem = window.bookTOC[index + 1];
+                    item.hasChildren = nextItem && nextItem.level > item.level;
+                    return item;
+                });
+
+                processedTOC.forEach(item => {
                     let li = document.createElement('li');
-                    li.style.padding = '8px 0';
+                    li.style.padding = '0';
                     li.style.borderBottom = '1px dashed #ddd';
-                    li.style.cursor = 'pointer';
-                    li.style.display = 'flex';
-                    li.style.justifyContent = 'space-between';
+                    li.style.listStyle = 'none';
+                    
+                    let titleWrapper = document.createElement('div');
+                    titleWrapper.style.padding = '8px 0';
+                    titleWrapper.style.cursor = 'pointer';
+                    titleWrapper.style.display = 'flex';
+                    titleWrapper.style.justifyContent = 'space-between';
+                    titleWrapper.style.alignItems = 'center';
+
+                    // Style dựa trên level
+                    let titleStyle = '';
+                    let titleClass = '';
                     if (item.level === 1) {
-                        li.style.fontWeight = 'bold';
-                        li.style.color = '#ee0033';
+                        titleStyle = 'font-weight: bold; color: #ee0033;';
                     } else if (item.level === 2) {
-                        li.style.paddingLeft = '20px';
-                        li.style.color = '#333';
+                        titleStyle = 'color: #333;';
+                        titleWrapper.style.paddingLeft = '20px';
                     } else if (item.level === 3) {
-                        li.style.paddingLeft = '30px';
-                        li.style.color = '#333';
-                        li.style.fontWeight = 'bold'; // In đậm trong mục lục (giống yêu cầu)
+                        titleStyle = 'font-weight: bold; color: #333;';
+                        titleWrapper.style.paddingLeft = '40px';
                     }
-                    // Số trang in trên giấy = pageCount + 1
-                    // Mà pageIndex = pageCount + 2 
-                    // => Số trang in trên giấy = pageIndex - 1
+                    
                     let pageLabel = item.isCover ? '' : `Trang ${item.pageIndex - 1}`;
-                    li.innerHTML = `<span>${item.title}</span><span style="color:#999; font-size:0.9rem;">${pageLabel}</span>`;
-                    li.addEventListener('click', () => {
+                    
+                    let toggleIcon = '';
+                    let isExpanded = false; // Mặc định thu gọn các nhánh con
+                    
+                    if (item.hasChildren) {
+                        const transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
+                        // Nút toggle bự hơn chút để dễ bấm
+                        toggleIcon = `<span class="toc-toggle" style="margin-right: 8px; display:inline-block; width:16px; height:16px; text-align:center; line-height:16px; font-size:0.7rem; color:#fff; background:#999; border-radius:3px; transition: transform 0.2s; transform: ${transform};">&#9654;</span>`;
+                    } else {
+                        // Spacer cho bằng nhau nếu muốn thẳng hàng, nhưng ở đây có padding rồi nên có thể bỏ
+                        toggleIcon = `<span style="margin-right: 8px; display:inline-block; width:16px;"></span>`;
+                    }
+
+                    titleWrapper.innerHTML = `
+                        <div style="display:flex; align-items:flex-start; ${titleStyle}">
+                            ${toggleIcon}
+                            <span style="flex:1;">${item.title}</span>
+                        </div>
+                        <span style="color:#999; font-size:0.9rem; flex-shrink:0; margin-left:10px;">${pageLabel}</span>
+                    `;
+                    
+                    // Xử lý click
+                    const toggleEl = titleWrapper.querySelector('.toc-toggle');
+                    
+                    titleWrapper.addEventListener('click', (e) => {
+                        // Nếu click chính xác vào nút toggle
+                        if (e.target === toggleEl) {
+                            e.stopPropagation();
+                            const childrenContainer = li.querySelector('.toc-children');
+                            if (childrenContainer) {
+                                if (childrenContainer.style.display === 'none') {
+                                    childrenContainer.style.display = 'block';
+                                    toggleEl.style.transform = 'rotate(90deg)';
+                                } else {
+                                    childrenContainer.style.display = 'none';
+                                    toggleEl.style.transform = 'rotate(0deg)';
+                                }
+                            }
+                            return;
+                        }
+                        
+                        // Nếu click vào text thì lật trang
                         navigateToPage(item.pageIndex);
                         closeAllPanels();
                     });
-                    tocList.appendChild(li);
+                    
+                    li.appendChild(titleWrapper);
+
+                    // Container chứa children
+                    let childrenContainer = document.createElement('ul');
+                    childrenContainer.className = 'toc-children';
+                    childrenContainer.style.padding = '0';
+                    childrenContainer.style.margin = '0';
+                    childrenContainer.style.display = isExpanded ? 'block' : 'none'; 
+                    
+                    if (item.hasChildren) {
+                        li.appendChild(childrenContainer);
+                    }
+
+                    // Tìm container cha phù hợp
+                    while (parentStack.length > 0 && parentStack[parentStack.length - 1].level >= item.level) {
+                        parentStack.pop();
+                    }
+                    
+                    let parent = parentStack[parentStack.length - 1].container;
+                    parent.appendChild(li);
+                    
+                    if (item.hasChildren) {
+                        parentStack.push({ level: item.level, container: childrenContainer });
+                    }
                 });
                 
                 panelToc.style.opacity = '1';
