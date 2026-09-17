@@ -746,7 +746,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const sel = window.getSelection();
                 hadSelectionOnDown = (sel && sel.toString().trim().length > 0);
 
-                const isText = e.target.closest('.scrapbook-desc');
+                // Chỉ chặn lật trang nếu click trực tiếp vào văn bản, bỏ qua margin/padding của trang
+                const isText = e.target.closest('.scrapbook-desc') && e.target.closest('p, .scrapbook-year, .scrapbook-caption, .scrapbook-milestone');
                 if (isText) {
                     isTextDown = true;
                     e.stopPropagation(); // Ngăn StPageFlip chiếm quyền điều khiển chuột để có thể bôi đen

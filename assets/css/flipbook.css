@@ -1011,7 +1011,8 @@
 /* ============================================================
    LIGHTBOX & TEXT SELECTION OVERRIDES
    ============================================================ */
-.scrapbook-desc,
+.scrapbook-desc p,
+.scrapbook-caption,
 .scrapbook-year,
 .scrapbook-milestone {
     user-select: text !important;
