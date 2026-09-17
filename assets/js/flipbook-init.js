@@ -1,4 +1,3 @@
-window.onerror = function(msg, url, line) { alert('ERROR: ' + msg + '\\nLine: ' + line); };
 document.addEventListener('DOMContentLoaded', async function () {
         function getOpenTags(html) {
             const stack = [];
@@ -733,6 +732,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         let hadSelectionOnDown = false;
 
         const stopFlip = (e) => {
+            if (!e.target || typeof e.target.closest !== 'function') return;
+
             const isImage = e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page');
 
             if (isImage) {
@@ -753,8 +754,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     e.stopPropagation(); // Ngăn StPageFlip chiếm quyền điều khiển chuột để có thể bôi đen
                     
                     textDownPos = { 
-                        x: e.clientX || (e.touches && e.touches[0].clientX) || 0, 
-                        y: e.clientY || (e.touches && e.touches[0].clientY) || 0 
+                        x: e.clientX || (e.touches && e.touches.length > 0 ? e.touches[0].clientX : 0) || 0, 
+                        y: e.clientY || (e.touches && e.touches.length > 0 ? e.touches[0].clientY : 0) || 0 
                     };
                     textDownTime = Date.now();
                 } else {
@@ -764,8 +765,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (isTextDown) {
                     e.stopPropagation(); // Chỉ chặn nhả chuột nếu trước đó bấm vào text
                     
-                    const currentX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX) || 0;
-                    const currentY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY) || 0;
+                    const currentX = e.clientX || (e.changedTouches && e.changedTouches.length > 0 ? e.changedTouches[0].clientX : 0) || 0;
+                    const currentY = e.clientY || (e.changedTouches && e.changedTouches.length > 0 ? e.changedTouches[0].clientY : 0) || 0;
                     
                     const dx = Math.abs(currentX - textDownPos.x);
                     const dy = Math.abs(currentY - textDownPos.y);
@@ -775,15 +776,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                         if (Date.now() - lastTextFlipTime > 500) {
                             lastTextFlipTime = Date.now();
                             
+                            const sel = window.getSelection();
                             if (hadSelectionOnDown) {
                                 // Nếu trước đó đang bôi đen, click 1 lần chỉ để hủy bôi đen, KHÔNG lật trang
-                                window.getSelection().removeAllRanges();
+                                if (sel) sel.removeAllRanges();
                                 return;
                             }
 
                             const page = e.target.closest('.page');
                             if (page) {
-                                window.getSelection().removeAllRanges();
+                                if (sel) sel.removeAllRanges();
                                 const isRight = page.classList.contains('scrapbook-right');
                                 if (isRight) {
                                     let dest = pageFlip.getCurrentPageIndex() + 2;
