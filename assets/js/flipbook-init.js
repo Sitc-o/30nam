@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             while ((match = regex.exec(html)) !== null) {
                 const tagFull = match[0];
                 const tagName = match[1].toLowerCase();
-                if (['br', 'hr', 'img'].includes(tagName)) continue;
+                if (['br', 'hr', 'img', 'video', 'source'].includes(tagName)) continue;
                 if (tagFull.startsWith('</')) {
                     if (stack.length > 0 && stack[stack.length - 1].tag === tagName) {
                         stack.pop();
@@ -206,17 +206,32 @@ document.addEventListener('DOMContentLoaded', async function () {
                         imgMaxHeight = '220px';
                     }
 
+                    let isVideo = /\.(mp4|webm|ogg)$/i.test(src);
+                    let mediaElement = '';
+                    
+                    if (isVideo) {
+                        mediaElement = `<video src="${src}" controls playsinline style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;"></video>`;
+                    } else {
+                        mediaElement = `<img src="${src}" style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;" />`;
+                    }
+
                     photosHTML += `<div style="width:${itemWidth}; display:flex; flex-direction:column; align-items:center;">
                         <div class="scrapbook-photo-wrapper" style="margin:0; display:inline-block;">
-                            <img src="${src}" style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;" />
+                            ${mediaElement}
                         </div>
                         ${captionHTML}
                     </div>`;
 
                     loadPromises.push(new Promise(r => {
-                        const img = new Image();
-                        img.onload = img.onerror = r;
-                        img.src = src;
+                        if (isVideo) {
+                            const vid = document.createElement('video');
+                            vid.onloadedmetadata = vid.onerror = r;
+                            vid.src = src;
+                        } else {
+                            const img = new Image();
+                            img.onload = img.onerror = r;
+                            img.src = src;
+                        }
                     }));
                 });
 
@@ -842,7 +857,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const stopFlip = (e) => {
             if (!e.target || typeof e.target.closest !== 'function') return;
 
-            const isImage = e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page');
+            const isImage = (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') && e.target.closest('.custom-flow-page');
 
             if (isImage) {
                 if (e.type === 'mousedown' || e.type === 'touchstart' || e.type === 'pointerdown') {
