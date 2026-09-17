@@ -1,6 +1,6 @@
 const footerCSS = `
 <style>
-/* 1. Ép Header luôn có nền trắng đục 100% để chống xuyên thấu màu đỏ */
+/* 1. Ép Header luôn có nền trắng đục để chống lộ nền footer */
 header, .site-header, .header, nav {
     background-color: #ffffff !important;
     position: relative;
@@ -13,30 +13,31 @@ body {
     background-color: #ffffff;
 }
 
-/* 2. Thẻ trang chính */
-#page-reveal-wrapper {
+/* 2. Thẻ nội dung chính (Khối màu trắng sẽ thu nhỏ) */
+#page-reveal-wrapper, main {
     position: relative;
     z-index: 2;
     background-color: #ffffff;
     min-height: 100vh;
-    margin-bottom: 70px;
+    margin-bottom: 70px; /* Chiều cao dải Peek Bar đáy trang */
     transform-origin: center bottom;
     will-change: transform, border-radius, box-shadow;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
-    overflow: hidden !important; /* Cắt góc bo tròn cho cả các khối nền đen bên trong */
+    overflow: hidden !important; /* Cắt góc bo tròn cho cả các khối nền con bên trong */
     transition: transform 0.9s cubic-bezier(0.25, 1, 0.3, 1), 
                 border-radius 0.9s cubic-bezier(0.25, 1, 0.3, 1),
                 box-shadow 0.9s ease;
 }
 
-/* Trạng thái búng mở: Bo góc 50px dứt khoát */
-#page-reveal-wrapper.footer-expanded {
+/* Trạng thái búng mở: Rút lên chừa đúng 200px thẻ trắng ở mép trên */
+#page-reveal-wrapper.footer-expanded, main.footer-expanded {
     transform: translateY(calc(-100vh + 270px)) scale(0.95);
     border-radius: 0 0 50px 50px !important;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     cursor: pointer;
 }
 
+/* Nút mũi tên thu hồi nằm trên thẻ trắng giống hệt IOI */
 .card-restore-btn {
     position: absolute;
     bottom: 24px;
@@ -64,21 +65,22 @@ body {
     height: 18px;
     fill: currentColor;
 }
-#page-reveal-wrapper.footer-expanded .card-restore-btn {
+#page-reveal-wrapper.footer-expanded .card-restore-btn,
+main.footer-expanded .card-restore-btn {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0) scale(1);
 }
 
-/* 3. Footer: Mặc định ẩn hoàn toàn (opacity: 0) khi đang ở trên đầu trang */
+/* 3. Footer toàn màn hình cố định ở đáy */
 .site-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-    background: #ee0033;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    z-index: 1 !important;
+    background: #ee0033 !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -87,14 +89,13 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     overflow: hidden;
     
-    /* Ẩn ngầm chống lộ màu đỏ */
+    /* Cơ chế ẩn ngầm khi ở trên cao để chống ám màu */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
-/* Chỉ hiện khi cuộn xuống gần đáy */
 .site-footer.footer-visible {
     opacity: 1;
     visibility: visible;
@@ -140,6 +141,7 @@ body {
     align-items: flex-start;
 }
 
+/* Chuyển logo về trắng tinh chuẩn thương hiệu */
 .footer-brand .simple-logo img {
     filter: brightness(0) invert(1);
     transition: transform 0.3s ease;
@@ -218,6 +220,11 @@ body {
     transform: rotate(180deg);
 }
 
+/* 4. Giữ các Modal không bị ảnh hưởng */
+.modal-overlay, .dept-overlay {
+    z-index: 9999 !important;
+}
+
 @media(max-width: 1050px) {
     .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
 }
@@ -230,7 +237,7 @@ body {
         opacity: 1 !important;
         visibility: visible !important;
     }
-    #page-reveal-wrapper {
+    #page-reveal-wrapper, main {
         margin-bottom: 0 !important;
         transform: none !important;
         border-radius: 0 !important;
@@ -246,6 +253,7 @@ body {
 const footerHTML = `
 <footer class="site-footer">
     <canvas id="footer-wave-canvas"></canvas>
+    
     <div class="footer-center-content">
         <div class="container footer-top">
             <div class="footer-brand">
@@ -291,38 +299,41 @@ const footerHTML = `
 
 document.write(footerCSS + footerHTML);
 
-// 4. Quản lý hiển thị và cử chỉ
+// 5. Quản lý DOM & Cử chỉ Snap Reveal
 document.addEventListener('DOMContentLoaded', () => {
-    const footer = document.querySelector('.site-footer');
+    let footer = document.querySelector('.site-footer');
     if (!footer) return;
 
-    let wrapper = document.getElementById('page-reveal-wrapper');
-    if (!wrapper) {
-        const existingMain = document.querySelector('main');
-        if (existingMain) {
-            existingMain.id = 'page-reveal-wrapper';
-            wrapper = existingMain;
+    // Tự động rút footer ra ngoài nếu bị nuốt vào bên trong main
+    if (footer.parentElement !== document.body) {
+        document.body.appendChild(footer);
+    }
+
+    // Xác định phần thân trang cần thu nhỏ
+    let wrapper = document.querySelector('main') || document.getElementById('page-reveal-wrapper');
+    if (wrapper) {
+        wrapper.id = 'page-reveal-wrapper';
+    } else {
+        wrapper = document.createElement('div');
+        wrapper.id = 'page-reveal-wrapper';
+        const header = document.querySelector('header, .site-header, nav');
+        const elementsToMove = [];
+        let current = header ? header.nextSibling : document.body.firstChild;
+        while (current && current !== footer && !current.classList?.contains('modal-overlay') && !current.classList?.contains('dept-overlay')) {
+            const next = current.nextSibling;
+            elementsToMove.push(current);
+            current = next;
+        }
+        elementsToMove.forEach(el => wrapper.appendChild(el));
+        if (header && header.nextSibling) {
+            document.body.insertBefore(wrapper, header.nextSibling);
         } else {
-            wrapper = document.createElement('div');
-            wrapper.id = 'page-reveal-wrapper';
-            const header = document.querySelector('header, .site-header, nav');
-            const elementsToMove = [];
-            let current = header ? header.nextSibling : document.body.firstChild;
-            while (current && current !== footer) {
-                const next = current.nextSibling;
-                elementsToMove.push(current);
-                current = next;
-            }
-            elementsToMove.forEach(el => wrapper.appendChild(el));
-            if (header && header.nextSibling) {
-                document.body.insertBefore(wrapper, header.nextSibling);
-            } else {
-                document.body.insertBefore(wrapper, footer);
-            }
+            document.body.insertBefore(wrapper, footer);
         }
     }
 
-    if (!document.querySelector('.card-restore-btn')) {
+    // Gắn nút khôi phục [^] vào đáy khối thẻ chính
+    if (!wrapper.querySelector('.card-restore-btn')) {
         const restoreBtn = document.createElement('div');
         restoreBtn.className = 'card-restore-btn';
         restoreBtn.title = 'Thu lại về trang';
@@ -351,22 +362,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function lockTemporarily() {
         isLocked = true;
-        setTimeout(() => { isLocked = false; }, 900);
+        setTimeout(() => { isLocked = false; }, 900); // Khóa 900ms khớp thời gian transition 0.9s
     }
 
     function isAtBottom() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        return scrollY >= maxScroll - 15;
+        return scrollY >= maxScroll - 20;
     }
 
-    // Kiểm tra vị trí để bật/tắt hiển thị Footer ngầm
     function checkFooterVisibility() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-        // Khi cuộn tới cách đáy dưới 1.2 lần chiều cao màn hình thì mới kích hoạt Footer
-        if (scrollY >= maxScroll - (window.innerHeight * 1.2)) {
+        if (scrollY >= maxScroll - (window.innerHeight * 1.5)) {
             footer.classList.add('footer-visible');
         } else {
             footer.classList.remove('footer-visible');
