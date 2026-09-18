@@ -163,8 +163,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                         tocRecorded = true;
                     }
                 });
-            } else if (blockText.startsWith('[anh:') && blockText.endsWith(']')) {
-                const innerText = blockText.substring(5, blockText.length - 1).trim();
+            } else if ((blockText.startsWith('[anh:') || blockText.startsWith('[album:') || blockText.startsWith('[anh-tron:') || blockText.startsWith('[album-tron:')) && blockText.endsWith(']')) {
+                const isAlbum = blockText.startsWith('[album:') || blockText.startsWith('[album-tron:');
+                const isTron = blockText.startsWith('[anh-tron:') || blockText.startsWith('[album-tron:');
+                
+                let innerText = '';
+                if (blockText.startsWith('[album-tron:')) {
+                    innerText = blockText.substring(12, blockText.length - 1).trim();
+                } else if (blockText.startsWith('[anh-tron:')) {
+                    innerText = blockText.substring(10, blockText.length - 1).trim();
+                } else if (blockText.startsWith('[album:')) {
+                    innerText = blockText.substring(7, blockText.length - 1).trim();
+                } else {
+                    innerText = blockText.substring(5, blockText.length - 1).trim();
+                }
                 
                 // Hỗ trợ nhiều ảnh ghép lại bằng dấu chấm phẩy ;
                 const photoBlocks = innerText.split(';').map(p => p.trim()).filter(p => p);
@@ -172,70 +184,99 @@ document.addEventListener('DOMContentLoaded', async function () {
                 let photosHTML = '';
                 const count = photoBlocks.length;
                 
-                let gridStyle = '';
-                if (count === 1) {
-                    gridStyle = 'display:flex; flex-direction:column; align-items:center; justify-content:center;';
-                } else if (count === 2) {
-                    gridStyle = 'display:flex; flex-direction:column; align-items:center; gap:15px; justify-content:center;';
-                } else {
-                    gridStyle = 'display:flex; flex-wrap:wrap; gap:15px; justify-content:center; align-items:flex-start;';
-                }
-                
                 const loadPromises = [];
-
-                photoBlocks.forEach(pb => {
-                    let src = pb;
-                    let caption = '';
-                    if (pb.includes('|')) {
-                        const parts = pb.split('|');
-                        src = parts[0].trim();
-                        caption = parts.slice(1).join('|').trim();
-                    }
+                
+                if (isAlbum && count > 1) {
+                    // Carousel logic for [album:...]
+                    let imagesHTML = '';
+                    let captionsHTML = '';
                     
-                    let captionHTML = caption ? `<div class="scrapbook-caption" style="font-size:0.9rem; font-style:italic; color:#666; margin-top:10px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>` : '';
+                    photoBlocks.forEach((pb, idx) => {
+                        let src = pb;
+                        let caption = '';
+                        if (pb.includes('|')) {
+                            const parts = pb.split('|');
+                            src = parts[0].trim();
+                            caption = parts.slice(1).join('|').trim();
+                        }
+                        
+                        let displayStyle = idx === 0 ? 'block' : 'none';
+                        imagesHTML += `<img class="carousel-img" data-index="${idx}" src="${src}" style="max-height:500px; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:${displayStyle};" />`;
+                        
+                        if (caption) {
+                            captionsHTML += `<div class="scrapbook-caption carousel-cap" data-index="${idx}" style="display:${displayStyle}; font-size:0.9rem; font-style:italic; color:#666; margin-top:10px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>`;
+                        }
+                        
+                        loadPromises.push(new Promise(r => { const img = new Image(); img.onload = img.onerror = r; img.src = src; }));
+                    });
                     
-                    let itemWidth = 'auto';
-                    let imgMaxHeight = '500px';
-                    if (count === 1) { itemWidth = '100%'; }
-                    
-                    if (count === 2) {
-                        itemWidth = '100%';
-                        imgMaxHeight = '235px';
-                    } else if (count >= 3) {
-                        itemWidth = 'calc(50% - 10px)';
-                        imgMaxHeight = '220px';
-                    }
-
-                    let isVideo = /\.(mp4|webm|ogg)$/i.test(src);
-                    let mediaElement = '';
-                    
-                    if (isVideo) {
-                        mediaElement = `<video src="${src}" controls playsinline style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;"></video>`;
-                    } else {
-                        mediaElement = `<img src="${src}" style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;" />`;
-                    }
-
-                    photosHTML += `<div style="width:${itemWidth}; display:flex; flex-direction:column; align-items:center;">
-                        <div class="scrapbook-photo-wrapper" style="margin:0; display:inline-block;">
-                            ${mediaElement}
+                    photosHTML = `<div class="photo-grid-container photo-carousel-container" style="margin:15px 0; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <div style="width:100%; display:flex; flex-direction:column; align-items:center; position: relative;">
+                            <div class="${isTron ? '' : 'scrapbook-photo-wrapper'}" style="margin:0; display:inline-block; position: relative;">
+                                ${imagesHTML}
+                                <button class="carousel-btn carousel-prev" style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; z-index: 10; padding:0; line-height:1;">&#10094;</button>
+                                <button class="carousel-btn carousel-next" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; z-index: 10; padding:0; line-height:1;">&#10095;</button>
+                            </div>
+                            <div class="carousel-captions" style="min-height: 20px;">
+                                ${captionsHTML}
+                            </div>
                         </div>
-                        ${captionHTML}
                     </div>`;
+                } else {
+                    // Original grid/stack logic for [anh:...]
+                    let gridStyle = '';
+                    if (count === 1) {
+                        gridStyle = 'display:flex; flex-direction:column; align-items:center; justify-content:center;';
+                    } else if (count === 2) {
+                        gridStyle = 'display:flex; flex-direction:column; align-items:center; gap:15px; justify-content:center;';
+                    } else {
+                        gridStyle = 'display:flex; flex-wrap:wrap; gap:15px; justify-content:center; align-items:flex-start;';
+                    }
+                    
+                    photoBlocks.forEach(pb => {
+                        let src = pb;
+                        let caption = '';
+                        if (pb.includes('|')) {
+                            const parts = pb.split('|');
+                            src = parts[0].trim();
+                            caption = parts.slice(1).join('|').trim();
+                        }
+                        
+                        let captionHTML = caption ? `<div class="scrapbook-caption" style="font-size:0.9rem; font-style:italic; color:#666; margin-top:10px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>` : '';
+                        
+                        let itemWidth = 'auto';
+                        let imgMaxHeight = '420px';
+                        
+                        if (count === 1) {
+                            itemWidth = '100%';
+                            imgMaxHeight = '500px';
+                        } else if (count === 2) {
+                            itemWidth = '100%';
+                            imgMaxHeight = '235px';
+                        } else if (count >= 3) {
+                            itemWidth = 'calc(50% - 10px)';
+                            imgMaxHeight = '220px';
+                        }
 
-                    loadPromises.push(new Promise(r => {
-                        if (isVideo) {
-                            const vid = document.createElement('video');
-                            vid.onloadedmetadata = vid.onerror = r;
-                            vid.src = src;
-                        } else {
+                        photosHTML += `<div style="width:${itemWidth}; display:flex; flex-direction:column; align-items:center;">
+                            <div class="${isTron ? '' : 'scrapbook-photo-wrapper'}" style="margin:0; display:inline-block;">
+                                <img src="${src}" style="max-height:${imgMaxHeight}; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:block;" />
+                            </div>
+                            ${captionHTML}
+                        </div>`;
+
+                        loadPromises.push(new Promise(r => {
                             const img = new Image();
                             img.onload = img.onerror = r;
                             img.src = src;
-                        }
-                    }));
-                });
+                        }));
+                    });
 
-                const finalHTML = `<div class="photo-grid-container" style="margin:15px 0; width:100%; ${gridStyle}">${photosHTML}</div>`;
+                    // Add .photo-grid-container for the centering logic to work on single items
+                    photosHTML = `<div class="photo-grid-container" style="margin:15px 0; width:100%; ${gridStyle}">${photosHTML}</div>`;
+                }
+                
+                const finalHTML = photosHTML;
                 
                 await Promise.all(loadPromises);
                 console.log(finalHTML);
@@ -931,8 +972,40 @@ document.addEventListener('DOMContentLoaded', async function () {
             window.addEventListener(evt, stopFlip, true);
         });
 
-        window.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG' && e.target.closest('.custom-flow-page')) {
+                window.addEventListener('click', (e) => {
+            const btn = e.target.closest('.carousel-btn');
+            if (btn) {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                const container = btn.closest('.photo-carousel-container');
+                if (!container) return;
+                
+                const images = container.querySelectorAll('.carousel-img');
+                const captions = container.querySelectorAll('.carousel-cap');
+                
+                let currentIndex = 0;
+                images.forEach((img, idx) => {
+                    if (img.style.display !== 'none') currentIndex = idx;
+                });
+                
+                let nextIndex = currentIndex;
+                if (btn.classList.contains('carousel-next')) {
+                    nextIndex = (currentIndex + 1) % images.length;
+                } else {
+                    nextIndex = (currentIndex - 1 + images.length) % images.length;
+                }
+                
+                images.forEach((img, idx) => {
+                    img.style.display = (idx === nextIndex) ? 'block' : 'none';
+                });
+                captions.forEach((cap, idx) => {
+                    cap.style.display = (idx === nextIndex) ? 'block' : 'none';
+                });
+                return;
+            }
+
+            if ((e.target.tagName === 'IMG' || e.target.closest('.carousel-btn')) && e.target.closest('.custom-flow-page')) {
                 e.stopPropagation();
                 e.preventDefault();
                 lightboxImg.src = e.target.src;
