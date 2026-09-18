@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
 
 <head>
@@ -24,6 +24,9 @@
 </head>
 
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+
     <main class="flipbook-layout">
 
         <nav class="top-nav" aria-label="Điều hướng chính">
@@ -39,10 +42,6 @@
             </div>
             <div class="nav-dropdown">
                 <a href="co-cau-to-chuc.html">MÔ HÌNH TỔ CHỨC</a>
-                <!-- <div class="nav-submenu">
-                    <a href="mo-hinh-to-chuc.html#tab-chinh-quyen">Tổ chức chính quyền</a>
-                    <a href="mo-hinh-to-chuc.html#tab-dang">Tổ chức Đảng và Đoàn thể</a>
-                </div> -->
             </div>
             <a href="thanh-tuu-khen-thuong.html">Thành tựu</a>
         </nav>
@@ -51,40 +50,8 @@
             <img src="assets/images/branch.png" alt="" class="branch branch-top-left">
             <img src="assets/images/branch.png" alt="" class="branch branch-bottom-right">
         </div>
-
-        <!-- Con số kỷ niệm chìm khổng lồ -->
-        <div class="bg-watermark" aria-hidden="true">
-            <span></span>
-            <!-- <span class="year-right">2026</span> -->
-        </div>
-
-        <!-- Typography bên trái (Mở trang ký ức) -->
-        <div class="side-typography left-side">
-            <!-- <p class="kicker">MỞ TRANG</p>
-            <h1 class="main-title">KÝ ỨC</h1>
-            <div class="divider">
-                <span class="line-h"></span>
-                <i class="star">✦</i>
-                <span class="line-h"></span>
-            </div>
-            <p class="subtitle">Mỗi trang mở ra<br>một dấu mốc</p> -->
-
-            <!-- <a href="gioi-thieu.html" class="action-btn video-btn">
-                <div class="icon-circle ripple-ring">
-                    <svg viewBox="0 0 24 24" fill="currentColor" class="global-inline-9">
-                        <path d="M8 5v14l11-7z" />
-                    </svg>
-                </div>
-                <span class="btn-text">XEM VIDEO GIỚI THIỆU</span>
-            </a> -->
-        </div>
-
         <!-- Typography bên phải (Mở biên niên) -->
         <div class="side-typography right-side">
-            <!-- <div class="vertical-line-container">
-                <i class="star">✦</i>
-                <div class="vertical-line"></div>
-            </div> -->
             <p class="kicker-small">MỞ BIÊN NIÊN</p>
 
             <a href="bien-nien-30-nam.html" class="action-btn next-btn">
@@ -100,59 +67,64 @@
         <!-- Tia sáng (God Rays) hắt từ góc phải -->
         <div class="god-rays" aria-hidden="true"></div>
 
-
-
         <div class="scene-layout global-inline-16">
-            <!-- Cột giữa: Quyển sách 3D -->
             <div class="center-book global-inline-17">
-                <div class="container-flipbook"
-                    style="opacity: 0; transition: opacity 0.8s ease-in-out, transform 0.7s ease-in-out;">
-                    <div id="flipbook">
-                        <!-- Bìa trước -->
-                        <div class="page page-cover" data-density="hard">
-                            <img src="assets/images/book cover image front no publisher.png" alt="30 năm"
-                                class="full-cover">
-                        </div>
+                <!-- SÂN KHẤU 3D ĐÃ LƯỢC BỎ MẶT SÀN CẮT VIỀN -->
+                <div class="studio-stage-3d">
+                    <div class="studio-floor-3d"></div>
+                    <!-- Bóng đổ tiếp xúc mềm dưới đáy sách -->
+                    <div class="book-dynamic-shadow"></div>
+                    <div class="container-flipbook is-isometric-3d">
+                        <div id="flipbook">
+                            <!-- Bìa trước -->
+                            <div class="page page-cover" data-density="hard">
+                                <img src="assets/images/book cover image front no publisher.png" alt="30 năm"
+                                    class="full-cover">
+                            </div>
 
-                        <!-- Mặt trong bìa -->
-                        <div class="page page-cover page-cover-inner" data-density="hard">
-                            <div class="page-content">
+                            <!-- Mặt trong bìa -->
+                            <div class="page page-cover page-cover-inner" data-density="hard">
+                                <div class="page-content">
+                                </div>
+                            </div>
+
+                            <!-- Javascript tự động chèn các trang vào đây -->
+
+                            <!-- Mặt trong bìa sau -->
+                            <div class="page page-cover page-cover-inner" data-density="hard">
+                                <div class="page-content"></div>
+                            </div>
+
+                            <!-- Bìa sau -->
+                            <div class="page page-cover" data-density="hard">
+
+                                <img src="assets/images/book cover image back.png" alt="ảnh bìa sau" class="full-cover">
+
                             </div>
                         </div>
-
-                        <!-- Javascript tự động chèn 30 trang vào đây -->
-
-                        <!-- Mặt trong bìa sau -->
-                        <div class="page page-cover page-cover-inner" data-density="hard">
-                            <div class="page-content"></div>
-                        </div>
-
-                        <!-- Bìa sau -->
-                        <div class="page page-cover" data-density="hard">
-
-                            <img src="assets/images/book cover image back.png" alt="ảnh bìa sau" class="full-cover">
-
-                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <!-- Đoạn này là tôi cố tình comment để bỏ nút bấm đi, không phải vô tình đâu nhé -->
 
-        <!-- Giữ lại menu mục lục ẩn -->
-        <div class="menu-backdrop" data-close-menu></div>
-        <aside class="book-menu" aria-hidden="true">
-            <!-- ... -->
-            <div class="book-menu__head">
-                <div><small>MỤC LỤC</small>
-                    <h1>30 năm Viettel Commerce</h1>
+                    <!-- Nút bấm tương tác mở sách ban đầu -->
+                    <!-- <button id="btn-open-3d-book" class="open-book-btn">
+                        <span>✦ MỞ SÁCH ✦</span>
+                    </button> -->
                 </div>
-                <button type="button" data-close-menu aria-label="Đóng menu">×</button>
             </div>
-        </aside>
+
+            <!-- Giữ lại menu mục lục ẩn -->
+            <div class="menu-backdrop" data-close-menu></div>
+            <aside class="book-menu" aria-hidden="true">
+                <!-- ... -->
+                <div class="book-menu__head">
+                    <div><small>MỤC LỤC</small>
+                        <h1>30 năm Viettel Commerce</h1>
+                    </div>
+                    <button type="button" data-close-menu aria-label="Đóng menu">×</button>
+                </div>
+            </aside>
 
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
     <script src="assets/js/flipbook-init.js?v=27"></script>
     <script src="assets/js/book-menu.js"></script>
     <script src="assets/js/home-approved.js"></script>
@@ -197,15 +169,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

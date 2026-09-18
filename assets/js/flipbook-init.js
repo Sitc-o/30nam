@@ -1,22 +1,22 @@
-document.addEventListener('DOMContentLoaded', async function () {
-        function getOpenTags(html) {
-            const stack = [];
-            const regex = /<\/?([a-z0-9]+)[^>]*>/gi;
-            let match;
-            while ((match = regex.exec(html)) !== null) {
-                const tagFull = match[0];
-                const tagName = match[1].toLowerCase();
-                if (['br', 'hr', 'img', 'video', 'source'].includes(tagName)) continue;
-                if (tagFull.startsWith('</')) {
-                    if (stack.length > 0 && stack[stack.length - 1].tag === tagName) {
-                        stack.pop();
-                    }
-                } else {
-                    stack.push({ tag: tagName, full: tagFull });
+﻿document.addEventListener('DOMContentLoaded', async function () {
+    function getOpenTags(html) {
+        const stack = [];
+        const regex = /<\/?([a-z0-9]+)[^>]*>/gi;
+        let match;
+        while ((match = regex.exec(html)) !== null) {
+            const tagFull = match[0];
+            const tagName = match[1].toLowerCase();
+            if (['br', 'hr', 'img', 'video', 'source'].includes(tagName)) continue;
+            if (tagFull.startsWith('</')) {
+                if (stack.length > 0 && stack[stack.length - 1].tag === tagName) {
+                    stack.pop();
                 }
+            } else {
+                stack.push({ tag: tagName, full: tagFull });
             }
-            return stack.map(s => s.full).join('');
         }
+        return stack.map(s => s.full).join('');
+    }
 
     const flipbookEl = document.getElementById('flipbook');
     const PageFlipClass = (typeof StPageFlip !== 'undefined') ? StPageFlip.PageFlip : (typeof St !== 'undefined' ? St.PageFlip : null);
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             let isRight = false;
             let isSignature = false;
             let isDropCap = false;
-            
+
             while (true) {
                 if (blockText.startsWith('[sat-le]')) {
                     blockText = blockText.substring(8).trim();
@@ -103,21 +103,21 @@ document.addEventListener('DOMContentLoaded', async function () {
                 let alignStyle = "";
                 if (isCenter) alignStyle = "text-align: center;";
                 if (isRight) alignStyle = "text-align: right;";
-                
+
                 // Xác định cấp độ tiêu đề
                 const isHeading3 = blockText.startsWith('### ');
                 const isHeading2 = !isHeading3 && blockText.startsWith('## ');
                 const isHeading1 = !isHeading3 && !isHeading2;
-                
+
                 const headingText = blockText.replace(isHeading3 ? '### ' : (isHeading2 ? '## ' : '# '), '').replace(/\n/g, '<br>');
-                
+
                 let fontSize = "1.6rem";
                 let fontColor = "#ee0033";
                 let fontWeight = "bold";
                 let textTransform = "none";
                 let dividerHTML = "";
                 let tocLevel = 1;
-                
+
                 if (isHeading1) {
                     tocLevel = 1;
                     fontSize = "1.6rem";
@@ -131,21 +131,21 @@ document.addEventListener('DOMContentLoaded', async function () {
                     alignStyle = "text-align: center;"; // Bắt buộc căn giữa
                     fontColor = "#333"; // Màu đen theo yêu cầu
                 }
-                
+
                 const hHTML = `
                     <div class="scrapbook-year" style="font-size:${fontSize}; line-height:1.4; margin-top:20px; margin-bottom:15px; color:${fontColor}; font-weight:${fontWeight}; text-transform:${textTransform}; font-family:'Times New Roman', Times, serif; ${alignStyle}">
                         ${headingText}
                     </div>
                     ${dividerHTML}
                 `;
-                
+
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = hHTML;
-                
+
                 let rawTitle = headingText.replace(/<br>/g, ' ');
-                
+
                 let tocRecorded = false;
-                
+
                 Array.from(tempDiv.childNodes).forEach(n => {
                     measureBox.appendChild(n.cloneNode(true));
                     if (measureBox.scrollHeight > MAX_HEIGHT) {
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     } else {
                         currentPage.appendChild(n.cloneNode(true));
                     }
-                    
+
                     // Ghi nhận TOC ngay sau khi tiêu đề đã được chèn vào đúng trang (pageCount hiện tại đã chính xác)
                     if (n.nodeType === 1 && n.classList.contains('scrapbook-year') && !tocRecorded) {
                         window.bookTOC.push({ level: tocLevel, title: rawTitle, pageIndex: pageCount + 2 });
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             } else if ((blockText.startsWith('[anh:') || blockText.startsWith('[album:') || blockText.startsWith('[anh-tron:') || blockText.startsWith('[album-tron:')) && blockText.endsWith(']')) {
                 const isAlbum = blockText.startsWith('[album:') || blockText.startsWith('[album-tron:');
                 const isTron = blockText.startsWith('[anh-tron:') || blockText.startsWith('[album-tron:');
-                
+
                 let innerText = '';
                 if (blockText.startsWith('[album-tron:')) {
                     innerText = blockText.substring(12, blockText.length - 1).trim();
@@ -177,20 +177,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                 } else {
                     innerText = blockText.substring(5, blockText.length - 1).trim();
                 }
-                
+
                 // Hỗ trợ nhiều ảnh ghép lại bằng dấu chấm phẩy ;
                 const photoBlocks = innerText.split(';').map(p => p.trim()).filter(p => p);
-                
+
                 let photosHTML = '';
                 const count = photoBlocks.length;
-                
+
                 const loadPromises = [];
-                
+
                 if (isAlbum && count > 1) {
                     // Carousel logic for [album:...]
                     let imagesHTML = '';
                     let captionsHTML = '';
-                    
+
                     photoBlocks.forEach((pb, idx) => {
                         let src = pb;
                         let caption = '';
@@ -199,17 +199,17 @@ document.addEventListener('DOMContentLoaded', async function () {
                             src = parts[0].trim();
                             caption = parts.slice(1).join('|').trim();
                         }
-                        
+
                         let displayStyle = idx === 0 ? 'block' : 'none';
                         imagesHTML += `<img class="carousel-img" data-index="${idx}" src="${src}" style="max-height:500px; max-width:100%; border-radius:2px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); display:${displayStyle};" />`;
-                        
+
                         if (caption) {
                             captionsHTML += `<div class="scrapbook-caption carousel-cap" data-index="${idx}" style="display:${displayStyle}; font-size:0.9rem; font-style:italic; color:#666; margin-top:10px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>`;
                         }
-                        
+
                         loadPromises.push(new Promise(r => { const img = new Image(); img.onload = img.onerror = r; img.src = src; }));
                     });
-                    
+
                     photosHTML = `<div class="photo-grid-container photo-carousel-container" style="margin:15px 0; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
                         <div style="width:100%; display:flex; flex-direction:column; align-items:center; position: relative;">
                             <div class="${isTron ? '' : 'scrapbook-photo-wrapper'}" style="margin:0; display:inline-block; position: relative;">
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     } else {
                         gridStyle = 'display:flex; flex-wrap:wrap; gap:15px; justify-content:center; align-items:flex-start;';
                     }
-                    
+
                     photoBlocks.forEach(pb => {
                         let src = pb;
                         let caption = '';
@@ -241,12 +241,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                             src = parts[0].trim();
                             caption = parts.slice(1).join('|').trim();
                         }
-                        
+
                         let captionHTML = caption ? `<div class="scrapbook-caption" style="font-size:0.9rem; font-style:italic; color:#666; margin-top:10px; font-family:'Times New Roman', serif; text-align:center;">${caption}</div>` : '';
-                        
+
                         let itemWidth = 'auto';
                         let imgMaxHeight = '420px';
-                        
+
                         if (count === 1) {
                             itemWidth = '100%';
                             imgMaxHeight = '500px';
@@ -275,12 +275,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                     // Add .photo-grid-container for the centering logic to work on single items
                     photosHTML = `<div class="photo-grid-container" style="margin:15px 0; width:100%; ${gridStyle}">${photosHTML}</div>`;
                 }
-                
+
                 const finalHTML = photosHTML;
-                
+
                 await Promise.all(loadPromises);
                 console.log(finalHTML);
-                
+
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = finalHTML;
                 let node = tempDiv.firstChild;
@@ -310,115 +310,57 @@ document.addEventListener('DOMContentLoaded', async function () {
                     // Nếu ấn Enter 1 lần (dòng giữa block), margin-bottom sẽ bằng 0
                     let marginBottom = (i === lines.length - 1) ? "12px" : "0px";
                     pNode.style.cssText = `text-indent:1.5rem; margin-top:0px; margin-bottom:${marginBottom}; line-height:1.6; color:#333;`;
-                
-                if (isNoIndent) pNode.style.textIndent = "0";
-                if (isCenter) {
-                    pNode.style.textIndent = "0";
-                    pNode.style.textAlign = "center";
-                }
-                if (isRight) {
-                    pNode.style.textIndent = "0";
-                    pNode.style.textAlign = "right";
-                }
-                if (isSignature) {
-                    pNode.style.textIndent = "0";
-                    pNode.style.textAlign = "center";
-                    pNode.style.marginTop = "30px";
-                    pNode.style.marginBottom = "30px";
-                    pNode.style.fontWeight = "500";
-                }
 
-                pNode.innerHTML = pText;
-                
-                let applyDropCap = false;
-                
-                if (isDropCap && i === 0) {
-                    applyDropCap = true;
-                } else if (isFirstParagraph) {
-                    // Tự động Drop Cap cho đoạn văn đầu tiên sau Tiêu đề
-                    if (!isNoIndent && !isCenter && !isRight && !isSignature && !pText.startsWith('<b>') && !pText.startsWith('1.') && !pText.startsWith('2.') && !pText.startsWith('3.')) {
+                    if (isNoIndent) pNode.style.textIndent = "0";
+                    if (isCenter) {
+                        pNode.style.textIndent = "0";
+                        pNode.style.textAlign = "center";
+                    }
+                    if (isRight) {
+                        pNode.style.textIndent = "0";
+                        pNode.style.textAlign = "right";
+                    }
+                    if (isSignature) {
+                        pNode.style.textIndent = "0";
+                        pNode.style.textAlign = "center";
+                        pNode.style.marginTop = "30px";
+                        pNode.style.marginBottom = "30px";
+                        pNode.style.fontWeight = "500";
+                    }
+
+                    pNode.innerHTML = pText;
+
+                    let applyDropCap = false;
+
+                    if (isDropCap && i === 0) {
                         applyDropCap = true;
-                    }
-                    isFirstParagraph = false;
-                }
-
-                if (applyDropCap) {
-                    pNode.classList.add('drop-cap-p');
-                    pNode.style.textIndent = "0"; // Không lùi đầu dòng cho đoạn có drop-cap
-                }
-
-                measureBox.appendChild(pNode.cloneNode(true));
-                if (measureBox.scrollHeight <= MAX_HEIGHT) {
-                    currentPage.appendChild(pNode.cloneNode(true));
-                } else {
-                    measureBox.removeChild(measureBox.lastChild);
-                    
-                    let words = pText.split(' ');
-                    let currentP_measure = pNode.cloneNode();
-                    measureBox.appendChild(currentP_measure);
-                    
-                    let left = 0, right = words.length - 1, bestFit = 0;
-                    while (left <= right) {
-                        let mid = Math.floor((left+right)/2);
-                        currentP_measure.innerHTML = words.slice(0, mid).join(' ');
-                        if (measureBox.scrollHeight <= MAX_HEIGHT) {
-                            bestFit = mid;
-                            left = mid + 1;
-                        } else {
-                            right = mid - 1;
+                    } else if (isFirstParagraph) {
+                        // Tự động Drop Cap cho đoạn văn đầu tiên sau Tiêu đề
+                        if (!isNoIndent && !isCenter && !isRight && !isSignature && !pText.startsWith('<b>') && !pText.startsWith('1.') && !pText.startsWith('2.') && !pText.startsWith('3.')) {
+                            applyDropCap = true;
                         }
-                    }
-                    
-                    // CHỐNG RỚT CHỮ (Orphan) VÀ CẮT NGANG TIỂU MỤC
-                    // Lưu ý: isDropCap (thẻ [chu-to]) là đoạn văn dài bình thường, bắt buộc phải cho phép cắt trang!
-                    let isSubheading = pText.startsWith('<b>') || isSignature;
-                    if ((isSubheading || bestFit < 10) && currentPage.childNodes.length > 0) {
-                        measureBox.removeChild(currentP_measure);
-                        commitPage();
-                        i--; // Lùi lại 1 bước để xử lý lại chính đoạn văn này trên trang giấy mới
-                        continue;
+                        isFirstParagraph = false;
                     }
 
-                    if (bestFit === 0) bestFit = 1; 
-                    
-                    let currentP_real = pNode.cloneNode();
-                    currentPage.appendChild(currentP_real);
-                    
-                    let bestFitText1 = words.slice(0, bestFit).join(' ');
-                    currentP_measure.innerHTML = bestFitText1;
-                    currentP_real.innerHTML = bestFitText1;
-                    commitPage();
-                    
-                    let remainingWords = words.slice(bestFit);
-                    let openTags1 = getOpenTags(bestFitText1);
-                    if (remainingWords.length > 0 && openTags1) {
-                        remainingWords[0] = openTags1 + remainingWords[0];
+                    if (applyDropCap) {
+                        pNode.classList.add('drop-cap-p');
+                        pNode.style.textIndent = "0"; // Không lùi đầu dòng cho đoạn có drop-cap
                     }
-                    while (remainingWords.length > 0) {
-                        currentP_measure = pNode.cloneNode();
-                        currentP_real = pNode.cloneNode();
-                        
-                        // Đảm bảo phần chữ bị cắt sang trang sau KHÔNG bị dính drop-cap
-                        currentP_measure.classList.remove('drop-cap-p');
-                        currentP_real.classList.remove('drop-cap-p');
 
-                        // Bỏ lùi đầu dòng vì đây là đoạn đang viết dở bị vắt sang trang
-                        currentP_measure.style.textIndent = "0";
-                        currentP_real.style.textIndent = "0";
+                    measureBox.appendChild(pNode.cloneNode(true));
+                    if (measureBox.scrollHeight <= MAX_HEIGHT) {
+                        currentPage.appendChild(pNode.cloneNode(true));
+                    } else {
+                        measureBox.removeChild(measureBox.lastChild);
 
+                        let words = pText.split(' ');
+                        let currentP_measure = pNode.cloneNode();
                         measureBox.appendChild(currentP_measure);
-                        currentPage.appendChild(currentP_real);
-                        
-                        currentP_measure.innerHTML = remainingWords.join(' ');
-                        if (measureBox.scrollHeight <= MAX_HEIGHT) {
-                            currentP_real.innerHTML = remainingWords.join(' ');
-                            break;
-                        }
-                        
-                        left = 0; right = remainingWords.length - 1; bestFit = 0;
+
+                        let left = 0, right = words.length - 1, bestFit = 0;
                         while (left <= right) {
-                            let mid = Math.floor((left+right)/2);
-                            currentP_measure.innerHTML = remainingWords.slice(0, mid).join(' ');
+                            let mid = Math.floor((left + right) / 2);
+                            currentP_measure.innerHTML = words.slice(0, mid).join(' ');
                             if (measureBox.scrollHeight <= MAX_HEIGHT) {
                                 bestFit = mid;
                                 left = mid + 1;
@@ -426,21 +368,79 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 right = mid - 1;
                             }
                         }
-                        if (bestFit === 0) bestFit = 1; 
-                        
-                        let bestFitText2 = remainingWords.slice(0, bestFit).join(' ');
-                        currentP_measure.innerHTML = bestFitText2;
-                        currentP_real.innerHTML = bestFitText2;
-                        commitPage();
-                        
-                        let nextRemaining = remainingWords.slice(bestFit);
-                        let openTags2 = getOpenTags(bestFitText2);
-                        if (nextRemaining.length > 0 && openTags2) {
-                            nextRemaining[0] = openTags2 + nextRemaining[0];
+
+                        // CHỐNG RỚT CHỮ (Orphan) VÀ CẮT NGANG TIỂU MỤC
+                        // Lưu ý: isDropCap (thẻ [chu-to]) là đoạn văn dài bình thường, bắt buộc phải cho phép cắt trang!
+                        let isSubheading = pText.startsWith('<b>') || isSignature;
+                        if ((isSubheading || bestFit < 10) && currentPage.childNodes.length > 0) {
+                            measureBox.removeChild(currentP_measure);
+                            commitPage();
+                            i--; // Lùi lại 1 bước để xử lý lại chính đoạn văn này trên trang giấy mới
+                            continue;
                         }
-                        remainingWords = nextRemaining;
+
+                        if (bestFit === 0) bestFit = 1;
+
+                        let currentP_real = pNode.cloneNode();
+                        currentPage.appendChild(currentP_real);
+
+                        let bestFitText1 = words.slice(0, bestFit).join(' ');
+                        currentP_measure.innerHTML = bestFitText1;
+                        currentP_real.innerHTML = bestFitText1;
+                        commitPage();
+
+                        let remainingWords = words.slice(bestFit);
+                        let openTags1 = getOpenTags(bestFitText1);
+                        if (remainingWords.length > 0 && openTags1) {
+                            remainingWords[0] = openTags1 + remainingWords[0];
+                        }
+                        while (remainingWords.length > 0) {
+                            currentP_measure = pNode.cloneNode();
+                            currentP_real = pNode.cloneNode();
+
+                            // Đảm bảo phần chữ bị cắt sang trang sau KHÔNG bị dính drop-cap
+                            currentP_measure.classList.remove('drop-cap-p');
+                            currentP_real.classList.remove('drop-cap-p');
+
+                            // Bỏ lùi đầu dòng vì đây là đoạn đang viết dở bị vắt sang trang
+                            currentP_measure.style.textIndent = "0";
+                            currentP_real.style.textIndent = "0";
+
+                            measureBox.appendChild(currentP_measure);
+                            currentPage.appendChild(currentP_real);
+
+                            currentP_measure.innerHTML = remainingWords.join(' ');
+                            if (measureBox.scrollHeight <= MAX_HEIGHT) {
+                                currentP_real.innerHTML = remainingWords.join(' ');
+                                break;
+                            }
+
+                            left = 0; right = remainingWords.length - 1; bestFit = 0;
+                            while (left <= right) {
+                                let mid = Math.floor((left + right) / 2);
+                                currentP_measure.innerHTML = remainingWords.slice(0, mid).join(' ');
+                                if (measureBox.scrollHeight <= MAX_HEIGHT) {
+                                    bestFit = mid;
+                                    left = mid + 1;
+                                } else {
+                                    right = mid - 1;
+                                }
+                            }
+                            if (bestFit === 0) bestFit = 1;
+
+                            let bestFitText2 = remainingWords.slice(0, bestFit).join(' ');
+                            currentP_measure.innerHTML = bestFitText2;
+                            currentP_real.innerHTML = bestFitText2;
+                            commitPage();
+
+                            let nextRemaining = remainingWords.slice(bestFit);
+                            let openTags2 = getOpenTags(bestFitText2);
+                            if (nextRemaining.length > 0 && openTags2) {
+                                nextRemaining[0] = openTags2 + nextRemaining[0];
+                            }
+                            remainingWords = nextRemaining;
+                        }
                     }
-                }
                 } // Đóng vòng lặp for
             }
         }
@@ -452,20 +452,202 @@ document.addEventListener('DOMContentLoaded', async function () {
         innerCover.insertAdjacentHTML('afterend', pagesHTML);
 
         const pageFlip = new PageFlipClass(flipbookEl, {
-            width: 550, height: 733, size: "stretch", minWidth: 300, maxWidth: 550, minHeight: 400, maxHeight: 700, maxShadowOpacity: 0.02, showCover: true, usePortrait: true, mobileScrollSupport: false, flippingTime: 700, showPageCorners: false
+            width: 550, height: 733, size: "stretch", minWidth: 300, maxWidth: 550, minHeight: 400, maxHeight: 700, maxShadowOpacity: 0.02, showCover: true, usePortrait: true, mobileScrollSupport: false, flippingTime: 320, startPage: 10, showPageCorners: false
         });
 
         pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+        // ============================================================
+        // HỆ THỐNG ĐIỀU KHIỂN CHUYỂN ĐỘNG 3D & TRẠNG THÁI PHẲNG
+        // ============================================================
+        const container = document.querySelector('.container-flipbook');
+        const dynamicShadow = document.querySelector('.book-dynamic-shadow');
+        const floorStudio = document.querySelector('.studio-floor-3d');
+        const btnOpen3D = document.getElementById('btn-open-3d-book');
+        const toolbar = document.getElementById('book-toolbar');
+
+        let isBookFlattened = false; // Trạng thái sách đã nắn phẳng trực diện hay chưa
+        let isAnimating = false;
+
+        // Khóa chuột của StPageFlip ngay từ đầu khi đang ở góc nghiêng 3D
+        container.classList.add('book-locked');
+
+        // Hàm hỗ trợ hiện thanh công cụ mục lục & tìm kiếm
+        function showToolbar() {
+            if (toolbar) toolbar.classList.add('is-visible');
+        }
+
+        // KỊCH BẢN 1: TỪ XA LAO TỚI & LẬT ĐÓNG TỪNG TRANG (GIỮ NGUYÊN)
+        // KỊCH BẢN 1: TỪ XA LAO TỚI & LẬT ĐÓNG TỪNG TRANG
+        function runIntroSequence() {
+            // 1. Định hình sẵn góc nghiêng 3D từ xa TRƯỚC KHI hiện hình (triệt tiêu hoàn toàn cú giật)
+            gsap.set(container, {
+                visibility: 'visible',
+                opacity: 0,
+                rotateX: 34,
+                rotateY: 0,
+                rotateZ: -15,
+                scale: 0.45,
+                y: -80,
+                x: 0
+            });
+            gsap.set(dynamicShadow, { scale: 0.45, opacity: 0 });
+            if (floorStudio) gsap.set(floorStudio, { scale: 0.7, opacity: 0.5 });
+
+            // 2. Fade in mượt mà và lao lại gần sàn 3D
+            gsap.to(container, {
+                opacity: 1,
+                scale: 0.85,
+                y: 0,
+                rotateX: 25,
+                rotateZ: -8,
+                duration: 2.2,
+                ease: "power2.out"
+            });
+            gsap.to(dynamicShadow, {
+                scale: 0.9,
+                opacity: 0.55,
+                duration: 2.2,
+                ease: "power2.out"
+            });
+            if (floorStudio) {
+                gsap.to(floorStudio, { scale: 1, opacity: 1, duration: 2.2, ease: "power2.out" });
+            }
+
+            // 3. Vòng lặp lật lùi từng trang liên tục về bìa trước
+            const closeInterval = setInterval(() => {
+                if (pageFlip.getCurrentPageIndex() > 0) {
+                    pageFlip.flipPrev();
+                } else {
+                    clearInterval(closeInterval);
+                    pageFlip.setting.flippingTime = 700;
+                    const shiftAmount = getShiftAmount();
+                    gsap.to(container, {
+                        x: -shiftAmount,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                    if (btnOpen3D) {
+                        gsap.to(btnOpen3D, {
+                            opacity: 1,
+                            pointerEvents: 'auto',
+                            duration: 0.5,
+                            delay: 0.2
+                        });
+                    }
+                    showToolbar();
+                }
+            }, 320);
+        }
+
+        // GỌI NGAY LẬP TỨC: Xóa bỏ dòng setTimeout(runIntroSequence, 150); cũ
+        runIntroSequence();
+
+        // KỊCH BẢN 2: LAO THẲNG LÊN -> XOAY CHÍNH DIỆN -> HẠ XUỐNG DẠNG PHẲNG 1 BÌA
+        function triggerSwoopToFlat(callback) {
+            if (isBookFlattened || isAnimating) {
+                if (callback) callback();
+                return;
+            }
+            isAnimating = true;
+
+            if (btnOpen3D) {
+                gsap.to(btnOpen3D, { opacity: 0, pointerEvents: 'none', duration: 0.2 });
+            }
+
+            const shiftAmount = getShiftAmount();
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    // Sau khi đã hạ xuống phẳng hoàn toàn:
+                    container.classList.remove('is-isometric-3d');
+                    container.classList.remove('book-locked'); // Mở khóa chuột để click lật trang được
+                    isBookFlattened = true;
+                    isAnimating = false;
+                    showToolbar();
+
+                    // KHÔNG tự động gọi flipNext() ở đây
+                    // Giữ nguyên bìa trước phẳng, lúc này click vào sách mới mở trang đầu tiên
+                    if (callback) callback();
+                }
+            });
+
+            // 1. Phóng vút lên cao theo hướng thẳng, triệt tiêu góc nghiêng
+            tl.to(container, {
+                y: -160,
+                scale: 1.15,
+                rotateX: 6,
+                rotateY: 0,
+                rotateZ: -2,
+                duration: 0.6,
+                ease: "power2.out"
+            })
+                .to(dynamicShadow, {
+                    scale: 1.5,
+                    opacity: 0.15,
+                    duration: 0.6,
+                    ease: "power2.out"
+                }, "<")
+                // 2. Hạ dần xuống mặt phẳng, xoay chuẩn 0 độ trực diện và canh giữa 1 bìa
+                .to(container, {
+                    y: 0,
+                    x: -shiftAmount, // Bìa 1 trang nằm chính giữa khung nhìn
+                    scale: 1,
+                    rotateX: 0,
+                    rotateY: 0,
+                    rotateZ: 0,
+                    duration: 0.75,
+                    ease: "power3.out"
+                })
+                .to(dynamicShadow, {
+                    opacity: 0,
+                    duration: 0.4
+                }, "<0.2");
+        }
+
+        // Bắt sự kiện click vào sách đang nghiêng
+        container.addEventListener('click', (e) => {
+            if (!isBookFlattened) {
+                e.stopPropagation();
+                triggerSwoopToFlat();
+            }
+        });
+
+        if (btnOpen3D) {
+            btnOpen3D.addEventListener('click', (e) => {
+                e.stopPropagation();
+                triggerSwoopToFlat();
+            });
+        }
+
+        // KỊCH BẢN 3: ĐIỀU HƯỚNG TRƯỢT CAMERA KHI ĐỌC SÁCH
+        pageFlip.on('changeState', (e) => {
+            const state = e.data;
+            const shiftAmount = getShiftAmount();
+            if (pageFlip.getOrientation() === 'portrait') {
+                gsap.to(container, { x: 0, duration: 0.6, ease: "power2.out" });
+                return;
+            }
+            if (state === 'read') {
+                const actualPage = pageFlip.getCurrentPageIndex();
+                let targetX = 0;
+                if (actualPage === 0) {
+                    targetX = -shiftAmount;
+                } else if (actualPage >= pageFlip.getPageCount() - 1) {
+                    targetX = shiftAmount;
+                } else {
+                    targetX = 0;
+                }
+                gsap.to(container, { x: targetX, duration: 0.7, ease: "power2.out" });
+            }
+        });
+
         window.bookPageFlip = pageFlip;
-        
         window.bookTOC.unshift({ level: 1, title: 'Bìa trước', pageIndex: 0, isCover: true });
         window.bookTOC.push({ level: 1, title: 'Bìa sau', pageIndex: pageFlip.getPageCount() - 1, isCover: true });
 
-        // ==========================================
-        // TÍNH NĂNG CINEMATIC CAMERA (VARIABLES & HELPERS)
-        // ==========================================
+        // ============================================================
+        // ĐIỀU HƯỚNG CHUYỂN TRANG (MỤC LỤC & TÌM KIẾM)
+        // ============================================================
         let predictedTarget = null;
-
         function getShiftAmount() {
             const wrapper = document.querySelector('.stf__wrapper');
             return wrapper ? wrapper.offsetWidth / 4 : 0;
@@ -473,29 +655,42 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         function navigateToPage(pageIndex) {
             if (!window.bookPageFlip) return;
-            
-            if (pageIndex <= 0) { 
-                predictedTarget = 'left'; 
-            } else if (pageIndex >= window.bookPageFlip.getPageCount() - 1) { 
-                predictedTarget = 'right'; 
-            } else { 
-                predictedTarget = 'center'; 
+
+            // Xử lý vị trí trượt ngang trước khi lật
+            if (pageIndex <= 0) {
+                predictedTarget = 'left';
+            } else if (pageIndex >= window.bookPageFlip.getPageCount() - 1) {
+                predictedTarget = 'right';
+            } else {
+                predictedTarget = 'center';
             }
-            
-            const container = document.querySelector('.container-flipbook');
+
             const shiftAmount = getShiftAmount();
+
+            // Nếu sách đang ở dạng nghiêng 3D, nắn thẳng về dạng phẳng trước rồi mới lật trang
+            if (!isBookFlattened) {
+                triggerSwoopToFlat(() => {
+                    if (window.bookPageFlip.getOrientation() !== 'portrait') {
+                        if (predictedTarget === 'center') gsap.to(container, { x: 0, duration: 0.4 });
+                        else if (predictedTarget === 'left') gsap.to(container, { x: -shiftAmount, duration: 0.4 });
+                        else if (predictedTarget === 'right') gsap.to(container, { x: shiftAmount, duration: 0.4 });
+                    }
+                    window.bookPageFlip.turnToPage(pageIndex);
+                });
+                return;
+            }
+
             if (container && window.bookPageFlip.getOrientation() !== 'portrait') {
                 if (predictedTarget === 'center') container.style.transform = `translateX(0px)`;
                 else if (predictedTarget === 'left') container.style.transform = `translateX(-${shiftAmount}px)`;
                 else if (predictedTarget === 'right') container.style.transform = `translateX(${shiftAmount}px)`;
             }
-
             window.bookPageFlip.turnToPage(pageIndex);
         }
 
         // HIỆN THỊ TOOLBAR SAU KHI LOAD XONG
-        const toolbar = document.getElementById('book-toolbar');
-        if (toolbar) toolbar.style.opacity = '1';
+        // const toolbar = document.getElementById('book-toolbar');
+        // if (toolbar) toolbar.style.opacity = '1';
 
         // XỬ LÝ MỤC LỤC
         const btnToc = document.getElementById('btn-toc');
@@ -521,9 +716,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 closeAllPanels();
                 // Render TOC
                 tocList.innerHTML = '';
-                
+
                 let parentStack = [{ level: 0, container: tocList }];
-                
+
                 // Tiền xử lý để biết item nào có con
                 const processedTOC = window.bookTOC.map((item, index) => {
                     const nextItem = window.bookTOC[index + 1];
@@ -539,7 +734,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     li.style.padding = '0';
                     li.style.borderBottom = '1px dashed #ddd';
                     li.style.listStyle = 'none';
-                    
+
                     let titleWrapper = document.createElement('div');
                     titleWrapper.style.padding = '8px 0';
                     titleWrapper.style.cursor = 'pointer';
@@ -559,11 +754,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                         titleStyle = 'font-weight: bold; color: #333;';
                         titleWrapper.style.paddingLeft = '40px';
                     }
-                    
+
                     let pageLabel = item.isCover ? '' : `Trang ${item.pageIndex - 1}`;
-                    
+
                     let toggleIcon = '';
-                    
+
                     if (item.hasChildren) {
                         const transform = item.isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
                         // Nút toggle bự hơn chút để dễ bấm
@@ -580,10 +775,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                         </div>
                         <span style="color:#999; font-size:0.9rem; flex-shrink:0; margin-left:10px;">${pageLabel}</span>
                     `;
-                    
+
                     // Xử lý click
                     const toggleEl = titleWrapper.querySelector('.toc-toggle');
-                    
+
                     titleWrapper.addEventListener('click', (e) => {
                         // Nếu click chính xác vào nút toggle
                         if (e.target === toggleEl) {
@@ -602,12 +797,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                             }
                             return;
                         }
-                        
+
                         // Nếu click vào text thì lật trang
                         navigateToPage(item.pageIndex);
                         closeAllPanels();
                     });
-                    
+
                     li.appendChild(titleWrapper);
 
                     // Container chứa children
@@ -615,8 +810,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     childrenContainer.className = 'toc-children';
                     childrenContainer.style.padding = '0';
                     childrenContainer.style.margin = '0';
-                    childrenContainer.style.display = item.isExpanded ? 'block' : 'none'; 
-                    
+                    childrenContainer.style.display = item.isExpanded ? 'block' : 'none';
+
                     if (item.hasChildren) {
                         li.appendChild(childrenContainer);
                     }
@@ -625,15 +820,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                     while (parentStack.length > 0 && parentStack[parentStack.length - 1].level >= item.level) {
                         parentStack.pop();
                     }
-                    
+
                     let parent = parentStack[parentStack.length - 1].container;
                     parent.appendChild(li);
-                    
+
                     if (item.hasChildren) {
                         parentStack.push({ level: item.level, container: childrenContainer });
                     }
                 });
-                
+
                 panelToc.style.opacity = '1';
                 panelToc.style.pointerEvents = 'auto';
                 panelToc.style.transform = 'translateX(-50%) translateY(0)';
@@ -648,7 +843,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const btnSearchUp = document.getElementById('search-up');
         const btnSearchDown = document.getElementById('search-down');
         const btnSearchClose = document.getElementById('search-close');
-        
+
         let searchResults = [];
         let currentSearchIndex = -1;
 
@@ -668,12 +863,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (currentSearchIndex >= 0 && searchResults[currentSearchIndex]) {
                 searchResults[currentSearchIndex].style.backgroundColor = '#ffeb3b'; // yellow
             }
-            
+
             currentSearchIndex = index;
             const target = searchResults[currentSearchIndex];
             target.style.backgroundColor = '#ff9800'; // orange (active)
             searchCount.textContent = `${currentSearchIndex + 1} / ${searchResults.length}`;
-            
+
             let pageIdx = parseInt(target.dataset.page);
             if (window.bookPageFlip) {
                 navigateToPage(pageIdx);
@@ -690,7 +885,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             pages.forEach((page, idx) => {
                 // page index trong DOM của .page chính là số trang thật của bookPageFlip!
-                let pageIndex = idx; 
+                let pageIndex = idx;
 
                 const walker = document.createTreeWalker(page, NodeFilter.SHOW_TEXT, null, false);
                 const nodesToReplace = [];
@@ -704,7 +899,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 nodesToReplace.forEach(node => {
                     const matchText = node.nodeValue;
                     const fragment = document.createDocumentFragment();
-                    
+
                     let lastIdx = 0;
                     let m;
                     regex.lastIndex = 0;
@@ -729,7 +924,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     node.parentNode.replaceChild(fragment, node);
                 });
             });
-            
+
             if (searchResults.length > 0) {
                 goToMatch(0);
             } else {
@@ -786,12 +981,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         });
 
-        
-        // Hiện sách lên mượt mà sau khi đã dàn trang và setup xong xuôi
-        const flipContainerOuter = document.querySelector('.container-flipbook');
-        if (flipContainerOuter) {
-            flipContainerOuter.style.opacity = '1';
-        }
+
+        // // Hiện sách lên mượt mà sau khi đã dàn trang và setup xong xuôi
+        // const flipContainerOuter = document.querySelector('.container-flipbook');
+        // if (flipContainerOuter) {
+        //     flipContainerOuter.style.opacity = '1';
+        // }
 
         // ==========================================
         // TÍNH NĂNG CINEMATIC CAMERA (TRƯỢT KHUNG ĐỒNG THỜI)
@@ -818,38 +1013,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         }
 
-        pageFlip.on('changeState', (e) => {
-            const state = e.data; 
-            const container = document.querySelector('.container-flipbook');
-            if (!container) return;
-            const shiftAmount = getShiftAmount();
-
-            if (pageFlip.getOrientation() === 'portrait') {
-                container.style.transform = `translateX(0px)`;
-                return;
-            }
-
-            if (state === 'user_fold' || state === 'fold_corner' || state === 'flipping') {
-                if (predictedTarget === 'center') {
-                    container.style.transform = `translateX(0px)`;
-                } else if (predictedTarget === 'left') {
-                    container.style.transform = `translateX(-${shiftAmount}px)`;
-                } else if (predictedTarget === 'right') {
-                    container.style.transform = `translateX(${shiftAmount}px)`;
-                }
-            }
-
-            if (state === 'read') {
-                const actualPage = pageFlip.getCurrentPageIndex();
-                if (actualPage === 0) {
-                    container.style.transform = `translateX(-${shiftAmount}px)`;
-                } else if (actualPage >= pageFlip.getPageCount() - 1) {
-                    container.style.transform = `translateX(${shiftAmount}px)`;
-                } else {
-                    container.style.transform = `translateX(0px)`;
-                }
-            }
-        });
 
         window.addEventListener('resize', () => {
             setTimeout(() => {
@@ -857,13 +1020,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             }, 100);
         });
 
-        setTimeout(() => {
-            const shiftAmount = getShiftAmount();
-            const container = document.querySelector('.container-flipbook');
-            if (container) {
-                container.style.transform = `translateX(-${shiftAmount}px)`;
-            }
-        }, 50);
+        // setTimeout(() => {
+        //     const shiftAmount = getShiftAmount();
+        //     const container = document.querySelector('.container-flipbook');
+        //     if (container) {
+        //         container.style.transform = `translateX(-${shiftAmount}px)`;
+        //     }
+        // }, 50);
 
         // ==========================================
         // SỰ KIỆN BÀN PHÍM (KEYBOARD NAVIGATION)
@@ -887,9 +1050,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.body.insertAdjacentHTML("beforeend", lightboxHTML);
         const lightbox = document.getElementById("photo-lightbox");
         const lightboxImg = document.getElementById("lightbox-img");
-        
+
         // Cho phép bôi đen chữ nhưng vẫn click để lật trang được
-        let textDownPos = {x: 0, y: 0};
+        let textDownPos = { x: 0, y: 0 };
         let textDownTime = 0;
         let lastTextFlipTime = 0;
         let isTextDown = false;
@@ -916,10 +1079,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (isText) {
                     isTextDown = true;
                     e.stopPropagation(); // Ngăn StPageFlip chiếm quyền điều khiển chuột để có thể bôi đen
-                    
-                    textDownPos = { 
-                        x: e.clientX || (e.touches && e.touches.length > 0 ? e.touches[0].clientX : 0) || 0, 
-                        y: e.clientY || (e.touches && e.touches.length > 0 ? e.touches[0].clientY : 0) || 0 
+
+                    textDownPos = {
+                        x: e.clientX || (e.touches && e.touches.length > 0 ? e.touches[0].clientX : 0) || 0,
+                        y: e.clientY || (e.touches && e.touches.length > 0 ? e.touches[0].clientY : 0) || 0
                     };
                     textDownTime = Date.now();
                 } else {
@@ -928,10 +1091,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             } else if (e.type === 'mouseup' || e.type === 'touchend' || e.type === 'pointerup') {
                 if (isTextDown) {
                     e.stopPropagation(); // Chỉ chặn nhả chuột nếu trước đó bấm vào text
-                    
+
                     const currentX = e.clientX || (e.changedTouches && e.changedTouches.length > 0 ? e.changedTouches[0].clientX : 0) || 0;
                     const currentY = e.clientY || (e.changedTouches && e.changedTouches.length > 0 ? e.changedTouches[0].clientY : 0) || 0;
-                    
+
                     const dx = Math.abs(currentX - textDownPos.x);
                     const dy = Math.abs(currentY - textDownPos.y);
                     const dt = Date.now() - textDownTime;
@@ -939,7 +1102,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     if (dx < 5 && dy < 5 && dt < 500) {
                         if (Date.now() - lastTextFlipTime > 500) {
                             lastTextFlipTime = Date.now();
-                            
+
                             const sel = window.getSelection();
                             if (hadSelectionOnDown) {
                                 // Nếu trước đó đang bôi đen, click 1 lần chỉ để hủy bôi đen, KHÔNG lật trang
@@ -972,30 +1135,30 @@ document.addEventListener('DOMContentLoaded', async function () {
             window.addEventListener(evt, stopFlip, true);
         });
 
-                window.addEventListener('click', (e) => {
+        window.addEventListener('click', (e) => {
             const btn = e.target.closest('.carousel-btn');
             if (btn) {
                 e.stopPropagation();
                 e.preventDefault();
-                
+
                 const container = btn.closest('.photo-carousel-container');
                 if (!container) return;
-                
+
                 const images = container.querySelectorAll('.carousel-img');
                 const captions = container.querySelectorAll('.carousel-cap');
-                
+
                 let currentIndex = 0;
                 images.forEach((img, idx) => {
                     if (img.style.display !== 'none') currentIndex = idx;
                 });
-                
+
                 let nextIndex = currentIndex;
                 if (btn.classList.contains('carousel-next')) {
                     nextIndex = (currentIndex + 1) % images.length;
                 } else {
                     nextIndex = (currentIndex - 1 + images.length) % images.length;
                 }
-                
+
                 images.forEach((img, idx) => {
                     img.style.display = (idx === nextIndex) ? 'block' : 'none';
                 });
@@ -1025,6 +1188,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error("Lỗi dàn trang:", e);
         alert("Lỗi quá trình dàn trang: " + e.message);
     }
+
 });
 
 

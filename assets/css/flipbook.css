@@ -35,7 +35,7 @@
 
 /* Reset và layout tổng thể */
 .flipbook-layout {
-    background-color: #e0dcd7;
+    background-color: #d6cfc7;
     background-image: radial-gradient(circle at center, #f2efe9 0%, #d8d3cd 100%);
     min-height: 100vh;
     position: relative;
@@ -409,9 +409,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.7s ease-in-out;
-    will-change: transform, filter;
-    filter: drop-shadow(-30px 30px 40px rgba(0, 0, 0, 0.2)) drop-shadow(-10px 15px 15px rgba(0, 0, 0, 0.1));
+    will-change: transform, opacity;
+    opacity: 0;
+    visibility: hidden;
 }
 
 
@@ -1250,17 +1250,25 @@
     cursor: zoom-in;
 }
 
-/* BOOK TOOLBAR & PANELS */
+/* BOOK TOOLBAR & PANELS - Cập nhật lại */
 #book-toolbar {
     position: fixed;
-    bottom: 20px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
-    z-index: 100;
+    gap: 12px;
+    z-index: 1000 !important;
+    /* Đảm bảo nổi lên trên sân khấu 3D */
     opacity: 0;
-    transition: opacity 0.8s ease-in-out;
+    pointer-events: none;
+    /* Khóa khi chưa hiện */
+    transition: opacity 0.5s ease-in-out;
+}
+
+#book-toolbar.is-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 #btn-toc,
@@ -1297,14 +1305,15 @@
 #panel-toc,
 #panel-search {
     position: fixed;
-    bottom: 80px;
+    bottom: 85px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     opacity: 0;
     pointer-events: none;
     width: 400px;
     max-width: 90vw;
-    z-index: 100;
+    z-index: 1001 !important;
+    /* Nổi trên cả toolbar */
     transition: all 0.3s ease;
     box-sizing: border-box;
 }
@@ -1420,4 +1429,85 @@ mark.search-highlight {
     padding: 0;
 }
 
-.carousel-btn:hover { background-color: #ee0033 !important; color: white !important; transition: all 0.2s ease-in-out; }
+.carousel-btn:hover {
+    background-color: #ee0033 !important;
+    color: white !important;
+    transition: all 0.2s ease-in-out;
+}
+
+/* ============================================================
+   NỀN STUDIO 3D CÓ ĐƯỜNG TỤ PHỐI CẢNH & ÁNH SÁNG RỌI
+   ============================================================ */
+
+/* 1. Không gian tối có ánh đèn rọi trung tâm (Spotlight Vignette) */
+.flipbook-layout {
+    background-color: #1a1817 !important;
+    /* Đổi sang nền trầm để làm nổi bật sách và bóng */
+    background-image: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.95) 100%) !important;
+    perspective: 1400px !important;
+    overflow: hidden;
+}
+
+.studio-stage-3d {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    perspective: 1400px;
+    perspective-origin: 50% 32%;
+    /* Điểm nhìn camera trên cao nhìn xuống */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. Mặt sàn 3D tạo các đường tụ phối cảnh (Perspective Floor) */
+.studio-floor-3d {
+    position: absolute;
+    width: 220vw;
+    height: 160vh;
+    top: 15%;
+    left: -60vw;
+    transform: rotateX(72deg) translateZ(-120px);
+    transform-origin: center center;
+    pointer-events: none;
+    z-index: 1;
+    /* Tạo vân sàn có các vệt cọ dọc tụ về điểm biến giống bản gốc */
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(210, 190, 165, 0.2) 0%, rgba(20, 15, 15, 0.8) 55%, #0d0b0b 85%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0px, rgba(0, 0, 0, 0.4) 3px, transparent 3px, transparent 12px);
+    filter: blur(1px);
+}
+
+/* 3. Khung chứa sách */
+.container-flipbook {
+    transition: none !important;
+    filter: none !important;
+    will-change: transform !important;
+}
+
+.container-flipbook.is-isometric-3d {
+    transform-style: preserve-3d !important;
+    cursor: pointer;
+}
+
+/* Khóa chuột không cho StPageFlip can thiệp lúc sách đang đóng 3D */
+.container-flipbook.book-locked #flipbook {
+    pointer-events: none !important;
+}
+
+/* 4. Bóng đổ tiếp xúc trực tiếp trên mặt sàn */
+.book-dynamic-shadow {
+    position: absolute;
+    width: 520px;
+    height: 260px;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%) rotateX(72deg);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.3) 45%, transparent 75%);
+    filter: blur(16px);
+    pointer-events: none;
+    z-index: 2;
+    transform-origin: center center;
+    opacity: 0;
+}
