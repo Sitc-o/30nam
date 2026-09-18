@@ -19,20 +19,21 @@ body {
     z-index: 2;
     background-color: #ffffff;
     min-height: 100vh;
-    margin-bottom: 70px; /* Chiều cao dải Peek Bar đáy trang */
+    margin-bottom: 260px;
     transform-origin: center bottom;
     will-change: transform, border-radius, box-shadow;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
-    overflow: hidden !important; /* Cắt góc bo tròn cho cả các khối nền con bên trong */
+    /* Removed overflow: hidden so position: sticky works inside main */
     transition: transform 0.9s cubic-bezier(0.25, 1, 0.3, 1), 
                 border-radius 0.9s cubic-bezier(0.25, 1, 0.3, 1),
                 box-shadow 0.9s ease;
 }
 
-/* Trạng thái búng mở: Rút lên chừa đúng 200px thẻ trắng ở mép trên */
+/* Trạng thái bóng mở: Mép dưới thu nhỏ chính xác ở mức 200px từ đỉnh màn hình */
 #page-reveal-wrapper.footer-expanded, main.footer-expanded {
-    transform: translateY(calc(-100vh + 270px)) scale(0.95);
+    transform: translateY(calc(-100vh + 460px)) scale(0.95);
     border-radius: 0 0 50px 50px !important;
+    overflow: hidden !important;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     cursor: pointer;
 }
@@ -89,7 +90,6 @@ main.footer-expanded .card-restore-btn {
     font-family: 'Roboto', Arial, sans-serif;
     overflow: hidden;
     
-    /* Cơ chế ẩn ngầm khi ở trên cao để chống ám màu */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -141,7 +141,6 @@ main.footer-expanded .card-restore-btn {
     align-items: flex-start;
 }
 
-/* Chuyển logo về trắng tinh chuẩn thương hiệu */
 .footer-brand .simple-logo img {
     filter: brightness(0) invert(1);
     transition: transform 0.3s ease;
@@ -299,17 +298,15 @@ const footerHTML = `
 
 document.write(footerCSS + footerHTML);
 
-// 5. Quản lý DOM & Cử chỉ Snap Reveal
+// 5. Quản lý DOM & Kích hoạt Universal Scroll (Hỗ trợ Chuột giữa, Scrollbar & Con lăn)
 document.addEventListener('DOMContentLoaded', () => {
     let footer = document.querySelector('.site-footer');
     if (!footer) return;
 
-    // Tự động rút footer ra ngoài nếu bị nuốt vào bên trong main
     if (footer.parentElement !== document.body) {
         document.body.appendChild(footer);
     }
 
-    // Xác định phần thân trang cần thu nhỏ
     let wrapper = document.querySelector('main') || document.getElementById('page-reveal-wrapper');
     if (wrapper) {
         wrapper.id = 'page-reveal-wrapper';
@@ -332,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Gắn nút khôi phục [^] vào đáy khối thẻ chính
     if (!wrapper.querySelector('.card-restore-btn')) {
         const restoreBtn = document.createElement('div');
         restoreBtn.className = 'card-restore-btn';
@@ -347,6 +343,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function openFooter() {
         if (isExpanded || isLocked) return;
         isExpanded = true;
+
+        // Cố định chiều cao trước khi thêm overflow: hidden để tránh giật lag (bug vòng lặp)
+        wrapper.style.height = wrapper.offsetHeight + 'px';
+
         wrapper.classList.add('footer-expanded');
         document.body.classList.add('footer-expanded-active');
         lockTemporarily();
@@ -355,65 +355,91 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeFooter() {
         if (!isExpanded || isLocked) return;
         isExpanded = false;
+
         wrapper.classList.remove('footer-expanded');
         document.body.classList.remove('footer-expanded-active');
+
+        // Gỡ cố định chiều cao sau khi transition hoàn tất (900ms)
+        setTimeout(() => {
+            if (!isExpanded) wrapper.style.height = '';
+        }, 900);
+
         lockTemporarily();
     }
 
     function lockTemporarily() {
         isLocked = true;
-        setTimeout(() => { isLocked = false; }, 900); // Khóa 900ms khớp thời gian transition 0.9s
+        setTimeout(() => { isLocked = false; }, 900);
     }
 
-    function isAtBottom() {
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        return scrollY >= maxScroll - 20;
-    }
+    // Xử lý sự kiện SCROLL: Tương thích hoàn hảo với Middle-click Auto-Scroll, Scrollbar kéo và Phím mũi tên
+    function handleScrollLogic() {
+        if (window.innerWidth <= 768) return;
 
-    function checkFooterVisibility() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
+        // Quản lý hiển thị ngầm của footer chống lộ nền
         if (scrollY >= maxScroll - (window.innerHeight * 1.5)) {
             footer.classList.add('footer-visible');
         } else {
             footer.classList.remove('footer-visible');
             if (isExpanded) closeFooter();
         }
+
+        if (isLocked) return;
+
+        // Ngưỡng kích hoạt trong khoảng đệm runway:
+        // Đệm 260px -> khi cuộn xuống qua mốc (maxScroll - 110px), tự động bung mở
+        const triggerOpenZone = maxScroll - 30;
+        const triggerCloseZone = maxScroll - 70;
+
+        if (!isExpanded && scrollY >= triggerOpenZone) {
+            openFooter();
+        } else if (isExpanded && scrollY < triggerCloseZone) {
+            closeFooter();
+        }
     }
 
-    window.addEventListener('scroll', () => {
-        checkFooterVisibility();
-    }, { passive: true });
+    window.addEventListener('scroll', handleScrollLogic, { passive: true });
+    handleScrollLogic();
 
-    checkFooterVisibility();
-
-    // Bắt cử chỉ cuộn chuột
+    // Hỗ trợ thêm cho con lăn chuột rời (Wheel)
     window.addEventListener('wheel', (e) => {
-        if (window.innerWidth <= 768) return;
+        if (window.innerWidth <= 768 || isLocked) return;
 
-        if (!isExpanded) {
-            if (isAtBottom() && e.deltaY > 20) {
-                openFooter();
-            }
-        } else {
-            if (e.deltaY < -15) {
-                closeFooter();
-            }
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+        if (!isExpanded && scrollY >= maxScroll - 80 && e.deltaY > 15) {
+            openFooter();
+        } else if (isExpanded && e.deltaY < -15) {
+            closeFooter();
         }
     }, { passive: true });
 
+    // Nút toggle và bấm vào mép thẻ trên để đóng/mở
     const toggleBtn = document.querySelector('.footer-toggle-btn');
     if (toggleBtn) {
         toggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            isExpanded ? closeFooter() : openFooter();
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            if (!isExpanded) {
+                openFooter();
+                window.scrollTo({ top: maxScroll, behavior: 'smooth' });
+            } else {
+                closeFooter();
+                window.scrollTo({ top: Math.max(0, maxScroll - 240), behavior: 'smooth' });
+            }
         });
     }
 
     wrapper.addEventListener('click', () => {
-        if (isExpanded) closeFooter();
+        if (isExpanded) {
+            closeFooter();
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            window.scrollTo({ top: Math.max(0, maxScroll - 240), behavior: 'smooth' });
+        }
     });
 
     // Vẽ Canvas Sóng Nền
