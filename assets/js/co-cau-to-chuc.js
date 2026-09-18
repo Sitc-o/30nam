@@ -600,10 +600,14 @@ function openDeptOverlay(id) {
   `;
 
   if (deptOverlay) {
-    deptOverlay.classList.add('is-active');
-    document.body.style.overflow = 'hidden';
-    if (deptScrollArea) deptScrollArea.scrollLeft = 0;
-  }
+      document.body.appendChild(deptOverlay);
+      
+      requestAnimationFrame(() => {
+        deptOverlay.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+        if (deptScrollArea) deptScrollArea.scrollLeft = 0;
+      });
+    }
 }
 
 function closeDeptOverlay() {

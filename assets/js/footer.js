@@ -219,10 +219,7 @@ main.footer-expanded .card-restore-btn {
     transform: rotate(180deg);
 }
 
-/* 4. Giữ các Modal không bị ảnh hưởng */
-.modal-overlay, .dept-overlay {
-    z-index: 9999 !important;
-}
+/* Removed modal-overlay z-index override */
 
 @media(max-width: 1050px) {
     .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
